@@ -1,6 +1,6 @@
 <template>
   <div class="result-item">
-    <a class="title">{{ title }}</a>
+    <a class="title" @click="showDetails">{{ title }}</a>
     <p class="auther">{{ author }}</p>
     <p class="abstract">
       {{ abstract }}
@@ -14,6 +14,15 @@ export default {
     title: String,
     author: String,
     abstract: String
+  },
+  methods: {
+    showDetails: function(event) {
+      let routeData = this.$router.resolve({
+        name: "Details",
+        query: { id: "111" }
+      });
+      window.open(routeData.href, "_blank");
+    }
   }
 };
 </script>

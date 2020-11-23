@@ -6,6 +6,7 @@ import Content from "../layout/Content.vue";
 import Footer from "../layout/Footer.vue";
 import Search from "../views/Search.vue";
 import Home from "../views/Home.vue";
+import Manage from "../views/Manage.vue";
 
 Vue.use(VueRouter);
 
@@ -21,13 +22,13 @@ const routes = [
   },
   {
     path: "/",
-    name: "Index",
+    // name: "Index",
     component: Index,
     redirect: "",
     children: [
       {
         path: "",
-        redirect: "/search",
+        redirect: "/home",
         components: {
           header: Header,
           content: Content,
@@ -45,10 +46,17 @@ const routes = [
             component: Search,
           },
           {
+            path: "details",
+            name: "Details",
+            props: (route) => ({ id: route.query.id }),
+            component: () =>
+              import(/* webpackChunkName: "Details" */ "../views/Details.vue"),
+          },
+          {
             path: "manage",
             name: "Manage",
-            component: () =>
-              import(/* webpackChunkName: "manage" */ "../views/Manage.vue"),
+            redirect: "manage/paper",
+            component: Manage,
             children: [
               {
                 path: "paper",

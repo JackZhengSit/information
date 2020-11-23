@@ -17,9 +17,9 @@
             active-text-color="#409EFF"
             @select="handleSelect"
           >
-            <el-menu-item index="home">首页</el-menu-item>
-            <el-menu-item index="search">检索</el-menu-item>
-            <el-menu-item index="manage">管理</el-menu-item>
+            <el-menu-item index="/home">首页</el-menu-item>
+            <el-menu-item index="/search">检索</el-menu-item>
+            <el-menu-item index="/manage">管理</el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
@@ -31,7 +31,7 @@
 export default {
   data() {
     return {
-      activeIndex: "search"
+      activeIndex: "/home"
     };
   },
   methods: {

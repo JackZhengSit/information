@@ -3,7 +3,7 @@
     <el-main>
       <el-row>
         <el-col :span="10" :offset="7">
-          <div class="search-input">
+          <!-- <div class="search-input">
             <el-input
               size="large"
               placeholder="请输入内容"
@@ -23,6 +23,18 @@
                 style="co"
               ></el-button>
             </el-input>
+          </div> -->
+          <div class="group">
+            <el-select v-model="searchType" placeholder="">
+              <el-option
+                v-for="item in searchTypes"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+            <el-input v-model="searchInput" placeholder="请输入内容"></el-input>
+            <el-button type="primary" icon="search">搜索</el-button>
           </div>
         </el-col>
       </el-row>
@@ -163,6 +175,14 @@ export default {
       input: "",
       select: "",
       activeNames: ["1"],
+      searchType: "全部",
+      searchTypes: [
+        { value: "全部" },
+        { value: "标题" },
+        { value: "摘要" },
+        { value: "关键词" }
+      ],
+      searchInput: "",
       departData: [
         {
           id: 1,
@@ -453,6 +473,11 @@ export default {
 </script>
 
 <style>
+.group {
+  display: flex;
+  justify-content: center;
+}
+
 .el-main {
   background-color: #fff;
 }
@@ -468,6 +493,7 @@ export default {
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
 }
+
 .left-nav-menu {
   background-color: #fff;
   border-radius: 4px;
