@@ -66,6 +66,22 @@ const routes = [
                     /* webpackChunkName: "paper" */ "../components/ManagePaper.vue"
                   ),
               },
+              {
+                path: "briefReportExterior",
+                name: "briefReportExterior",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "ManageBriefReportExterior" */ "../components/ManageBriefReportExterior.vue"
+                  ),
+              },
+              {
+                path: "briefReportInterior",
+                name: "briefReportInterior",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "ManageBriefReportInterior" */ "../components/ManageBriefReportInterior.vue"
+                  ),
+              },
             ],
           },
         ],

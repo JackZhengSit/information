@@ -49,26 +49,36 @@
         <el-col :span="24">
           <vxe-table
             align="center"
+            border
             highlight-hover-row
             ref="xTable"
-            height="400"
+            max-height="600"
+            :toolbar-config="{
+              zoom: true,
+            }"
             :export-config="{ isPrint: false }"
             :edit-config="{ trigger: 'dblclick', mode: 'cell' }"
             :data="tableData"
           >
-            <vxe-table-column type="seq" width="60"></vxe-table-column>
+            <vxe-table-column
+              type="checkbox"
+              width="60"
+              fixed="left"
+            ></vxe-table-column>
+            <vxe-table-column
+              type="seq"
+              width="60"
+              fixed="left"
+            ></vxe-table-column>
             <vxe-table-column
               field="title"
+              width="60"
               :title="briefReportExterior.orderNum"
-              :edit-render="{
-                name: 'input',
-                immediate: true,
-                attrs: { type: 'text' },
-              }"
             ></vxe-table-column>
             <vxe-table-column
               field="author"
-              title="作者"
+              width="100"
+              :title="briefReportExterior.name"
               :edit-render="{
                 name: 'input',
                 immediate: true,
@@ -77,7 +87,8 @@
             ></vxe-table-column>
             <vxe-table-column
               field="abstract"
-              title="摘要"
+              width="100"
+              :title="briefReportExterior.type"
               show-overflow
               :edit-render="{
                 name: 'input',
@@ -86,12 +97,300 @@
               }"
             ></vxe-table-column>
             <vxe-table-column
-              field="publicateDate"
-              title="发表日期"
-              sortable
+              field="title"
+              width="100"
+              :title="briefReportExterior.completeDepartment"
               :edit-render="{
-                name: '$input',
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.title"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.industryType"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.industryDetailType"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.industryChainType"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.referDeviceType"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.referDevice"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.referProduct"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.referProject"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.referInstitution"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.referTechnology"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.referCategory"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.department"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.researchField"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column
+            ><vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.researchOrientation"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.researchSystem"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.techFieldType1"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.techFieldType2"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.techFieldType3"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.industryField"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.industryOrientation"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.publishDepartment"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.checkInTime"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.knowledgeType"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.securityLevel"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.abs"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'textarea' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.formatTime"
+              :edit-render="{
+                name: 'input',
                 props: { type: 'date' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.informationCollactor"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.informationAuditor"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.language"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.keywords"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.informationOrigin"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
+              }"
+            ></vxe-table-column>
+            <vxe-table-column
+              field="title"
+              width="100"
+              :title="briefReportExterior.referWebsite"
+              :edit-render="{
+                name: 'input',
+                props: { type: 'text' },
               }"
             ></vxe-table-column>
           </vxe-table>

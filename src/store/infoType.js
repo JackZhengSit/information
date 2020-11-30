@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2020-11-23 15:58:10
+ * @LastEditTime: 2020-11-30 14:51:05
  */
 var infoType = {
   industryTrend: "行业动态",
@@ -188,8 +188,8 @@ var briefReportExterior = {
   /** 知识发布部门 */
   publishDepartment: "知识发布部门",
 
-  /** 等级时间 */
-  checkInTime: "等级时间",
+  /** 登记时间 */
+  checkInTime: "登记时间",
 
   /** 知识类型 */
   knowledgeType: "知识类型",
@@ -229,4 +229,161 @@ var briefReportExterior = {
   updateTime: "更新时间",
 };
 
-export { infoType, industryTrend, briefReportExterior };
+var briefReportInterior = {
+  orderNum: {
+    field: "orderNum",
+    title: "序号",
+  },
+  name: {
+    field: "name",
+    title: "简报名称",
+  },
+  type: {
+    field: "type",
+    title: "简报类型",
+  },
+  completeDepartment: {
+    field: "completeDepartment",
+    title: "完成作者单位",
+  },
+  title: {
+    field: "title",
+    title: "题名",
+  },
+  industryType: {
+    field: "industryType",
+    title: "行业类别",
+  },
+  industryDetailType: {
+    field: "industryDetailType",
+    title: "行业细分",
+  },
+
+  industryChainType: {
+    field: "industryChainType",
+    title: "产业链类型",
+  },
+  referDeviceType: {
+    field: "referDeviceType",
+    title: "涉及装备/平台具体类型",
+  },
+
+  referDevice: {
+    field: "referDevice",
+    title: "涉及装备名称",
+  },
+  referProduct: {
+    field: "referProduct",
+    title: "涉及具体产品名称",
+  },
+  referProject: {
+    field: "referProject",
+    title: "涉及项目名称",
+  },
+  referInstitution: {
+    field: "referInstitution",
+    title: "涉及机构名称",
+  },
+  referTechnology: {
+    field: "referTechnology",
+    title: "涉及技术",
+  },
+  referCategory: {
+    field: "referCategory",
+    title: "所属类别",
+  },
+  department: {
+    field: "department",
+    title: "部门类别",
+  },
+  researchField: {
+    field: "researchField",
+    title: "业务板块",
+  },
+  researchOrientation: {
+    field: "researchOrientation",
+    title: "业务方向",
+  },
+  researchSystem: {
+    field: "researchSystem",
+    title: "系统",
+  },
+  techFieldType1: {
+    field: "techFieldType1",
+    title: "技术领域一级分类",
+  },
+  techFieldType2: {
+    field: "techFieldType2",
+    title: "技术领域二级分类",
+  },
+  techFieldType3: {
+    field: "techFieldType3",
+    title: "技术领域三级分类",
+  },
+  industryField: {
+    field: "industryField",
+    title: "产业领域",
+  },
+  industryOrientation: {
+    field: "industryOrientation",
+    title: "产业方向",
+  },
+  publishDepartment: {
+    field: "publishDepartment",
+    title: "知识发布部门",
+  },
+  checkInTime: {
+    field: "checkInTime",
+    title: "登记时间",
+  },
+  knowledgeType: {
+    field: "knowledgeType",
+    title: "知识类型",
+  },
+  securityLevel: {
+    field: "securityLevel",
+    title: "密级",
+  },
+  abs: {
+    field: "abs",
+    title: "摘要",
+  },
+  formatTime: {
+    field: "formatTime",
+    title: "形成时间",
+  },
+  informationCollactor: {
+    field: "informationCollactor",
+    title: "知识收集人",
+  },
+  informationAuditor: {
+    field: "informationAuditor",
+    title: "知识审核人",
+  },
+  language: {
+    field: "language",
+    title: "语种",
+  },
+  keywords: {
+    field: "keywords",
+    title: "关键词",
+  },
+  informationOrigin: {
+    field: "informationOrigin",
+    title: "信息来源",
+  },
+  referWebsite: {
+    field: "referWebsite",
+    title: "参考网址",
+  },
+  createTime: {
+    field: "createTime",
+    title: "创建时间",
+  },
+  updateTime: {
+    field: "updateTime",
+    title: "更新时间",
+  },
+};
+
+export { infoType, industryTrend, briefReportExterior, briefReportInterior };
