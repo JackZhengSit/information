@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2020-11-30 15:20:37
+ * @LastEditTime: 2020-12-03 14:17:22
 -->
 <template>
   <div>
@@ -13,6 +13,18 @@
 
 <script>
 import { briefReportInterior } from "../store/infoType";
+import axios from "axios";
+
+axios.get("http://localhost:8080/BriefReportExterior/2").then((response) => {
+  console.log(response);
+});
+
+// var p = Promise.resolve("Hello");
+
+// p.then(function (s) {
+//   console.log(s);
+// });
+
 export default {
   data() {
     return {
