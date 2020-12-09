@@ -3,12 +3,11 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-02 08:45:42
- * @LastEditTime: 2020-12-03 14:23:32
+ * @LastEditTime: 2020-12-09 10:24:08
  */
 import axios from "axios";
-import { resolve } from "core-js/fn/promise";
-import { config } from "vue/types/umd";
 import router from "../router";
+import { Message, MessageBox } from "element-ui";
 
 const service = axios.create({
   timeout: 10000,
@@ -19,11 +18,11 @@ service.defaults.headers.post["Content-Type"] =
 
 // 环境的切换
 if (process.env.NODE_ENV == "development") {
-  service.defaults.baseURL = "https://localhost:8080";
+  service.defaults.baseURL = "http://localhost:8080";
 } else if (process.env.NODE_ENV == "debug") {
-  service.defaults.baseURL = "https://localhost:8080";
+  service.defaults.baseURL = "http://localhost:8080";
 } else if (process.env.NODE_ENV == "production") {
-  service.defaults.baseURL = "https://localhost:8080";
+  service.defaults.baseURL = "http://localhost:8080";
 }
 
 service.interceptors.request.use(
@@ -40,18 +39,21 @@ service.interceptors.response.use(
     if (response.status === 200) {
       return response.data;
     } else {
+      Message({
+        message: response.message,
+        type: "error",
+        duration: 5 * 1000,
+      });
       return Promise.reject(response);
     }
   },
   (error) => {
-    if (error.response.status) {
-      switch (error.response.status) {
-        case 404:
-          router.replace({ path: "/home" });
-          break;
-      }
-    }
-    return Promise.reject(error.response);
+    Message({
+      message: error.message,
+      type: "error",
+      duration: 5 * 1000,
+    });
+    return Promise.reject(error);
   }
 );
 

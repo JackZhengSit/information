@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2020-12-03 14:17:22
+ * @LastEditTime: 2020-12-09 16:56:49
 -->
 <template>
   <div>
@@ -13,11 +13,13 @@
 
 <script>
 import { briefReportInterior } from "../store/infoType";
-import axios from "axios";
+import { briefReportInteriorExample } from "@/store/infoExample";
+import { getBriefReportInterior } from "@/api/manageBriefReportInterior";
+// import axios from "axios"; :data="tableData"
 
-axios.get("http://localhost:8080/BriefReportExterior/2").then((response) => {
-  console.log(response);
-});
+// axios.get("http://localhost:8080/BriefReportExterior/2").then((response) => {
+//   console.log(response);
+// });
 
 // var p = Promise.resolve("Hello");
 
@@ -28,6 +30,11 @@ axios.get("http://localhost:8080/BriefReportExterior/2").then((response) => {
 export default {
   data() {
     return {
+      tableData: [
+        briefReportInteriorExample,
+        briefReportInteriorExample,
+        briefReportInteriorExample,
+      ],
       gridOptions: {
         border: true,
         resizable: true,
@@ -38,16 +45,16 @@ export default {
         id: "briefReportInteriorGrid",
         height: 600,
         rowId: "id",
-        customConfig: {
-          storage: true,
-          checkMethod: this.checkColumnMethod,
-        },
-        sortConfig: {
-          trigger: "cell",
-        },
-        filterConfig: {
-          remote: true,
-        },
+        // customConfig: {
+        //   storage: true,
+        //   checkMethod: this.checkColumnMethod,
+        // },
+        // sortConfig: {
+        //   trigger: "cell",
+        // },
+        // filterConfig: {
+        //   remote: true,
+        // },
         pagerConfig: {
           pageSize: 10,
           pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
@@ -482,13 +489,50 @@ export default {
           zoom: true,
           custom: true,
         },
-        proxyConfig: {},
+        proxyConfig: {
+          ajax: {
+            query: () => {
+              getBriefReportInterior("").then((res) => {
+                console.log(res._embedded.briefReportInteriors);
+                return res._embedded.briefReportInteriors;
+              });
+            },
+          },
+        },
         columns: [
-          { type: "checkbox", title: "ID", width: 100 },
+          // {
+          //   type: "checkbox",
+          //   title: "ID",
+          //   width: 100,
+          //   fixed: "left",
+          //   align: "center",
+          //   sortable: true,
+          // },
           {
+            resizable: true,
+            align: "center",
+            minwidth: 100,
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
             field: briefReportInterior.orderNum.field,
             title: briefReportInterior.orderNum.title,
-            width: 100,
+          },
+          {
+            resizable: true,
+            minwidth: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: briefReportInterior.name.field,
+            title: briefReportInterior.name.title,
+          },
+          {
+            resizable: true,
+            minwidth: 100,
+            align: "center",
+            field: briefReportInterior.type.field,
+            title: briefReportInterior.type.title,
           },
         ],
       },
