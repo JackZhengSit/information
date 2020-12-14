@@ -5,7 +5,7 @@ import { briefReportInterior } from "./infoType";
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-08 16:49:05
- * @LastEditTime: 2020-12-08 16:50:43
+ * @LastEditTime: 2020-12-14 08:41:50
  */
 export var briefReportInteriorExample = {
   orderNum: "序号",
@@ -113,4 +113,82 @@ export var briefReportInteriorExample = {
 
   /** 更新时间 */
   updateTime: "更新时间",
+};
+
+// let a = {
+//   orderNum: 11
+//   name: test
+//   type: test
+//   completeDepartment: 测试测试
+//   title: 测试测试
+//   industryType: 测试测试
+//   industryDetailType: 测试测试
+//   industryChainType: 测试测试
+//   referDeviceType: 测试测试
+//   referDevice: 测试测试
+//   referProduct: 测试测试
+//   referProject: 测试测试
+//   referInstitution: 测试测试
+//   referTechnology: 测试测试
+//   referCategory: 测试测试
+//   department: 测试测试
+//   researchField: 测试测试
+//   researchOrientation: 测试测试
+//   researchSystem: 测试测试
+//   techFieldType1: 测试测试
+//   techFieldType2: 测试测试
+//   techFieldType3: 测试测试
+//   industryField: 测试测试
+//   industryOrientation: 测试测试
+//   publishDepartment: 测试测试
+//   checkInTime: 2020.7.9
+//   knowledgeType: 测试测试
+//   securityLevel: 测试测试
+//   abs: 测试测试
+//   formatTime: 2020.10.20
+//   informationCollactor: 测试测试
+//   informationAuditor: 测试测试
+//   language: 测试测试
+//   keywords: 测试测试
+//   informationOrigin: 测试测试
+//   referWebsite: http://dfajosdfjapsodjfpaosdjf"
+// };
+
+let b = {
+  orderNum: 11,
+  name: "test",
+  type: "test",
+  completeDepartment: "测试测试",
+  title: "测试测试",
+  industryType: "测试测试",
+  industryDetailType: "测试测试",
+  industryChainType: "测试测试",
+  referDeviceType: "测试测试",
+  referDevice: "测试测试",
+  referProduct: "测试测试",
+  referProject: "测试测试",
+  referInstitution: "测试测试",
+  referTechnology: "测试测试",
+  referCategory: "测试测试",
+  department: "测试测试",
+  researchField: "测试测试",
+  researchOrientation: "测试测试",
+  researchSystem: "测试测试",
+  techFieldType1: "测试测试",
+  techFieldType2: "测试测试",
+  techFieldType3: "测试测试",
+  industryField: "测试测试",
+  industryOrientation: "测试测试",
+  publishDepartment: "测试测试",
+  checkInTime: "2020.10.20",
+  knowledgeType: "测试测试",
+  securityLevel: "测试测试",
+  abs: "测试测试",
+  formatTime: "2020.10.20",
+  informationCollactor: "测试测试",
+  informationAuditor: "测试测试",
+  language: "测试测试",
+  keywords: "测试测试",
+  informationOrigin: "测试测试",
+  referWebsite: "http://dfajosdfjapsodjfpaosdjf",
 };

@@ -55,7 +55,7 @@ const routes = [
           {
             path: "manage",
             name: "Manage",
-            redirect: "manage/paper",
+            redirect: "manage/industryTrend",
             component: Manage,
             children: [
               {
@@ -80,6 +80,54 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "ManageBriefReportInterior" */ "../components/ManageBriefReportInterior.vue"
+                  ),
+              },
+              {
+                path: "industryTrend",
+                name: "industryTrend",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "industryTrend" */ "../components/ManageIndustryTrend.vue"
+                  ),
+              },
+              {
+                path: "paperExterior",
+                name: "paperExterior",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "paperExterior" */ "../components/ManagePaperExterior.vue"
+                  ),
+              },
+              {
+                path: "patentExterior",
+                name: "patentExterior",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "patentExterior" */ "../components/ManagePatentExterior.vue"
+                  ),
+              },
+              {
+                path: "reportExterior",
+                name: "reportExterior",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "reportExterior" */ "../components/ManageReportExterior.vue"
+                  ),
+              },
+              {
+                path: "reportInterior",
+                name: "reportInterior",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "reportInterior" */ "../components/ManageReportInterior.vue"
+                  ),
+              },
+              {
+                path: "standardExterior",
+                name: "standardExterior",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "standardExterior" */ "../components/ManageStandardExterior.vue"
                   ),
               },
             ],

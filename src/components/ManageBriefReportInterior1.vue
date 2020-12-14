@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2020-12-10 14:09:02
+ * @LastEditTime: 2020-12-10 09:01:07
 -->
 <template>
   <div>
@@ -17,190 +17,54 @@ import { briefReportInteriorExample } from "@/store/infoExample";
 import { getBriefReportInterior } from "@/api/manageBriefReportInterior";
 import axios from "axios";
 
-const findPageList = (pageSize, currentPage) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const list = [
-        {
-          id: 10001,
-          name: "Test1",
-          nickname: "T1",
-          role: "Develop",
-          sex: "Man",
-          age: 28,
-          address: "Shenzhen",
-        },
-        {
-          id: 10002,
-          name: "Test2",
-          nickname: "T2",
-          role: "Test",
-          sex: "Women",
-          age: 22,
-          address: "Guangzhou",
-        },
-        {
-          id: 10003,
-          name: "Test3",
-          nickname: "T3",
-          role: "PM",
-          sex: "Man",
-          age: 32,
-          address: "Shanghai",
-        },
-        {
-          id: 10004,
-          name: "Test4",
-          nickname: "T4",
-          role: "Designer",
-          sex: "Women ",
-          age: 23,
-          address: "Shenzhen",
-        },
-        {
-          id: 10005,
-          name: "Test5",
-          nickname: "T5",
-          role: "Develop",
-          sex: "Women ",
-          age: 30,
-          address: "Shanghai",
-        },
-        {
-          id: 10006,
-          name: "Test6",
-          nickname: "T6",
-          role: "Designer",
-          sex: "Women ",
-          age: 21,
-          address: "Shenzhen",
-        },
-        {
-          id: 10007,
-          name: "Test7",
-          nickname: "T7",
-          role: "Test",
-          sex: "Man ",
-          age: 29,
-          address: "Shenzhen",
-        },
-        {
-          id: 10008,
-          name: "Test8",
-          nickname: "T8",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Shenzhen",
-        },
-        {
-          id: 10009,
-          name: "Test9",
-          nickname: "T9",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Shenzhen",
-        },
-        {
-          id: 100010,
-          name: "Test10",
-          nickname: "T10",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Guangzhou",
-        },
-        {
-          id: 100011,
-          name: "Test11",
-          nickname: "T11",
-          role: "Test",
-          sex: "Women ",
-          age: 26,
-          address: "Shenzhen",
-        },
-        {
-          id: 100012,
-          name: "Test12",
-          nickname: "T12",
-          role: "Develop",
-          sex: "Man ",
-          age: 34,
-          address: "Guangzhou",
-        },
-        {
-          id: 100013,
-          name: "Test13",
-          nickname: "T13",
-          role: "Test",
-          sex: "Women ",
-          age: 22,
-          address: "Shenzhen",
-        },
-      ];
-      resolve({
-        page: {
-          total: list.length,
-        },
-        result: list.slice(
-          (currentPage - 1) * pageSize,
-          currentPage * pageSize
-        ),
-      });
-    }, 100);
-  });
-};
-
 export default {
   data() {
     return {
+      tableData: [],
       gridOptions: {
         border: true,
         resizable: true,
+        showHeaderOverflow: true,
+        showOverflow: true,
         highlightHoverRow: true,
         keepSource: true,
         id: "briefReportInteriorGrid",
         height: 600,
-        rowId: "orderNum",
-        proxyConfig: {
-          autoLoad: true,
-          props: {
-            result: "result",
-            total: "page.total",
-          },
-          ajax: {
-            query: ({ page }) => {
-              console.log(page);
-              let p = getBriefReportInterior({
-                page: page.currentPage - 1,
-                size: page.pageSize,
-              });
-              console.log(p);
-              return p;
-            },
-          },
+        rowId: "id",
+        // customConfig: {
+        //   storage: true,
+        //   checkMethod: this.checkColumnMethod,
+        // },
+        // sortConfig: {
+        //   trigger: "cell",
+        // },
+        // filterConfig: {
+        //   remote: true,
+        // },
+        pagerConfig: {
+          pageSize: 10,
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
         },
         formConfig: {
           titleWidth: 100,
           titleAlign: "right",
           items: [
             {
-              field: briefReportInterior.orderNum.field,
-              title: briefReportInterior.orderNum.title,
-              span: 12,
+              field: "orderNum",
+              title: "序号",
+              span: 8,
               itemRender: {
                 name: "$input",
-                props: { placeholder: "start" },
+                props: { placeholder: "" },
               },
             },
             {
               field: briefReportInterior.orderNum.field,
-              // title: briefReportInterior.orderNum.title,
-              span: 10,
+              title: briefReportInterior.orderNum.title,
+              span: 8,
               itemRender: {
                 name: "$input",
-                props: { placeholder: "end" },
+                props: { placeholder: "" },
               },
             },
             {
@@ -216,6 +80,7 @@ export default {
               field: briefReportInterior.type.field,
               title: briefReportInterior.type.title,
               span: 8,
+              folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
@@ -225,6 +90,7 @@ export default {
               field: briefReportInterior.completeDepartment.field,
               title: briefReportInterior.completeDepartment.title,
               span: 8,
+              folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
@@ -443,21 +309,11 @@ export default {
             {
               field: briefReportInterior.checkInTime.field,
               title: briefReportInterior.checkInTime.title,
-              span: 12,
+              span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
-                props: { placeholder: "start" },
-              },
-            },
-            {
-              field: briefReportInterior.checkInTime.field,
-              // title: briefReportInterior.checkInTime.title,
-              span: 10,
-              folding: true,
-              itemRender: {
-                name: "$input",
-                props: { placeholder: "end" },
+                props: { placeholder: "" },
               },
             },
             {
@@ -483,31 +339,21 @@ export default {
             {
               field: briefReportInterior.abs.field,
               title: briefReportInterior.abs.title,
-              span: 24,
+              span: 8,
               folding: true,
               itemRender: {
-                name: "$textarea",
+                name: "$input",
                 props: { placeholder: "" },
               },
             },
             {
               field: briefReportInterior.formatTime.field,
               title: briefReportInterior.formatTime.title,
-              span: 12,
+              span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
-                props: { placeholder: "start" },
-              },
-            },
-            {
-              field: briefReportInterior.formatTime.field,
-              // title: briefReportInterior.formatTime.title,
-              span: 10,
-              folding: true,
-              itemRender: {
-                name: "$input",
-                props: { placeholder: "end" },
+                props: { placeholder: "" },
               },
             },
             {
@@ -570,26 +416,26 @@ export default {
                 props: { placeholder: "" },
               },
             },
-            // {
-            //   field: briefReportInterior.createTime.field,
-            //   title: briefReportInterior.createTime.title,
-            //   span: 8,
-            //   folding: true,
-            //   itemRender: {
-            //     name: "$input",
-            //     props: { placeholder: "" },
-            //   },
-            // },
-            // {
-            //   field: briefReportInterior.updateTime.field,
-            //   title: briefReportInterior.updateTime.title,
-            //   span: 8,
-            //   folding: true,
-            //   itemRender: {
-            //     name: "$input",
-            //     props: { placeholder: "" },
-            //   },
-            // },
+            {
+              field: briefReportInterior.createTime.field,
+              title: briefReportInterior.createTime.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+              },
+            },
+            {
+              field: briefReportInterior.updateTime.field,
+              title: briefReportInterior.updateTime.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+              },
+            },
             {
               span: 24,
               align: "center",
@@ -610,8 +456,35 @@ export default {
             },
           ],
         },
-        pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+        toolbarConfig: {
+          buttons: [
+            { code: "insert_actived", name: "新增" },
+            { code: "delete", name: "删除" },
+            { code: "mark_cancel", name: "取消" },
+            {
+              code: "save",
+              name: "保存",
+              status: "success",
+            },
+          ],
+          refresh: true,
+          import: true,
+          export: true,
+          print: true,
+          zoom: true,
+          custom: true,
+        },
+        proxyConfig: {
+          ajax: {
+            query: () =>
+              // axios.get("http://localhost:8080/BriefReportInterior"),
+              {
+                getBriefReportInterior("").then((res) => {
+                  console.log(res._embedded.briefReportInteriors);
+                  return res._embedded.briefReportInteriors;
+                });
+              },
+          },
         },
         columns: [
           {
@@ -980,36 +853,6 @@ export default {
             field: briefReportInterior.referWebsite.field,
             title: briefReportInterior.referWebsite.title,
           },
-        ],
-      },
-      gridOptions1: {
-        border: true,
-        resizable: true,
-        height: 530,
-        pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
-        },
-        proxyConfig: {
-          seq: true, // 启用动态序号代理
-          props: {
-            result: "result",
-            total: "page.total",
-          },
-          ajax: {
-            query: ({ page }) => {
-              let p = findPageList(page.pageSize, page.currentPage);
-              console.log(p);
-              return p;
-            },
-          },
-        },
-        columns: [
-          { type: "checkbox", width: 50 },
-          { type: "seq", width: 60 },
-          { field: "name", title: "Name" },
-          { field: "nickname", title: "Nickname" },
-          { field: "role", title: "Role" },
-          { field: "address", title: "Address", showOverflow: true },
         ],
       },
     };

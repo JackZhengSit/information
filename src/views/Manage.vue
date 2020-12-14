@@ -26,23 +26,23 @@
                     <span slot="title">{{ infoType.briefReportInterior }}</span>
                   </el-menu-item>
                   <el-menu-item index="/manage/reportExterior">
-                    <i class="el-icon-document-remove"></i>
+                    <i class="el-icon-folder"></i>
                     <span slot="title">{{ infoType.reportExterior }}</span>
                   </el-menu-item>
                   <el-menu-item index="/manage/reportInterior">
-                    <i class="el-icon-document-remove"></i>
+                    <i class="el-icon-suitcase"></i>
                     <span slot="title">{{ infoType.reportInterior }}</span>
                   </el-menu-item>
                   <el-menu-item index="/manage/patentExterior">
-                    <i class="el-icon-document-remove"></i>
+                    <i class="el-icon-postcard"></i>
                     <span slot="title">{{ infoType.patentExterior }}</span>
                   </el-menu-item>
                   <el-menu-item index="/manage/paperExterior">
-                    <i class="el-icon-document-remove"></i>
+                    <i class="el-icon-notebook-1"></i>
                     <span slot="title">{{ infoType.paperExterior }}</span>
                   </el-menu-item>
                   <el-menu-item index="/manage/standardExterior">
-                    <i class="el-icon-document-remove"></i>
+                    <i class="el-icon-office-building"></i>
                     <span slot="title">{{ infoType.standardExterior }}</span>
                   </el-menu-item>
                 </el-menu>
@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       infoType,
-      defaultActiveIndex: "/manage/paper",
+      defaultActiveIndex: "/manage/industryTrend",
       form: {
         title: "",
         author: "",
