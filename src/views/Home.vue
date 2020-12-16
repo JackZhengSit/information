@@ -40,21 +40,85 @@
       </el-row>
       <el-row :gutter="20" style="margin-top: 20px">
         <el-col :span="10" :offset="2">
+          <!-- <div id="infoTypeChart" style="width: 600; height: 400px"></div> -->
           <el-carousel :interval="4000" type="card" height="280px">
-            <el-carousel-item v-for="item in 6" :key="item">
-              {{ item }}
+            <el-carousel-item v-for="item in 3" :key="item">
+              <div id="infoTypeChart" style="width: 600; height: 300px"></div>
             </el-carousel-item>
           </el-carousel>
         </el-col>
         <el-col :span="10">
           <el-card shadow="hover">
-            <div slot="header" class="clearfix">
+            <!-- <div slot="header" class="clearfix">
               <span>行业动态</span>
               <el-link style="float: right; padding: 3px 0" type="primary"
                 >更多</el-link
               >
-            </div>
-            <div>
+            </div> -->
+            <el-tabs v-model="activeTab" type="card">
+              <el-tab-pane label="数据资源" name="1">
+                <el-table :data="industyTrendData" style="width: 100%">
+                  <el-table-column
+                    :prop="industryTrend.title.field"
+                    :label="industryTrend.title.title"
+                    min-width="200"
+                  ></el-table-column>
+                  <el-table-column
+                    :prop="industryTrend.checkInTime.field"
+                    :label="industryTrend.checkInTime.title"
+                    width="100"
+                  ></el-table-column>
+                </el-table>
+              </el-tab-pane>
+              <el-tab-pane label="行业动态" name="2">
+                <el-table :data="industyTrendData" style="width: 100%">
+                  <el-table-column
+                    :prop="industryTrend.title.field"
+                    :label="industryTrend.title.title"
+                    min-width="200"
+                  ></el-table-column>
+                  <el-table-column
+                    :prop="industryTrend.checkInTime.field"
+                    :label="industryTrend.checkInTime.title"
+                    width="100"
+                  ></el-table-column>
+                </el-table>
+              </el-tab-pane>
+              <el-tab-pane label="外部资料" name="3">
+                <el-table :data="industyTrendData" style="width: 100%">
+                  <el-table-column
+                    :prop="industryTrend.title.field"
+                    :label="industryTrend.title.title"
+                    min-width="200"
+                  ></el-table-column>
+                  <el-table-column
+                    :prop="industryTrend.checkInTime.field"
+                    :label="industryTrend.checkInTime.title"
+                    width="100"
+                  ></el-table-column>
+                </el-table>
+              </el-tab-pane>
+              <el-tab-pane label="情报产品" name="4">
+                <el-table :data="industyTrendData" style="width: 100%">
+                  <el-table-column
+                    :prop="industryTrend.title.field"
+                    :label="industryTrend.title.title"
+                    min-width="200"
+                  ></el-table-column>
+                  <el-table-column
+                    :prop="industryTrend.checkInTime.field"
+                    :label="industryTrend.checkInTime.title"
+                    width="100"
+                  ></el-table-column>
+                </el-table>
+              </el-tab-pane>
+              <el-link
+                style="float: right; padding: 10px 20px 5px 20px"
+                type="primary"
+                >更多</el-link
+              >
+            </el-tabs>
+            <!-- <div>
               <el-table :data="industyTrendData" style="width: 100%">
                 <el-table-column
                   :prop="industryTrend.title.field"
@@ -67,11 +131,11 @@
                   width="100"
                 ></el-table-column>
               </el-table>
-            </div>
+            </div> -->
           </el-card>
         </el-col>
       </el-row>
-      <el-row>
+      <!-- <el-row>
         <el-col :span="20" :offset="2">
           <el-card shadow="hover" style="margin: 10px 0">
             <div slot="header" class="clearfix">
@@ -83,7 +147,7 @@
             </div>
           </el-card>
         </el-col>
-      </el-row>
+      </el-row> -->
       <el-row>
         <el-col :span="20" :offset="2">
           <div class="topic">
@@ -376,11 +440,14 @@
 
 <script>
 import { industryTrend } from "../store/infoType";
+// import echarts from "echarts";
 export default {
   data() {
     return {
       searchInput: "",
       searchType: "全部",
+      activeTab: "1",
+
       searchTypes: [
         { value: "全部" },
         { value: "标题" },
@@ -420,6 +487,50 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    infoTypeChart() {
+      let myEcharts = this.$echarts.init(
+        document.getElementById("infoTypeChart"),
+        "light"
+      );
+      let option = {
+        title: {
+          text: "表格示例",
+        },
+        tooltip: {},
+        legend: {
+          data: ["知识量"],
+        },
+        xAxis: {
+          data: [
+            "行业动态",
+            "外部简报",
+            "外部论文著作",
+            "外部专利",
+            "外部标准",
+            "情报外部报告",
+          ],
+        },
+        yAxis: {},
+        series: [
+          {
+            name: "销量",
+            type: "bar",
+            data: [5, 20, 36, 10, 10, 20, 27],
+          },
+        ],
+      };
+      myEcharts.setOption(option);
+      window.addEventListener("resize", function () {
+        myEcharts.resize();
+      });
+    },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.infoTypeChart();
+    });
   },
 };
 </script>

@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-02 08:45:42
- * @LastEditTime: 2020-12-10 10:07:06
+ * @LastEditTime: 2020-12-16 14:24:07
  */
 import axios from "axios";
 import router from "../router";
@@ -48,8 +48,9 @@ service.interceptors.response.use(
     }
   },
   (error) => {
+    console.log(error.response);
     Message({
-      message: error.message,
+      message: error.message + ":\t" + error.response.data.message,
       type: "error",
       duration: 5 * 1000,
     });

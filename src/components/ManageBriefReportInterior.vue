@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2020-12-10 14:09:02
+ * @LastEditTime: 2020-12-16 17:01:29
 -->
 <template>
   <div>
@@ -14,7 +14,12 @@
 <script>
 import { briefReportInterior } from "../store/infoType";
 import { briefReportInteriorExample } from "@/store/infoExample";
-import { getBriefReportInterior } from "@/api/manageBriefReportInterior";
+import {
+  getBriefReportInterior,
+  searchBriefReportInterior,
+  postBriefReportInterior,
+  deleteBriefReportInterior,
+} from "@/api/manageBriefReportInterior";
 import axios from "axios";
 
 const findPageList = (pageSize, currentPage) => {
@@ -163,44 +168,29 @@ export default {
         id: "briefReportInteriorGrid",
         height: 600,
         rowId: "orderNum",
-        proxyConfig: {
-          autoLoad: true,
-          props: {
-            result: "result",
-            total: "page.total",
-          },
-          ajax: {
-            query: ({ page }) => {
-              console.log(page);
-              let p = getBriefReportInterior({
-                page: page.currentPage - 1,
-                size: page.pageSize,
-              });
-              console.log(p);
-              return p;
-            },
-          },
-        },
         formConfig: {
+          data: {},
           titleWidth: 100,
           titleAlign: "right",
           items: [
             {
-              field: briefReportInterior.orderNum.field,
-              title: briefReportInterior.orderNum.title,
+              field: briefReportInterior.orderNumStart.field,
+              title: briefReportInterior.orderNumStart.title,
               span: 12,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
+                defaultValue: 1,
               },
             },
             {
-              field: briefReportInterior.orderNum.field,
+              field: briefReportInterior.orderNumEnd.field,
               // title: briefReportInterior.orderNum.title,
               span: 10,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
+                defaultValue: 1000000,
               },
             },
             {
@@ -210,6 +200,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -219,6 +210,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -228,6 +220,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -238,6 +231,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -248,6 +242,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -258,6 +253,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -268,6 +264,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -278,6 +275,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -288,6 +286,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -298,6 +297,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -308,6 +308,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -318,6 +319,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -328,6 +330,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -338,6 +341,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -348,6 +352,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -358,6 +363,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -368,6 +374,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -378,6 +385,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -388,6 +396,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -398,6 +407,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -408,6 +418,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -418,6 +429,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -428,6 +440,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -438,26 +451,29 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.checkInTime.field,
-              title: briefReportInterior.checkInTime.title,
+              field: briefReportInterior.checkInTimeStart.field,
+              title: briefReportInterior.checkInTimeStart.title,
               span: 12,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
+                defaultValue: "1900-01-01",
               },
             },
             {
-              field: briefReportInterior.checkInTime.field,
+              field: briefReportInterior.checkInTimeEnd.field,
               // title: briefReportInterior.checkInTime.title,
               span: 10,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
+                defaultValue: "2020-12-12",
               },
             },
             {
@@ -468,6 +484,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -478,6 +495,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -488,26 +506,29 @@ export default {
               itemRender: {
                 name: "$textarea",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.formatTime.field,
-              title: briefReportInterior.formatTime.title,
+              field: briefReportInterior.formatTimeStart.field,
+              title: briefReportInterior.formatTimeStart.title,
               span: 12,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
+                defaultValue: "1900-01-01",
               },
             },
             {
-              field: briefReportInterior.formatTime.field,
+              field: briefReportInterior.formatTimeEnd.field,
               // title: briefReportInterior.formatTime.title,
               span: 10,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
+                defaultValue: "2020-12-12",
               },
             },
             {
@@ -518,6 +539,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -528,6 +550,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -538,6 +561,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -548,6 +572,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -558,6 +583,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -568,6 +594,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             // {
@@ -613,6 +640,59 @@ export default {
         pagerConfig: {
           pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
         },
+        toolbarConfig: {
+          buttons: [
+            { code: "insert_actived", name: "新增" },
+            { code: "delete", name: "直接删除" },
+            { code: "mark_cancel", name: "删除/取消" },
+            {
+              code: "save",
+              name: "保存",
+              status: "success",
+            },
+          ],
+          refresh: true,
+          import: true,
+          export: true,
+          zoom: true,
+          custom: true,
+        },
+        proxyConfig: {
+          autoLoad: true,
+          form: true,
+          props: {
+            result: "result",
+            total: "page.total",
+          },
+          ajax: {
+            // query: ({ page }) => {
+            //   // console.log(page);
+            //   let p = getBriefReportInterior({
+            //     page: page.currentPage - 1,
+            //     size: page.pageSize,
+            //   });
+            //   console.log(p);
+            //   return p;
+            // },
+            query: ({ page, form }) => {
+              const queryParams = Object.assign({}, form, {
+                page: page.currentPage - 1,
+                size: page.pageSize,
+              });
+              console.log(queryParams);
+              let p = searchBriefReportInterior(queryParams);
+              return p;
+            },
+            save: (data) => {
+              console.log(data);
+              postBriefReportInterior(data);
+            },
+            delete: (data) => {
+              console.log(data);
+              deleteBriefReportInterior();
+            },
+          },
+        },
         columns: [
           {
             type: "checkbox",
@@ -621,6 +701,7 @@ export default {
             align: "center",
           },
           {
+            fixed: "left",
             resizable: true,
             align: "center",
             width: 80,
@@ -1013,6 +1094,21 @@ export default {
         ],
       },
     };
+  },
+  methods: {
+    // formSubmit() {
+    //   this.loading = true;
+    //   console.log(this.gridOptions);
+    //   searchBriefReportInterior(this.gridOptions.formConfig.data).then(
+    //     (data) => {
+    //       this.tableData = data;
+    //       this.loading = false;
+    //     }
+    //   );
+    // },
+    // formReset() {
+    //   // this.loading = true;
+    // },
   },
 };
 </script>

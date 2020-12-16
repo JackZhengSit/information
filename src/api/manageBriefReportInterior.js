@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-03 13:37:44
- * @LastEditTime: 2020-12-10 13:21:34
+ * @LastEditTime: 2020-12-16 14:12:29
  */
 import axios from "@/utils/axio";
 
@@ -38,9 +38,16 @@ export function getBriefReportInterior1(params) {
 
 export function searchBriefReportInterior(params) {
   return axios({
-    url: "/BriefReportInterior/search/",
+    url: "/BriefReportInterior/search/manageSearch",
     methd: "get",
     params,
+  }).then((res) => {
+    return Promise.resolve({
+      page: {
+        total: res.page.totalElements,
+      },
+      result: res._embedded.briefReportInteriors,
+    });
   });
 }
 

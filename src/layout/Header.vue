@@ -20,6 +20,8 @@
             <el-menu-item index="/home">首页</el-menu-item>
             <el-menu-item index="/search">检索</el-menu-item>
             <el-menu-item index="/manage">管理</el-menu-item>
+            <el-menu-item index="">图书</el-menu-item>
+            <el-menu-item index="">期刊</el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
@@ -31,12 +33,12 @@
 export default {
   data() {
     return {
-      activeIndex: "/home"
+      activeIndex: "/home",
     };
   },
   methods: {
-    handleSelect(key, keyPath) {}
-  }
+    handleSelect(key, keyPath) {},
+  },
 };
 </script>
 

@@ -7,8 +7,11 @@ import router from "./router";
 import store from "./store";
 import "./plugins/element.js";
 import "./plugins/vxe-table.js";
-import "./plugins/xe-ajax.js";
+// import "./plugins/xe-ajax.js";
+// import "./plugins/echarts.js";
+import echarts from "echarts";
 
+Vue.prototype.$echarts = echarts;
 Vue.config.productionTip = false;
 
 new Vue({

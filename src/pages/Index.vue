@@ -9,7 +9,7 @@
     <div id="footer">
       <router-view name="footer"></router-view>
     </div>
-    <el-backtop bottom="100"></el-backtop>
+    <el-backtop :bottom="100"></el-backtop>
   </div>
 </template>
 
