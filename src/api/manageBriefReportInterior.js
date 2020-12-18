@@ -3,14 +3,14 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-03 13:37:44
- * @LastEditTime: 2020-12-16 14:12:29
+ * @LastEditTime: 2020-12-18 14:35:44
  */
 import axios from "@/utils/axio";
 
 export function getBriefReportInterior(params) {
   return axios({
     url: "/BriefReportInterior",
-    methd: "get",
+    method: "get",
     params: params,
   }).then((res) => {
     return Promise.resolve(
@@ -29,7 +29,7 @@ export function getBriefReportInterior(params) {
 export function getBriefReportInterior1(params) {
   return axios({
     url: "/BriefReportInterior",
-    methd: "get",
+    method: "get",
     params: params,
   }).then((res) => {
     return Promise.resolve(res._embedded.briefReportInteriors);
@@ -39,7 +39,7 @@ export function getBriefReportInterior1(params) {
 export function searchBriefReportInterior(params) {
   return axios({
     url: "/BriefReportInterior/search/manageSearch",
-    methd: "get",
+    method: "get",
     params,
   }).then((res) => {
     return Promise.resolve({
@@ -51,10 +51,21 @@ export function searchBriefReportInterior(params) {
   });
 }
 
+export function confirmSaveBriefReportInterior(data) {
+  return axios({
+    url: "/manual/brief-report-interior/save",
+    method: "post",
+    data: data,
+  }).then((res) => {
+    console.log(res);
+    // return Promise.resolve({});
+  });
+}
+
 export function postBriefReportInterior(data) {
   return axios({
     url: "/BriefReportInterior",
-    methd: "post",
+    method: "post",
     data: data,
   });
 }
@@ -62,7 +73,7 @@ export function postBriefReportInterior(data) {
 export function putBriefReportInterior(params, data) {
   return axios({
     url: "/BriefReportInterior",
-    methd: "put",
+    method: "put",
     params: params,
     data: data,
   });

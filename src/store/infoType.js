@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2020-12-16 09:49:52
+ * @LastEditTime: 2020-12-18 08:36:15
  */
 var infoType = {
   industryTrend: "行业动态",
@@ -17,6 +17,10 @@ var infoType = {
 };
 
 let infoBase = {
+  id: {
+    field: "id",
+    title: "id",
+  },
   orderNum: {
     field: "orderNum",
     title: "序号",

@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2020-12-16 17:01:29
+ * @LastEditTime: 2020-12-18 14:18:18
 -->
 <template>
   <div>
@@ -19,6 +19,7 @@ import {
   searchBriefReportInterior,
   postBriefReportInterior,
   deleteBriefReportInterior,
+  confirmSaveBriefReportInterior,
 } from "@/api/manageBriefReportInterior";
 import axios from "axios";
 
@@ -167,7 +168,12 @@ export default {
         keepSource: true,
         id: "briefReportInteriorGrid",
         height: 600,
-        rowId: "orderNum",
+        // rowId: "orderNum",
+        editConfig: {
+          trigger: "click",
+          mode: "row",
+          showStatus: true,
+        },
         formConfig: {
           data: {},
           titleWidth: 100,
@@ -679,21 +685,38 @@ export default {
                 page: page.currentPage - 1,
                 size: page.pageSize,
               });
-              console.log(queryParams);
+              // console.log(queryParams);
               let p = searchBriefReportInterior(queryParams);
               return p;
             },
             save: (data) => {
-              console.log(data);
-              postBriefReportInterior(data);
+              // console.log(data);
+              // //插入
+              // for (let record of data.body.insertRecords) {
+              //   // postBriefReportInterior(record);
+              //   console.log(record);
+              // }
+              // for (let record of data.body.updateRecords) {
+              //   console.log(record);
+              // }
+              // for (let record of data.body.deleteRecords) {
+              //   console.log(record);
+              // }
+              confirmSaveBriefReportInterior(data.body);
             },
             delete: (data) => {
               console.log(data);
-              deleteBriefReportInterior();
+              // deleteBriefReportInterior();
             },
           },
         },
         columns: [
+          {
+            width: 100,
+            visible: false,
+            field: briefReportInterior.id.field,
+            title: briefReportInterior.id.title,
+          },
           {
             type: "checkbox",
             width: 50,
@@ -704,7 +727,8 @@ export default {
             fixed: "left",
             resizable: true,
             align: "center",
-            width: 80,
+            editRender: { name: "input" },
+            width: 90,
             sortable: true,
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
