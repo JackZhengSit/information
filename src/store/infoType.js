@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2020-12-18 08:36:15
+ * @LastEditTime: 2020-12-22 10:53:52
  */
 var infoType = {
   industryTrend: "行业动态",
@@ -182,6 +182,10 @@ let infoBase = {
   updateTime: {
     field: "updateTime",
     title: "更新时间",
+  },
+  filePath: {
+    field: "filePath",
+    title: "附件",
   },
 };
 var industryTrend1 = {

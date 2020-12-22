@@ -42,12 +42,12 @@ export function searchBriefReportInterior(params) {
     method: "get",
     params,
   }).then((res) => {
-    return Promise.resolve({
+    return {
       page: {
         total: res.page.totalElements,
       },
       result: res._embedded.briefReportInteriors,
-    });
+    };
   });
 }
 
@@ -57,10 +57,12 @@ export function confirmSaveBriefReportInterior(data) {
     method: "post",
     data: data,
   }).then((res) => {
-    console.log(res);
-    // return Promise.resolve({});
+    // console.log(res);
+    return res;
   });
 }
+
+
 
 export function postBriefReportInterior(data) {
   return axios({

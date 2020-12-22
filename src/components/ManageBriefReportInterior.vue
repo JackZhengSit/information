@@ -3,15 +3,28 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2020-12-18 14:18:18
+ * @LastEditTime: 2020-12-22 17:03:22
 -->
 <template>
   <div>
-    <vxe-grid ref="xGrid" v-bind="gridOptions"></vxe-grid>
+    <vxe-grid ref="xGrid" v-bind="gridOptions">
+      <template v-slot:uploadFile="{ row }">
+        <el-upload
+          show-file-list="false"
+          :limit="1"
+          data="row.id"
+          action="http://localhost:8080/manual/brief-report-interior/upload?id=1"
+        >
+          <el-button slot="trigger" type="default">上传</el-button>
+          <el-button type="danger" style="margin-left: 10px">删除</el-button>
+        </el-upload>
+      </template>
+    </vxe-grid>
   </div>
 </template>
 
 <script>
+import { Message, MessageBox } from "element-ui";
 import { briefReportInterior } from "../store/infoType";
 import { briefReportInteriorExample } from "@/store/infoExample";
 import {
@@ -158,6 +171,11 @@ const findPageList = (pageSize, currentPage) => {
   });
 };
 
+// 驼峰转换下划线
+function toLine(name) {
+  if (name == null) return name;
+  return name.replace(/([A-Z])/g, "_$1").toLowerCase();
+}
 export default {
   data() {
     return {
@@ -167,10 +185,10 @@ export default {
         highlightHoverRow: true,
         keepSource: true,
         id: "briefReportInteriorGrid",
-        height: 600,
+        maxHeight: 1000,
         // rowId: "orderNum",
         editConfig: {
-          trigger: "click",
+          trigger: "dblclick",
           mode: "row",
           showStatus: true,
         },
@@ -646,6 +664,12 @@ export default {
         pagerConfig: {
           pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
         },
+        sortConfig: {
+          trigger: "cell",
+          remote: true,
+        },
+        importConfig: {},
+        exportConfig: {},
         toolbarConfig: {
           buttons: [
             { code: "insert_actived", name: "新增" },
@@ -666,47 +690,41 @@ export default {
         proxyConfig: {
           autoLoad: true,
           form: true,
+          sort: true,
           props: {
             result: "result",
             total: "page.total",
           },
           ajax: {
-            // query: ({ page }) => {
-            //   // console.log(page);
-            //   let p = getBriefReportInterior({
-            //     page: page.currentPage - 1,
-            //     size: page.pageSize,
-            //   });
-            //   console.log(p);
-            //   return p;
-            // },
-            query: ({ page, form }) => {
+            query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
                 size: page.pageSize,
               });
-              // console.log(queryParams);
+              let firstSort = sorts[0];
+              if (firstSort) {
+                queryParams.sort = firstSort.property + "," + firstSort.order;
+                // queryParams.order = firstSort.order;
+              }
+              console.log(queryParams);
               let p = searchBriefReportInterior(queryParams);
               return p;
             },
             save: (data) => {
-              // console.log(data);
-              // //插入
-              // for (let record of data.body.insertRecords) {
-              //   // postBriefReportInterior(record);
-              //   console.log(record);
-              // }
-              // for (let record of data.body.updateRecords) {
-              //   console.log(record);
-              // }
-              // for (let record of data.body.deleteRecords) {
-              //   console.log(record);
-              // }
-              confirmSaveBriefReportInterior(data.body);
+              confirmSaveBriefReportInterior(data.body).then((result) =>
+                Message({
+                  message: "保存成功",
+                  type: "success",
+                })
+              );
             },
             delete: (data) => {
-              console.log(data);
-              // deleteBriefReportInterior();
+              confirmSaveBriefReportInterior(data.body).then((result) =>
+                Message({
+                  message: "删除成功",
+                  type: "success",
+                })
+              );
             },
           },
         },
@@ -1085,6 +1103,24 @@ export default {
             field: briefReportInterior.referWebsite.field,
             title: briefReportInterior.referWebsite.title,
           },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            // editRender: { name: "input", enabled: false },
+            field: briefReportInterior.filePath.field,
+            title: briefReportInterior.filePath.title,
+            fixed: "right",
+          },
+          {
+            resizable: true,
+            width: 180,
+            align: "center",
+            title: "操作",
+            slots: { default: "uploadFile" },
+            fixed: "right",
+          },
         ],
       },
       gridOptions1: {
@@ -1119,21 +1155,7 @@ export default {
       },
     };
   },
-  methods: {
-    // formSubmit() {
-    //   this.loading = true;
-    //   console.log(this.gridOptions);
-    //   searchBriefReportInterior(this.gridOptions.formConfig.data).then(
-    //     (data) => {
-    //       this.tableData = data;
-    //       this.loading = false;
-    //     }
-    //   );
-    // },
-    // formReset() {
-    //   // this.loading = true;
-    // },
-  },
+  methods: {},
 };
 </script>
 

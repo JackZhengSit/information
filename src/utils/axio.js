@@ -36,7 +36,7 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
-    if (response.status === 200) {
+    if (200<=response.status<300) {
       return response.data;
     } else {
       Message({
