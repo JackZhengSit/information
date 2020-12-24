@@ -3,17 +3,17 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2020-12-22 17:03:22
+ * @LastEditTime: 2020-12-24 16:58:54
 -->
 <template>
   <div>
     <vxe-grid ref="xGrid" v-bind="gridOptions">
-      <template v-slot:uploadFile="{ row }">
+      <template v-slot:uploadFile="{}">
         <el-upload
-          show-file-list="false"
+          :show-file-list="false"
           :limit="1"
-          data="row.id"
-          action="http://localhost:8080/manual/brief-report-interior/upload?id=1"
+          :data="{ id: 5 }"
+          action="http://localhost:8080/manual/brief-report-interior/upload"
         >
           <el-button slot="trigger" type="default">上传</el-button>
           <el-button type="danger" style="margin-left: 10px">删除</el-button>
