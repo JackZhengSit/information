@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-03 13:37:44
- * @LastEditTime: 2020-12-18 14:35:44
+ * @LastEditTime: 2020-12-25 10:36:14
  */
 import axios from "@/utils/axio";
 
@@ -62,7 +62,13 @@ export function confirmSaveBriefReportInterior(data) {
   });
 }
 
-
+export function removeRemoteFileById(param) {
+  return axios({
+    url: "/manual/brief-report-interior/remove",
+    method: "get",
+    params: param,
+  });
+}
 
 export function postBriefReportInterior(data) {
   return axios({

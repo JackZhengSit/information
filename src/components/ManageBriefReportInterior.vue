@@ -3,20 +3,26 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2020-12-24 16:58:54
+ * @LastEditTime: 2020-12-25 11:02:30
 -->
 <template>
   <div>
     <vxe-grid ref="xGrid" v-bind="gridOptions">
-      <template v-slot:uploadFile="{}">
+      <template v-slot:uploadFile="{ row }">
         <el-upload
           :show-file-list="false"
           :limit="1"
-          :data="{ id: 5 }"
+          :on-success="uploadFileSuccess"
+          :data="{ id: row.id }"
           action="http://localhost:8080/manual/brief-report-interior/upload"
         >
           <el-button slot="trigger" type="default">上传</el-button>
-          <el-button type="danger" style="margin-left: 10px">删除</el-button>
+          <el-button
+            type="danger"
+            style="margin-left: 10px"
+            @click="removeFileById(row)"
+            >删除</el-button
+          >
         </el-upload>
       </template>
     </vxe-grid>
@@ -28,148 +34,11 @@ import { Message, MessageBox } from "element-ui";
 import { briefReportInterior } from "../store/infoType";
 import { briefReportInteriorExample } from "@/store/infoExample";
 import {
-  getBriefReportInterior,
   searchBriefReportInterior,
-  postBriefReportInterior,
-  deleteBriefReportInterior,
+  removeRemoteFileById,
   confirmSaveBriefReportInterior,
 } from "@/api/manageBriefReportInterior";
 import axios from "axios";
-
-const findPageList = (pageSize, currentPage) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const list = [
-        {
-          id: 10001,
-          name: "Test1",
-          nickname: "T1",
-          role: "Develop",
-          sex: "Man",
-          age: 28,
-          address: "Shenzhen",
-        },
-        {
-          id: 10002,
-          name: "Test2",
-          nickname: "T2",
-          role: "Test",
-          sex: "Women",
-          age: 22,
-          address: "Guangzhou",
-        },
-        {
-          id: 10003,
-          name: "Test3",
-          nickname: "T3",
-          role: "PM",
-          sex: "Man",
-          age: 32,
-          address: "Shanghai",
-        },
-        {
-          id: 10004,
-          name: "Test4",
-          nickname: "T4",
-          role: "Designer",
-          sex: "Women ",
-          age: 23,
-          address: "Shenzhen",
-        },
-        {
-          id: 10005,
-          name: "Test5",
-          nickname: "T5",
-          role: "Develop",
-          sex: "Women ",
-          age: 30,
-          address: "Shanghai",
-        },
-        {
-          id: 10006,
-          name: "Test6",
-          nickname: "T6",
-          role: "Designer",
-          sex: "Women ",
-          age: 21,
-          address: "Shenzhen",
-        },
-        {
-          id: 10007,
-          name: "Test7",
-          nickname: "T7",
-          role: "Test",
-          sex: "Man ",
-          age: 29,
-          address: "Shenzhen",
-        },
-        {
-          id: 10008,
-          name: "Test8",
-          nickname: "T8",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Shenzhen",
-        },
-        {
-          id: 10009,
-          name: "Test9",
-          nickname: "T9",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Shenzhen",
-        },
-        {
-          id: 100010,
-          name: "Test10",
-          nickname: "T10",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Guangzhou",
-        },
-        {
-          id: 100011,
-          name: "Test11",
-          nickname: "T11",
-          role: "Test",
-          sex: "Women ",
-          age: 26,
-          address: "Shenzhen",
-        },
-        {
-          id: 100012,
-          name: "Test12",
-          nickname: "T12",
-          role: "Develop",
-          sex: "Man ",
-          age: 34,
-          address: "Guangzhou",
-        },
-        {
-          id: 100013,
-          name: "Test13",
-          nickname: "T13",
-          role: "Test",
-          sex: "Women ",
-          age: 22,
-          address: "Shenzhen",
-        },
-      ];
-      resolve({
-        page: {
-          total: list.length,
-        },
-        result: list.slice(
-          (currentPage - 1) * pageSize,
-          currentPage * pageSize
-        ),
-      });
-    }, 100);
-  });
-};
 
 // 驼峰转换下划线
 function toLine(name) {
@@ -1109,8 +978,8 @@ export default {
             align: "center",
             showOverflow: "tooltip",
             // editRender: { name: "input", enabled: false },
-            field: briefReportInterior.filePath.field,
-            title: briefReportInterior.filePath.title,
+            field: briefReportInterior.fileName.field,
+            title: briefReportInterior.fileName.title,
             fixed: "right",
           },
           {
@@ -1123,39 +992,25 @@ export default {
           },
         ],
       },
-      gridOptions1: {
-        border: true,
-        resizable: true,
-        height: 530,
-        pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
-        },
-        proxyConfig: {
-          seq: true, // 启用动态序号代理
-          props: {
-            result: "result",
-            total: "page.total",
-          },
-          ajax: {
-            query: ({ page }) => {
-              let p = findPageList(page.pageSize, page.currentPage);
-              console.log(p);
-              return p;
-            },
-          },
-        },
-        columns: [
-          { type: "checkbox", width: 50 },
-          { type: "seq", width: 60 },
-          { field: "name", title: "Name" },
-          { field: "nickname", title: "Nickname" },
-          { field: "role", title: "Role" },
-          { field: "address", title: "Address", showOverflow: true },
-        ],
-      },
     };
   },
-  methods: {},
+  methods: {
+    removeFileById(row) {
+      console.log(row);
+      removeRemoteFileById({ id: row.id }).then((res) => {
+        Message({
+          message: "删除成功！",
+          type: "success",
+        });
+      });
+    },
+    uploadFileSuccess() {
+      Message({
+        message: "上传成功",
+        type: "success",
+      });
+    },
+  },
 };
 </script>
 

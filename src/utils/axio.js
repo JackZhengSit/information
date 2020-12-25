@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-02 08:45:42
- * @LastEditTime: 2020-12-16 14:24:07
+ * @LastEditTime: 2020-12-25 16:51:57
  */
 import axios from "axios";
 import router from "../router";
@@ -36,11 +36,11 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
-    if (200<=response.status<300) {
+    if (200 <= response.status < 300) {
       return response.data;
     } else {
       Message({
-        message: response.message,
+        message: "错误：" + response.message,
         type: "error",
         duration: 5 * 1000,
       });
@@ -48,13 +48,20 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    console.log(error.response);
     Message({
-      message: error.message + ":\t" + error.response.data.message,
+      message: "错误：" + error.message,
       type: "error",
       duration: 5 * 1000,
     });
-    return Promise.reject(error);
+    return Promise.reject(error).catch((error) => {
+      console.log(error);
+      if (error.response.data) {
+        Message({
+          message: "错误：" + error.response.data.message,
+          type: "error",
+        });
+      }
+    });
   }
 );
 
