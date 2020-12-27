@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2020-12-25 11:02:30
+ * @LastEditTime: 2020-12-28 00:30:38
 -->
 <template>
   <div>
@@ -11,7 +11,6 @@
       <template v-slot:uploadFile="{ row }">
         <el-upload
           :show-file-list="false"
-          :limit="1"
           :on-success="uploadFileSuccess"
           :data="{ id: row.id }"
           action="http://localhost:8080/manual/brief-report-interior/upload"
@@ -39,15 +38,38 @@ import {
   confirmSaveBriefReportInterior,
 } from "@/api/manageBriefReportInterior";
 import axios from "axios";
-
+import XLSX from "xlsx";
 // 驼峰转换下划线
+
 function toLine(name) {
   if (name == null) return name;
   return name.replace(/([A-Z])/g, "_$1").toLowerCase();
 }
+function csvToObject(csvString) {
+  let csvarry = csvString.split("\r\n");
+  let datas = [];
+  let headers = csvarry[0].split(",");
+  for (let i = 0; i < headers.length; i++) {
+    Object.keys(briefReportInterior).forEach(function (key) {
+      if (briefReportInterior[key].title == headers[i])
+        headers[i] = briefReportInterior[key].field;
+    });
+  }
+  for (let i = 1; i < csvarry.length - 1; i++) {
+    let data = {};
+    let temp = csvarry[i].split(",");
+    for (let j = 0; j < temp.length; j++) {
+      data[headers[j]] = temp[j];
+    }
+    datas.push(data);
+  }
+  return datas;
+}
+
 export default {
   data() {
     return {
+      // xGrid: this.$refs.xGrid,
       gridOptions: {
         border: true,
         resizable: true,
@@ -537,8 +559,17 @@ export default {
           trigger: "cell",
           remote: true,
         },
-        importConfig: {},
-        exportConfig: {},
+        importConfig: {
+          mode: "insert",
+          remote: true,
+          importMethod: this.importMethod,
+        },
+        exportConfig: {
+          // columnFilterMethod(column) {
+          //   console.log(column);
+          //   column.type = "checkbox";
+          // },
+        },
         toolbarConfig: {
           buttons: [
             { code: "insert_actived", name: "新增" },
@@ -575,7 +606,7 @@ export default {
                 queryParams.sort = firstSort.property + "," + firstSort.order;
                 // queryParams.order = firstSort.order;
               }
-              console.log(queryParams);
+              // console.log(queryParams);
               let p = searchBriefReportInterior(queryParams);
               return p;
             },
@@ -996,7 +1027,6 @@ export default {
   },
   methods: {
     removeFileById(row) {
-      console.log(row);
       removeRemoteFileById({ id: row.id }).then((res) => {
         Message({
           message: "删除成功！",
@@ -1010,6 +1040,36 @@ export default {
         type: "success",
       });
     },
+    importMethod(file) {
+      let xGrid = this.$refs.xGrid;
+      return Promise.resolve(file.file)
+        .then((file) => {
+          let reader = new FileReader();
+          reader.readAsText(file);
+          reader.onload = function () {
+            let data = csvToObject(this.result);
+            console.log(data);
+            confirmSaveBriefReportInterior({
+              insertRecords: data,
+            }).then(() => {
+              xGrid.commitProxy("query");
+              Message({
+                message: "导入成功",
+                type: "success",
+              });
+            });
+          };
+        })
+        .catch(() => {
+          Message({
+            message: "导入失败",
+            type: "error",
+          });
+        });
+    },
+  },
+  mounted: function () {
+    // var xGrid = this.$refs.xGrid;
   },
 };
 </script>

@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2020-12-25 08:41:25
+ * @LastEditTime: 2020-12-27 21:39:59
  */
 var infoType = {
   industryTrend: "行业动态",
@@ -188,7 +188,7 @@ let infoBase = {
     title: "附件位置",
   },
   fileName: {
-    field: "fieldNname",
+    field: "fileName",
     title: "附件名",
   },
 };

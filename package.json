@@ -18,7 +18,8 @@
     "vuex": "^3.6.0",
     "vxe-table": "^2.10.4",
     "xe-ajax": "^4.0.5",
-    "xe-utils": "^2.8.3"
+    "xe-utils": "^2.8.3",
+    "xlsx": "^0.16.9"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.12.1",

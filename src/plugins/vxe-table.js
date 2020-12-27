@@ -6,3 +6,7 @@ import "vxe-table/lib/style.css";
 
 // const app = createApp(App);
 Vue.use(VXETable);
+VXETable.setup({
+  zIndex: 1000,
+  grid: {},
+});

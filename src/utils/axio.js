@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-02 08:45:42
- * @LastEditTime: 2020-12-25 16:51:57
+ * @LastEditTime: 2020-12-27 21:48:23
  */
 import axios from "axios";
 import router from "../router";
@@ -61,6 +61,7 @@ service.interceptors.response.use(
           type: "error",
         });
       }
+      return Promise.reject(error);
     });
   }
 );
