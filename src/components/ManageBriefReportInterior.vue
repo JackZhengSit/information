@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2020-12-28 00:30:38
+ * @LastEditTime: 2020-12-28 16:14:13
 -->
 <template>
   <div>
@@ -13,6 +13,7 @@
           :show-file-list="false"
           :on-success="uploadFileSuccess"
           :data="{ id: row.id }"
+          accept=".rar,.zip,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx"
           action="http://localhost:8080/manual/brief-report-interior/upload"
         >
           <el-button slot="trigger" type="default">上传</el-button>
@@ -37,14 +38,7 @@ import {
   removeRemoteFileById,
   confirmSaveBriefReportInterior,
 } from "@/api/manageBriefReportInterior";
-import axios from "axios";
-import XLSX from "xlsx";
-// 驼峰转换下划线
 
-function toLine(name) {
-  if (name == null) return name;
-  return name.replace(/([A-Z])/g, "_$1").toLowerCase();
-}
 function csvToObject(csvString) {
   let csvarry = csvString.split("\r\n");
   let datas = [];
@@ -413,17 +407,7 @@ export default {
                 defaultValue: "",
               },
             },
-            {
-              field: briefReportInterior.abs.field,
-              title: briefReportInterior.abs.title,
-              span: 24,
-              folding: true,
-              itemRender: {
-                name: "$textarea",
-                props: { placeholder: "" },
-                defaultValue: "",
-              },
-            },
+
             {
               field: briefReportInterior.formatTimeStart.field,
               title: briefReportInterior.formatTimeStart.title,
@@ -562,6 +546,7 @@ export default {
         importConfig: {
           mode: "insert",
           remote: true,
+          types: ["csv"],
           importMethod: this.importMethod,
         },
         exportConfig: {
@@ -611,20 +596,22 @@ export default {
               return p;
             },
             save: (data) => {
-              confirmSaveBriefReportInterior(data.body).then((result) =>
-                Message({
-                  message: "保存成功",
-                  type: "success",
-                })
-              );
+              confirmSaveBriefReportInterior(data.body);
+              // .then((result) =>
+              //   Message({
+              //     message: "保存成功",
+              //     type: "success",
+              //   })
+              // );
             },
             delete: (data) => {
-              confirmSaveBriefReportInterior(data.body).then((result) =>
-                Message({
-                  message: "删除成功",
-                  type: "success",
-                })
-              );
+              confirmSaveBriefReportInterior(data.body);
+              // .then((result) =>
+              //   Message({
+              //     message: "删除成功",
+              //     type: "success",
+              //   })
+              // );
             },
           },
         },
@@ -1028,6 +1015,7 @@ export default {
   methods: {
     removeFileById(row) {
       removeRemoteFileById({ id: row.id }).then((res) => {
+        this.$refs.xGrid.commitProxy("query");
         Message({
           message: "删除成功！",
           type: "success",
@@ -1035,6 +1023,7 @@ export default {
       });
     },
     uploadFileSuccess() {
+      this.$refs.xGrid.commitProxy("query");
       Message({
         message: "上传成功",
         type: "success",
@@ -1048,7 +1037,7 @@ export default {
           reader.readAsText(file);
           reader.onload = function () {
             let data = csvToObject(this.result);
-            console.log(data);
+            // console.log(data);
             confirmSaveBriefReportInterior({
               insertRecords: data,
             }).then(() => {

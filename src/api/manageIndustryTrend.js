@@ -2,14 +2,14 @@
  * @Description:
  * @Version: 0.0.0
  * @Autor: JackZheng
- * @Date: 2020-12-03 13:37:44
- * @LastEditTime: 2020-12-28 14:57:16
+ * @Date: 2020-12-28 16:09:14
+ * @LastEditTime: 2020-12-28 16:12:07
  */
 import axios from "@/utils/axio";
 
-export function getBriefReportInterior(params) {
+export function getIndustryTrend(params) {
   return axios({
-    url: "/BriefReportInterior",
+    url: "/IndustryTrend",
     method: "get",
     params: params,
   }).then((res) => {
@@ -17,14 +17,14 @@ export function getBriefReportInterior(params) {
       page: {
         total: res.page.totalElements,
       },
-      result: res._embedded.briefReportInteriors,
+      result: res._embedded.industryTrends,
     });
   });
 }
 
-export function searchBriefReportInterior(params) {
+export function searchIndustryTrend(params) {
   return axios({
-    url: "/BriefReportInterior/search/manageSearch",
+    url: "/IndustryTrend/search/manageSearch",
     method: "get",
     params,
   }).then((res) => {
@@ -32,14 +32,14 @@ export function searchBriefReportInterior(params) {
       page: {
         total: res.page.totalElements,
       },
-      result: res._embedded.briefReportInteriors,
+      result: res._embedded.industryTrends,
     };
   });
 }
 
-export function confirmSaveBriefReportInterior(data) {
+export function confirmSaveIndustryTrend(data) {
   return axios({
-    url: "/manual/brief-report-interior/save",
+    url: "/manual/industry-trend/save",
     method: "post",
     data: data,
   }).then((res) => {
@@ -50,7 +50,7 @@ export function confirmSaveBriefReportInterior(data) {
 
 export function removeRemoteFileById(param) {
   return axios({
-    url: "/manual/brief-report-interior/remove",
+    url: "/manual/industry-trend/remove",
     method: "get",
     params: param,
   }).then((res) => {

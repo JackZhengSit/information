@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2020-12-27 21:39:59
+ * @LastEditTime: 2020-12-28 10:14:35
  */
 var infoType = {
   industryTrend: "行业动态",
@@ -298,7 +298,7 @@ var industryTrend1 = {
   updateTime: "更新时间",
 };
 
-var briefReportExterior = {
+var briefReportExterior1 = {
   orderNum: "序号",
   name: "简报名称",
   type: "简报类型",
@@ -436,7 +436,251 @@ var briefReportInterior = {
   },
 };
 
-Object.assign(briefReportInterior, infoBase);
-Object.assign(industryTrend, infoBase);
+var briefReportExterior = {};
 
-export { infoType, industryTrend, briefReportExterior, briefReportInterior };
+var paperExterior = {
+  paperType: {
+    field: "paperType",
+    title: "论文类型",
+  },
+  title: {
+    field: "title",
+    title: "题名",
+  },
+  author: {
+    field: "author",
+    title: "作者",
+  },
+  authorInstitution: {
+    field: "authorInstitution",
+    title: "作者单位",
+  },
+  firstAuthorInstitution: {
+    field: "firstAuthorInstitution",
+    title: "第一作者",
+  },
+  informationComeFrom: {
+    field: "informationComeFrom",
+    title: "文献来源",
+  },
+  publicationTime: {
+    field: "publicationTime",
+    title: "发表时间",
+  },
+  documentType: {
+    field: "documentType",
+    title: "文献类型",
+  },
+  pageNo: {
+    field: "pageNo",
+    title: "页码",
+  },
+  traslatedTitle: {
+    field: "traslatedTitle",
+    title: "翻译题名",
+  },
+  authorGroup: {
+    field: "authorGroup",
+    title: "团体作者",
+  },
+  publicateCompony: {
+    field: "publicateCompony",
+    title: "出版单位",
+  },
+  publicateTime: {
+    field: "publicateTime",
+    title: "出版时间",
+  },
+  conferenceSite: {
+    field: "conferenceSite",
+    title: "会议地址",
+  },
+  conferenceName: {
+    field: "conferenceName",
+    title: "会议名称",
+  },
+  conferenceDate: {
+    field: "conferenceDate",
+    title: "会议时间",
+  },
+  chineseClassNum: {
+    field: "chineseClassNum",
+    title: "中图分类号",
+  },
+  fundProject: {
+    field: "fundProject",
+    title: "基金项目",
+  },
+  reference: {
+    field: "reference",
+    title: "参考文献",
+  },
+  quotation: {
+    field: "quotation",
+    title: "引文",
+  },
+  allName: {
+    field: "allName",
+    title: "整本名称t",
+  },
+  pageCount: {
+    field: "pageCount",
+    title: "总页数",
+  },
+  collectCompany: {
+    field: "collectCompany",
+    title: "馆藏单位",
+  },
+};
+
+var patentExterior = {
+  inventionTitile: {
+    field: "inventionTitile",
+    title: "专利名称",
+  },
+  applicationNo: {
+    field: "applicationNo",
+    title: "申请号",
+  },
+  applicationDay: {
+    field: "applicationDay",
+    title: "申请日",
+  },
+  publicationNo: {
+    field: "publicationNo",
+    title: "授权号",
+  },
+  publicationDay: {
+    field: "publicationDay",
+    title: "授权日",
+  },
+  applicationType: {
+    field: "applicationType",
+    title: "申请类型",
+  },
+  patentType: {
+    field: "patentType",
+    title: "专利类别",
+  },
+  assignee: {
+    field: "assignee",
+    title: "申请公司",
+  },
+  firstAssignee: {
+    field: "firstAssignee",
+    title: "第一申请人",
+  },
+  inventor: {
+    field: "inventor",
+    title: "发明人",
+  },
+  claims: {
+    field: "claims",
+    title: "权力要求书",
+  },
+  priorityNum: {
+    field: "priorityNum",
+    title: "优先权号",
+  },
+  priorityDay: {
+    field: "priorityDay",
+    title: "优先权日",
+  },
+  mainClassNum: {
+    field: "mainClassNum",
+    title: "主分类号",
+  },
+  legalStatus: {
+    field: "legalStatus",
+    title: "法律状态",
+  },
+};
+
+var reportExterior = {
+  title: {
+    field: "title",
+    title: "题名",
+  },
+  type: {
+    field: "type",
+    title: "报告类型",
+  },
+  completeDepartment: {
+    field: "completeDepartment",
+    title: "内容完成作者/单位",
+  },
+};
+
+var reportInterior = {};
+
+var standardExterior = {
+  name: {
+    field: "name",
+    title: "标准名称",
+  },
+  num: {
+    field: "num",
+    title: "标准号",
+  },
+  publicateDate: {
+    field: "publicateDate",
+    title: "发布日",
+  },
+  executeDate: {
+    field: "executeDate",
+    title: "实施日",
+  },
+  specifyInstitution: {
+    field: "specifyInstitution",
+    title: "归口单位",
+  },
+  applicationScope: {
+    field: "applicationScope",
+    title: "使用范围",
+  },
+  author: {
+    field: "author",
+    title: "起草人",
+  },
+  status: {
+    field: "status",
+    title: "标准状态",
+  },
+  authorInstitution: {
+    field: "authorInstitution",
+    title: "起草单位",
+  },
+  chineseStandardClassNumname: {
+    field: "chineseStandardClassNum",
+    title: "中国分类号",
+  },
+  substituteStandard: {
+    field: "substituteStandard",
+    title: "替代标准",
+  },
+  publicateCompony: {
+    field: "publicateCompony",
+    title: "发布单位",
+  },
+};
+
+Object.assign(industryTrend, infoBase);
+Object.assign(briefReportInterior, infoBase);
+Object.assign(briefReportExterior, briefReportInterior);
+Object.assign(paperExterior, infoBase);
+Object.assign(patentExterior, infoBase);
+Object.assign(reportExterior, infoBase);
+Object.assign(reportInterior, reportInterior);
+Object.assign(standardExterior, infoBase);
+
+export {
+  infoType,
+  industryTrend,
+  briefReportExterior,
+  briefReportInterior,
+  paperExterior,
+  patentExterior,
+  reportExterior,
+  reportInterior,
+  standardExterior,
+};
