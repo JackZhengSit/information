@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2020-12-28 16:33:36
+ * @LastEditTime: 2020-12-28 19:27:47
 -->
 <template>
   <div>
@@ -121,7 +121,6 @@ export default {
                 defaultValue: "",
               },
             },
-
             {
               field: industryTrend.industryType.field,
               title: industryTrend.industryType.title,
@@ -342,6 +341,7 @@ export default {
                 defaultValue: "",
               },
             },
+            { span: 8 },
             {
               field: industryTrend.checkInTimeStart.field,
               title: industryTrend.checkInTimeStart.title,
@@ -528,12 +528,7 @@ export default {
           types: ["csv"],
           importMethod: this.importMethod,
         },
-        exportConfig: {
-          // columnFilterMethod(column) {
-          //   console.log(column);
-          //   column.type = "checkbox";
-          // },
-        },
+        exportConfig: {},
         toolbarConfig: {
           buttons: [
             { code: "insert_actived", name: "新增" },
@@ -607,7 +602,6 @@ export default {
             field: industryTrend.orderNum.field,
             title: industryTrend.orderNum.title,
           },
-
           {
             resizable: true,
             width: 100,
@@ -618,7 +612,6 @@ export default {
             field: industryTrend.trendType.field,
             title: industryTrend.trendType.title,
           },
-
           {
             resizable: true,
             width: 100,

@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2020-12-28 10:14:35
+ * @LastEditTime: 2020-12-28 22:53:28
  */
 var infoType = {
   industryTrend: "行业动态",
@@ -412,7 +412,7 @@ var industryTrend = {
     title: "题名",
   },
   trendType: {
-    fiedld: "trendType",
+    field: "trendType",
     title: "动态类型",
   },
 };
@@ -467,6 +467,14 @@ var paperExterior = {
     field: "publicationTime",
     title: "发表时间",
   },
+  publicationTimeStart: {
+    field: "publicationTimeStart",
+    title: "发表时间开始",
+  },
+  publicationTimeEnd: {
+    field: "publicationTimeEnd",
+    title: "发表时间结束",
+  },
   documentType: {
     field: "documentType",
     title: "文献类型",
@@ -491,6 +499,14 @@ var paperExterior = {
     field: "publicateTime",
     title: "出版时间",
   },
+  publicateTimeStart: {
+    field: "publicateTimeStart",
+    title: "出版时间开始",
+  },
+  publicateTimeEnd: {
+    field: "publicateTimeEnd",
+    title: "出版时间结束",
+  },
   conferenceSite: {
     field: "conferenceSite",
     title: "会议地址",
@@ -502,6 +518,14 @@ var paperExterior = {
   conferenceDate: {
     field: "conferenceDate",
     title: "会议时间",
+  },
+  conferenceDateStart: {
+    field: "conferenceDateStart",
+    title: "会议时间开始",
+  },
+  conferenceDateEnd: {
+    field: "conferenceDateEnd",
+    title: "会议时间结束",
   },
   chineseClassNum: {
     field: "chineseClassNum",
@@ -521,7 +545,7 @@ var paperExterior = {
   },
   allName: {
     field: "allName",
-    title: "整本名称t",
+    title: "整本名称",
   },
   pageCount: {
     field: "pageCount",
