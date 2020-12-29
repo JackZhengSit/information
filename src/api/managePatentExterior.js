@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-28 20:37:10
- * @LastEditTime: 2020-12-28 20:39:51
+ * @LastEditTime: 2020-12-29 14:56:56
  */
 import axios from "@/utils/axio";
 
@@ -39,7 +39,7 @@ export function searchPatentExterior(params) {
 
 export function confirmSavePatentExterior(data) {
   return axios({
-    url: "/patent-exterior/save",
+    url: "/manual/patent-exterior/save",
     method: "post",
     data: data,
   }).then((res) => {

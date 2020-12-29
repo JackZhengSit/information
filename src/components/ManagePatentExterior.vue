@@ -3,576 +3,671 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2020-12-14 15:12:17
+ * @LastEditTime: 2020-12-29 14:47:33
 -->
 <template>
   <div>
-    <vxe-grid ref="xGrid" v-bind="gridOptions"></vxe-grid>
+    <vxe-grid ref="xGrid" v-bind="gridOptions">
+      <template v-slot:uploadFile="{ row }">
+        <el-upload
+          :show-file-list="false"
+          :on-success="uploadFileSuccess"
+          :data="{ id: row.id }"
+          accept=".rar,.zip,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx"
+          action="http://localhost:8080/manual/patent-exterior/upload"
+        >
+          <el-button slot="trigger" type="default">上传</el-button>
+          <el-button
+            type="danger"
+            style="margin-left: 10px"
+            @click="removeFileById(row)"
+            >删除</el-button
+          >
+        </el-upload>
+      </template>
+    </vxe-grid>
   </div>
 </template>
 
 <script>
-import { briefReportInterior } from "../store/infoType";
-import { briefReportInteriorExample } from "@/store/infoExample";
-import { getBriefReportInterior } from "@/api/manageBriefReportInterior";
-import axios from "axios";
+import { Message, MessageBox } from "element-ui";
+import { patentExterior } from "../store/infoType";
+import {
+  searchPatentExterior,
+  removeRemoteFileById,
+  confirmSavePatentExterior,
+} from "@/api/managePatentExterior";
 
-const findPageList = (pageSize, currentPage) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const list = [
-        {
-          id: 10001,
-          name: "Test1",
-          nickname: "T1",
-          role: "Develop",
-          sex: "Man",
-          age: 28,
-          address: "Shenzhen",
-        },
-        {
-          id: 10002,
-          name: "Test2",
-          nickname: "T2",
-          role: "Test",
-          sex: "Women",
-          age: 22,
-          address: "Guangzhou",
-        },
-        {
-          id: 10003,
-          name: "Test3",
-          nickname: "T3",
-          role: "PM",
-          sex: "Man",
-          age: 32,
-          address: "Shanghai",
-        },
-        {
-          id: 10004,
-          name: "Test4",
-          nickname: "T4",
-          role: "Designer",
-          sex: "Women ",
-          age: 23,
-          address: "Shenzhen",
-        },
-        {
-          id: 10005,
-          name: "Test5",
-          nickname: "T5",
-          role: "Develop",
-          sex: "Women ",
-          age: 30,
-          address: "Shanghai",
-        },
-        {
-          id: 10006,
-          name: "Test6",
-          nickname: "T6",
-          role: "Designer",
-          sex: "Women ",
-          age: 21,
-          address: "Shenzhen",
-        },
-        {
-          id: 10007,
-          name: "Test7",
-          nickname: "T7",
-          role: "Test",
-          sex: "Man ",
-          age: 29,
-          address: "Shenzhen",
-        },
-        {
-          id: 10008,
-          name: "Test8",
-          nickname: "T8",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Shenzhen",
-        },
-        {
-          id: 10009,
-          name: "Test9",
-          nickname: "T9",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Shenzhen",
-        },
-        {
-          id: 100010,
-          name: "Test10",
-          nickname: "T10",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Guangzhou",
-        },
-        {
-          id: 100011,
-          name: "Test11",
-          nickname: "T11",
-          role: "Test",
-          sex: "Women ",
-          age: 26,
-          address: "Shenzhen",
-        },
-        {
-          id: 100012,
-          name: "Test12",
-          nickname: "T12",
-          role: "Develop",
-          sex: "Man ",
-          age: 34,
-          address: "Guangzhou",
-        },
-        {
-          id: 100013,
-          name: "Test13",
-          nickname: "T13",
-          role: "Test",
-          sex: "Women ",
-          age: 22,
-          address: "Shenzhen",
-        },
-      ];
-      resolve({
-        page: {
-          total: list.length,
-        },
-        result: list.slice(
-          (currentPage - 1) * pageSize,
-          currentPage * pageSize
-        ),
-      });
-    }, 100);
-  });
-};
+function csvToObject(csvString) {
+  let csvarry = csvString.split("\r\n");
+  let datas = [];
+  let headers = csvarry[0].split(",");
+  for (let i = 0; i < headers.length; i++) {
+    Object.keys(patentExterior).forEach(function (key) {
+      if (patentExterior[key].title == headers[i])
+        headers[i] = patentExterior[key].field;
+    });
+  }
+  for (let i = 1; i < csvarry.length - 1; i++) {
+    let data = {};
+    let temp = csvarry[i].split(",");
+    for (let j = 0; j < temp.length; j++) {
+      data[headers[j]] = temp[j];
+    }
+    datas.push(data);
+  }
+  return datas;
+}
 
 export default {
   data() {
     return {
+      // xGrid: this.$refs.xGrid,
       gridOptions: {
         border: true,
         resizable: true,
         highlightHoverRow: true,
         keepSource: true,
-        id: "briefReportInteriorGrid",
-        height: 600,
-        rowId: "orderNum",
-        proxyConfig: {
-          autoLoad: true,
-          props: {
-            result: "result",
-            total: "page.total",
-          },
-          ajax: {
-            query: ({ page }) => {
-              console.log(page);
-              let p = getBriefReportInterior({
-                page: page.currentPage - 1,
-                size: page.pageSize,
-              });
-              console.log(p);
-              return p;
-            },
-          },
+        id: "patentExteriorGrid",
+        maxHeight: 1000,
+        // rowId: "orderNum",
+        editConfig: {
+          trigger: "dblclick",
+          mode: "row",
+          showStatus: true,
         },
         formConfig: {
+          data: {},
           titleWidth: 100,
           titleAlign: "right",
           items: [
             {
-              field: briefReportInterior.orderNum.field,
-              title: briefReportInterior.orderNum.title,
+              field: patentExterior.orderNumStart.field,
+              title: patentExterior.orderNumStart.title,
               span: 12,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
+                defaultValue: 1,
               },
             },
             {
-              field: briefReportInterior.orderNum.field,
-              // title: briefReportInterior.orderNum.title,
+              field: patentExterior.orderNumEnd.field,
+              // title: patentExterior.orderNum.title,
               span: 10,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
+                defaultValue: 1000000,
               },
             },
+
             {
-              field: briefReportInterior.name.field,
-              title: briefReportInterior.name.title,
+              field: patentExterior.inventionTitile.field,
+              title: patentExterior.inventionTitile.title,
               span: 8,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.type.field,
-              title: briefReportInterior.type.title,
+              field: patentExterior.applicationNo.field,
+              title: patentExterior.applicationNo.title,
               span: 8,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.completeDepartment.field,
-              title: briefReportInterior.completeDepartment.title,
+              field: patentExterior.publicationNo.field,
+              title: patentExterior.publicationNo.title,
               span: 8,
+
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.title.field,
-              title: briefReportInterior.title.title,
+              field: patentExterior.applicationDayStart.field,
+              title: patentExterior.applicationDayStart.title,
+              span: 12,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "1900-01-01",
+              },
+            },
+            {
+              field: patentExterior.applicationDayEnd.field,
+              // title: patentExterior.applicationDayEnd.title,
+              span: 10,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "2020-12-12",
+              },
+            },
+
+            {
+              field: patentExterior.applicationType.field,
+              title: patentExterior.applicationType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.industryType.field,
-              title: briefReportInterior.industryType.title,
+              field: patentExterior.patentType.field,
+              title: patentExterior.patentType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.industryDetailType.field,
-              title: briefReportInterior.industryDetailType.title,
+              field: patentExterior.assignee.field,
+              title: patentExterior.assignee.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.industryChainType.field,
-              title: briefReportInterior.industryChainType.title,
+              field: patentExterior.publicationDayStart.field,
+              title: patentExterior.publicationDayStart.title,
+              span: 12,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "1900-01-01",
+              },
+            },
+            {
+              field: patentExterior.publicationDayEnd.field,
+              // title: patentExterior.publicationDayEnd.title,
+              span: 10,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "2020-12-12",
+              },
+            },
+
+            {
+              field: patentExterior.patentType.field,
+              title: patentExterior.patentType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referDeviceType.field,
-              title: briefReportInterior.referDeviceType.title,
+              field: patentExterior.assignee.field,
+              title: patentExterior.assignee.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referDevice.field,
-              title: briefReportInterior.referDevice.title,
+              field: patentExterior.firstAssignee.field,
+              title: patentExterior.firstAssignee.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referProduct.field,
-              title: briefReportInterior.referProduct.title,
+              field: patentExterior.inventor.field,
+              title: patentExterior.inventor.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referProject.field,
-              title: briefReportInterior.referProject.title,
+              field: patentExterior.priorityNum.field,
+              title: patentExterior.priorityNum.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referInstitution.field,
-              title: briefReportInterior.referInstitution.title,
+              field: patentExterior.priorityDayStart.field,
+              title: patentExterior.priorityDayStart.title,
+              span: 12,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "1900-01-01",
+              },
+            },
+            {
+              field: patentExterior.priorityDayEnd.field,
+              // title: patentExterior.priorityDayEnd.title,
+              span: 10,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "2020-12-12",
+              },
+            },
+            {
+              field: patentExterior.mainClassNum.field,
+              title: patentExterior.mainClassNum.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referTechnology.field,
-              title: briefReportInterior.referTechnology.title,
+              field: patentExterior.legalStatus.field,
+              title: patentExterior.legalStatus.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
+
             {
-              field: briefReportInterior.referCategory.field,
-              title: briefReportInterior.referCategory.title,
+              field: patentExterior.industryType.field,
+              title: patentExterior.industryType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.department.field,
-              title: briefReportInterior.department.title,
+              field: patentExterior.industryDetailType.field,
+              title: patentExterior.industryDetailType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.researchField.field,
-              title: briefReportInterior.researchField.title,
+              field: patentExterior.industryChainType.field,
+              title: patentExterior.industryChainType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.researchOrientation.field,
-              title: briefReportInterior.researchOrientation.title,
+              field: patentExterior.referDeviceType.field,
+              title: patentExterior.referDeviceType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.researchSystem.field,
-              title: briefReportInterior.researchSystem.title,
+              field: patentExterior.referDevice.field,
+              title: patentExterior.referDevice.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.techFieldType1.field,
-              title: briefReportInterior.techFieldType1.title,
+              field: patentExterior.referProduct.field,
+              title: patentExterior.referProduct.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.techFieldType2.field,
-              title: briefReportInterior.techFieldType2.title,
+              field: patentExterior.referProject.field,
+              title: patentExterior.referProject.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.techFieldType3.field,
-              title: briefReportInterior.techFieldType3.title,
+              field: patentExterior.referInstitution.field,
+              title: patentExterior.referInstitution.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.industryField.field,
-              title: briefReportInterior.industryField.title,
+              field: patentExterior.referTechnology.field,
+              title: patentExterior.referTechnology.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.industryOrientation.field,
-              title: briefReportInterior.industryOrientation.title,
+              field: patentExterior.referCategory.field,
+              title: patentExterior.referCategory.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.publishDepartment.field,
-              title: briefReportInterior.publishDepartment.title,
+              field: patentExterior.department.field,
+              title: patentExterior.department.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.checkInTime.field,
-              title: briefReportInterior.checkInTime.title,
+              field: patentExterior.researchField.field,
+              title: patentExterior.researchField.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.researchOrientation.field,
+              title: patentExterior.researchOrientation.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.researchSystem.field,
+              title: patentExterior.researchSystem.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.techFieldType1.field,
+              title: patentExterior.techFieldType1.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.techFieldType2.field,
+              title: patentExterior.techFieldType2.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.techFieldType3.field,
+              title: patentExterior.techFieldType3.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.industryField.field,
+              title: patentExterior.industryField.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.industryOrientation.field,
+              title: patentExterior.industryOrientation.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.publishDepartment.field,
+              title: patentExterior.publishDepartment.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.checkInTimeStart.field,
+              title: patentExterior.checkInTimeStart.title,
               span: 12,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
+                defaultValue: "1900-01-01",
               },
             },
             {
-              field: briefReportInterior.checkInTime.field,
-              // title: briefReportInterior.checkInTime.title,
+              field: patentExterior.checkInTimeEnd.field,
+              // title: patentExterior.checkInTime.title,
               span: 10,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
+                defaultValue: "2020-12-12",
               },
             },
             {
-              field: briefReportInterior.knowledgeType.field,
-              title: briefReportInterior.knowledgeType.title,
+              field: patentExterior.knowledgeType.field,
+              title: patentExterior.knowledgeType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.securityLevel.field,
-              title: briefReportInterior.securityLevel.title,
+              field: patentExterior.securityLevel.field,
+              title: patentExterior.securityLevel.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
+
             {
-              field: briefReportInterior.abs.field,
-              title: briefReportInterior.abs.title,
-              span: 24,
-              folding: true,
-              itemRender: {
-                name: "$textarea",
-                props: { placeholder: "" },
-              },
-            },
-            {
-              field: briefReportInterior.formatTime.field,
-              title: briefReportInterior.formatTime.title,
+              field: patentExterior.formatTimeStart.field,
+              title: patentExterior.formatTimeStart.title,
               span: 12,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
+                defaultValue: "1900-01-01",
               },
             },
             {
-              field: briefReportInterior.formatTime.field,
-              // title: briefReportInterior.formatTime.title,
+              field: patentExterior.formatTimeEnd.field,
+              // title: patentExterior.formatTime.title,
               span: 10,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
+                defaultValue: "2020-12-12",
               },
             },
             {
-              field: briefReportInterior.informationCollactor.field,
-              title: briefReportInterior.informationCollactor.title,
+              field: patentExterior.informationCollactor.field,
+              title: patentExterior.informationCollactor.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.informationAuditor.field,
-              title: briefReportInterior.informationAuditor.title,
+              field: patentExterior.informationAuditor.field,
+              title: patentExterior.informationAuditor.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.language.field,
-              title: briefReportInterior.language.title,
+              field: patentExterior.language.field,
+              title: patentExterior.language.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.keywords.field,
-              title: briefReportInterior.keywords.title,
+              field: patentExterior.keywords.field,
+              title: patentExterior.keywords.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.informationOrigin.field,
-              title: briefReportInterior.informationOrigin.title,
+              field: patentExterior.informationOrigin.field,
+              title: patentExterior.informationOrigin.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referWebsite.field,
-              title: briefReportInterior.referWebsite.title,
+              field: patentExterior.referWebsite.field,
+              title: patentExterior.referWebsite.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             // {
-            //   field: briefReportInterior.createTime.field,
-            //   title: briefReportInterior.createTime.title,
+            //   field: patentExterior.createTime.field,
+            //   title: patentExterior.createTime.title,
             //   span: 8,
             //   folding: true,
             //   itemRender: {
@@ -581,8 +676,8 @@ export default {
             //   },
             // },
             // {
-            //   field: briefReportInterior.updateTime.field,
-            //   title: briefReportInterior.updateTime.title,
+            //   field: patentExterior.updateTime.field,
+            //   title: patentExterior.updateTime.title,
             //   span: 8,
             //   folding: true,
             //   itemRender: {
@@ -613,7 +708,77 @@ export default {
         pagerConfig: {
           pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
         },
+        sortConfig: {
+          trigger: "cell",
+          remote: true,
+        },
+        importConfig: {
+          mode: "insert",
+          remote: true,
+          types: ["csv"],
+          importMethod: this.importMethod,
+        },
+        exportConfig: {
+          // columnFilterMethod(column) {
+          //   console.log(column);
+          //   column.type = "checkbox";
+          // },
+        },
+        toolbarConfig: {
+          buttons: [
+            { code: "insert_actived", name: "新增" },
+            { code: "delete", name: "直接删除" },
+            { code: "mark_cancel", name: "删除/取消" },
+            {
+              code: "save",
+              name: "保存",
+              status: "success",
+            },
+          ],
+          refresh: true,
+          import: true,
+          export: true,
+          zoom: true,
+          custom: true,
+        },
+        proxyConfig: {
+          autoLoad: true,
+          form: true,
+          sort: true,
+          props: {
+            result: "result",
+            total: "page.total",
+          },
+          ajax: {
+            query: ({ page, sorts, form }) => {
+              const queryParams = Object.assign({}, form, {
+                page: page.currentPage - 1,
+                size: page.pageSize,
+              });
+              let firstSort = sorts[0];
+              if (firstSort) {
+                queryParams.sort = firstSort.property + "," + firstSort.order;
+                // queryParams.order = firstSort.order;
+              }
+              // console.log(queryParams);
+              let p = searchPatentExterior(queryParams);
+              return p;
+            },
+            save: (data) => {
+              confirmSavePatentExterior(data.body);
+            },
+            delete: (data) => {
+              confirmSavePatentExterior(data.body);
+            },
+          },
+        },
         columns: [
+          {
+            width: 100,
+            visible: false,
+            field: patentExterior.id.field,
+            title: patentExterior.id.title,
+          },
           {
             type: "checkbox",
             width: 50,
@@ -621,14 +786,27 @@ export default {
             align: "center",
           },
           {
+            fixed: "left",
             resizable: true,
             align: "center",
-            width: 80,
+            editRender: { name: "input" },
+            width: 90,
             sortable: true,
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
-            field: briefReportInterior.orderNum.field,
-            title: briefReportInterior.orderNum.title,
+            field: patentExterior.orderNum.field,
+            title: patentExterior.orderNum.title,
+          },
+
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.inventionTitile.field,
+            title: patentExterior.inventionTitile.title,
           },
           {
             resizable: true,
@@ -637,8 +815,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.name.field,
-            title: briefReportInterior.name.title,
+            field: patentExterior.applicationNo.field,
+            title: patentExterior.applicationNo.title,
           },
           {
             resizable: true,
@@ -647,8 +825,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.type.field,
-            title: briefReportInterior.type.title,
+            field: patentExterior.applicationDay.field,
+            title: patentExterior.applicationDay.title,
           },
           {
             resizable: true,
@@ -657,8 +835,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.completeDepartment.field,
-            title: briefReportInterior.completeDepartment.title,
+            field: patentExterior.publicationNo.field,
+            title: patentExterior.publicationNo.title,
           },
           {
             resizable: true,
@@ -667,8 +845,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.title.field,
-            title: briefReportInterior.title.title,
+            field: patentExterior.publicationDay.field,
+            title: patentExterior.publicationDay.title,
           },
           {
             resizable: true,
@@ -677,8 +855,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.industryType.field,
-            title: briefReportInterior.industryType.title,
+            field: patentExterior.applicationType.field,
+            title: patentExterior.applicationType.title,
           },
           {
             resizable: true,
@@ -687,8 +865,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.industryDetailType.field,
-            title: briefReportInterior.industryDetailType.title,
+            field: patentExterior.patentType.field,
+            title: patentExterior.patentType.title,
           },
           {
             resizable: true,
@@ -697,8 +875,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.industryChainType.field,
-            title: briefReportInterior.industryChainType.title,
+            field: patentExterior.assignee.field,
+            title: patentExterior.assignee.title,
           },
           {
             resizable: true,
@@ -707,8 +885,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referDeviceType.field,
-            title: briefReportInterior.referDeviceType.title,
+            field: patentExterior.firstAssignee.field,
+            title: patentExterior.firstAssignee.title,
           },
           {
             resizable: true,
@@ -717,8 +895,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referDevice.field,
-            title: briefReportInterior.referDevice.title,
+            field: patentExterior.inventor.field,
+            title: patentExterior.inventor.title,
           },
           {
             resizable: true,
@@ -727,8 +905,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referProduct.field,
-            title: briefReportInterior.referProduct.title,
+            field: patentExterior.claims.field,
+            title: patentExterior.claims.title,
           },
           {
             resizable: true,
@@ -737,8 +915,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referProject.field,
-            title: briefReportInterior.referProject.title,
+            field: patentExterior.priorityNum.field,
+            title: patentExterior.priorityNum.title,
           },
           {
             resizable: true,
@@ -747,8 +925,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referInstitution.field,
-            title: briefReportInterior.referInstitution.title,
+            field: patentExterior.priorityDay.field,
+            title: patentExterior.priorityDay.title,
           },
           {
             resizable: true,
@@ -757,8 +935,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referTechnology.field,
-            title: briefReportInterior.referTechnology.title,
+            field: patentExterior.mainClassNum.field,
+            title: patentExterior.mainClassNum.title,
           },
           {
             resizable: true,
@@ -767,8 +945,19 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referCategory.field,
-            title: briefReportInterior.referCategory.title,
+            field: patentExterior.legalStatus.field,
+            title: patentExterior.legalStatus.title,
+          },
+
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.industryType.field,
+            title: patentExterior.industryType.title,
           },
           {
             resizable: true,
@@ -777,8 +966,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.department.field,
-            title: briefReportInterior.department.title,
+            field: patentExterior.industryDetailType.field,
+            title: patentExterior.industryDetailType.title,
           },
           {
             resizable: true,
@@ -787,8 +976,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.researchField.field,
-            title: briefReportInterior.researchField.title,
+            field: patentExterior.industryChainType.field,
+            title: patentExterior.industryChainType.title,
           },
           {
             resizable: true,
@@ -797,8 +986,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.researchOrientation.field,
-            title: briefReportInterior.researchOrientation.title,
+            field: patentExterior.referDeviceType.field,
+            title: patentExterior.referDeviceType.title,
           },
           {
             resizable: true,
@@ -807,8 +996,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.researchSystem.field,
-            title: briefReportInterior.researchSystem.title,
+            field: patentExterior.referDevice.field,
+            title: patentExterior.referDevice.title,
           },
           {
             resizable: true,
@@ -817,8 +1006,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.techFieldType1.field,
-            title: briefReportInterior.techFieldType1.title,
+            field: patentExterior.referProduct.field,
+            title: patentExterior.referProduct.title,
           },
           {
             resizable: true,
@@ -827,8 +1016,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.techFieldType2.field,
-            title: briefReportInterior.techFieldType2.title,
+            field: patentExterior.referProject.field,
+            title: patentExterior.referProject.title,
           },
           {
             resizable: true,
@@ -837,8 +1026,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.techFieldType3.field,
-            title: briefReportInterior.techFieldType3.title,
+            field: patentExterior.referInstitution.field,
+            title: patentExterior.referInstitution.title,
           },
           {
             resizable: true,
@@ -847,8 +1036,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.industryField.field,
-            title: briefReportInterior.industryField.title,
+            field: patentExterior.referTechnology.field,
+            title: patentExterior.referTechnology.title,
           },
           {
             resizable: true,
@@ -857,8 +1046,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.industryOrientation.field,
-            title: briefReportInterior.industryOrientation.title,
+            field: patentExterior.referCategory.field,
+            title: patentExterior.referCategory.title,
           },
           {
             resizable: true,
@@ -867,8 +1056,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.publishDepartment.field,
-            title: briefReportInterior.publishDepartment.title,
+            field: patentExterior.department.field,
+            title: patentExterior.department.title,
           },
           {
             resizable: true,
@@ -877,8 +1066,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.checkInTime.field,
-            title: briefReportInterior.checkInTime.title,
+            field: patentExterior.researchField.field,
+            title: patentExterior.researchField.title,
           },
           {
             resizable: true,
@@ -887,8 +1076,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.knowledgeType.field,
-            title: briefReportInterior.knowledgeType.title,
+            field: patentExterior.researchOrientation.field,
+            title: patentExterior.researchOrientation.title,
           },
           {
             resizable: true,
@@ -897,8 +1086,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.securityLevel.field,
-            title: briefReportInterior.securityLevel.title,
+            field: patentExterior.researchSystem.field,
+            title: patentExterior.researchSystem.title,
           },
           {
             resizable: true,
@@ -907,8 +1096,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.abs.field,
-            title: briefReportInterior.abs.title,
+            field: patentExterior.techFieldType1.field,
+            title: patentExterior.techFieldType1.title,
           },
           {
             resizable: true,
@@ -917,8 +1106,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.formatTime.field,
-            title: briefReportInterior.formatTime.title,
+            field: patentExterior.techFieldType2.field,
+            title: patentExterior.techFieldType2.title,
           },
           {
             resizable: true,
@@ -927,8 +1116,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.informationCollactor.field,
-            title: briefReportInterior.informationCollactor.title,
+            field: patentExterior.techFieldType3.field,
+            title: patentExterior.techFieldType3.title,
           },
           {
             resizable: true,
@@ -937,8 +1126,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.informationAuditor.field,
-            title: briefReportInterior.informationAuditor.title,
+            field: patentExterior.industryField.field,
+            title: patentExterior.industryField.title,
           },
           {
             resizable: true,
@@ -947,8 +1136,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.language.field,
-            title: briefReportInterior.language.title,
+            field: patentExterior.industryOrientation.field,
+            title: patentExterior.industryOrientation.title,
           },
           {
             resizable: true,
@@ -957,8 +1146,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.keywords.field,
-            title: briefReportInterior.keywords.title,
+            field: patentExterior.publishDepartment.field,
+            title: patentExterior.publishDepartment.title,
           },
           {
             resizable: true,
@@ -967,8 +1156,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.informationOrigin.field,
-            title: briefReportInterior.informationOrigin.title,
+            field: patentExterior.checkInTime.field,
+            title: patentExterior.checkInTime.title,
           },
           {
             resizable: true,
@@ -977,42 +1166,168 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referWebsite.field,
-            title: briefReportInterior.referWebsite.title,
+            field: patentExterior.knowledgeType.field,
+            title: patentExterior.knowledgeType.title,
           },
-        ],
-      },
-      gridOptions1: {
-        border: true,
-        resizable: true,
-        height: 530,
-        pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
-        },
-        proxyConfig: {
-          seq: true, // 启用动态序号代理
-          props: {
-            result: "result",
-            total: "page.total",
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.securityLevel.field,
+            title: patentExterior.securityLevel.title,
           },
-          ajax: {
-            query: ({ page }) => {
-              let p = findPageList(page.pageSize, page.currentPage);
-              console.log(p);
-              return p;
-            },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.abs.field,
+            title: patentExterior.abs.title,
           },
-        },
-        columns: [
-          { type: "checkbox", width: 50 },
-          { type: "seq", width: 60 },
-          { field: "name", title: "Name" },
-          { field: "nickname", title: "Nickname" },
-          { field: "role", title: "Role" },
-          { field: "address", title: "Address", showOverflow: true },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.formatTime.field,
+            title: patentExterior.formatTime.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.informationCollactor.field,
+            title: patentExterior.informationCollactor.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.informationAuditor.field,
+            title: patentExterior.informationAuditor.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.language.field,
+            title: patentExterior.language.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.keywords.field,
+            title: patentExterior.keywords.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.informationOrigin.field,
+            title: patentExterior.informationOrigin.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.referWebsite.field,
+            title: patentExterior.referWebsite.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            // editRender: { name: "input", enabled: false },
+            field: patentExterior.fileName.field,
+            title: patentExterior.fileName.title,
+            fixed: "right",
+          },
+          {
+            resizable: true,
+            width: 180,
+            align: "center",
+            title: "操作",
+            slots: { default: "uploadFile" },
+            fixed: "right",
+          },
         ],
       },
     };
+  },
+  methods: {
+    removeFileById(row) {
+      removeRemoteFileById({ id: row.id }).then((res) => {
+        this.$refs.xGrid.commitProxy("query");
+        Message({
+          message: "删除成功！",
+          type: "success",
+        });
+      });
+    },
+    uploadFileSuccess() {
+      this.$refs.xGrid.commitProxy("query");
+      Message({
+        message: "上传成功",
+        type: "success",
+      });
+    },
+    importMethod(file) {
+      let xGrid = this.$refs.xGrid;
+      return Promise.resolve(file.file)
+        .then((file) => {
+          let reader = new FileReader();
+          reader.readAsText(file);
+          reader.onload = function () {
+            let data = csvToObject(this.result);
+            // console.log(data);
+            confirmSavePatentExterior({
+              insertRecords: data,
+            }).then(() => {
+              xGrid.commitProxy("query");
+              Message({
+                message: "导入成功",
+                type: "success",
+              });
+            });
+          };
+        })
+        .catch(() => {
+          Message({
+            message: "导入失败",
+            type: "error",
+          });
+        });
+    },
+  },
+  mounted: function () {
+    // var xGrid = this.$refs.xGrid;
   },
 };
 </script>

@@ -3,576 +3,625 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2020-12-14 15:12:17
+ * @LastEditTime: 2020-12-29 15:44:17
 -->
 <template>
   <div>
-    <vxe-grid ref="xGrid" v-bind="gridOptions"></vxe-grid>
+    <vxe-grid ref="xGrid" v-bind="gridOptions">
+      <template v-slot:uploadFile="{ row }">
+        <el-upload
+          :show-file-list="false"
+          :on-success="uploadFileSuccess"
+          :data="{ id: row.id }"
+          accept=".rar,.zip,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx"
+          action="http://localhost:8080/manual/standard-exterior/upload"
+        >
+          <el-button slot="trigger" type="default">上传</el-button>
+          <el-button
+            type="danger"
+            style="margin-left: 10px"
+            @click="removeFileById(row)"
+            >删除</el-button
+          >
+        </el-upload>
+      </template>
+    </vxe-grid>
   </div>
 </template>
 
 <script>
-import { briefReportInterior } from "../store/infoType";
-import { briefReportInteriorExample } from "@/store/infoExample";
-import { getBriefReportInterior } from "@/api/manageBriefReportInterior";
-import axios from "axios";
+import { Message, MessageBox } from "element-ui";
+import { standardExterior } from "../store/infoType";
+import {
+  searchStandardExterior,
+  removeRemoteFileById,
+  confirmSaveStandardExterior,
+} from "@/api/manageStandardExterior";
 
-const findPageList = (pageSize, currentPage) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const list = [
-        {
-          id: 10001,
-          name: "Test1",
-          nickname: "T1",
-          role: "Develop",
-          sex: "Man",
-          age: 28,
-          address: "Shenzhen",
-        },
-        {
-          id: 10002,
-          name: "Test2",
-          nickname: "T2",
-          role: "Test",
-          sex: "Women",
-          age: 22,
-          address: "Guangzhou",
-        },
-        {
-          id: 10003,
-          name: "Test3",
-          nickname: "T3",
-          role: "PM",
-          sex: "Man",
-          age: 32,
-          address: "Shanghai",
-        },
-        {
-          id: 10004,
-          name: "Test4",
-          nickname: "T4",
-          role: "Designer",
-          sex: "Women ",
-          age: 23,
-          address: "Shenzhen",
-        },
-        {
-          id: 10005,
-          name: "Test5",
-          nickname: "T5",
-          role: "Develop",
-          sex: "Women ",
-          age: 30,
-          address: "Shanghai",
-        },
-        {
-          id: 10006,
-          name: "Test6",
-          nickname: "T6",
-          role: "Designer",
-          sex: "Women ",
-          age: 21,
-          address: "Shenzhen",
-        },
-        {
-          id: 10007,
-          name: "Test7",
-          nickname: "T7",
-          role: "Test",
-          sex: "Man ",
-          age: 29,
-          address: "Shenzhen",
-        },
-        {
-          id: 10008,
-          name: "Test8",
-          nickname: "T8",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Shenzhen",
-        },
-        {
-          id: 10009,
-          name: "Test9",
-          nickname: "T9",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Shenzhen",
-        },
-        {
-          id: 100010,
-          name: "Test10",
-          nickname: "T10",
-          role: "Develop",
-          sex: "Man ",
-          age: 35,
-          address: "Guangzhou",
-        },
-        {
-          id: 100011,
-          name: "Test11",
-          nickname: "T11",
-          role: "Test",
-          sex: "Women ",
-          age: 26,
-          address: "Shenzhen",
-        },
-        {
-          id: 100012,
-          name: "Test12",
-          nickname: "T12",
-          role: "Develop",
-          sex: "Man ",
-          age: 34,
-          address: "Guangzhou",
-        },
-        {
-          id: 100013,
-          name: "Test13",
-          nickname: "T13",
-          role: "Test",
-          sex: "Women ",
-          age: 22,
-          address: "Shenzhen",
-        },
-      ];
-      resolve({
-        page: {
-          total: list.length,
-        },
-        result: list.slice(
-          (currentPage - 1) * pageSize,
-          currentPage * pageSize
-        ),
-      });
-    }, 100);
-  });
-};
+function csvToObject(csvString) {
+  let csvarry = csvString.split("\r\n");
+  let datas = [];
+  let headers = csvarry[0].split(",");
+  for (let i = 0; i < headers.length; i++) {
+    Object.keys(standardExterior).forEach(function (key) {
+      if (standardExterior[key].title == headers[i])
+        headers[i] = standardExterior[key].field;
+    });
+  }
+  for (let i = 1; i < csvarry.length - 1; i++) {
+    let data = {};
+    let temp = csvarry[i].split(",");
+    for (let j = 0; j < temp.length; j++) {
+      data[headers[j]] = temp[j];
+    }
+    datas.push(data);
+  }
+  return datas;
+}
 
 export default {
   data() {
     return {
+      // xGrid: this.$refs.xGrid,
       gridOptions: {
         border: true,
         resizable: true,
         highlightHoverRow: true,
         keepSource: true,
-        id: "briefReportInteriorGrid",
-        height: 600,
-        rowId: "orderNum",
-        proxyConfig: {
-          autoLoad: true,
-          props: {
-            result: "result",
-            total: "page.total",
-          },
-          ajax: {
-            query: ({ page }) => {
-              console.log(page);
-              let p = getBriefReportInterior({
-                page: page.currentPage - 1,
-                size: page.pageSize,
-              });
-              console.log(p);
-              return p;
-            },
-          },
+        id: "standardExteriorGrid",
+        maxHeight: 1000,
+        // rowId: "orderNum",
+        editConfig: {
+          trigger: "dblclick",
+          mode: "row",
+          showStatus: true,
         },
         formConfig: {
+          data: {},
           titleWidth: 100,
           titleAlign: "right",
           items: [
             {
-              field: briefReportInterior.orderNum.field,
-              title: briefReportInterior.orderNum.title,
+              field: standardExterior.orderNumStart.field,
+              title: standardExterior.orderNumStart.title,
               span: 12,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
+                defaultValue: 1,
               },
             },
             {
-              field: briefReportInterior.orderNum.field,
-              // title: briefReportInterior.orderNum.title,
+              field: standardExterior.orderNumEnd.field,
+              // title: standardExterior.orderNum.title,
               span: 10,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
+                defaultValue: 1000000,
               },
             },
+
             {
-              field: briefReportInterior.name.field,
-              title: briefReportInterior.name.title,
+              field: standardExterior.name.field,
+              title: standardExterior.name.title,
               span: 8,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.type.field,
-              title: briefReportInterior.type.title,
+              field: standardExterior.num.field,
+              title: standardExterior.num.title,
               span: 8,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.completeDepartment.field,
-              title: briefReportInterior.completeDepartment.title,
+              field: standardExterior.specifyInstitution.field,
+              title: standardExterior.specifyInstitution.title,
               span: 8,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.title.field,
-              title: briefReportInterior.title.title,
+              field: standardExterior.publicateDateStart.field,
+              title: standardExterior.publicateDateStart.title,
+              span: 12,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "1900-01-01",
+              },
+            },
+            {
+              field: standardExterior.publicateDateEnd.field,
+              // title: standardExterior.publicateDateEnd.title,
+              span: 10,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "2020-12-12",
+              },
+            },
+            {
+              field: standardExterior.executeDateStart.field,
+              title: standardExterior.executeDateStart.title,
+              span: 12,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "1900-01-01",
+              },
+            },
+            {
+              field: standardExterior.executeDateEnd.field,
+              // title: standardExterior.executeDateEnd.title,
+              span: 10,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "2020-12-12",
+              },
+            },
+            {
+              field: standardExterior.specifyInstitution.field,
+              title: standardExterior.specifyInstitution.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.industryType.field,
-              title: briefReportInterior.industryType.title,
+              field: standardExterior.applicationScope.field,
+              title: standardExterior.applicationScope.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.industryDetailType.field,
-              title: briefReportInterior.industryDetailType.title,
+              field: standardExterior.author.field,
+              title: standardExterior.author.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.industryChainType.field,
-              title: briefReportInterior.industryChainType.title,
+              field: standardExterior.status.field,
+              title: standardExterior.status.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referDeviceType.field,
-              title: briefReportInterior.referDeviceType.title,
+              field: standardExterior.authorInstitution.field,
+              title: standardExterior.authorInstitution.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referDevice.field,
-              title: briefReportInterior.referDevice.title,
+              field: standardExterior.chineseStandardClassNumname.field,
+              title: standardExterior.chineseStandardClassNumname.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referProduct.field,
-              title: briefReportInterior.referProduct.title,
+              field: standardExterior.substituteStandard.field,
+              title: standardExterior.substituteStandard.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referProject.field,
-              title: briefReportInterior.referProject.title,
+              field: standardExterior.publicateCompony.field,
+              title: standardExterior.publicateCompony.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
+
             {
-              field: briefReportInterior.referInstitution.field,
-              title: briefReportInterior.referInstitution.title,
+              field: standardExterior.industryType.field,
+              title: standardExterior.industryType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referTechnology.field,
-              title: briefReportInterior.referTechnology.title,
+              field: standardExterior.industryDetailType.field,
+              title: standardExterior.industryDetailType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referCategory.field,
-              title: briefReportInterior.referCategory.title,
+              field: standardExterior.industryChainType.field,
+              title: standardExterior.industryChainType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.department.field,
-              title: briefReportInterior.department.title,
+              field: standardExterior.referDeviceType.field,
+              title: standardExterior.referDeviceType.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.researchField.field,
-              title: briefReportInterior.researchField.title,
+              field: standardExterior.referDevice.field,
+              title: standardExterior.referDevice.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.researchOrientation.field,
-              title: briefReportInterior.researchOrientation.title,
+              field: standardExterior.referProduct.field,
+              title: standardExterior.referProduct.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.researchSystem.field,
-              title: briefReportInterior.researchSystem.title,
+              field: standardExterior.referProject.field,
+              title: standardExterior.referProject.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.techFieldType1.field,
-              title: briefReportInterior.techFieldType1.title,
+              field: standardExterior.referInstitution.field,
+              title: standardExterior.referInstitution.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.techFieldType2.field,
-              title: briefReportInterior.techFieldType2.title,
+              field: standardExterior.referTechnology.field,
+              title: standardExterior.referTechnology.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.techFieldType3.field,
-              title: briefReportInterior.techFieldType3.title,
+              field: standardExterior.referCategory.field,
+              title: standardExterior.referCategory.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.industryField.field,
-              title: briefReportInterior.industryField.title,
+              field: standardExterior.department.field,
+              title: standardExterior.department.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.industryOrientation.field,
-              title: briefReportInterior.industryOrientation.title,
+              field: standardExterior.researchField.field,
+              title: standardExterior.researchField.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.publishDepartment.field,
-              title: briefReportInterior.publishDepartment.title,
+              field: standardExterior.researchOrientation.field,
+              title: standardExterior.researchOrientation.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.checkInTime.field,
-              title: briefReportInterior.checkInTime.title,
+              field: standardExterior.researchSystem.field,
+              title: standardExterior.researchSystem.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.techFieldType1.field,
+              title: standardExterior.techFieldType1.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.techFieldType2.field,
+              title: standardExterior.techFieldType2.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.techFieldType3.field,
+              title: standardExterior.techFieldType3.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.industryField.field,
+              title: standardExterior.industryField.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.industryOrientation.field,
+              title: standardExterior.industryOrientation.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.publishDepartment.field,
+              title: standardExterior.publishDepartment.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.knowledgeType.field,
+              title: standardExterior.knowledgeType.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+
+            {
+              field: standardExterior.securityLevel.field,
+              title: standardExterior.securityLevel.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.checkInTimeStart.field,
+              title: standardExterior.checkInTimeStart.title,
               span: 12,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
+                defaultValue: "1900-01-01",
               },
             },
             {
-              field: briefReportInterior.checkInTime.field,
-              // title: briefReportInterior.checkInTime.title,
+              field: standardExterior.checkInTimeEnd.field,
+              // title: standardExterior.checkInTime.title,
               span: 10,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
+                defaultValue: "2020-12-12",
               },
             },
+
             {
-              field: briefReportInterior.knowledgeType.field,
-              title: briefReportInterior.knowledgeType.title,
-              span: 8,
-              folding: true,
-              itemRender: {
-                name: "$input",
-                props: { placeholder: "" },
-              },
-            },
-            {
-              field: briefReportInterior.securityLevel.field,
-              title: briefReportInterior.securityLevel.title,
-              span: 8,
-              folding: true,
-              itemRender: {
-                name: "$input",
-                props: { placeholder: "" },
-              },
-            },
-            {
-              field: briefReportInterior.abs.field,
-              title: briefReportInterior.abs.title,
-              span: 24,
-              folding: true,
-              itemRender: {
-                name: "$textarea",
-                props: { placeholder: "" },
-              },
-            },
-            {
-              field: briefReportInterior.formatTime.field,
-              title: briefReportInterior.formatTime.title,
+              field: standardExterior.formatTimeStart.field,
+              title: standardExterior.formatTimeStart.title,
               span: 12,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
+                defaultValue: "1900-01-01",
               },
             },
             {
-              field: briefReportInterior.formatTime.field,
-              // title: briefReportInterior.formatTime.title,
+              field: standardExterior.formatTimeEnd.field,
+              // title: standardExterior.formatTime.title,
               span: 10,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
+                defaultValue: "2020-12-12",
               },
             },
             {
-              field: briefReportInterior.informationCollactor.field,
-              title: briefReportInterior.informationCollactor.title,
+              field: standardExterior.informationCollactor.field,
+              title: standardExterior.informationCollactor.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.informationAuditor.field,
-              title: briefReportInterior.informationAuditor.title,
+              field: standardExterior.informationAuditor.field,
+              title: standardExterior.informationAuditor.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.language.field,
-              title: briefReportInterior.language.title,
+              field: standardExterior.language.field,
+              title: standardExterior.language.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.keywords.field,
-              title: briefReportInterior.keywords.title,
+              field: standardExterior.keywords.field,
+              title: standardExterior.keywords.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.informationOrigin.field,
-              title: briefReportInterior.informationOrigin.title,
+              field: standardExterior.informationOrigin.field,
+              title: standardExterior.informationOrigin.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
-              field: briefReportInterior.referWebsite.field,
-              title: briefReportInterior.referWebsite.title,
+              field: standardExterior.referWebsite.field,
+              title: standardExterior.referWebsite.title,
               span: 8,
               folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             // {
-            //   field: briefReportInterior.createTime.field,
-            //   title: briefReportInterior.createTime.title,
+            //   field: standardExterior.createTime.field,
+            //   title: standardExterior.createTime.title,
             //   span: 8,
             //   folding: true,
             //   itemRender: {
@@ -581,8 +630,8 @@ export default {
             //   },
             // },
             // {
-            //   field: briefReportInterior.updateTime.field,
-            //   title: briefReportInterior.updateTime.title,
+            //   field: standardExterior.updateTime.field,
+            //   title: standardExterior.updateTime.title,
             //   span: 8,
             //   folding: true,
             //   itemRender: {
@@ -613,7 +662,77 @@ export default {
         pagerConfig: {
           pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
         },
+        sortConfig: {
+          trigger: "cell",
+          remote: true,
+        },
+        importConfig: {
+          mode: "insert",
+          remote: true,
+          types: ["csv"],
+          importMethod: this.importMethod,
+        },
+        exportConfig: {
+          // columnFilterMethod(column) {
+          //   console.log(column);
+          //   column.type = "checkbox";
+          // },
+        },
+        toolbarConfig: {
+          buttons: [
+            { code: "insert_actived", name: "新增" },
+            { code: "delete", name: "直接删除" },
+            { code: "mark_cancel", name: "删除/取消" },
+            {
+              code: "save",
+              name: "保存",
+              status: "success",
+            },
+          ],
+          refresh: true,
+          import: true,
+          export: true,
+          zoom: true,
+          custom: true,
+        },
+        proxyConfig: {
+          autoLoad: true,
+          form: true,
+          sort: true,
+          props: {
+            result: "result",
+            total: "page.total",
+          },
+          ajax: {
+            query: ({ page, sorts, form }) => {
+              const queryParams = Object.assign({}, form, {
+                page: page.currentPage - 1,
+                size: page.pageSize,
+              });
+              let firstSort = sorts[0];
+              if (firstSort) {
+                queryParams.sort = firstSort.property + "," + firstSort.order;
+                // queryParams.order = firstSort.order;
+              }
+              // console.log(queryParams);
+              let p = searchStandardExterior(queryParams);
+              return p;
+            },
+            save: (data) => {
+              confirmSaveStandardExterior(data.body);
+            },
+            delete: (data) => {
+              confirmSaveStandardExterior(data.body);
+            },
+          },
+        },
         columns: [
+          {
+            width: 100,
+            visible: false,
+            field: standardExterior.id.field,
+            title: standardExterior.id.title,
+          },
           {
             type: "checkbox",
             width: 50,
@@ -621,14 +740,16 @@ export default {
             align: "center",
           },
           {
+            fixed: "left",
             resizable: true,
             align: "center",
-            width: 80,
+            editRender: { name: "input" },
+            width: 90,
             sortable: true,
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
-            field: briefReportInterior.orderNum.field,
-            title: briefReportInterior.orderNum.title,
+            field: standardExterior.orderNum.field,
+            title: standardExterior.orderNum.title,
           },
           {
             resizable: true,
@@ -637,8 +758,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.name.field,
-            title: briefReportInterior.name.title,
+            field: standardExterior.name.field,
+            title: standardExterior.name.title,
           },
           {
             resizable: true,
@@ -647,8 +768,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.type.field,
-            title: briefReportInterior.type.title,
+            field: standardExterior.num.field,
+            title: standardExterior.num.title,
           },
           {
             resizable: true,
@@ -657,8 +778,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.completeDepartment.field,
-            title: briefReportInterior.completeDepartment.title,
+            field: standardExterior.publicateDate.field,
+            title: standardExterior.publicateDate.title,
           },
           {
             resizable: true,
@@ -667,8 +788,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.title.field,
-            title: briefReportInterior.title.title,
+            field: standardExterior.executeDate.field,
+            title: standardExterior.executeDate.title,
           },
           {
             resizable: true,
@@ -677,8 +798,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.industryType.field,
-            title: briefReportInterior.industryType.title,
+            field: standardExterior.specifyInstitution.field,
+            title: standardExterior.specifyInstitution.title,
           },
           {
             resizable: true,
@@ -687,8 +808,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.industryDetailType.field,
-            title: briefReportInterior.industryDetailType.title,
+            field: standardExterior.applicationScope.field,
+            title: standardExterior.applicationScope.title,
           },
           {
             resizable: true,
@@ -697,8 +818,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.industryChainType.field,
-            title: briefReportInterior.industryChainType.title,
+            field: standardExterior.author.field,
+            title: standardExterior.author.title,
           },
           {
             resizable: true,
@@ -707,8 +828,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referDeviceType.field,
-            title: briefReportInterior.referDeviceType.title,
+            field: standardExterior.status.field,
+            title: standardExterior.status.title,
           },
           {
             resizable: true,
@@ -717,8 +838,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referDevice.field,
-            title: briefReportInterior.referDevice.title,
+            field: standardExterior.authorInstitution.field,
+            title: standardExterior.authorInstitution.title,
           },
           {
             resizable: true,
@@ -727,8 +848,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referProduct.field,
-            title: briefReportInterior.referProduct.title,
+            field: standardExterior.chineseStandardClassNumname.field,
+            title: standardExterior.chineseStandardClassNumname.title,
           },
           {
             resizable: true,
@@ -737,8 +858,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referProject.field,
-            title: briefReportInterior.referProject.title,
+            field: standardExterior.substituteStandard.field,
+            title: standardExterior.substituteStandard.title,
           },
           {
             resizable: true,
@@ -747,8 +868,19 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referInstitution.field,
-            title: briefReportInterior.referInstitution.title,
+            field: standardExterior.publicateCompony.field,
+            title: standardExterior.publicateCompony.title,
+          },
+
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.industryType.field,
+            title: standardExterior.industryType.title,
           },
           {
             resizable: true,
@@ -757,8 +889,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referTechnology.field,
-            title: briefReportInterior.referTechnology.title,
+            field: standardExterior.industryDetailType.field,
+            title: standardExterior.industryDetailType.title,
           },
           {
             resizable: true,
@@ -767,8 +899,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referCategory.field,
-            title: briefReportInterior.referCategory.title,
+            field: standardExterior.industryChainType.field,
+            title: standardExterior.industryChainType.title,
           },
           {
             resizable: true,
@@ -777,8 +909,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.department.field,
-            title: briefReportInterior.department.title,
+            field: standardExterior.referDeviceType.field,
+            title: standardExterior.referDeviceType.title,
           },
           {
             resizable: true,
@@ -787,8 +919,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.researchField.field,
-            title: briefReportInterior.researchField.title,
+            field: standardExterior.referDevice.field,
+            title: standardExterior.referDevice.title,
           },
           {
             resizable: true,
@@ -797,8 +929,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.researchOrientation.field,
-            title: briefReportInterior.researchOrientation.title,
+            field: standardExterior.referProduct.field,
+            title: standardExterior.referProduct.title,
           },
           {
             resizable: true,
@@ -807,8 +939,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.researchSystem.field,
-            title: briefReportInterior.researchSystem.title,
+            field: standardExterior.referProject.field,
+            title: standardExterior.referProject.title,
           },
           {
             resizable: true,
@@ -817,8 +949,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.techFieldType1.field,
-            title: briefReportInterior.techFieldType1.title,
+            field: standardExterior.referInstitution.field,
+            title: standardExterior.referInstitution.title,
           },
           {
             resizable: true,
@@ -827,8 +959,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.techFieldType2.field,
-            title: briefReportInterior.techFieldType2.title,
+            field: standardExterior.referTechnology.field,
+            title: standardExterior.referTechnology.title,
           },
           {
             resizable: true,
@@ -837,8 +969,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.techFieldType3.field,
-            title: briefReportInterior.techFieldType3.title,
+            field: standardExterior.referCategory.field,
+            title: standardExterior.referCategory.title,
           },
           {
             resizable: true,
@@ -847,8 +979,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.industryField.field,
-            title: briefReportInterior.industryField.title,
+            field: standardExterior.department.field,
+            title: standardExterior.department.title,
           },
           {
             resizable: true,
@@ -857,8 +989,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.industryOrientation.field,
-            title: briefReportInterior.industryOrientation.title,
+            field: standardExterior.researchField.field,
+            title: standardExterior.researchField.title,
           },
           {
             resizable: true,
@@ -867,8 +999,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.publishDepartment.field,
-            title: briefReportInterior.publishDepartment.title,
+            field: standardExterior.researchOrientation.field,
+            title: standardExterior.researchOrientation.title,
           },
           {
             resizable: true,
@@ -877,8 +1009,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.checkInTime.field,
-            title: briefReportInterior.checkInTime.title,
+            field: standardExterior.researchSystem.field,
+            title: standardExterior.researchSystem.title,
           },
           {
             resizable: true,
@@ -887,8 +1019,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.knowledgeType.field,
-            title: briefReportInterior.knowledgeType.title,
+            field: standardExterior.techFieldType1.field,
+            title: standardExterior.techFieldType1.title,
           },
           {
             resizable: true,
@@ -897,8 +1029,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.securityLevel.field,
-            title: briefReportInterior.securityLevel.title,
+            field: standardExterior.techFieldType2.field,
+            title: standardExterior.techFieldType2.title,
           },
           {
             resizable: true,
@@ -907,8 +1039,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.abs.field,
-            title: briefReportInterior.abs.title,
+            field: standardExterior.techFieldType3.field,
+            title: standardExterior.techFieldType3.title,
           },
           {
             resizable: true,
@@ -917,8 +1049,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.formatTime.field,
-            title: briefReportInterior.formatTime.title,
+            field: standardExterior.industryField.field,
+            title: standardExterior.industryField.title,
           },
           {
             resizable: true,
@@ -927,8 +1059,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.informationCollactor.field,
-            title: briefReportInterior.informationCollactor.title,
+            field: standardExterior.industryOrientation.field,
+            title: standardExterior.industryOrientation.title,
           },
           {
             resizable: true,
@@ -937,8 +1069,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.informationAuditor.field,
-            title: briefReportInterior.informationAuditor.title,
+            field: standardExterior.publishDepartment.field,
+            title: standardExterior.publishDepartment.title,
           },
           {
             resizable: true,
@@ -947,8 +1079,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.language.field,
-            title: briefReportInterior.language.title,
+            field: standardExterior.checkInTime.field,
+            title: standardExterior.checkInTime.title,
           },
           {
             resizable: true,
@@ -957,8 +1089,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.keywords.field,
-            title: briefReportInterior.keywords.title,
+            field: standardExterior.knowledgeType.field,
+            title: standardExterior.knowledgeType.title,
           },
           {
             resizable: true,
@@ -967,8 +1099,8 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.informationOrigin.field,
-            title: briefReportInterior.informationOrigin.title,
+            field: standardExterior.securityLevel.field,
+            title: standardExterior.securityLevel.title,
           },
           {
             resizable: true,
@@ -977,42 +1109,148 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referWebsite.field,
-            title: briefReportInterior.referWebsite.title,
+            field: standardExterior.abs.field,
+            title: standardExterior.abs.title,
           },
-        ],
-      },
-      gridOptions1: {
-        border: true,
-        resizable: true,
-        height: 530,
-        pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
-        },
-        proxyConfig: {
-          seq: true, // 启用动态序号代理
-          props: {
-            result: "result",
-            total: "page.total",
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.formatTime.field,
+            title: standardExterior.formatTime.title,
           },
-          ajax: {
-            query: ({ page }) => {
-              let p = findPageList(page.pageSize, page.currentPage);
-              console.log(p);
-              return p;
-            },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.informationCollactor.field,
+            title: standardExterior.informationCollactor.title,
           },
-        },
-        columns: [
-          { type: "checkbox", width: 50 },
-          { type: "seq", width: 60 },
-          { field: "name", title: "Name" },
-          { field: "nickname", title: "Nickname" },
-          { field: "role", title: "Role" },
-          { field: "address", title: "Address", showOverflow: true },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.informationAuditor.field,
+            title: standardExterior.informationAuditor.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.language.field,
+            title: standardExterior.language.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.keywords.field,
+            title: standardExterior.keywords.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.informationOrigin.field,
+            title: standardExterior.informationOrigin.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.referWebsite.field,
+            title: standardExterior.referWebsite.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            // editRender: { name: "input", enabled: false },
+            field: standardExterior.fileName.field,
+            title: standardExterior.fileName.title,
+            fixed: "right",
+          },
+          {
+            resizable: true,
+            width: 180,
+            align: "center",
+            title: "操作",
+            slots: { default: "uploadFile" },
+            fixed: "right",
+          },
         ],
       },
     };
+  },
+  methods: {
+    removeFileById(row) {
+      removeRemoteFileById({ id: row.id }).then((res) => {
+        this.$refs.xGrid.commitProxy("query");
+        Message({
+          message: "删除成功！",
+          type: "success",
+        });
+      });
+    },
+    uploadFileSuccess() {
+      this.$refs.xGrid.commitProxy("query");
+      Message({
+        message: "上传成功",
+        type: "success",
+      });
+    },
+    importMethod(file) {
+      let xGrid = this.$refs.xGrid;
+      return Promise.resolve(file.file)
+        .then((file) => {
+          let reader = new FileReader();
+          reader.readAsText(file);
+          reader.onload = function () {
+            let data = csvToObject(this.result);
+            // console.log(data);
+            confirmSaveStandardExterior({
+              insertRecords: data,
+            }).then(() => {
+              xGrid.commitProxy("query");
+              Message({
+                message: "导入成功",
+                type: "success",
+              });
+            });
+          };
+        })
+        .catch(() => {
+          Message({
+            message: "导入失败",
+            type: "error",
+          });
+        });
+    },
+  },
+  mounted: function () {
+    // var xGrid = this.$refs.xGrid;
   },
 };
 </script>

@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2020-12-28 22:53:28
+ * @LastEditTime: 2020-12-29 15:32:16
  */
 var infoType = {
   industryTrend: "行业动态",
@@ -192,6 +192,7 @@ let infoBase = {
     title: "附件名",
   },
 };
+
 var industryTrend1 = {
   orderNum: "序号",
   title: "题名",
@@ -570,12 +571,28 @@ var patentExterior = {
     field: "applicationDay",
     title: "申请日",
   },
+  applicationDayStart: {
+    field: "applicationDayStart",
+    title: "申请日",
+  },
+  applicationDayEnd: {
+    field: "applicationDayEnd",
+    title: "申请日",
+  },
   publicationNo: {
     field: "publicationNo",
     title: "授权号",
   },
   publicationDay: {
     field: "publicationDay",
+    title: "授权日",
+  },
+  publicationDayStart: {
+    field: "publicationDayStart",
+    title: "授权日",
+  },
+  publicationDayEnd: {
+    field: "publicationDayEnd",
     title: "授权日",
   },
   applicationType: {
@@ -608,6 +625,14 @@ var patentExterior = {
   },
   priorityDay: {
     field: "priorityDay",
+    title: "优先权日",
+  },
+  priorityDayStart: {
+    field: "priorityDayStart",
+    title: "优先权日",
+  },
+  priorityDayEnd: {
+    field: "priorityDayEnd",
     title: "优先权日",
   },
   mainClassNum: {
@@ -650,8 +675,24 @@ var standardExterior = {
     field: "publicateDate",
     title: "发布日",
   },
+  publicateDateStart: {
+    field: "publicateDateStart",
+    title: "发布日",
+  },
+  publicateDateEnd: {
+    field: "publicateDateEnd",
+    title: "发布日",
+  },
   executeDate: {
     field: "executeDate",
+    title: "实施日",
+  },
+  executeDateStart: {
+    field: "executeDateStart",
+    title: "实施日",
+  },
+  executeDateEnd: {
+    field: "executeDateEnd",
     title: "实施日",
   },
   specifyInstitution: {
@@ -694,7 +735,7 @@ Object.assign(briefReportExterior, briefReportInterior);
 Object.assign(paperExterior, infoBase);
 Object.assign(patentExterior, infoBase);
 Object.assign(reportExterior, infoBase);
-Object.assign(reportInterior, reportInterior);
+Object.assign(reportInterior, reportExterior);
 Object.assign(standardExterior, infoBase);
 
 export {
