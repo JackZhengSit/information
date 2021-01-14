@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2020-12-28 16:15:01
+ * @LastEditTime: 2021-01-11 10:10:44
 -->
 <template>
   <div>
@@ -14,7 +14,7 @@
           :on-success="uploadFileSuccess"
           :data="{ id: row.id }"
           accept=".rar,.zip,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx"
-          action="http://localhost:8080/manual/brief-report-exterior/upload"
+          :action="uploadUrl"
         >
           <el-button slot="trigger" type="default">上传</el-button>
           <el-button
@@ -37,6 +37,7 @@ import {
   removeRemoteFileById,
   confirmSaveBriefReportExterior,
 } from "@/api/manageBriefReportExterior";
+import baseUrl from "@/config/baseUrl";
 
 function csvToObject(csvString) {
   let csvarry = csvString.split("\r\n");
@@ -63,6 +64,7 @@ export default {
   data() {
     return {
       // xGrid: this.$refs.xGrid,
+      uploadUrl: baseUrl + "/manual/brief-report-exterior/upload",
       gridOptions: {
         border: true,
         resizable: true,

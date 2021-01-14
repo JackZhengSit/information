@@ -1,7 +1,8 @@
 <template>
   <div class="result-item">
     <a class="title" @click="showDetails">{{ title }}</a>
-    <p class="auther">{{ author }}</p>
+    <p class="author">{{ author }}</p>
+    <p class="author">{{ infoType }}</p>
     <p class="abstract">
       {{ abstract }}
     </p>
@@ -13,17 +14,18 @@ export default {
   props: {
     title: String,
     author: String,
-    abstract: String
+    infoType: String,
+    abstract: String,
   },
   methods: {
-    showDetails: function(event) {
+    showDetails: function (event) {
       let routeData = this.$router.resolve({
         name: "Details",
-        query: { id: "111" }
+        query: { id: "111" },
       });
       window.open(routeData.href, "_blank");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -37,7 +39,7 @@ export default {
   cursor: pointer;
 }
 
-.result-item .auther {
+.result-item .author {
   margin: 10px 0 10px 0;
   font-size: 14px;
   color: #303133;

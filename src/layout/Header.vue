@@ -2,11 +2,11 @@
   <el-container>
     <el-header>
       <el-row>
-        <el-col :span="4" :offset="7">
+        <el-col :span="3" :offset="7">
           <h4 style="color: #409eff">信息情报系统</h4>
           <!-- <img src="" alt="" /> -->
         </el-col>
-        <el-col :span="6" :offset="4">
+        <el-col :span="12" :offset="0">
           <el-menu
             :default-active="activeIndex"
             class="el-menu-demo"
@@ -19,9 +19,13 @@
           >
             <el-menu-item index="/home">首页</el-menu-item>
             <el-menu-item index="/search">检索</el-menu-item>
-            <el-menu-item index="/manage">管理</el-menu-item>
-            <el-menu-item index="">图书</el-menu-item>
-            <el-menu-item index="">期刊</el-menu-item>
+            <el-menu-item index="">馆藏书刊</el-menu-item>
+            <el-menu-item index="">情报需求</el-menu-item>
+            <el-menu-item index="">船舶百科</el-menu-item>
+            <el-menu-item index="">总咨询台</el-menu-item>
+            <el-menu-item index="">下载工具</el-menu-item>
+            <el-menu-item index="">数据统计</el-menu-item>
+            <el-menu-item index="/manage">后台管理</el-menu-item>
           </el-menu>
         </el-col>
       </el-row>

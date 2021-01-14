@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-28 20:38:17
- * @LastEditTime: 2020-12-28 20:42:40
+ * @LastEditTime: 2021-01-14 10:31:06
  */
 import axios from "@/utils/axio";
 
@@ -26,7 +26,7 @@ export function searchStandardExterior(params) {
   return axios({
     url: "/StandardExterior/search/manageSearch",
     method: "get",
-    params,
+    params: params,
   }).then((res) => {
     return {
       page: {

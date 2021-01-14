@@ -42,251 +42,137 @@
         <el-col :span="10" :offset="2">
           <!-- <div id="infoTypeChart" style="width: 600; height: 400px"></div> -->
           <el-carousel :interval="4000" type="card" height="280px">
-            <el-carousel-item v-for="item in 3" :key="item">
-              <div id="infoTypeChart" style="width: 600; height: 300px"></div>
+            <el-carousel-item>
+              <div id="infoTypeChart" class="chartItem"></div>
+            </el-carousel-item>
+            <el-carousel-item>
+              <div id="infoTypeChartInterior" class="chartItem"></div>
+            </el-carousel-item>
+            <el-carousel-item>
+              <div id="infoTypeChartExterior" class="chartItem"></div>
             </el-carousel-item>
           </el-carousel>
         </el-col>
         <el-col :span="10">
           <el-card shadow="hover">
-            <!-- <div slot="header" class="clearfix">
-              <span>行业动态</span>
-              <el-link style="float: right; padding: 3px 0" type="primary"
-                >更多</el-link
-              >
-            </div> -->
             <el-tabs v-model="activeTab" type="card">
               <el-tab-pane label="数据资源" name="1">
-                <el-table :data="industyTrendData" style="width: 100%">
-                  <el-table-column
-                    :prop="industryTrend.title.field"
-                    :label="industryTrend.title.title"
-                    min-width="200"
-                  ></el-table-column>
-                  <el-table-column
-                    :prop="industryTrend.checkInTime.field"
-                    :label="industryTrend.checkInTime.title"
-                    width="100"
-                  ></el-table-column>
-                </el-table>
+                <el-button type="default"
+                  ><i class="el-icon-s-cooperation" style="font-size: 80px"></i>
+                  <span style="margin: 20px auto; display: block"
+                    >知网数据库</span
+                  ></el-button
+                >
+                <el-button type="default">
+                  <i class="el-icon-s-management" style="font-size: 80px"> </i>
+                  <span style="margin: 20px auto; display: block"
+                    >国军标网站</span
+                  >
+                </el-button>
               </el-tab-pane>
               <el-tab-pane label="行业动态" name="2">
-                <el-table :data="industyTrendData" style="width: 100%">
+                <el-table :data="newestIndustyTrendData" style="width: 100%">
                   <el-table-column
-                    :prop="industryTrend.title.field"
-                    :label="industryTrend.title.title"
+                    :prop="information.infoTitle.field"
+                    :label="information.infoTitle.title"
                     min-width="200"
                   ></el-table-column>
                   <el-table-column
-                    :prop="industryTrend.checkInTime.field"
-                    :label="industryTrend.checkInTime.title"
+                    :prop="information.checkInTime.field"
+                    :label="information.checkInTime.title"
                     width="100"
                   ></el-table-column>
                 </el-table>
               </el-tab-pane>
               <el-tab-pane label="外部资料" name="3">
-                <el-table :data="industyTrendData" style="width: 100%">
+                <el-table :data="newestInfoExteriorData" style="width: 100%">
                   <el-table-column
-                    :prop="industryTrend.title.field"
-                    :label="industryTrend.title.title"
+                    :prop="information.infoTitle.field"
+                    :label="information.infoTitle.title"
                     min-width="200"
                   ></el-table-column>
                   <el-table-column
-                    :prop="industryTrend.checkInTime.field"
-                    :label="industryTrend.checkInTime.title"
+                    :prop="information.checkInTime.field"
+                    :label="information.checkInTime.title"
                     width="100"
                   ></el-table-column>
                 </el-table>
               </el-tab-pane>
               <el-tab-pane label="情报产品" name="4">
-                <el-table :data="industyTrendData" style="width: 100%">
+                <el-table :data="newestInfoExteriorData" style="width: 100%">
                   <el-table-column
-                    :prop="industryTrend.title.field"
-                    :label="industryTrend.title.title"
+                    :prop="information.infoTitle.field"
+                    :label="information.infoTitle.title"
                     min-width="200"
                   ></el-table-column>
                   <el-table-column
-                    :prop="industryTrend.checkInTime.field"
-                    :label="industryTrend.checkInTime.title"
+                    :prop="information.checkInTime.field"
+                    :label="information.checkInTime.title"
                     width="100"
                   ></el-table-column>
                 </el-table>
               </el-tab-pane>
+
               <el-link
                 style="float: right; padding: 10px 20px 5px 20px"
                 type="primary"
                 >更多</el-link
               >
             </el-tabs>
-            <!-- <div>
-              <el-table :data="industyTrendData" style="width: 100%">
-                <el-table-column
-                  :prop="industryTrend.title.field"
-                  :label="industryTrend.title.title"
-                  min-width="200"
-                ></el-table-column>
-                <el-table-column
-                  :prop="industryTrend.checkInTime.field"
-                  :label="industryTrend.checkInTime.title"
-                  width="100"
-                ></el-table-column>
-              </el-table>
-            </div> -->
           </el-card>
         </el-col>
       </el-row>
-      <!-- <el-row>
-        <el-col :span="20" :offset="2">
-          <el-card shadow="hover" style="margin: 10px 0">
-            <div slot="header" class="clearfix">
-              <span>馆藏图书</span>
-            </div>
-            <div>
-              <el-link style="padding: 3px 10px" type="primary">图书</el-link>
-              <el-link style="padding: 3px 10px" type="primary">期刊</el-link>
-            </div>
+      <el-row>
+        <el-col :span="20" :offset="2" style="margin-top: 15px">
+          <el-card shadow="hover">
+            <h5 style="margin-top: 0px">公告信息</h5>
+            <el-carousel height="100px" direction="vertical" arrow="always">
+              <el-carousel-item v-for="item in newestNoticeData" :key="item">
+                <h5 style="margin: 5px 0">{{ item.title }}</h5>
+                <p>{{ item.mainText }}</p>
+              </el-carousel-item>
+            </el-carousel>
           </el-card>
+          <div></div>
         </el-col>
-      </el-row> -->
+      </el-row>
       <el-row>
         <el-col :span="20" :offset="2">
           <div class="topic">
-            <!-- <el-card class="topicItem" shadow="hover">
-              <div slot="header" class="clearfix">
-                <span><strong>专题：</strong>高端装备行业</span>
-                <el-link style="float: right; padding: 3px 0" type="primary"
-                  >更多</el-link
-                >
-              </div>
-              <div>
-                <el-table :data="topicData">
-                  <el-table-column
-                    label="题名"
-                    min-width="200"
-                    prop="title"
-                  ></el-table-column>
-                  <el-table-column
-                    label="类型"
-                    width="100"
-                    prop="type"
-                  ></el-table-column>
-                  <el-table-column
-                    label="登记时间"
-                    width="100"
-                    prop="checkInTime"
-                  ></el-table-column>
-                </el-table>
-              </div>
-            </el-card>
-            <el-card class="topicItem" shadow="hover">
-              <div slot="header" class="clearfix">
-                <span><strong>专题：</strong>高端装备行业</span>
-                <el-link style="float: right; padding: 3px 0" type="primary"
-                  >更多</el-link
-                >
-              </div>
-              <div>
-                <el-table :data="topicData">
-                  <el-table-column
-                    label="题名"
-                    min-width="200"
-                    prop="title"
-                  ></el-table-column>
-                  <el-table-column
-                    label="类型"
-                    width="100"
-                    prop="type"
-                  ></el-table-column>
-                  <el-table-column
-                    label="登记时间"
-                    width="100"
-                    prop="checkInTime"
-                  ></el-table-column>
-                </el-table>
-              </div>
-            </el-card>
-            <el-card class="topicItem" shadow="hover">
-              <div slot="header" class="clearfix">
-                <span><strong>专题：</strong>高端装备行业</span>
-                <el-link style="float: right; padding: 3px 0" type="primary"
-                  >更多</el-link
-                >
-              </div>
-              <div>
-                <el-table :data="topicData">
-                  <el-table-column
-                    label="题名"
-                    min-width="200"
-                    prop="title"
-                  ></el-table-column>
-                  <el-table-column
-                    label="类型"
-                    width="100"
-                    prop="type"
-                  ></el-table-column>
-                  <el-table-column
-                    label="登记时间"
-                    width="100"
-                    prop="checkInTime"
-                  ></el-table-column>
-                </el-table>
-              </div>
-            </el-card>
-            <el-card class="topicItem" shadow="hover">
-              <div slot="header" class="clearfix">
-                <span><strong>专题：</strong>高端装备行业</span>
-                <el-link style="float: right; padding: 3px 0" type="primary"
-                  >更多</el-link
-                >
-              </div>
-              <div>
-                <el-table :data="topicData">
-                  <el-table-column
-                    label="题名"
-                    min-width="200"
-                    prop="title"
-                  ></el-table-column>
-                  <el-table-column
-                    label="类型"
-                    width="100"
-                    prop="type"
-                  ></el-table-column>
-                  <el-table-column
-                    label="登记时间"
-                    width="100"
-                    prop="checkInTime"
-                  ></el-table-column>
-                </el-table>
-              </div>
-            </el-card>
-            <el-card class="topicItem" shadow="hover">
-              <div slot="header" class="clearfix">
-                <span><strong>专题：</strong>高端装备行业</span>
-                <el-link style="float: right; padding: 3px 0" type="primary"
-                  >更多</el-link
-                >
-              </div>
-              <div>
-                <el-table :data="topicData">
-                  <el-table-column
-                    label="题名"
-                    min-width="200"
-                    prop="title"
-                  ></el-table-column>
-                  <el-table-column
-                    label="类型"
-                    width="100"
-                    prop="type"
-                  ></el-table-column>
-                  <el-table-column
-                    label="登记时间"
-                    width="100"
-                    prop="checkInTime"
-                  ></el-table-column>
-                </el-table>
-              </div>
-            </el-card> -->
-            <div class="topicItem">
+            <div
+              v-for="topicItem in topics"
+              :key="topicItem.name"
+              class="topicItem"
+            >
+              <el-card shadow="hover">
+                <div slot="header" class="clearfix">
+                  <span><strong>专题：</strong>{{ topicItem.name }}</span>
+                  <el-link style="float: right; padding: 3px 0" type="primary"
+                    >更多</el-link
+                  >
+                </div>
+                <div>
+                  <el-table :data="topicItem.list">
+                    <el-table-column
+                      :label="information.infoTitle.title"
+                      min-width="200"
+                      :prop="information.infoTitle.field"
+                    ></el-table-column>
+                    <el-table-column
+                      :label="information.infoType.title"
+                      width="100"
+                      :prop="information.infoType.field"
+                    ></el-table-column>
+                    <el-table-column
+                      :label="information.checkInTime.title"
+                      width="100"
+                      :prop="information.checkInTime.field"
+                    ></el-table-column>
+                  </el-table>
+                </div>
+              </el-card>
+            </div>
+            <!-- <div class="topicItem">
               <el-card shadow="hover">
                 <div slot="header" class="clearfix">
                   <span><strong>专题：</strong>高端装备行业</span>
@@ -372,65 +258,7 @@
                   </el-table>
                 </div>
               </el-card>
-            </div>
-            <div class="topicItem">
-              <el-card shadow="hover">
-                <div slot="header" class="clearfix">
-                  <span><strong>专题：</strong>高端装备行业</span>
-                  <el-link style="float: right; padding: 3px 0" type="primary"
-                    >更多</el-link
-                  >
-                </div>
-                <div>
-                  <el-table :data="topicData">
-                    <el-table-column
-                      label="题名"
-                      min-width="200"
-                      prop="title"
-                    ></el-table-column>
-                    <el-table-column
-                      label="类型"
-                      width="100"
-                      prop="type"
-                    ></el-table-column>
-                    <el-table-column
-                      label="登记时间"
-                      width="100"
-                      prop="checkInTime"
-                    ></el-table-column>
-                  </el-table>
-                </div>
-              </el-card>
-            </div>
-            <div class="topicItem">
-              <el-card shadow="hover">
-                <div slot="header" class="clearfix">
-                  <span><strong>专题：</strong>高端装备行业</span>
-                  <el-link style="float: right; padding: 3px 0" type="primary"
-                    >更多</el-link
-                  >
-                </div>
-                <div>
-                  <el-table :data="topicData">
-                    <el-table-column
-                      label="题名"
-                      min-width="200"
-                      prop="title"
-                    ></el-table-column>
-                    <el-table-column
-                      label="类型"
-                      width="100"
-                      prop="type"
-                    ></el-table-column>
-                    <el-table-column
-                      label="登记时间"
-                      width="100"
-                      prop="checkInTime"
-                    ></el-table-column>
-                  </el-table>
-                </div>
-              </el-card>
-            </div>
+            </div> -->
           </div>
         </el-col>
       </el-row>
@@ -439,53 +267,67 @@
 </template>
 
 <script>
-import { industryTrend } from "../store/infoType";
-// import echarts from "echarts";
+import { information } from "../store/infoType";
+import {
+  getNewestIndustryTrend,
+  getNewestInfoExterior,
+  getNewestInfoInterior,
+  getTopicInformation,
+} from "@/api/queryInformation";
+
+import { getNewestNotice } from "@/api/manageNotice";
+
 export default {
   data() {
     return {
       searchInput: "",
       searchType: "全部",
       activeTab: "1",
-
+      information,
       searchTypes: [
         { value: "全部" },
         { value: "标题" },
         { value: "作者" },
         { value: "关键词" },
       ],
-      industryTrend,
-      industyTrendData: [
+      newestIndustyTrendData: [],
+      newestInfoExteriorData: [],
+      newestinfoInteriorData: [],
+      newestNoticeData: [],
+      topics: [
         {
-          title: "动态名1动态名1动态名1动态名1",
-          checkInTime: "2020-10-2",
+          id: 1,
+          name: "配套产品",
+          list: [],
         },
         {
-          title: "动态名1动态名1动态名1动态名1",
-          checkInTime: "2020-10-2",
+          id: 2,
+          name: "前沿技术",
+          list: [],
         },
         {
-          title: "动态名1动态名1动态名1动态名1",
-          checkInTime: "2020-10-2",
-        },
-      ],
-      topicData: [
-        {
-          title: "动态名1动态名1动态名1动态名1",
-          type: "外部报告",
-          checkInTime: "2020-10-2",
-        },
-        {
-          title: "动态名1动态名1动态名1动态名1",
-          type: "外部报告",
-          checkInTime: "2020-10-2",
-        },
-        {
-          title: "动态名1动态名1动态名1动态名1",
-          type: "外部报告",
-          checkInTime: "2020-10-2",
+          id: 3,
+          name: "市场经营",
+          list: [],
         },
       ],
+      // topicData: [
+      //   {
+      //     title: "动态名1动态名1动态名1动态名1",
+      //     type: "外部报告",
+      //     checkInTime: "2020-10-2",
+      //   },
+      //   {
+      //     title: "动态名1动态名1动态名1动态名1",
+      //     type: "外部报告",
+      //     checkInTime: "2020-10-2",
+      //   },
+      //   {
+      //     title: "动态名1动态名1动态名1动态名1",
+      //     type: "外部报告",
+      //     checkInTime: "2020-10-2",
+      //   },
+      // ],
     };
   },
   methods: {
@@ -496,28 +338,115 @@ export default {
       );
       let option = {
         title: {
-          text: "表格示例",
+          text: "全部情报信息统计",
+          left: 80,
+          top: 20,
         },
         tooltip: {},
         legend: {
           data: ["知识量"],
         },
-        xAxis: {
+        grid: {
+          left: 90,
+        },
+        xAxis: { type: "value" },
+        yAxis: {
+          type: "category",
           data: [
-            "行业动态",
-            "外部简报",
-            "外部论文著作",
-            "外部专利",
+            "内部报告",
+            "内部简报",
+            "外部报告",
             "外部标准",
-            "情报外部报告",
+            "外部行业报告",
+            "外部行业动态",
+            "外部论文",
+            "外部专利",
           ],
         },
-        yAxis: {},
         series: [
           {
             name: "销量",
             type: "bar",
-            data: [5, 20, 36, 10, 10, 20, 27],
+            data: [8, 14, 6, 613, 4, 383, 20, 2918],
+          },
+        ],
+      };
+      myEcharts.setOption(option);
+      window.addEventListener("resize", function () {
+        myEcharts.resize();
+      });
+    },
+    infoTypeChartInterior() {
+      let myEcharts = this.$echarts.init(
+        document.getElementById("infoTypeChartInterior"),
+        "light"
+      );
+      let option = {
+        title: {
+          text: "内部情报信息统计",
+          left: 80,
+          top: 20,
+        },
+        tooltip: {},
+        legend: {
+          data: ["知识量"],
+        },
+        grid: {
+          left: 90,
+        },
+        xAxis: { type: "value" },
+        yAxis: {
+          type: "category",
+          data: ["内部报告", "内部简报"],
+        },
+        series: [
+          {
+            name: "销量",
+            type: "bar",
+            data: [8, 14],
+          },
+        ],
+      };
+      myEcharts.setOption(option);
+      window.addEventListener("resize", function () {
+        myEcharts.resize();
+      });
+    },
+    infoTypeChartExterior() {
+      let myEcharts = this.$echarts.init(
+        document.getElementById("infoTypeChartExterior"),
+        "light"
+      );
+      let option = {
+        title: {
+          text: "外部情报信息统计",
+          left: 80,
+          top: 20,
+        },
+        tooltip: {},
+        legend: {
+          data: ["知识量"],
+        },
+        grid: {
+          left: 90,
+        },
+        xAxis: { type: "value" },
+        yAxis: {
+          type: "category",
+          data: [
+            "外部报告",
+            "外部标准",
+            "外部行业报告",
+            "外部行业动态",
+            "外部论文",
+            "外部专利",
+          ],
+        },
+        series: [
+          {
+            name: "销量",
+            type: "bar",
+            data: [6, 613, 4, 383, 20, 2918],
           },
         ],
       };
@@ -527,29 +456,45 @@ export default {
       });
     },
   },
+  created() {
+    getNewestIndustryTrend().then((res) => {
+      this.newestIndustyTrendData = res;
+    });
+    getNewestInfoExterior().then((res) => {
+      this.newestInfoExteriorData = res;
+    });
+    getNewestInfoInterior().then((res) => {
+      this.newestinfoInteriorData = res;
+    });
+    getNewestNotice().then((res) => {
+      this.newestNoticeData = res;
+    });
+    this.topics.forEach((v, i) => {
+      getTopicInformation({ topic: v.name }).then(
+        (res) => (this.topics[i].list = res)
+      );
+    });
+  },
   mounted() {
     this.$nextTick(() => {
       this.infoTypeChart();
+      this.infoTypeChartInterior();
+      this.infoTypeChartExterior();
     });
   },
 };
 </script>
 
 <style>
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 200px;
-  margin: 0;
-}
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
+/* .el-carousel__item {
   background-color: #d3dce6;
+} */
+.chartItem {
+  width: 600;
+  height: 300px;
+  background-color: #fbfcfd;
+  /* border: 1px solid #dcdfe6; */
+  border-radius: 2px;
 }
 
 .topic {

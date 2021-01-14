@@ -59,14 +59,6 @@ const routes = [
             component: Manage,
             children: [
               {
-                path: "paper",
-                name: "Paper",
-                component: () =>
-                  import(
-                    /* webpackChunkName: "paper" */ "../components/ManagePaper.vue"
-                  ),
-              },
-              {
                 path: "briefReportExterior",
                 name: "briefReportExterior",
                 component: () =>

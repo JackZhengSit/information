@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2020-12-29 15:32:16
+ * @LastEditTime: 2021-01-13 13:43:23
  */
 var infoType = {
   industryTrend: "行业动态",
@@ -35,7 +35,7 @@ let infoBase = {
   },
   industryType: {
     field: "industryType",
-    title: "行业类别",
+    title: "产业类别",
   },
   industryDetailType: {
     field: "industryDetailType",
@@ -729,6 +729,25 @@ var standardExterior = {
   },
 };
 
+var information = {
+  originId: {
+    field: "originId",
+    title: "源ID",
+  },
+  infoTitle: {
+    field: "infoTitle",
+    title: "标题",
+  },
+  infoType: {
+    field: "infoType",
+    title: "类型",
+  },
+  infoAuthor: {
+    field: "infoAuthor",
+    title: "作者",
+  },
+};
+
 Object.assign(industryTrend, infoBase);
 Object.assign(briefReportInterior, infoBase);
 Object.assign(briefReportExterior, briefReportInterior);
@@ -737,6 +756,7 @@ Object.assign(patentExterior, infoBase);
 Object.assign(reportExterior, infoBase);
 Object.assign(reportInterior, reportExterior);
 Object.assign(standardExterior, infoBase);
+Object.assign(information, infoBase);
 
 export {
   infoType,
@@ -748,4 +768,5 @@ export {
   reportExterior,
   reportInterior,
   standardExterior,
+  information,
 };
