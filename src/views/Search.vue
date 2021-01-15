@@ -42,27 +42,33 @@
         <el-col :span="4" :offset="3">
           <div class="left-nav-menu" style="">
             <el-collapse v-model="activeNames" @change="handleChange">
-              <el-collapse-item title="情报分类" name="infoType">
-                <el-checkbox
-                  :indeterminate="infoTypeIsIndeterminate"
-                  v-model="infoTypeCheckAll"
-                  @change="handleCheckAllInfoType"
-                  >全选</el-checkbox
-                >
-                <div style="margin: 15px 0"></div>
+              <el-collapse-item name="infoType">
+                <template slot="title">
+                  情报类型
+                  <div style="margin-left: 30px">
+                    <el-checkbox
+                      :indeterminate="infoTypeIsIndeterminate"
+                      v-model="infoTypeCheckAll"
+                      @change="handleCheckAllInfoType"
+                      >全选</el-checkbox
+                    >
+                  </div>
+                </template>
+
+                <!-- <div style="margin: 15px 0"></div> -->
                 <el-checkbox-group
                   v-model="checkedInfoType"
                   @change="handleCheckedInfoTypeChange"
                 >
-                  <el-checkbox
+                  <!-- <el-checkbox
                     v-for="item in infoTypes"
                     :label="infoTypes"
                     :key="item"
                     >{{ item }}</el-checkbox
-                  >
+                  > -->
                 </el-checkbox-group>
               </el-collapse-item>
-              <el-collapse-item title="部门" name="1">
+              <el-collapse-item title="infoType" name="1">
                 <el-tree
                   :data="departData"
                   show-checkbox
@@ -190,7 +196,7 @@
 
 <script>
 import ResultItem from "../components/ResultItem";
-import { infoType } from "../store/infoType";
+import { infoType } from "@/store/infoType";
 export default {
   data() {
     return {
@@ -208,31 +214,15 @@ export default {
       searchInput: "",
 
       //左侧导航栏
-      infoTypesData: [],
+      infoTypes: [],
       infoTypeCheckAll: false,
       checkedInfoType: infoType,
-      isInderterminate: true,
+      infoTypeIsIndeterminate: true,
 
       departData: [
         {
           id: 1,
-          label: "一级 1",
-          children: [
-            {
-              id: 4,
-              label: "二级 1-1",
-              children: [
-                {
-                  id: 9,
-                  label: "三级 1-1-1",
-                },
-                {
-                  id: 10,
-                  label: "三级 1-1-2",
-                },
-              ],
-            },
-          ],
+          label: "行业动态（" + 12 + ")",
         },
         {
           id: 2,
@@ -499,13 +489,9 @@ export default {
           "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这摘要这是摘要这是摘要这是摘要这是摘要这是摘要",
       },
     ];
-    this.infoTypesData = [
-      "行业动态",
-      "情报简报",
-      "外部简报",
-      "情报报告",
-      "外部报告",
-    ];
+    for (let i in infoType) {
+      this.infoTypes.push(infoType[i]);
+    }
   },
   methods: {
     handleChange(val) {

@@ -41,7 +41,7 @@
       <el-row :gutter="20" style="margin-top: 20px">
         <el-col :span="10" :offset="2">
           <!-- <div id="infoTypeChart" style="width: 600; height: 400px"></div> -->
-          <el-carousel :interval="4000" type="card" height="280px">
+          <el-carousel :interval="4000" height="280px">
             <el-carousel-item>
               <div id="infoTypeChart" class="chartItem"></div>
             </el-carousel-item>
@@ -158,11 +158,11 @@
                       min-width="200"
                       :prop="information.infoTitle.field"
                     ></el-table-column>
-                    <el-table-column
+                    <!-- <el-table-column
                       :label="information.infoType.title"
                       width="100"
                       :prop="information.infoType.field"
-                    ></el-table-column>
+                    ></el-table-column> -->
                     <el-table-column
                       :label="information.checkInTime.title"
                       width="100"
