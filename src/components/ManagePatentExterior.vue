@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-11 10:55:34
+ * @LastEditTime: 2021-01-18 10:04:03
 -->
 <template>
   <div>
@@ -38,6 +38,7 @@ import {
   confirmSavePatentExterior,
 } from "@/api/managePatentExterior";
 import baseUrl from "@/config/baseUrl";
+import XLSX from "xlsx";
 
 function csvToObject(csvString) {
   let csvarry = csvString.split("\r\n");
@@ -717,14 +718,15 @@ export default {
         importConfig: {
           mode: "insert",
           remote: true,
-          types: ["csv"],
+          types: ["xlsx"],
           importMethod: this.importMethod,
         },
         exportConfig: {
-          // columnFilterMethod(column) {
-          //   console.log(column);
-          //   column.type = "checkbox";
-          // },
+          // remote: true,
+          exportMethod: this.exportMethod,
+          // original: true,
+          types: ["xlsx"],
+          modes: ["current", "selected"],
         },
         toolbarConfig: {
           buttons: [
@@ -1300,32 +1302,60 @@ export default {
         type: "success",
       });
     },
-    importMethod(file) {
+    replaceExcelTitle(workbook) {
+      let worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      for (let k1 in worksheet) {
+        if (k1.endsWith(1)) {
+          for (let k2 in patentExterior) {
+            if (patentExterior[k2].title == worksheet[k1].v) {
+              worksheet[k1].v = patentExterior[k2].field;
+              worksheet[k1].r = "<t>" + patentExterior[k2].field + "</t>";
+              worksheet[k1].h = patentExterior[k2].field;
+              worksheet[k1].w = patentExterior[k2].field;
+            }
+          }
+        }
+      }
+    },
+    importMethod({ file }) {
+      // return Promise.resolve(file.file).then((file) => {});
       let xGrid = this.$refs.xGrid;
-      return Promise.resolve(file.file)
-        .then((file) => {
-          let reader = new FileReader();
-          reader.readAsText(file);
-          reader.onload = function () {
-            let data = csvToObject(this.result);
-            // console.log(data);
-            confirmSavePatentExterior({
-              insertRecords: data,
-            }).then(() => {
-              xGrid.commitProxy("query");
-              Message({
-                message: "导入成功",
-                type: "success",
-              });
+      let methods = this.$options.methods;
+      return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+          let data = e.target.result;
+          let workbook = XLSX.read(data, { type: "binary" });
+          let worksheet = workbook.Sheets[workbook.SheetNames[0]];
+          methods.replaceExcelTitle(workbook);
+          let importData = XLSX.utils.sheet_to_json(worksheet);
+          // console.log(workbook);
+          // console.log(importData);
+          confirmSavePatentExterior({
+            insertRecords: importData,
+          }).then(() => {
+            xGrid.commitProxy("query");
+            Message({
+              type: "success",
+              message: "导入成功",
             });
-          };
-        })
-        .catch(() => {
-          Message({
-            message: "导入失败",
-            type: "error",
           });
+          resolve();
+        };
+        reader.onerror = function (e) {
+          Message({
+            type: "error",
+            message: "读取文件出错",
+          });
+          reject();
+        };
+        reader.readAsBinaryString(file);
+      }).catch(() => {
+        Message({
+          type: "error",
+          message: "导入失败",
         });
+      });
     },
   },
   mounted: function () {

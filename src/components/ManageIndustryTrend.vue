@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-15 16:06:58
+ * @LastEditTime: 2021-01-18 10:51:19
 -->
 <template>
   <div>
@@ -532,10 +532,11 @@ export default {
           importMethod: this.importMethod,
         },
         exportConfig: {
-          remote: true,
+          // remote: true,
           exportMethod: this.exportMethod,
-          // types: ["xlsx"],
-          // modes: ["current", "selected", "all"],
+          // original: true,
+          types: ["xlsx"],
+          modes: ["current", "selected"],
         },
         toolbarConfig: {
           buttons: [
@@ -994,10 +995,11 @@ export default {
         }
       }
     },
-    importMethod(file) {
+    importMethod({ file }) {
       // return Promise.resolve(file.file).then((file) => {});
       let xGrid = this.$refs.xGrid;
       let methods = this.$options.methods;
+      // this.$XModal.message({ message: "loading 消息提示", status: "loading" });
       return new Promise((resolve, reject) => {
         let reader = new FileReader();
         reader.onload = function (e) {
@@ -1026,18 +1028,13 @@ export default {
           });
           reject();
         };
-        reader.readAsBinaryString(file.file);
+        reader.readAsBinaryString(file);
       }).catch(() => {
         Message({
           type: "error",
           message: "导入失败",
         });
       });
-    },
-    exportMethod(options) {
-      console.log(options);
-      let xGrid = this.$refs.xGrid;
-      return Promise.resolve(options);
     },
   },
   mounted: function () {
