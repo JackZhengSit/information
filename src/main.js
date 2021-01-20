@@ -10,8 +10,10 @@ import "./plugins/vxe-table.js";
 // import "./plugins/xe-ajax.js";
 // import "./plugins/echarts.js";
 import echarts from "echarts";
+import api from "@/api";
 
 Vue.prototype.$echarts = echarts;
+Vue.prototype.$api = api;
 Vue.config.productionTip = false;
 
 new Vue({

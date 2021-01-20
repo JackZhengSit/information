@@ -127,7 +127,10 @@
           <el-card shadow="hover">
             <h5 style="margin-top: 0px">公告信息</h5>
             <el-carousel height="100px" direction="vertical" arrow="always">
-              <el-carousel-item v-for="item in newestNoticeData" :key="item">
+              <el-carousel-item
+                v-for="item in newestNoticeData"
+                :key="item.title"
+              >
                 <h5 style="margin: 5px 0">{{ item.title }}</h5>
                 <p>{{ item.mainText }}</p>
               </el-carousel-item>
@@ -275,7 +278,11 @@ import {
   getTopicInformation,
 } from "@/api/queryInformation";
 
+import { countInfoType } from "@/api/queryInformation";
+
 import { getNewestNotice } from "@/api/manageNotice";
+
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -330,8 +337,26 @@ export default {
       // ],
     };
   },
+  computed: {
+    ...mapGetters([
+      "getInfoTypeField",
+      "getInfoTypeTitle",
+      "getExteriorInfoTypeField",
+      "getExteriorInfoTypeTitle",
+      "getInteriorInfoTypeField",
+      "getInteriorInfoTypeTitle",
+    ]),
+  },
   methods: {
-    infoTypeChart() {
+    async infoTypeChart() {
+      let value = [];
+
+      for (const item of this.getInfoTypeField) {
+        await countInfoType({ infoType: item }).then((res) => {
+          value.push(res);
+        });
+      }
+
       let myEcharts = this.$echarts.init(
         document.getElementById("infoTypeChart"),
         "light"
@@ -352,31 +377,36 @@ export default {
         xAxis: { type: "value" },
         yAxis: {
           type: "category",
-          data: [
-            "内部报告",
-            "内部简报",
-            "外部报告",
-            "外部标准",
-            "外部行业报告",
-            "外部行业动态",
-            "外部论文",
-            "外部专利",
-          ],
+          data: this.getInfoTypeTitle,
         },
         series: [
           {
             name: "销量",
             type: "bar",
-            data: [8, 14, 6, 613, 4, 383, 20, 2918],
+            data: value,
           },
         ],
       };
+      // this.$nextTick(() => {
+      //   myEcharts.setOption(option);
+      //   window.addEventListener("resize", function () {
+      //     myEcharts.resize();
+      //   });
+      // });
       myEcharts.setOption(option);
       window.addEventListener("resize", function () {
         myEcharts.resize();
       });
     },
-    infoTypeChartInterior() {
+    async infoTypeChartInterior() {
+      let value = [];
+
+      for (const item of this.getInteriorInfoTypeField) {
+        await countInfoType({ infoType: item }).then((res) => {
+          value.push(res);
+        });
+      }
+
       let myEcharts = this.$echarts.init(
         document.getElementById("infoTypeChartInterior"),
         "light"
@@ -397,13 +427,13 @@ export default {
         xAxis: { type: "value" },
         yAxis: {
           type: "category",
-          data: ["内部报告", "内部简报"],
+          data: this.getInteriorInfoTypeTitle,
         },
         series: [
           {
             name: "销量",
             type: "bar",
-            data: [8, 14],
+            data: value,
           },
         ],
       };
@@ -412,7 +442,15 @@ export default {
         myEcharts.resize();
       });
     },
-    infoTypeChartExterior() {
+    async infoTypeChartExterior() {
+      let value = [];
+
+      for (const item of this.getExteriorInfoTypeField) {
+        await countInfoType({ infoType: item }).then((res) => {
+          value.push(res);
+        });
+      }
+
       let myEcharts = this.$echarts.init(
         document.getElementById("infoTypeChartExterior"),
         "light"
@@ -433,20 +471,13 @@ export default {
         xAxis: { type: "value" },
         yAxis: {
           type: "category",
-          data: [
-            "外部报告",
-            "外部标准",
-            "外部行业报告",
-            "外部行业动态",
-            "外部论文",
-            "外部专利",
-          ],
+          data: this.getExteriorInfoTypeTitle,
         },
         series: [
           {
             name: "销量",
             type: "bar",
-            data: [6, 613, 4, 383, 20, 2918],
+            data: value,
           },
         ],
       };
@@ -476,11 +507,9 @@ export default {
     });
   },
   mounted() {
-    this.$nextTick(() => {
-      this.infoTypeChart();
-      this.infoTypeChartInterior();
-      this.infoTypeChartExterior();
-    });
+    this.infoTypeChart();
+    this.infoTypeChartInterior();
+    this.infoTypeChartExterior();
   },
 };
 </script>
