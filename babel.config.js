@@ -5,5 +5,9 @@ module.exports = {
   //     retainLines: true,
   //   },
   // },
-  presets: ["@vue/cli-plugin-babel/preset"],
+  presets: [
+    "@vue/cli-plugin-babel/preset",
+    ["@babel/preset-env", { modules: "commonjs" }],
+  ],
+  // plugins: ["@babel/plugin-proposal-object-rest-spread"],
 };

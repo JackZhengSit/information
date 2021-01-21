@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2021-01-18 09:58:45
+ * @LastEditTime: 2021-01-21 15:27:09
 -->
 <template>
   <div>
@@ -553,10 +553,10 @@ export default {
           importMethod: this.importMethod,
         },
         exportConfig: {
-          // remote: true,
+          remote: true,
           exportMethod: this.exportMethod,
           // original: true,
-          types: ["xlsx"],
+          // types: ["xlsx"],
           modes: ["current", "selected"],
         },
         toolbarConfig: {
@@ -1087,6 +1087,10 @@ export default {
           message: "导入失败",
         });
       });
+    },
+    exportMethod({ options }) {
+      this.tableExportMethod(options, briefReportInterior);
+      return Promise.resolve();
     },
   },
   mounted: function () {

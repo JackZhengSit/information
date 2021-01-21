@@ -1,9 +1,8 @@
 <template>
-  <el-container>
-    <el-main>
-      <el-row>
-        <el-col :span="10" :offset="7">
-          <!-- <div class="search-input">
+  <div>
+    <el-row>
+      <el-col :span="10" :offset="7">
+        <!-- <div class="search-input">
             <el-input
               size="large"
               placeholder="请输入内容"
@@ -24,97 +23,97 @@
               ></el-button>
             </el-input>
           </div> -->
-          <div class="group">
-            <el-select v-model="searchType" placeholder="">
-              <el-option
-                v-for="item in searchTypes"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-            <el-input v-model="searchInput" placeholder="请输入内容"></el-input>
-            <el-button type="primary" icon="search">搜索</el-button>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row :gutter="20" style="margin-top: 20px">
-        <el-col :span="4" :offset="3">
-          <div class="left-nav-menu" style="">
-            <el-collapse v-model="activeNames" @change="handleChange">
-              <el-collapse-item name="infoType">
-                <template slot="title">
-                  情报类型
-                  <div style="margin-left: 30px">
-                    <el-checkbox
-                      :indeterminate="infoTypeIsIndeterminate"
-                      v-model="infoTypeCheckAll"
-                      @change="handleCheckAllInfoType"
-                      >全选</el-checkbox
-                    >
-                  </div>
-                </template>
+        <div class="group">
+          <el-select v-model="searchType" placeholder="">
+            <el-option
+              v-for="item in searchTypes"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+          <el-input v-model="searchInput" placeholder="请输入内容"></el-input>
+          <el-button type="primary" icon="search">搜索</el-button>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20" style="margin-top: 20px">
+      <el-col :span="4" :offset="3">
+        <div class="left-nav-menu" style="">
+          <el-collapse v-model="activeNames" @change="handleChange">
+            <el-collapse-item name="infoType">
+              <template slot="title">
+                情报类型
+                <div style="margin-left: 30px">
+                  <el-checkbox
+                    :indeterminate="infoTypeIsIndeterminate"
+                    v-model="infoTypeCheckAll"
+                    @change="handleCheckAllInfoType"
+                    >全选</el-checkbox
+                  >
+                </div>
+              </template>
 
-                <!-- <div style="margin: 15px 0"></div> -->
-                <el-checkbox-group
-                  v-model="checkedInfoType"
-                  @change="handleCheckedInfoTypeChange"
-                >
-                  <!-- <el-checkbox
+              <!-- <div style="margin: 15px 0"></div> -->
+              <el-checkbox-group
+                v-model="checkedInfoType"
+                @change="handleCheckedInfoTypeChange"
+              >
+                <!-- <el-checkbox
                     v-for="item in infoTypes"
                     :label="infoTypes"
                     :key="item"
                     >{{ item }}</el-checkbox
                   > -->
-                </el-checkbox-group>
-              </el-collapse-item>
-              <el-collapse-item title="infoType" name="1">
-                <el-tree
-                  :data="departData"
-                  show-checkbox
-                  node-key="id"
-                  :default-checked-keys="[1, 2, 3]"
-                  :props="defaultProps"
-                >
-                </el-tree>
-              </el-collapse-item>
-              <el-collapse-item title="业务方向" name="2">
-                <el-tree
-                  :data="researchData"
-                  show-checkbox
-                  node-key="id"
-                  :default-checked-keys="[1, 2, 3]"
-                  :props="defaultProps"
-                ></el-tree>
-              </el-collapse-item>
-              <el-collapse-item title="系统" name="3">
-                <el-tree
-                  :data="systemData"
-                  show-checkbox
-                  node-key="id"
-                  :default-checked-keys="[1, 2, 3]"
-                  :props="defaultProps"
-                ></el-tree>
-              </el-collapse-item>
-              <el-collapse-item title="来源" name="4">
-                <el-tree
-                  :data="referenceData"
-                  show-checkbox
-                  node-key="id"
-                  :default-checked-keys="[1, 2, 3]"
-                  :props="defaultProps"
-                ></el-tree>
-              </el-collapse-item>
-            </el-collapse>
+              </el-checkbox-group>
+            </el-collapse-item>
+            <el-collapse-item title="infoType" name="1">
+              <el-tree
+                :data="departData"
+                show-checkbox
+                node-key="id"
+                :default-checked-keys="[1, 2, 3]"
+                :props="defaultProps"
+              >
+              </el-tree>
+            </el-collapse-item>
+            <el-collapse-item title="业务方向" name="2">
+              <el-tree
+                :data="researchData"
+                show-checkbox
+                node-key="id"
+                :default-checked-keys="[1, 2, 3]"
+                :props="defaultProps"
+              ></el-tree>
+            </el-collapse-item>
+            <el-collapse-item title="系统" name="3">
+              <el-tree
+                :data="systemData"
+                show-checkbox
+                node-key="id"
+                :default-checked-keys="[1, 2, 3]"
+                :props="defaultProps"
+              ></el-tree>
+            </el-collapse-item>
+            <el-collapse-item title="来源" name="4">
+              <el-tree
+                :data="referenceData"
+                show-checkbox
+                node-key="id"
+                :default-checked-keys="[1, 2, 3]"
+                :props="defaultProps"
+              ></el-tree>
+            </el-collapse-item>
+          </el-collapse>
+        </div>
+      </el-col>
+      <el-col :span="14">
+        <div class="result-block" style="background-color: #fff">
+          <div class="result-title" style="">
+            <a href="#">共18页&nbsp;每页10条</a>
+            <a href="#">下一页&nbsp;&nbsp;上一页</a>
           </div>
-        </el-col>
-        <el-col :span="14">
-          <div class="result-block" style="background-color: #fff">
-            <div class="result-title" style="">
-              <a href="#">共18页&nbsp;每页10条</a>
-              <a href="#">下一页&nbsp;&nbsp;上一页</a>
-            </div>
-            <!-- <div class="result-body">
+          <!-- <div class="result-body">
               <div class="result-item">
                 <a class="title">这是标题</a>
                 <p class="auther">这是作者</p>
@@ -167,31 +166,30 @@
                 </p>
               </div>
             </div> -->
-            <div class="result-body">
-              <ResultItem
-                v-for="li in resultList"
-                :key="li.id"
-                :title="li.title"
-                :author="li.author"
-                :infoType="li.infoType"
-                :abstract="li.abstract"
-              >
-              </ResultItem>
-            </div>
-
-            <div class="result-footer">
-              <el-pagination
-                layout="prev, pager, next"
-                :total="1000"
-                style="float: right"
-              >
-              </el-pagination>
-            </div>
+          <div class="result-body">
+            <ResultItem
+              v-for="li in resultList"
+              :key="li.id"
+              :title="li.title"
+              :author="li.author"
+              :infoType="li.infoType"
+              :abstract="li.abstract"
+            >
+            </ResultItem>
           </div>
-        </el-col>
-      </el-row>
-    </el-main>
-  </el-container>
+
+          <div class="result-footer">
+            <el-pagination
+              layout="prev, pager, next"
+              :total="1000"
+              style="float: right"
+            >
+            </el-pagination>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>

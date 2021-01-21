@@ -1,20 +1,31 @@
 <template>
-  <div class="index">
-    <div id="header">
+  <div id="index">
+    <header id="header">
       <router-view name="header"></router-view>
-    </div>
-    <div id="content">
+    </header>
+    <main id="content">
       <router-view name="content"></router-view>
-    </div>
-    <div id="footer">
+    </main>
+    <footer id="footer">
       <router-view name="footer"></router-view>
-    </div>
+    </footer>
     <el-backtop :bottom="100"></el-backtop>
   </div>
+
+  <!-- <el-container>
+    <el-main>
+      <router-view name="header"></router-view>
+    </el-main>
+    <el-main>
+      <router-view name="content"></router-view>
+    </el-main>
+    <el-footer>
+      <router-view name="footer"></router-view>
+    </el-footer>
+  </el-container> -->
 </template>
 
 <script>
-export default {};
 </script>
 
 <style>
@@ -29,15 +40,11 @@ body {
 }
 #header {
   flex: 1;
-  position: fixed;
-  width: 1920px;
-  top: 0px;
-  z-index: 1000;
 }
 
 #content {
   flex: 1;
-  padding-top: 60px;
+  padding-top: 105px;
 }
 #footer {
   flex: 1;

@@ -12,8 +12,11 @@ import "./plugins/vxe-table.js";
 import echarts from "echarts";
 import api from "@/api";
 
+import tableExportMethod from "@/utils/funcUtil";
+
 Vue.prototype.$echarts = echarts;
 Vue.prototype.$api = api;
+Vue.use(tableExportMethod);
 Vue.config.productionTip = false;
 
 new Vue({
