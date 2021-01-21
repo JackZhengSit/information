@@ -11,6 +11,7 @@ import "./plugins/vxe-table.js";
 // import "./plugins/echarts.js";
 import echarts from "echarts";
 import api from "@/api";
+import { sync } from "vuex-router-sync";
 
 import tableExportMethod from "@/utils/funcUtil";
 
@@ -18,6 +19,7 @@ Vue.prototype.$echarts = echarts;
 Vue.prototype.$api = api;
 Vue.use(tableExportMethod);
 Vue.config.productionTip = false;
+const unsync = sync(store, router, { moduleName: "RouteModule" });
 
 new Vue({
   router,

@@ -39,13 +39,24 @@
         <h3 class="logo-title">信息情报库</h3>
       </div>
       <div class="menu-box">
-        <a class="menu-title">首页</a>
+        <a path="/home" @click="toHome($event)" class="menu-title">首页</a>
+        <a path="/search" @click="toSearch($event)" class="menu-title">检索</a>
+        <a class="menu-title">馆藏书刊</a>
+        <a class="menu-title">情报需求</a>
+        <a class="menu-title">船舶百科</a>
+        <a class="menu-title">总质询台</a>
+        <a class="menu-title">下载工具</a>
+        <a class="menu-title">数据统计</a>
+        <a path="/manage" @click="toManage($event)" class="menu-title"
+          >后台管理</a
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
+// import { ElMenuItem } from "element-ui/types/menu-item";
 // export default {
 //   data() {
 //     return {
@@ -56,6 +67,60 @@
 //     handleSelect(key, keyPath) {},
 //   },
 // };
+import { mapState } from "vuex";
+export default {
+  data() {
+    return {
+      activeUrl: "",
+    };
+  },
+  computed: {
+    ...mapState({
+      path: (state) => state.RouteModule.path,
+    }),
+  },
+  methods: {
+    acitveMenuItem() {
+      // console.log(menu);
+      let menu = document.getElementsByClassName("menu-title");
+      menu.forEach((element) => {
+        if (this.path.startsWith(element.getAttribute("path"))) {
+          element.className = "menu-title-active";
+        }
+      });
+    },
+    toHome({ srcElement }) {
+      this.$router.push({ name: "Home" });
+      // srcElement.className = "menu-title-active";
+    },
+    toSearch({ srcElement }) {
+      this.$router.push({ name: "Search" });
+      // srcElement.className = "menu-title-active";
+    },
+    toManage({ srcElement }) {
+      this.$router.push({ name: "Manage" });
+      // srcElement.className = "menu-title-active";
+    },
+  },
+  watch: {
+    "$route.path": function (newVal, oldVal) {
+      let menu = document.getElementsByClassName("menu-title");
+      document.getElementsByClassName("menu-title-active")[0].className =
+        "menu-title";
+      menu.forEach((element) => {
+        let pathStr = element.getAttribute("path");
+        // console.log(pathStr);
+        if (newVal.startsWith(pathStr)) {
+          element.className = "menu-title-active";
+        }
+      });
+    },
+  },
+
+  mounted() {
+    this.acitveMenuItem();
+  },
+};
 </script>
 
 <style scoped>
@@ -78,7 +143,7 @@
 }
 
 .logo-box {
-  flex: 1 1 40%;
+  /* flex: 1 1 40%; */
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -90,7 +155,7 @@
 }
 
 .menu-box {
-  flex: 1 0 60%;
+  /* flex: 1 0 60%; */
   display: flex;
   justify-content: flex-end;
   justify-items: stretch;
@@ -99,9 +164,27 @@
   text-decoration: none;
   text-align: center;
   color: #1989fa;
-  opacity: 0.5;
+  opacity: 0.4;
   line-height: 100px;
   padding: 0 22px;
+  cursor: pointer;
+}
+
+.menu-title:hover {
+  color: #1989fa;
+  opacity: 1;
+  border-bottom: 2px solid #1989fa;
+}
+
+.menu-title-active {
+  text-decoration: none;
+  text-align: center;
+  line-height: 100px;
+  padding: 0 22px;
+  cursor: pointer;
+  color: #1989fa;
+  opacity: 1;
+  border-bottom: 2px solid #1989fa;
 }
 
 /* .el-header {

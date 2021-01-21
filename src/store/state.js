@@ -3,9 +3,11 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-01-20 10:16:29
- * @LastEditTime: 2021-01-20 10:58:29
+ * @LastEditTime: 2021-01-21 16:12:45
  */
 const state = () => ({
+  activeIndex: "",
+
   infoTypeMap: new Map([
     ["industryTrend", "行业动态"],
     ["briefReportExterior", "外部简报"],

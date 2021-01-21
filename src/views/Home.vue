@@ -1,5 +1,5 @@
 <template>
-  <el-main>
+  <div>
     <el-row>
       <el-col :span="10" :offset="7">
         <!-- <div class="search-input">
@@ -124,14 +124,14 @@
     <el-row>
       <el-col :span="20" :offset="2" style="margin-top: 15px">
         <el-card shadow="hover">
-          <h5 style="margin-top: 0px">公告信息</h5>
-          <el-carousel height="100px" direction="vertical" arrow="always">
+          <!-- <h5 style="margin-top: 0px">公告信息</h5> -->
+          <el-carousel height="60px" direction="vertical" arrow="always">
             <el-carousel-item
               v-for="item in newestNoticeData"
               :key="item.title"
             >
-              <h5 style="margin: 5px 0">{{ item.title }}</h5>
-              <p>{{ item.mainText }}</p>
+              <h5 style="margin: 0"><strong>公告：</strong>{{ item.title }}</h5>
+              <p style="margin: 3px 0 0 0">{{ item.mainText }}</p>
             </el-carousel-item>
           </el-carousel>
         </el-card>
@@ -264,7 +264,7 @@
         </div>
       </el-col>
     </el-row>
-  </el-main>
+  </div>
 </template>
 
 <script>

@@ -4,7 +4,9 @@
       <router-view name="header"></router-view>
     </header>
     <main id="content">
-      <router-view name="content"></router-view>
+      <el-main>
+        <router-view name="content"></router-view>
+      </el-main>
     </main>
     <footer id="footer">
       <router-view name="footer"></router-view>
@@ -44,7 +46,7 @@ body {
 
 #content {
   flex: 1;
-  padding-top: 105px;
+  padding-top: 100px;
 }
 #footer {
   flex: 1;
