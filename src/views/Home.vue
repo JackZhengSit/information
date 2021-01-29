@@ -2,29 +2,8 @@
   <div>
     <el-row>
       <el-col :span="10" :offset="7">
-        <!-- <div class="search-input">
-            <el-input
-              size="large"
-              placeholder="请输入内容"
-              v-model="input"
-              class="input-with-select"
-            >
-              <el-select v-model="select" slot="prepend" placeholder="全部">
-                <el-option label="标题" value="1"></el-option>
-                <el-option label="作者" value="2"></el-option>
-                <el-option label="摘要" value="3"></el-option>
-                <el-option label="关键词" value="4"></el-option>
-              </el-select>
-              <el-button
-                type="primary"
-                slot="append"
-                icon="el-icon-search"
-                style="co"
-              ></el-button>
-            </el-input>
-          </div> -->
-        <div class="group">
-          <el-select v-model="searchType" placeholder="">
+        <!-- <div class="group">
+          <el-select v-model="searchType" placeholder="" style="width: 150px">
             <el-option
               v-for="item in searchTypes"
               :key="item.value"
@@ -34,80 +13,151 @@
           </el-select>
           <el-input v-model="searchInput" placeholder="请输入内容"></el-input>
           <el-button type="primary" icon="search">搜索</el-button>
-        </div>
+        </div> -->
+        <search-form-group></search-form-group>
       </el-col>
     </el-row>
     <el-row :gutter="20" style="margin-top: 20px">
       <el-col :span="10" :offset="2">
-        <!-- <div id="infoTypeChart" style="width: 600; height: 400px"></div> -->
-        <el-carousel :interval="4000" height="280px">
-          <el-carousel-item>
-            <div id="infoTypeChart" class="chartItem"></div>
-          </el-carousel-item>
-          <el-carousel-item>
-            <div id="infoTypeChartInterior" class="chartItem"></div>
-          </el-carousel-item>
-          <el-carousel-item>
-            <div id="infoTypeChartExterior" class="chartItem"></div>
-          </el-carousel-item>
-        </el-carousel>
+        <!-- <el-carousel :interval="4000" height="280px"> -->
+        <el-card shadow="hover" style="height: 420px">
+          <el-carousel :interval="4000" height="381px">
+            <el-carousel-item>
+              <div id="infoTypeChart" class="chartItem"></div>
+            </el-carousel-item>
+            <el-carousel-item>
+              <div id="infoTypeChartInterior" class="chartItem"></div>
+            </el-carousel-item>
+            <el-carousel-item>
+              <div id="infoTypeChartExterior" class="chartItem"></div>
+            </el-carousel-item>
+          </el-carousel>
+        </el-card>
       </el-col>
       <el-col :span="10">
-        <el-card shadow="hover">
+        <el-card shadow="hover" style="height: 420px">
           <el-tabs v-model="activeTab" type="card">
-            <el-tab-pane label="数据资源" name="1">
-              <el-button type="default"
+            <el-tab-pane
+              label="数据资源"
+              name="dataResource"
+              style="height: 289px"
+            >
+              <el-button
+                plain
+                type="primary"
+                onclick="window.location.href = 'http://200.100.65.13/kns55/'"
                 ><i class="el-icon-s-cooperation" style="font-size: 80px"></i>
                 <span style="margin: 20px auto; display: block"
                   >知网数据库</span
                 ></el-button
               >
-              <el-button type="default">
+              <el-button
+                plain
+                type="primary"
+                onclick="window.location.href = 'http://200.100.68.15/8090/Main.htm'"
+              >
                 <i class="el-icon-s-management" style="font-size: 80px"> </i>
                 <span style="margin: 20px auto; display: block"
                   >国军标网站</span
                 >
               </el-button>
             </el-tab-pane>
-            <el-tab-pane label="行业动态" name="2">
+            <el-tab-pane label="行业动态" name="industryTrend">
               <el-table :data="newestIndustyTrendData" style="width: 100%">
                 <el-table-column
+                  show-overflow-tooltip
                   :prop="information.infoTitle.field"
                   :label="information.infoTitle.title"
                   min-width="200"
                 ></el-table-column>
                 <el-table-column
-                  :prop="information.checkInTime.field"
-                  :label="information.checkInTime.title"
+                  align="center"
+                  :prop="information.infoType.field"
+                  :label="information.infoType.title"
                   width="100"
+                ></el-table-column>
+                <el-table-column
+                  align="center"
+                  :prop="information.createTime.field"
+                  :label="information.createTime.title"
+                  :formatter="formatDate"
+                  width="160"
                 ></el-table-column>
               </el-table>
             </el-tab-pane>
-            <el-tab-pane label="外部资料" name="3">
-              <el-table :data="newestInfoExteriorData" style="width: 100%">
+            <el-tab-pane label="" name="infoInterior">
+              <template #label>
+                <el-dropdown @command="newestInfoInteriorCommand">
+                  <span class="el-dropdown-link">
+                    情报产品<i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item
+                      v-for="item in getInteriorInfoTypeTitle"
+                      :key="item"
+                      :command="item"
+                      >{{ item }}</el-dropdown-item
+                    >
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </template>
+              <el-table :data="newestInfoInteriorData" style="width: 100%">
                 <el-table-column
+                  show-overflow-tooltip
                   :prop="information.infoTitle.field"
                   :label="information.infoTitle.title"
                   min-width="200"
                 ></el-table-column>
                 <el-table-column
-                  :prop="information.checkInTime.field"
-                  :label="information.checkInTime.title"
+                  align="center"
+                  :prop="information.infoType.field"
+                  :label="information.infoType.title"
                   width="100"
+                ></el-table-column>
+                <el-table-column
+                  align="center"
+                  :prop="information.createTime.field"
+                  :label="information.createTime.title"
+                  :formatter="formatDate"
+                  width="160"
                 ></el-table-column>
               </el-table>
             </el-tab-pane>
-            <el-tab-pane label="情报产品" name="4">
+            <el-tab-pane label="" name="infoExterior">
+              <template #label>
+                <el-dropdown @command="newestInfoExteriorCommand">
+                  <span class="el-dropdown-link">
+                    外部资料<i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item
+                      v-for="item in getExteriorInfoTypeTitle"
+                      :key="item"
+                      :command="item"
+                      >{{ item }}</el-dropdown-item
+                    >
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </template>
               <el-table :data="newestInfoExteriorData" style="width: 100%">
                 <el-table-column
+                  show-overflow-tooltip
                   :prop="information.infoTitle.field"
                   :label="information.infoTitle.title"
                   min-width="200"
                 ></el-table-column>
                 <el-table-column
-                  :prop="information.checkInTime.field"
-                  :label="information.checkInTime.title"
+                  align="center"
+                  :prop="information.infoType.field"
+                  :label="information.infoType.title"
                   width="100"
+                ></el-table-column>
+                <el-table-column
+                  align="center"
+                  :prop="information.createTime.field"
+                  :label="information.createTime.title"
+                  :formatter="formatDate"
+                  width="160"
                 ></el-table-column>
               </el-table>
             </el-tab-pane>
@@ -122,7 +172,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="20" :offset="2" style="margin-top: 15px">
+      <el-col :span="20" :offset="2" style="margin-top: 10px">
         <el-card shadow="hover">
           <!-- <h5 style="margin-top: 0px">公告信息</h5> -->
           <el-carousel height="60px" direction="vertical" arrow="always">
@@ -138,7 +188,7 @@
         <div></div>
       </el-col>
     </el-row>
-    <el-row>
+    <el-row style="margin-top: 5px">
       <el-col :span="20" :offset="2">
         <div class="topic">
           <div
@@ -156,111 +206,28 @@
               <div>
                 <el-table :data="topicItem.list">
                   <el-table-column
-                    :label="information.infoTitle.title"
-                    min-width="200"
+                    show-overflow-tooltip
                     :prop="information.infoTitle.field"
+                    :label="information.infoTitle.title"
+                    min-width="180"
                   ></el-table-column>
-                  <!-- <el-table-column
-                      :label="information.infoType.title"
-                      width="100"
-                      :prop="information.infoType.field"
-                    ></el-table-column> -->
                   <el-table-column
-                    :label="information.checkInTime.title"
+                    align="center"
+                    :prop="information.infoType.field"
+                    :label="information.infoType.title"
                     width="100"
-                    :prop="information.checkInTime.field"
+                  ></el-table-column>
+                  <el-table-column
+                    align="center"
+                    :prop="information.createTime.field"
+                    :label="information.createTime.title"
+                    :formatter="formatDate"
+                    width="160"
                   ></el-table-column>
                 </el-table>
               </div>
             </el-card>
           </div>
-          <!-- <div class="topicItem">
-              <el-card shadow="hover">
-                <div slot="header" class="clearfix">
-                  <span><strong>专题：</strong>高端装备行业</span>
-                  <el-link style="float: right; padding: 3px 0" type="primary"
-                    >更多</el-link
-                  >
-                </div>
-                <div>
-                  <el-table :data="topicData">
-                    <el-table-column
-                      label="题名"
-                      min-width="200"
-                      prop="title"
-                    ></el-table-column>
-                    <el-table-column
-                      label="类型"
-                      width="100"
-                      prop="type"
-                    ></el-table-column>
-                    <el-table-column
-                      label="登记时间"
-                      width="100"
-                      prop="checkInTime"
-                    ></el-table-column>
-                  </el-table>
-                </div>
-              </el-card>
-            </div>
-            <div class="topicItem">
-              <el-card shadow="hover">
-                <div slot="header" class="clearfix">
-                  <span><strong>专题：</strong>高端装备行业</span>
-                  <el-link style="float: right; padding: 3px 0" type="primary"
-                    >更多</el-link
-                  >
-                </div>
-                <div>
-                  <el-table :data="topicData">
-                    <el-table-column
-                      label="题名"
-                      min-width="200"
-                      prop="title"
-                    ></el-table-column>
-                    <el-table-column
-                      label="类型"
-                      width="100"
-                      prop="type"
-                    ></el-table-column>
-                    <el-table-column
-                      label="登记时间"
-                      width="100"
-                      prop="checkInTime"
-                    ></el-table-column>
-                  </el-table>
-                </div>
-              </el-card>
-            </div>
-            <div class="topicItem">
-              <el-card shadow="hover">
-                <div slot="header" class="clearfix">
-                  <span><strong>专题：</strong>高端装备行业</span>
-                  <el-link style="float: right; padding: 3px 0" type="primary"
-                    >更多</el-link
-                  >
-                </div>
-                <div>
-                  <el-table :data="topicData">
-                    <el-table-column
-                      label="题名"
-                      min-width="200"
-                      prop="title"
-                    ></el-table-column>
-                    <el-table-column
-                      label="类型"
-                      width="100"
-                      prop="type"
-                    ></el-table-column>
-                    <el-table-column
-                      label="登记时间"
-                      width="100"
-                      prop="checkInTime"
-                    ></el-table-column>
-                  </el-table>
-                </div>
-              </el-card>
-            </div> -->
         </div>
       </el-col>
     </el-row>
@@ -274,6 +241,7 @@ import {
   getNewestInfoExterior,
   getNewestInfoInterior,
   getTopicInformation,
+  getNewestInfoByInfoType,
 } from "@/api/queryInformation";
 
 import { countInfoType } from "@/api/queryInformation";
@@ -282,22 +250,24 @@ import { getNewestNotice } from "@/api/manageNotice";
 
 import { mapGetters } from "vuex";
 
+import moment from "moment";
+
 export default {
   data() {
     return {
       searchInput: "",
       searchType: "全部",
-      activeTab: "1",
-      information,
       searchTypes: [
         { value: "全部" },
         { value: "标题" },
         { value: "作者" },
         { value: "关键词" },
       ],
+      information,
+      activeTab: "dataResource",
       newestIndustyTrendData: [],
       newestInfoExteriorData: [],
-      newestinfoInteriorData: [],
+      newestInfoInteriorData: [],
       newestNoticeData: [],
       topics: [
         {
@@ -316,23 +286,6 @@ export default {
           list: [],
         },
       ],
-      // topicData: [
-      //   {
-      //     title: "动态名1动态名1动态名1动态名1",
-      //     type: "外部报告",
-      //     checkInTime: "2020-10-2",
-      //   },
-      //   {
-      //     title: "动态名1动态名1动态名1动态名1",
-      //     type: "外部报告",
-      //     checkInTime: "2020-10-2",
-      //   },
-      //   {
-      //     title: "动态名1动态名1动态名1动态名1",
-      //     type: "外部报告",
-      //     checkInTime: "2020-10-2",
-      //   },
-      // ],
     };
   },
   computed: {
@@ -349,7 +302,7 @@ export default {
     async infoTypeChart() {
       let value = [];
 
-      for (const item of this.getInfoTypeField) {
+      for (const item of this.getInfoTypeTitle) {
         await countInfoType({ infoType: item }).then((res) => {
           value.push(res);
         });
@@ -399,7 +352,7 @@ export default {
     async infoTypeChartInterior() {
       let value = [];
 
-      for (const item of this.getInteriorInfoTypeField) {
+      for (const item of this.getInteriorInfoTypeTitle) {
         await countInfoType({ infoType: item }).then((res) => {
           value.push(res);
         });
@@ -443,7 +396,7 @@ export default {
     async infoTypeChartExterior() {
       let value = [];
 
-      for (const item of this.getExteriorInfoTypeField) {
+      for (const item of this.getExteriorInfoTypeTitle) {
         await countInfoType({ infoType: item }).then((res) => {
           value.push(res);
         });
@@ -484,6 +437,25 @@ export default {
         myEcharts.resize();
       });
     },
+    newestInfoInteriorCommand(command) {
+      getNewestInfoByInfoType({ infoType: command }).then((res) => {
+        this.newestInfoInteriorData = res;
+        this.activeTab = "infoInterior";
+      });
+    },
+    newestInfoExteriorCommand(command) {
+      getNewestInfoByInfoType({ infoType: command }).then((res) => {
+        this.newestInfoExteriorData = res;
+        this.activeTab = "infoExterior";
+      });
+    },
+    formatDate(row, column, cellValue, index) {
+      const date = row[column.property];
+      if (date == undefined) {
+        return "";
+      }
+      return moment(date).format("YYYY-MM-DD HH:mm:ss");
+    },
   },
   created() {
     getNewestIndustryTrend().then((res) => {
@@ -493,7 +465,7 @@ export default {
       this.newestInfoExteriorData = res;
     });
     getNewestInfoInterior().then((res) => {
-      this.newestinfoInteriorData = res;
+      this.newestInfoInteriorData = res;
     });
     getNewestNotice().then((res) => {
       this.newestNoticeData = res;
@@ -513,15 +485,11 @@ export default {
 </script>
 
 <style>
-/* .el-carousel__item {
-  background-color: #d3dce6;
-} */
+.el-dropdown-link {
+  color: #303133;
+}
 .chartItem {
-  width: 600;
-  height: 300px;
-  background-color: #fbfcfd;
-  /* border: 1px solid #dcdfe6; */
-  border-radius: 2px;
+  height: 400px;
 }
 
 .topic {

@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-21 15:37:02
+ * @LastEditTime: 2021-01-27 15:43:49
 -->
 <template>
   <div>
@@ -39,7 +39,7 @@ import {
 } from "@/api/managePatentExterior";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
-
+import moment from "moment";
 function csvToObject(csvString) {
   let csvarry = csvString.split("\r\n");
   let datas = [];
@@ -72,7 +72,7 @@ export default {
         highlightHoverRow: true,
         keepSource: true,
         id: "patentExteriorGrid",
-        maxHeight: 1000,
+        maxHeight: 1500,
         // rowId: "orderNum",
         editConfig: {
           trigger: "dblclick",
@@ -155,7 +155,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
 
@@ -211,7 +211,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
 
@@ -289,7 +289,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {
@@ -536,28 +536,6 @@ export default {
               },
             },
             {
-              field: patentExterior.checkInTimeStart.field,
-              title: patentExterior.checkInTimeStart.title,
-              span: 12,
-              folding: true,
-              itemRender: {
-                name: "$input",
-                props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
-            },
-            {
-              field: patentExterior.checkInTimeEnd.field,
-              // title: patentExterior.checkInTime.title,
-              span: 10,
-              folding: true,
-              itemRender: {
-                name: "$input",
-                props: { placeholder: "end" },
-                defaultValue: "2020-12-12",
-              },
-            },
-            {
               field: patentExterior.knowledgeType.field,
               title: patentExterior.knowledgeType.title,
               span: 8,
@@ -577,6 +555,28 @@ export default {
                 name: "$input",
                 props: { placeholder: "" },
                 defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.checkInTimeStart.field,
+              title: patentExterior.checkInTimeStart.title,
+              span: 12,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "start" },
+                defaultValue: "1900-01-01",
+              },
+            },
+            {
+              field: patentExterior.checkInTimeEnd.field,
+              // title: patentExterior.checkInTime.title,
+              span: 10,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "end" },
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
 
@@ -599,7 +599,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {

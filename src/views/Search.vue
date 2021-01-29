@@ -2,28 +2,7 @@
   <div>
     <el-row>
       <el-col :span="10" :offset="7">
-        <!-- <div class="search-input">
-            <el-input
-              size="large"
-              placeholder="请输入内容"
-              v-model="input"
-              class="input-with-select"
-            >
-              <el-select v-model="select" slot="prepend" placeholder="全部">
-                <el-option label="标题" value="1"></el-option>
-                <el-option label="作者" value="2"></el-option>
-                <el-option label="摘要" value="3"></el-option>
-                <el-option label="关键词" value="4"></el-option>
-              </el-select>
-              <el-button
-                type="primary"
-                slot="append"
-                icon="el-icon-search"
-                style="co"
-              ></el-button>
-            </el-input>
-          </div> -->
-        <div class="group">
+        <!-- <div class="group">
           <el-select v-model="searchType" placeholder="">
             <el-option
               v-for="item in searchTypes"
@@ -34,13 +13,14 @@
           </el-select>
           <el-input v-model="searchInput" placeholder="请输入内容"></el-input>
           <el-button type="primary" icon="search">搜索</el-button>
-        </div>
+        </div> -->
+        <search-form-group></search-form-group>
       </el-col>
     </el-row>
     <el-row :gutter="20" style="margin-top: 20px">
       <el-col :span="4" :offset="3">
         <div class="left-nav-menu" style="">
-          <el-collapse v-model="activeNames" @change="handleChange">
+          <el-collapse v-model="activeNames">
             <el-collapse-item name="infoType">
               <template slot="title">
                 情报类型
@@ -53,18 +33,16 @@
                   >
                 </div>
               </template>
-
-              <!-- <div style="margin: 15px 0"></div> -->
               <el-checkbox-group
                 v-model="checkedInfoType"
                 @change="handleCheckedInfoTypeChange"
               >
-                <!-- <el-checkbox
-                    v-for="item in infoTypes"
-                    :label="infoTypes"
-                    :key="item"
-                    >{{ item }}</el-checkbox
-                  > -->
+                <el-checkbox
+                  v-for="info in getInfoTypeTitle"
+                  :label="info"
+                  :key="info"
+                  >{{ info }}</el-checkbox
+                >
               </el-checkbox-group>
             </el-collapse-item>
             <el-collapse-item title="infoType" name="1">
@@ -113,61 +91,8 @@
             <a href="#">共18页&nbsp;每页10条</a>
             <a href="#">下一页&nbsp;&nbsp;上一页</a>
           </div>
-          <!-- <div class="result-body">
-              <div class="result-item">
-                <a class="title">这是标题</a>
-                <p class="auther">这是作者</p>
-                <p class="abstract">
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                </p>
-              </div>
-              <div class="result-item">
-                <a class="title">这是标题</a>
-                <p class="auther">这是作者</p>
-                <p class="abstract">
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                </p>
-              </div>
-              <div class="result-item">
-                <a class="title">这是标题</a>
-                <p class="auther">这是作者</p>
-                <p class="abstract">
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                </p>
-              </div>
-              <div class="result-item">
-                <a class="title">这是标题</a>
-                <p class="auther">这是作者</p>
-                <p class="abstract">
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                </p>
-              </div>
-              <div class="result-item">
-                <a class="title">这是标题</a>
-                <p class="auther">这是作者</p>
-                <p class="abstract">
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                  这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要这里是摘要摘要
-                </p>
-              </div>
-            </div> -->
           <div class="result-body">
-            <ResultItem
+            <result-item
               v-for="li in resultList"
               :key="li.id"
               :title="li.title"
@@ -175,7 +100,7 @@
               :infoType="li.infoType"
               :abstract="li.abstract"
             >
-            </ResultItem>
+            </result-item>
           </div>
 
           <div class="result-footer">
@@ -193,29 +118,17 @@
 </template>
 
 <script>
-import ResultItem from "../components/ResultItem";
 import { infoType } from "@/store/infoType";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
-      //搜索框
-      input: "",
-      select: "",
-      activeNames: ["1"],
-      searchType: "全部",
-      searchTypes: [
-        { value: "全部" },
-        { value: "标题" },
-        { value: "摘要" },
-        { value: "关键词" },
-      ],
-      searchInput: "",
-
       //左侧导航栏
-      infoTypes: [],
-      infoTypeCheckAll: false,
-      checkedInfoType: infoType,
-      infoTypeIsIndeterminate: true,
+      activeNames: ["1"],
+      checkedInfoType: [],
+      infoTypeIsIndeterminate: false,
+      infoTypeCheckAll: true,
 
       departData: [
         {
@@ -408,6 +321,17 @@ export default {
       resultList: [],
     };
   },
+  computed: {
+    ...mapGetters(["getInfoTypeTitle"]),
+  },
+  methods: {
+    handleCheckAllInfoType(val) {
+      //
+    },
+    handleCheckedInfoTypeChange(val) {
+      //
+    },
+  },
   created() {
     this.resultList = [
       {
@@ -487,46 +411,11 @@ export default {
           "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这摘要这是摘要这是摘要这是摘要这是摘要这是摘要",
       },
     ];
-    for (let i in infoType) {
-      this.infoTypes.push(infoType[i]);
-    }
-  },
-  methods: {
-    handleChange(val) {
-      console.log(val);
-    },
-    handleCheckAllInfoType() {
-      // this.checkedInfoType=val?info
-    },
-  },
-  components: {
-    ResultItem,
   },
 };
 </script>
 
 <style>
-.group {
-  display: flex;
-  justify-content: center;
-}
-
-.el-main {
-  background-color: #fff;
-}
-
-.el-select .el-input {
-  width: 100px;
-}
-
-.search-input {
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
-}
-
-.input-with-select .el-input-group__prepend {
-  background-color: #fff;
-}
-
 .left-nav-menu {
   background-color: #fff;
   border-radius: 4px;
@@ -557,38 +446,16 @@ export default {
   opacity: 1;
 }
 
-/* .result-item .title {
-  display: block;
-  margin: 16px 0 10px 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: #409eff;
-  cursor: pointer;
-}
-
-.result-item .auther {
-  margin: 10px 0 10px 0;
-  font-size: 14px;
-  color: #303133;
-}
-
-.result-item .abstract {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #606266;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  word-break: break-all;
-  overflow: hidden;
-  -webkit-line-clamp: 4;
-  display: -webkit-box;
-} */
-
 .result-body {
   padding: 0 15px;
 }
 
 .result-item {
   border-bottom: rgb(235, 238, 245) solid 1px;
+}
+
+.check-info {
+  width: 100px;
+  margin: 0;
 }
 </style>

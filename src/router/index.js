@@ -7,6 +7,9 @@ import Footer from "../layout/Footer.vue";
 import Search from "../views/Search.vue";
 import Home from "../views/Home.vue";
 import Manage from "../views/Manage.vue";
+import Download from "../views/Download.vue";
+import Statistics from "../views/Statistics.vue";
+import Wiki from "../views/Wiki.vue";
 
 Vue.use(VueRouter);
 
@@ -44,6 +47,21 @@ const routes = [
             path: "search",
             name: "Search",
             component: Search,
+          },
+          {
+            path: "wiki",
+            name: "Wiki",
+            component: Wiki,
+          },
+          {
+            path: "download",
+            name: "Download",
+            component: Download,
+          },
+          {
+            path: "statistics",
+            name: "Statistics",
+            component: Statistics,
           },
           {
             path: "details",
@@ -120,6 +138,14 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "standardExterior" */ "../components/ManageStandardExterior.vue"
+                  ),
+              },
+              {
+                path: "notice",
+                name: "notice",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "notice" */ "../components/ManageNotice.vue"
                   ),
               },
             ],

@@ -3,17 +3,28 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2021-01-13 13:43:23
+ * @LastEditTime: 2021-01-29 10:29:11
  */
+// var infoType = {
+//   industryTrend: "行业动态",
+//   briefReportExterior: "外部简报",
+//   briefReportInterior: "情报内部简报",
+//   paperExterior: "外部论文著作",
+//   patentExterior: "外部专利",
+//   reportExterior: "外部行业报告",
+//   reportInterior: "情报内部报告",
+//   standardExterior: "外部标准",
+// };
 var infoType = {
   industryTrend: "行业动态",
-  briefReportExterior: "外部简报",
-  briefReportInterior: "情报内部简报",
-  paperExterior: "外部论文著作",
-  patentExterior: "外部专利",
-  reportExterior: "外部行业报告",
-  reportInterior: "情报内部报告",
+  reportInterior: "情报报告",
+  briefReportInterior: "情报简报",
   standardExterior: "外部标准",
+  reportExterior: "行业报告",
+  briefReportExterior: "外部简报",
+  paperExterior: "外部论文",
+  patentExterior: "外部专利",
+  notice: "公告",
 };
 
 let infoBase = {
@@ -663,6 +674,10 @@ var reportExterior = {
 var reportInterior = {};
 
 var standardExterior = {
+  type: {
+    field: "type",
+    title: "标准类型",
+  },
   name: {
     field: "name",
     title: "标准名称",
@@ -748,6 +763,45 @@ var information = {
   },
 };
 
+var notice = {
+  id: {
+    field: "id",
+    title: "id",
+  },
+  title: {
+    field: "title",
+    title: "标题",
+  },
+  author: {
+    field: "author",
+    title: "作者",
+  },
+  mainText: {
+    field: "mainText",
+    title: "文本",
+  },
+  publicateDay: {
+    field: "publicateDay",
+    title: "发布日",
+  },
+  publicateDayStart: {
+    field: "publicateDayStart",
+    title: "开始发布日",
+  },
+  publicateDayEnd: {
+    field: "publicateDayEnd",
+    title: "终止发布日",
+  },
+  createTime: {
+    field: "createTime",
+    title: "创建时间",
+  },
+  updateTime: {
+    field: "updateTime",
+    title: "更新时间",
+  },
+};
+
 Object.assign(industryTrend, infoBase);
 Object.assign(briefReportInterior, infoBase);
 Object.assign(briefReportExterior, briefReportInterior);
@@ -769,4 +823,5 @@ export {
   reportInterior,
   standardExterior,
   information,
+  notice,
 };

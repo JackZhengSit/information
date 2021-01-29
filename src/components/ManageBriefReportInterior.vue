@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2021-01-21 15:27:09
+ * @LastEditTime: 2021-01-27 15:35:44
 -->
 <template>
   <div>
@@ -40,6 +40,7 @@ import {
 } from "@/api/manageBriefReportInterior";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
+import moment from "moment";
 
 function csvToObject(csvString) {
   let csvarry = csvString.split("\r\n");
@@ -73,7 +74,7 @@ export default {
         highlightHoverRow: true,
         keepSource: true,
         id: "briefReportInteriorGrid",
-        maxHeight: 1000,
+        maxHeight: 1500,
         // rowId: "orderNum",
         editConfig: {
           trigger: "dblclick",
@@ -385,7 +386,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {
@@ -430,7 +431,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {

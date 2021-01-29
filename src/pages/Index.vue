@@ -28,6 +28,16 @@
 </template>
 
 <script>
+export default {
+  data() {
+    return {
+      background: {
+        backgroundImage: "url(" + require("../assets/back.jpg") + ")",
+        backgroundRepeat: "no-repeat",
+      },
+    };
+  },
+};
 </script>
 
 <style>
@@ -48,6 +58,7 @@ body {
   flex: 1;
   padding-top: 100px;
 }
+
 #footer {
   flex: 1;
 }

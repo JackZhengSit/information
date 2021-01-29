@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-21 15:35:43
+ * @LastEditTime: 2021-01-29 11:08:59
 -->
 <template>
   <div>
@@ -39,7 +39,7 @@ import {
 } from "@/api/managePaperExterior";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
-
+import moment from "moment";
 function csvToObject(csvString) {
   let csvarry = csvString.split("\r\n");
   let datas = [];
@@ -72,7 +72,7 @@ export default {
         highlightHoverRow: true,
         keepSource: true,
         id: "paperExteriorGrid",
-        maxHeight: 1000,
+        maxHeight: 1500,
         // rowId: "orderNum",
         editConfig: {
           trigger: "dblclick",
@@ -186,7 +186,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {
@@ -263,7 +263,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {
@@ -307,7 +307,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {
@@ -627,7 +627,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {
@@ -672,7 +672,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {
@@ -837,7 +837,7 @@ export default {
                 queryParams.sort = firstSort.property + "," + firstSort.order;
                 // queryParams.order = firstSort.order;
               }
-              console.log(queryParams);
+              //console.log(queryParams);
               let p = searchPaperExterior(queryParams);
               return p;
             },

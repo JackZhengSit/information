@@ -39,6 +39,7 @@ import {
 } from "@/api/manageIndustryTrend";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
+import moment from "moment";
 
 function csvToObject(csvString) {
   let csvarry = csvString.split("\r\n");
@@ -72,7 +73,7 @@ export default {
         highlightHoverRow: true,
         keepSource: true,
         id: "industryTrendGrid",
-        maxHeight: 1000,
+        maxHeight: 1500,
         // rowId: "orderNum",
         editConfig: {
           trigger: "dblclick",
@@ -364,7 +365,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {
@@ -409,7 +410,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {

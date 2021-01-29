@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-21 15:39:54
+ * @LastEditTime: 2021-01-29 10:38:52
 -->
 <template>
   <div>
@@ -39,7 +39,7 @@ import {
 } from "@/api/manageStandardExterior";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
-
+import moment from "moment";
 function csvToObject(csvString) {
   let csvarry = csvString.split("\r\n");
   let datas = [];
@@ -72,7 +72,7 @@ export default {
         highlightHoverRow: true,
         keepSource: true,
         id: "standardExteriorGrid",
-        maxHeight: 1000,
+        maxHeight: 1500,
         // rowId: "orderNum",
         editConfig: {
           trigger: "dblclick",
@@ -104,7 +104,16 @@ export default {
                 defaultValue: 1000000,
               },
             },
-
+            {
+              field: standardExterior.type.field,
+              title: standardExterior.type.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
             {
               field: standardExterior.name.field,
               title: standardExterior.name.title,
@@ -129,6 +138,29 @@ export default {
               field: standardExterior.specifyInstitution.field,
               title: standardExterior.specifyInstitution.title,
               span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.specifyInstitution.field,
+              title: standardExterior.specifyInstitution.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.applicationScope.field,
+              title: standardExterior.applicationScope.title,
+              span: 8,
+              folding: true,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
@@ -154,7 +186,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
             {
@@ -176,31 +208,10 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
-            {
-              field: standardExterior.specifyInstitution.field,
-              title: standardExterior.specifyInstitution.title,
-              span: 8,
-              folding: true,
-              itemRender: {
-                name: "$input",
-                props: { placeholder: "" },
-                defaultValue: "",
-              },
-            },
-            {
-              field: standardExterior.applicationScope.field,
-              title: standardExterior.applicationScope.title,
-              span: 8,
-              folding: true,
-              itemRender: {
-                name: "$input",
-                props: { placeholder: "" },
-                defaultValue: "",
-              },
-            },
+
             {
               field: standardExterior.author.field,
               title: standardExterior.author.title,
@@ -501,17 +512,6 @@ export default {
             },
 
             {
-              field: standardExterior.securityLevel.field,
-              title: standardExterior.securityLevel.title,
-              span: 8,
-              folding: true,
-              itemRender: {
-                name: "$input",
-                props: { placeholder: "" },
-                defaultValue: "",
-              },
-            },
-            {
               field: standardExterior.checkInTimeStart.field,
               title: standardExterior.checkInTimeStart.title,
               span: 12,
@@ -530,7 +530,7 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
               },
             },
 
@@ -553,7 +553,18 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: "2020-12-12",
+                defaultValue: moment().format("YYYY-MM-DD"),
+              },
+            },
+            {
+              field: standardExterior.securityLevel.field,
+              title: standardExterior.securityLevel.title,
+              span: 8,
+              folding: true,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
               },
             },
             {
@@ -754,6 +765,16 @@ export default {
             showHeaderOverflow: "tooltip",
             field: standardExterior.orderNum.field,
             title: standardExterior.orderNum.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.type.field,
+            title: standardExterior.type.title,
           },
           {
             resizable: true,

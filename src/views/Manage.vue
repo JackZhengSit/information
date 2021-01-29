@@ -16,33 +16,37 @@
                   <i class="el-icon-tickets"></i>
                   <span slot="title">{{ infoType.industryTrend }}</span>
                 </el-menu-item>
-                <el-menu-item index="/manage/briefReportExterior">
-                  <i class="el-icon-link"></i>
-                  <span slot="title">{{ infoType.briefReportExterior }}</span>
+                <el-menu-item index="/manage/reportInterior">
+                  <i class="el-icon-suitcase"></i>
+                  <span slot="title">{{ infoType.reportInterior }}</span>
                 </el-menu-item>
                 <el-menu-item index="/manage/briefReportInterior">
                   <i class="el-icon-notebook-2"></i>
                   <span slot="title">{{ infoType.briefReportInterior }}</span>
                 </el-menu-item>
+                <el-menu-item index="/manage/standardExterior">
+                  <i class="el-icon-office-building"></i>
+                  <span slot="title">{{ infoType.standardExterior }}</span>
+                </el-menu-item>
                 <el-menu-item index="/manage/reportExterior">
                   <i class="el-icon-folder"></i>
                   <span slot="title">{{ infoType.reportExterior }}</span>
                 </el-menu-item>
-                <el-menu-item index="/manage/reportInterior">
-                  <i class="el-icon-suitcase"></i>
-                  <span slot="title">{{ infoType.reportInterior }}</span>
-                </el-menu-item>
-                <el-menu-item index="/manage/patentExterior">
-                  <i class="el-icon-postcard"></i>
-                  <span slot="title">{{ infoType.patentExterior }}</span>
+                <el-menu-item index="/manage/briefReportExterior">
+                  <i class="el-icon-link"></i>
+                  <span slot="title">{{ infoType.briefReportExterior }}</span>
                 </el-menu-item>
                 <el-menu-item index="/manage/paperExterior">
                   <i class="el-icon-notebook-1"></i>
                   <span slot="title">{{ infoType.paperExterior }}</span>
                 </el-menu-item>
-                <el-menu-item index="/manage/standardExterior">
-                  <i class="el-icon-office-building"></i>
-                  <span slot="title">{{ infoType.standardExterior }}</span>
+                <el-menu-item index="/manage/patentExterior">
+                  <i class="el-icon-postcard"></i>
+                  <span slot="title">{{ infoType.patentExterior }}</span>
+                </el-menu-item>
+                <el-menu-item index="/manage/notice">
+                  <i class="el-icon-bell"></i>
+                  <span slot="title">{{ infoType.notice }}</span>
                 </el-menu-item>
               </el-menu>
             </el-col>
