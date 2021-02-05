@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-29 10:38:52
+ * @LastEditTime: 2021-02-02 15:32:53
 -->
 <template>
   <div>
@@ -127,6 +127,36 @@ export default {
             {
               field: standardExterior.num.field,
               title: standardExterior.num.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.topicCategory.field,
+              title: standardExterior.topicCategory.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.professionField.field,
+              title: standardExterior.professionField.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: standardExterior.infoNo.field,
+              title: standardExterior.infoNo.title,
               span: 8,
               itemRender: {
                 name: "$input",
@@ -379,8 +409,8 @@ export default {
               },
             },
             {
-              field: standardExterior.referCategory.field,
-              title: standardExterior.referCategory.title,
+              field: standardExterior.infoCategory.field,
+              title: standardExterior.infoCategory.title,
               span: 8,
               folding: true,
               itemRender: {
@@ -994,8 +1024,38 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: standardExterior.referCategory.field,
-            title: standardExterior.referCategory.title,
+            field: standardExterior.infoCategory.field,
+            title: standardExterior.infoCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.topicCategory.field,
+            title: standardExterior.topicCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.professionField.field,
+            title: standardExterior.professionField.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: standardExterior.infoNo.field,
+            title: standardExterior.infoNo.title,
           },
           {
             resizable: true,

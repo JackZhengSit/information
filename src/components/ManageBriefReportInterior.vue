@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
- * @LastEditTime: 2021-01-27 15:35:44
+ * @LastEditTime: 2021-02-02 15:28:51
 -->
 <template>
   <div>
@@ -137,6 +137,36 @@ export default {
               },
             },
             {
+              field: briefReportInterior.topicCategory.field,
+              title: briefReportInterior.topicCategory.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: briefReportInterior.professionField.field,
+              title: briefReportInterior.professionField.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: briefReportInterior.infoNo.field,
+              title: briefReportInterior.infoNo.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
               field: briefReportInterior.title.field,
               title: briefReportInterior.title.title,
               span: 8,
@@ -247,8 +277,8 @@ export default {
               },
             },
             {
-              field: briefReportInterior.referCategory.field,
-              title: briefReportInterior.referCategory.title,
+              field: briefReportInterior.infoCategory.field,
+              title: briefReportInterior.infoCategory.title,
               span: 8,
               folding: true,
               itemRender: {
@@ -782,8 +812,38 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportInterior.referCategory.field,
-            title: briefReportInterior.referCategory.title,
+            field: briefReportInterior.infoCategory.field,
+            title: briefReportInterior.infoCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: briefReportInterior.topicCategory.field,
+            title: briefReportInterior.topicCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: briefReportInterior.professionField.field,
+            title: briefReportInterior.professionField.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: briefReportInterior.infoNo.field,
+            title: briefReportInterior.infoNo.title,
           },
           {
             resizable: true,

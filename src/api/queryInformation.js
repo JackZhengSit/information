@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-01-14 10:25:17
- * @LastEditTime: 2021-01-27 13:48:22
+ * @LastEditTime: 2021-02-03 15:16:44
  */
 import axios from "@/utils/axio";
 
@@ -61,5 +61,40 @@ export function getNewestInfoByInfoType(params) {
     params: params,
   }).then((res) => {
     return res._embedded.viewInformations;
+  });
+}
+
+export function getInfoTypeCount() {
+  return axios({
+    url: "/manual/information/getInfoTypeCount",
+    method: "get",
+  });
+}
+
+export function getTopicCategoryCount() {
+  return axios({
+    url: "/manual/information/getTopicCategoryCount",
+    method: "get",
+  });
+}
+export function getProfessionFieldCount() {
+  return axios({
+    url: "/manual/information/getProfessionFieldCount",
+    method: "get",
+  });
+}
+
+export function getYearCount() {
+  return axios({
+    url: "/manual/information/getYearCount",
+    method: "get",
+  });
+}
+
+export function searchInformation(data) {
+  return axios({
+    url: "/manual/information/searchInformation",
+    method: "post",
+    data,
   });
 }

@@ -38,49 +38,88 @@
                 @change="handleCheckedInfoTypeChange"
               >
                 <el-checkbox
-                  v-for="info in getInfoTypeTitle"
-                  :label="info"
-                  :key="info"
-                  >{{ info }}</el-checkbox
+                  style="width: 130px; margin: 0px"
+                  v-for="item in infoTypeAndCount"
+                  :label="item.infoType"
+                  :key="item.infoType"
+                  >{{ item.infoType }}({{ item.infoCount }})</el-checkbox
                 >
               </el-checkbox-group>
             </el-collapse-item>
-            <el-collapse-item title="infoType" name="1">
-              <el-tree
-                :data="departData"
-                show-checkbox
-                node-key="id"
-                :default-checked-keys="[1, 2, 3]"
-                :props="defaultProps"
+            <el-collapse-item name="topicCategory">
+              <template slot="title">
+                专题分类
+                <div style="margin-left: 30px">
+                  <el-checkbox
+                    :indeterminate="topicCategoryIsIndeterminate"
+                    v-model="topicCategoryCheckAll"
+                    @change="handleCheckAllTopicCategory"
+                    >全选</el-checkbox
+                  >
+                </div>
+              </template>
+              <el-checkbox-group
+                v-model="checkedTopicCategory"
+                @change="handleCheckedTopicCategoryChange"
               >
-              </el-tree>
+                <el-checkbox
+                  style="width: 130px; margin: 0px"
+                  v-for="item in topicCategoryAndCount"
+                  :label="item.topicCategory"
+                  :key="item.topicCategory"
+                  >{{ item.topicCategory }}({{ item.count }})</el-checkbox
+                >
+              </el-checkbox-group>
             </el-collapse-item>
-            <el-collapse-item title="业务方向" name="2">
-              <el-tree
-                :data="researchData"
-                show-checkbox
-                node-key="id"
-                :default-checked-keys="[1, 2, 3]"
-                :props="defaultProps"
-              ></el-tree>
+            <el-collapse-item name="professionField">
+              <template slot="title">
+                专业领域
+                <div style="margin-left: 30px">
+                  <el-checkbox
+                    :indeterminate="professionFieldIsIndeterminate"
+                    v-model="professionFieldCheckAll"
+                    @change="handleCheckAllProfessionField"
+                    >全选</el-checkbox
+                  >
+                </div>
+              </template>
+              <el-checkbox-group
+                v-model="checkedProfessionField"
+                @change="handleCheckedProfessionFieldChange"
+              >
+                <el-checkbox
+                  style="width: 130px; margin: 0px"
+                  v-for="item in professionFieldAndCount"
+                  :label="item.professionField"
+                  :key="item.professionField"
+                  >{{ item.professionField }}({{ item.count }})</el-checkbox
+                >
+              </el-checkbox-group>
             </el-collapse-item>
-            <el-collapse-item title="系统" name="3">
-              <el-tree
-                :data="systemData"
-                show-checkbox
-                node-key="id"
-                :default-checked-keys="[1, 2, 3]"
-                :props="defaultProps"
-              ></el-tree>
-            </el-collapse-item>
-            <el-collapse-item title="来源" name="4">
-              <el-tree
-                :data="referenceData"
-                show-checkbox
-                node-key="id"
-                :default-checked-keys="[1, 2, 3]"
-                :props="defaultProps"
-              ></el-tree>
+            <el-collapse-item name="year">
+              <template slot="title">
+                年份
+                <div style="margin-left: 56px">
+                  <el-checkbox
+                    :indeterminate="yearIsIndeterminate"
+                    v-model="yearCheckAll"
+                    @change="handleCheckAllYear"
+                    >全选</el-checkbox
+                  >
+                </div>
+              </template>
+              <el-checkbox-group
+                v-model="checkedYear"
+                @change="handleCheckedYearChange"
+              >
+                <el-checkbox
+                  style="width: 130px; margin: 0px"
+                  v-for="item in yearAndCount"
+                  :label="item.year"
+                  :key="item.year"
+                  >{{ item.year }}({{ item.count }})</el-checkbox
+                >
+              </el-checkbox-group>
             </el-collapse-item>
           </el-collapse>
         </div>
@@ -88,25 +127,31 @@
       <el-col :span="14">
         <div class="result-block" style="background-color: #fff">
           <div class="result-title" style="">
-            <a href="#">共18页&nbsp;每页10条</a>
+            <a href="#">共{{ pageCount }}页&nbsp;每页{{ pageSize }}条</a>
             <a href="#">下一页&nbsp;&nbsp;上一页</a>
           </div>
           <div class="result-body">
             <result-item
               v-for="li in resultList"
               :key="li.id"
-              :title="li.title"
-              :author="li.author"
+              :title="li.infoTitle"
+              :author="li.infoAuthor"
               :infoType="li.infoType"
-              :abstract="li.abstract"
+              :abstract="li.abs"
             >
             </result-item>
           </div>
 
           <div class="result-footer">
             <el-pagination
-              layout="prev, pager, next"
-              :total="1000"
+              background
+              layout="prev, pager, next,sizes,jumper"
+              :total="total"
+              :page-size="pageSize"
+              :current-page.sync="currentPage"
+              :page-sizes="[5, 10, 20, 50]"
+              @size-change="handlePageSizeChange"
+              @current-change="handleCurrentPageChange"
               style="float: right"
             >
             </el-pagination>
@@ -118,299 +163,173 @@
 </template>
 
 <script>
-import { infoType } from "@/store/infoType";
 import { mapGetters } from "vuex";
+import {
+  getInfoTypeCount,
+  getTopicCategoryCount,
+  getProfessionFieldCount,
+  getYearCount,
+  searchInformation,
+} from "@/api/queryInformation";
 
 export default {
   data() {
     return {
       //左侧导航栏
-      activeNames: ["1"],
+      activeNames: ["infoType"],
+
+      infoTypeAndCount: [],
       checkedInfoType: [],
       infoTypeIsIndeterminate: false,
       infoTypeCheckAll: true,
 
-      departData: [
-        {
-          id: 1,
-          label: "行业动态（" + 12 + ")",
-        },
-        {
-          id: 2,
-          label: "一级 2",
-          children: [
-            {
-              id: 5,
-              label: "二级 2-1",
-            },
-            {
-              id: 6,
-              label: "二级 2-2",
-            },
-          ],
-        },
-        {
-          id: 3,
-          label: "一级 3",
-          children: [
-            {
-              id: 7,
-              label: "二级 3-1",
-            },
-            {
-              id: 8,
-              label: "二级 3-2",
-            },
-          ],
-        },
-      ],
-      researchData: [
-        {
-          id: 1,
-          label: "一级 1",
-          children: [
-            {
-              id: 4,
-              label: "二级 1-1",
-              children: [
-                {
-                  id: 9,
-                  label: "三级 1-1-1",
-                },
-                {
-                  id: 10,
-                  label: "三级 1-1-2",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 2,
-          label: "一级 2",
-          children: [
-            {
-              id: 5,
-              label: "二级 2-1",
-            },
-            {
-              id: 6,
-              label: "二级 2-2",
-            },
-          ],
-        },
-        {
-          id: 3,
-          label: "一级 3",
-          children: [
-            {
-              id: 7,
-              label: "二级 3-1",
-            },
-            {
-              id: 8,
-              label: "二级 3-2",
-            },
-          ],
-        },
-      ],
-      systemData: [
-        {
-          id: 1,
-          label: "一级 1",
-          children: [
-            {
-              id: 4,
-              label: "二级 1-1",
-              children: [
-                {
-                  id: 9,
-                  label: "三级 1-1-1",
-                },
-                {
-                  id: 10,
-                  label: "三级 1-1-2",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 2,
-          label: "一级 2",
-          children: [
-            {
-              id: 5,
-              label: "二级 2-1",
-            },
-            {
-              id: 6,
-              label: "二级 2-2",
-            },
-          ],
-        },
-        {
-          id: 3,
-          label: "一级 3",
-          children: [
-            {
-              id: 7,
-              label: "二级 3-1",
-            },
-            {
-              id: 8,
-              label: "二级 3-2",
-            },
-          ],
-        },
-      ],
-      referenceData: [
-        {
-          id: 1,
-          label: "一级 1",
-          children: [
-            {
-              id: 4,
-              label: "二级 1-1",
-              children: [
-                {
-                  id: 9,
-                  label: "三级 1-1-1",
-                },
-                {
-                  id: 10,
-                  label: "三级 1-1-2",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 2,
-          label: "一级 2",
-          children: [
-            {
-              id: 5,
-              label: "二级 2-1",
-            },
-            {
-              id: 6,
-              label: "二级 2-2",
-            },
-          ],
-        },
-        {
-          id: 3,
-          label: "一级 3",
-          children: [
-            {
-              id: 7,
-              label: "二级 3-1",
-            },
-            {
-              id: 8,
-              label: "二级 3-2",
-            },
-          ],
-        },
-      ],
-      defaultProps: {
-        children: "children",
-        label: "label",
-      },
+      topicCategoryAndCount: [],
+      checkedTopicCategory: [],
+      topicCategoryIsIndeterminate: false,
+      topicCategoryCheckAll: true,
+
+      professionFieldAndCount: [],
+      checkedProfessionField: [],
+      professionFieldIsIndeterminate: false,
+      professionFieldCheckAll: true,
+
+      yearAndCount: [],
+      checkedYear: [],
+      yearIsIndeterminate: false,
+      yearCheckAll: true,
+
       resultList: [],
+
+      //分页
+      total: 0,
+      pageSize: 10,
+      currentPage: 1,
+      pageCount: 0,
     };
   },
   computed: {
     ...mapGetters(["getInfoTypeTitle"]),
   },
   methods: {
+    initCheckbox() {
+      let p1 = getInfoTypeCount().then((res) => {
+        this.infoTypeAndCount = res;
+        this.checkedInfoType = res.map((item) => item.infoType);
+      });
+
+      let p2 = getTopicCategoryCount().then((res) => {
+        this.topicCategoryAndCount = res;
+        this.checkedTopicCategory = res.map((item) => item.topicCategory);
+      });
+
+      let p3 = getProfessionFieldCount().then((res) => {
+        this.professionFieldAndCount = res;
+        this.checkedProfessionField = res.map((item) => item.professionField);
+      });
+
+      let p4 = getYearCount().then((res) => {
+        this.yearAndCount = res;
+        this.checkedYear = res.map((item) => item.year);
+      });
+
+      return Promise.all([p1, p2, p3, p4]);
+    },
+
     handleCheckAllInfoType(val) {
-      //
+      this.checkedInfoType = val
+        ? this.infoTypeAndCount.map((item) => item.infoType)
+        : [];
+      this.infoTypeIsIndeterminate = false;
     },
     handleCheckedInfoTypeChange(val) {
-      //
+      let checkedInfoCount = val.length;
+      let allCount = this.infoTypeAndCount.length;
+      this.infoTypeCheckAll = checkedInfoCount === allCount;
+      this.infoTypeIsIndeterminate =
+        checkedInfoCount > 0 && checkedInfoCount < allCount;
+    },
+    handleCheckAllTopicCategory(val) {
+      this.checkedTopicCategory = val
+        ? this.topicCategoryAndCount.map((item) => item.topicCategory)
+        : [];
+      this.topicCategoryIsIndeterminate = false;
+    },
+    handleCheckedTopicCategoryChange(val) {
+      let topicCategoryCount = val.length;
+      let allCount = this.topicCategoryAndCount.length;
+      this.topicCategoryCheckAll = topicCategoryCount === allCount;
+      this.topicCategoryIsIndeterminate =
+        topicCategoryCount > 0 && topicCategoryCount < allCount;
+    },
+    handleCheckAllProfessionField(val) {
+      this.checkedProfessionField = val
+        ? this.professionFieldAndCount.map((item) => item.professionField)
+        : [];
+      this.professionFieldIsIndeterminate = false;
+    },
+    handleCheckedProfessionFieldChange(val) {
+      let checkedProfessionFieldCount = val.length;
+      let allCount = this.professionFieldAndCount.length;
+      this.professionFieldCheckAll = checkedProfessionFieldCount === allCount;
+      this.professionFieldIsIndeterminate =
+        checkedProfessionFieldCount > 0 &&
+        checkedProfessionFieldCount < allCount;
+    },
+    handleCheckAllYear(val) {
+      this.checkedYear = val ? this.yearAndCount.map((item) => item.year) : [];
+      this.yearIsIndeterminate = false;
+    },
+    handleCheckedYearChange(val) {
+      let checkedYearCount = val.length;
+      let allCount = this.yearAndCount.length;
+      this.yearCheckAll = checkedYearCount === allCount;
+      this.yearIsIndeterminate =
+        checkedYearCount > 0 && checkedYearCount < allCount;
+    },
+    handlePageSizeChange(val) {
+      this.pageSize = val;
+      this.$options.methods.search();
+    },
+    handleCurrentPageChange(val) {
+      this.currentPage = val;
+      this.$options.methods.search();
+    },
+    search() {
+      let data = {
+        current: this.currentPage,
+        size: this.pageSize,
+        infoType: this.checkedInfoType,
+        topicCategory: this.checkedTopicCategory,
+        professionField: this.checkedProfessionField,
+        year: this.checkedYear,
+      };
+      console.log(this);
+      console.log(data);
+      searchInformation({
+        current: this.currentPage,
+        size: this.pageSize,
+        infoType: this.checkedInfoType
+          .map((item) => "'" + item + "'")
+          .toString(),
+        topicCategory: this.checkedTopicCategory
+          .map((item) => "'" + item + "'")
+          .toString(),
+        professionField: this.checkedProfessionField
+          .map((item) => "'" + item + "'")
+          .toString(),
+        year: this.checkedYear.map((item) => "'" + item + "'").toString(),
+      }).then((res) => {
+        console.log(res);
+        this.resultList = res.records;
+        this.total = res.total;
+        this.currentPage = res.current;
+      });
     },
   },
   created() {
-    this.resultList = [
-      {
-        id: 0,
-        title: "这是标题，这是标题",
-        author: "这是作者",
-        infoType: "这是类型",
-        abstract:
-          "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要",
-      },
-      {
-        id: 1,
-        title: "这是标题，这是标题",
-        author: "这是作者",
-        infoType: "这是类型",
-        abstract:
-          "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要",
-      },
-      {
-        id: 2,
-        title: "这是标题，这是标题",
-        author: "这是作者",
-        infoType: "这是类型",
-        abstract:
-          "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要要这是摘要这是摘要这是摘要摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要",
-      },
-      {
-        id: 3,
-        title: "这是标题，这是标题",
-        author: "这是作者",
-        infoType: "这是类型",
-        abstract:
-          "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这",
-      },
-      {
-        id: 4,
-        title: "这是标题，这是标题",
-        author: "这是作者",
-        infoType: "这是类型",
-        abstract:
-          "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要是摘要这是摘要这是摘要这是摘要这是摘要这是摘要要这是摘要",
-      },
-      {
-        id: 5,
-        title: "这是标题，这是标题",
-        author: "这是作者",
-        infoType: "这是类型",
-        abstract:
-          "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是要这是摘要这是摘要这是摘要",
-      },
-      {
-        id: 6,
-        title: "这是标题，这是标题",
-        author: "这是作者",
-        abstract:
-          "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要",
-      },
-      {
-        id: 7,
-        title: "这是标题，这是标题",
-        author: "这是作者",
-        abstract:
-          "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要",
-      },
-      {
-        id: 8,
-        title: "这是标题，这是标题",
-        author: "这是作者",
-        abstract:
-          "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这要这是摘要这是摘要这是摘要这是摘要这是摘要",
-      },
-      {
-        id: 9,
-        title: "这是标题，这是标题",
-        author: "这是作者",
-        abstract:
-          "这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这摘要这是摘要这是摘要这是摘要这是摘要这是摘要",
-      },
-    ];
+    this.initCheckbox().then(() => {
+      this.search(this);
+    });
   },
 };
 </script>
@@ -452,10 +371,5 @@ export default {
 
 .result-item {
   border-bottom: rgb(235, 238, 245) solid 1px;
-}
-
-.check-info {
-  width: 100px;
-  margin: 0;
 }
 </style>

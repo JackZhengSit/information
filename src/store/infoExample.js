@@ -42,7 +42,7 @@ export var briefReportInteriorExample = {
   referTechnology: "涉及技术",
 
   /** 所属类别 */
-  referCategory: "所属类别",
+  infoCategory: "所属类别",
 
   /** 部门类别 */
   department: "部门类别",
@@ -130,7 +130,7 @@ export var briefReportInteriorExample = {
 //   referProject: 测试测试
 //   referInstitution: 测试测试
 //   referTechnology: 测试测试
-//   referCategory: 测试测试
+//   infoCategory: 测试测试
 //   department: 测试测试
 //   researchField: 测试测试
 //   researchOrientation: 测试测试
@@ -169,7 +169,7 @@ let b = {
   referProject: "测试测试",
   referInstitution: "测试测试",
   referTechnology: "测试测试",
-  referCategory: "测试测试",
+  infoCategory: "测试测试",
   department: "测试测试",
   researchField: "测试测试",
   researchOrientation: "测试测试",

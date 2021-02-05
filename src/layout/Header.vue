@@ -21,7 +21,7 @@
         >
         <a class="menu-title" @click="toWiki">船舶百科</a>
         <a
-          href="http://200.100.65.13:8080/r/library/lib_adice.jsp"
+          href="http://200.100.65.13:8080/r/library/lib_advice.jsp"
           class="menu-title"
           >总咨询台</a
         >

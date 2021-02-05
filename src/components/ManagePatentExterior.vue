@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-27 15:43:49
+ * @LastEditTime: 2021-02-02 15:30:44
 -->
 <template>
   <div>
@@ -130,6 +130,36 @@ export default {
               title: patentExterior.publicationNo.title,
               span: 8,
 
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.topicCategory.field,
+              title: patentExterior.topicCategory.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.professionField.field,
+              title: patentExterior.professionField.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: patentExterior.infoNo.field,
+              title: patentExterior.infoNo.title,
+              span: 8,
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
@@ -415,8 +445,8 @@ export default {
               },
             },
             {
-              field: patentExterior.referCategory.field,
-              title: patentExterior.referCategory.title,
+              field: patentExterior.infoCategory.field,
+              title: patentExterior.infoCategory.title,
               span: 8,
               folding: true,
               itemRender: {
@@ -1050,8 +1080,38 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: patentExterior.referCategory.field,
-            title: patentExterior.referCategory.title,
+            field: patentExterior.infoCategory.field,
+            title: patentExterior.infoCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.topicCategory.field,
+            title: patentExterior.topicCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.professionField.field,
+            title: patentExterior.professionField.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: patentExterior.infoNo.field,
+            title: patentExterior.infoNo.title,
           },
           {
             resizable: true,

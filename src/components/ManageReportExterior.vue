@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-21 15:37:40
+ * @LastEditTime: 2021-02-02 15:31:17
 -->
 <template>
   <div>
@@ -137,6 +137,36 @@ export default {
               },
             },
             {
+              field: reportExterior.topicCategory.field,
+              title: reportExterior.topicCategory.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: reportExterior.professionField.field,
+              title: reportExterior.professionField.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: reportExterior.infoNo.field,
+              title: reportExterior.infoNo.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
               field: reportExterior.industryType.field,
               title: reportExterior.industryType.title,
               span: 8,
@@ -236,8 +266,8 @@ export default {
               },
             },
             {
-              field: reportExterior.referCategory.field,
-              title: reportExterior.referCategory.title,
+              field: reportExterior.infoCategory.field,
+              title: reportExterior.infoCategory.title,
               span: 8,
               folding: true,
               itemRender: {
@@ -750,8 +780,38 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: reportExterior.referCategory.field,
-            title: reportExterior.referCategory.title,
+            field: reportExterior.infoCategory.field,
+            title: reportExterior.infoCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: reportExterior.topicCategory.field,
+            title: reportExterior.topicCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: reportExterior.professionField.field,
+            title: reportExterior.professionField.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: reportExterior.infoNo.field,
+            title: reportExterior.infoNo.title,
           },
           {
             resizable: true,

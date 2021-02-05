@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-21 15:33:24
+ * @LastEditTime: 2021-02-02 15:29:29
 -->
 <template>
   <div>
@@ -137,6 +137,36 @@ export default {
               },
             },
             {
+              field: industryTrend.topicCategory.field,
+              title: industryTrend.topicCategory.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: industryTrend.professionField.field,
+              title: industryTrend.professionField.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: industryTrend.infoNo.field,
+              title: industryTrend.infoNo.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
               field: industryTrend.industryDetailType.field,
               title: industryTrend.industryDetailType.title,
               span: 8,
@@ -225,8 +255,8 @@ export default {
               },
             },
             {
-              field: industryTrend.referCategory.field,
-              title: industryTrend.referCategory.title,
+              field: industryTrend.infoCategory.field,
+              title: industryTrend.infoCategory.title,
               span: 8,
               folding: true,
               itemRender: {
@@ -729,8 +759,38 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: industryTrend.referCategory.field,
-            title: industryTrend.referCategory.title,
+            field: industryTrend.infoCategory.field,
+            title: industryTrend.infoCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: industryTrend.topicCategory.field,
+            title: industryTrend.topicCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: industryTrend.professionField.field,
+            title: industryTrend.professionField.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: industryTrend.infoNo.field,
+            title: industryTrend.infoNo.title,
           },
           {
             resizable: true,

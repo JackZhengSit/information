@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2021-01-29 10:29:11
+ * @LastEditTime: 2021-02-02 14:32:58
  */
 // var infoType = {
 //   industryTrend: "行业动态",
@@ -59,36 +59,48 @@ let infoBase = {
   },
   referDeviceType: {
     field: "referDeviceType",
-    title: "涉及装备/平台具体类型",
+    title: "所属装备/平台具体类型",
   },
 
   referDevice: {
     field: "referDevice",
-    title: "涉及装备名称",
+    title: "所属装备名称",
   },
   referProduct: {
     field: "referProduct",
-    title: "涉及具体产品名称",
+    title: "所属具体产品名称",
   },
   referProject: {
     field: "referProject",
-    title: "涉及项目名称",
+    title: "所属项目名称",
   },
   referInstitution: {
     field: "referInstitution",
-    title: "涉及机构名称",
+    title: "所属机构名称",
   },
   referTechnology: {
     field: "referTechnology",
-    title: "涉及技术",
+    title: "所属技术名称",
   },
-  referCategory: {
-    field: "referCategory",
+  infoCategory: {
+    field: "infoCategory",
     title: "所属类别",
+  },
+  topicCategory: {
+    field: "topicCategory",
+    title: "专题分类",
+  },
+  professionField: {
+    field: "professionField",
+    title: "专业领域",
+  },
+  infoNo: {
+    field: "infoNo",
+    title: "信息编号",
   },
   department: {
     field: "department",
-    title: "部门类别",
+    title: "信息收集部门",
   },
   researchField: {
     field: "researchField",
@@ -237,7 +249,7 @@ var industryTrend1 = {
   referTechnology: "涉及技术",
 
   /** 所属类别 */
-  referCategory: "所属类别",
+  infoCategory: "所属类别",
 
   /** 部门类别 */
   department: "部门类别",
@@ -345,7 +357,7 @@ var briefReportExterior1 = {
   referTechnology: "涉及技术",
 
   /** 所属类别 */
-  referCategory: "所属类别",
+  infoCategory: "所属类别",
 
   /** 部门类别 */
   department: "部门类别",

@@ -54,7 +54,7 @@
               <el-button
                 plain
                 type="primary"
-                onclick="window.location.href = 'http://200.100.68.15/8090/Main.htm'"
+                onclick="window.location.href = 'http://200.100.68.15:8090/Main.htm'"
               >
                 <i class="el-icon-s-management" style="font-size: 80px"> </i>
                 <span style="margin: 20px auto; display: block"
@@ -66,10 +66,20 @@
               <el-table :data="newestIndustyTrendData" style="width: 100%">
                 <el-table-column
                   show-overflow-tooltip
-                  :prop="information.infoTitle.field"
                   :label="information.infoTitle.title"
+                  :prop="information.infoTitle.field"
                   min-width="200"
-                ></el-table-column>
+                >
+                </el-table-column>
+                <el-table-column label="" width="50">
+                  <template slot-scope="scope">
+                    <span
+                      v-if="isnew(scope.row.createTime)"
+                      class="new-animation"
+                      >new</span
+                    >
+                  </template>
+                </el-table-column>
                 <el-table-column
                   align="center"
                   :prop="information.infoType.field"
@@ -81,7 +91,7 @@
                   :prop="information.createTime.field"
                   :label="information.createTime.title"
                   :formatter="formatDate"
-                  width="160"
+                  width="100"
                 ></el-table-column>
               </el-table>
             </el-tab-pane>
@@ -108,6 +118,15 @@
                   :label="information.infoTitle.title"
                   min-width="200"
                 ></el-table-column>
+                <el-table-column label="" width="50">
+                  <template slot-scope="scope">
+                    <span
+                      v-if="isnew(scope.row.createTime)"
+                      class="new-animation"
+                      >new</span
+                    >
+                  </template>
+                </el-table-column>
                 <el-table-column
                   align="center"
                   :prop="information.infoType.field"
@@ -119,7 +138,7 @@
                   :prop="information.createTime.field"
                   :label="information.createTime.title"
                   :formatter="formatDate"
-                  width="160"
+                  width="100"
                 ></el-table-column>
               </el-table>
             </el-tab-pane>
@@ -131,7 +150,9 @@
                   </span>
                   <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item
-                      v-for="item in getExteriorInfoTypeTitle"
+                      v-for="item in getExteriorInfoTypeTitle.filter(
+                        (item) => item != '行业动态'
+                      )"
                       :key="item"
                       :command="item"
                       >{{ item }}</el-dropdown-item
@@ -146,6 +167,15 @@
                   :label="information.infoTitle.title"
                   min-width="200"
                 ></el-table-column>
+                <el-table-column label="" width="50">
+                  <template slot-scope="scope">
+                    <span
+                      v-if="isnew(scope.row.createTime)"
+                      class="new-animation"
+                      >new</span
+                    >
+                  </template>
+                </el-table-column>
                 <el-table-column
                   align="center"
                   :prop="information.infoType.field"
@@ -157,7 +187,7 @@
                   :prop="information.createTime.field"
                   :label="information.createTime.title"
                   :formatter="formatDate"
-                  width="160"
+                  width="100"
                 ></el-table-column>
               </el-table>
             </el-tab-pane>
@@ -175,12 +205,19 @@
       <el-col :span="20" :offset="2" style="margin-top: 10px">
         <el-card shadow="hover">
           <!-- <h5 style="margin-top: 0px">公告信息</h5> -->
-          <el-carousel height="60px" direction="vertical" arrow="always">
+          <el-carousel height="66px" direction="vertical" arrow="always">
             <el-carousel-item
               v-for="item in newestNoticeData"
               :key="item.title"
             >
-              <h5 style="margin: 0"><strong>公告：</strong>{{ item.title }}</h5>
+              <h5 style="margin: 0">
+                <i
+                  class="el-icon-message-solid"
+                  style="font-size: 20px; color: #409eff"
+                ></i
+                ><strong> 公告：</strong>
+                {{ item.title }}
+              </h5>
               <p style="margin: 3px 0 0 0">{{ item.mainText }}</p>
             </el-carousel-item>
           </el-carousel>
@@ -211,6 +248,15 @@
                     :label="information.infoTitle.title"
                     min-width="180"
                   ></el-table-column>
+                  <el-table-column label="" width="50">
+                    <template slot-scope="scope">
+                      <span
+                        v-if="isnew(scope.row.createTime)"
+                        class="new-animation"
+                        >new</span
+                      >
+                    </template>
+                  </el-table-column>
                   <el-table-column
                     align="center"
                     :prop="information.infoType.field"
@@ -219,10 +265,10 @@
                   ></el-table-column>
                   <el-table-column
                     align="center"
+                    width="100"
                     :prop="information.createTime.field"
                     :label="information.createTime.title"
                     :formatter="formatDate"
-                    width="160"
                   ></el-table-column>
                 </el-table>
               </div>
@@ -264,7 +310,7 @@ export default {
         { value: "关键词" },
       ],
       information,
-      activeTab: "dataResource",
+      activeTab: "industryTrend",
       newestIndustyTrendData: [],
       newestInfoExteriorData: [],
       newestInfoInteriorData: [],
@@ -328,13 +374,13 @@ export default {
         xAxis: { type: "value" },
         yAxis: {
           type: "category",
-          data: this.getInfoTypeTitle,
+          data: [...this.getInfoTypeTitle].reverse(),
         },
         series: [
           {
             name: "销量",
             type: "bar",
-            data: value,
+            data: [...value].reverse(),
           },
         ],
       };
@@ -378,13 +424,13 @@ export default {
         xAxis: { type: "value" },
         yAxis: {
           type: "category",
-          data: this.getInteriorInfoTypeTitle,
+          data: [...this.getInteriorInfoTypeTitle].reverse(),
         },
         series: [
           {
             name: "销量",
             type: "bar",
-            data: value,
+            data: [...value].reverse(),
           },
         ],
       };
@@ -422,13 +468,13 @@ export default {
         xAxis: { type: "value" },
         yAxis: {
           type: "category",
-          data: this.getExteriorInfoTypeTitle,
+          data: [...this.getExteriorInfoTypeTitle].reverse(),
         },
         series: [
           {
             name: "销量",
             type: "bar",
-            data: value,
+            data: [...value].reverse(),
           },
         ],
       };
@@ -454,7 +500,11 @@ export default {
       if (date == undefined) {
         return "";
       }
-      return moment(date).format("YYYY-MM-DD HH:mm:ss");
+      return moment(date).format("YYYY-MM-DD");
+    },
+    isnew(createTime) {
+      //是否为一周内
+      return moment(createTime).isAfter(moment().subtract(7, "d"));
     },
   },
   created() {
@@ -501,5 +551,20 @@ export default {
 .topicItem {
   flex: 0 0 32%;
   padding: 5px;
+}
+
+.new-animation {
+  color: #409eff;
+  -webkit-animation: newAnimation 0.5s 0.2s linear infinite alternate; /* Safari and Chrome */
+}
+
+@-webkit-keyframes newAnimation /* Safari and Chrome */ {
+  from {
+    color: #409eff;
+    opacity: 0.5;
+  }
+  to {
+    color: #409eff;
+  }
 }
 </style>

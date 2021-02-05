@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-27 15:33:52
+ * @LastEditTime: 2021-02-02 15:25:44
 -->
 <template>
   <div>
@@ -135,6 +135,36 @@ export default {
               },
             },
             {
+              field: briefReportExterior.topicCategory.field,
+              title: briefReportExterior.topicCategory.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: briefReportExterior.professionField.field,
+              title: briefReportExterior.professionField.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: briefReportExterior.infoNo.field,
+              title: briefReportExterior.infoNo.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
               field: briefReportExterior.title.field,
               title: briefReportExterior.title.title,
               span: 8,
@@ -245,8 +275,8 @@ export default {
               },
             },
             {
-              field: briefReportExterior.referCategory.field,
-              title: briefReportExterior.referCategory.title,
+              field: briefReportExterior.infoCategory.field,
+              title: briefReportExterior.infoCategory.title,
               span: 8,
               folding: true,
               itemRender: {
@@ -768,8 +798,38 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: briefReportExterior.referCategory.field,
-            title: briefReportExterior.referCategory.title,
+            field: briefReportExterior.infoCategory.field,
+            title: briefReportExterior.infoCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: briefReportExterior.topicCategory.field,
+            title: briefReportExterior.topicCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: briefReportExterior.professionField.field,
+            title: briefReportExterior.professionField.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: briefReportExterior.infoNo.field,
+            title: briefReportExterior.infoNo.title,
           },
           {
             resizable: true,

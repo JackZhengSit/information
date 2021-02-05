@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-29 11:08:59
+ * @LastEditTime: 2021-02-02 15:30:14
 -->
 <template>
   <div>
@@ -127,6 +127,36 @@ export default {
             {
               field: paperExterior.author.field,
               title: paperExterior.author.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: paperExterior.topicCategory.field,
+              title: paperExterior.topicCategory.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: paperExterior.professionField.field,
+              title: paperExterior.professionField.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: paperExterior.infoNo.field,
+              title: paperExterior.infoNo.title,
               span: 8,
               itemRender: {
                 name: "$input",
@@ -488,8 +518,8 @@ export default {
               },
             },
             {
-              field: paperExterior.referCategory.field,
-              title: paperExterior.referCategory.title,
+              field: paperExterior.infoCategory.field,
+              title: paperExterior.infoCategory.title,
               span: 8,
               folding: true,
               itemRender: {
@@ -1203,8 +1233,38 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: paperExterior.referCategory.field,
-            title: paperExterior.referCategory.title,
+            field: paperExterior.infoCategory.field,
+            title: paperExterior.infoCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: paperExterior.topicCategory.field,
+            title: paperExterior.topicCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: paperExterior.professionField.field,
+            title: paperExterior.professionField.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: paperExterior.infoNo.field,
+            title: paperExterior.infoNo.title,
           },
           {
             resizable: true,

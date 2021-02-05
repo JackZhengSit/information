@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-12-14 15:11:31
- * @LastEditTime: 2021-01-21 15:39:27
+ * @LastEditTime: 2021-02-02 15:32:01
 -->
 <template>
   <div>
@@ -137,6 +137,36 @@ export default {
               },
             },
             {
+              field: reportInterior.topicCategory.field,
+              title: reportInterior.topicCategory.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: reportInterior.professionField.field,
+              title: reportInterior.professionField.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
+              field: reportInterior.infoNo.field,
+              title: reportInterior.infoNo.title,
+              span: 8,
+              itemRender: {
+                name: "$input",
+                props: { placeholder: "" },
+                defaultValue: "",
+              },
+            },
+            {
               field: reportInterior.industryType.field,
               title: reportInterior.industryType.title,
               span: 8,
@@ -236,8 +266,8 @@ export default {
               },
             },
             {
-              field: reportInterior.referCategory.field,
-              title: reportInterior.referCategory.title,
+              field: reportInterior.infoCategory.field,
+              title: reportInterior.infoCategory.title,
               span: 8,
               folding: true,
               itemRender: {
@@ -750,8 +780,38 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
-            field: reportInterior.referCategory.field,
-            title: reportInterior.referCategory.title,
+            field: reportInterior.infoCategory.field,
+            title: reportInterior.infoCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: reportInterior.topicCategory.field,
+            title: reportInterior.topicCategory.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: reportInterior.professionField.field,
+            title: reportInterior.professionField.title,
+          },
+          {
+            resizable: true,
+            width: 100,
+            align: "center",
+            showOverflow: "tooltip",
+            showHeaderOverflow: "tooltip",
+            editRender: { name: "input" },
+            field: reportInterior.infoNo.field,
+            title: reportInterior.infoNo.title,
           },
           {
             resizable: true,
