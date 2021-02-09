@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-01-27 15:55:12
- * @LastEditTime: 2021-02-05 11:29:18
+ * @LastEditTime: 2021-02-08 09:25:10
 -->
 <template>
   <div class="group">
@@ -15,7 +15,11 @@
         :value="item.value"
       ></el-option>
     </el-select>
-    <el-input v-model="searchInput" placeholder="请输入内容"></el-input>
+    <el-input
+      v-model="searchInput"
+      placeholder="请输入内容"
+      @keyup.enter.native="handleSearch"
+    ></el-input>
     <el-button type="primary" icon="search" @click="handleSearch"
       >搜索</el-button
     >
@@ -25,22 +29,23 @@
 
 
 <script>
-import { mapState } from "vuex";
-import { mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
+
 export default {
   data() {
     return {
       searchTypes: [
-        { value: "全部" },
-        { value: "标题" },
-        { value: "作者" },
-        { value: "关键词" },
+        { label: "全部", value: "all" },
+        { label: "标题", value: "info_title" },
+        { label: "作者", value: "info_author" },
+        { label: "关键词", value: "keywords" },
       ],
     };
   },
   computed: {
     // ...mapState(["searchType", "searchInput"]),
     // ...mapMutations(["setSearchType", "setSearchInput"]),
+    ...mapState("RouteModule", ["path"]),
     searchType: {
       get() {
         return this.$store.state.searchType;
@@ -59,7 +64,11 @@ export default {
     },
   },
   methods: {
-    handleSearch() {},
+    ...mapActions("search", ["search"]),
+    handleSearch() {
+      if (this.path != "/search") this.$router.push({ name: "Search" });
+      else this.search();
+    },
   },
 };
 </script>

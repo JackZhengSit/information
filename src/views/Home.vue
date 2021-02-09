@@ -218,11 +218,19 @@
                 ><strong> 公告：</strong>
                 {{ item.title }}
               </h5>
-              <p style="margin: 3px 0 0 0">{{ item.mainText }}</p>
+              <p style="margin: 3px 0 0 0">
+                {{ item.mainText }}
+                <!-- <a
+                  style="color: #409eff; cursor: pointer"
+                  v-if="item.mainText.length > 168"
+                  type="text"
+                  @click="showNoticeDetail = true"
+                  >...更多</a
+                > -->
+              </p>
             </el-carousel-item>
           </el-carousel>
         </el-card>
-        <div></div>
       </el-col>
     </el-row>
     <el-row style="margin-top: 5px">
@@ -301,6 +309,7 @@ import moment from "moment";
 export default {
   data() {
     return {
+      showNoticeDetail: false,
       searchInput: "",
       searchType: "全部",
       searchTypes: [
@@ -328,7 +337,7 @@ export default {
         },
         {
           id: 3,
-          name: "市场经营",
+          name: "市场运行",
           list: [],
         },
       ],
@@ -378,7 +387,7 @@ export default {
         },
         series: [
           {
-            name: "销量",
+            name: "数量",
             type: "bar",
             data: [...value].reverse(),
           },

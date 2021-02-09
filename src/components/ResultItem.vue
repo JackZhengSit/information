@@ -1,52 +1,94 @@
 <template>
   <div class="result-item">
     <a class="title" @click="showDetails">{{ title }}</a>
-    <p class="author">{{ author }}</p>
-    <p class="author">{{ infoType }}</p>
+    <p class="author">
+      <strong>[{{ infoType }}]</strong> {{ author }}
+    </p>
+
     <p class="abstract">
       {{ abstract }}
     </p>
+    <el-button
+      type="primary"
+      size="mini"
+      icon="el-icon-s-unfold"
+      plain
+      @click="showDetails"
+      >情报详情</el-button
+    >
+    <el-button
+      type="primary"
+      size="mini"
+      icon="el-icon-document"
+      plain
+      @click="openFile"
+      >查看文件</el-button
+    >
   </div>
 </template>
 
 <script>
+import baseUrl from "@/config/baseUrl";
 export default {
   props: {
+    id: String,
+    originId: String,
     title: String,
     author: String,
     infoType: String,
     abstract: String,
+    fileUrl: String,
   },
   methods: {
     showDetails: function (event) {
       let routeData = this.$router.resolve({
         name: "Details",
-        query: { id: "111" },
+        query: {
+          originId: this.originId,
+          infoType: this.infoType,
+          infoTitle: this.title,
+          infoFileUrl: this.fileUrl,
+        },
+        props: true,
       });
       window.open(routeData.href, "_blank");
+    },
+    openFile() {
+      if (!this.fileUrl.includes(".")) {
+        this.$message({
+          type: "warning",
+          message: "此情报附件无附件或未上传！",
+        });
+      } else window.open(baseUrl + this.fileUrl);
     },
   },
 };
 </script>
 
 <style  scoped>
+.result-item {
+  padding: 10px 0 10px 0;
+}
 .result-item .title {
   display: block;
-  margin: 16px 0 10px 0;
-  font-size: 18px;
-  font-weight: 600;
+  margin: 0;
   color: #409eff;
   cursor: pointer;
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .result-item .author {
-  margin: 10px 0 10px 0;
+  margin: 0;
   font-size: 14px;
-  color: #303133;
+  line-height: 30px;
+  color: #666;
 }
 
 .result-item .abstract {
-  margin-top: 10px;
+  margin: 0px 0 5px 0;
   font-size: 14px;
   color: #606266;
   overflow: hidden;

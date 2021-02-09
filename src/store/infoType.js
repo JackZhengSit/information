@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2021-02-02 14:32:58
+ * @LastEditTime: 2021-02-09 10:38:35
  */
 // var infoType = {
 //   industryTrend: "行业动态",
@@ -84,7 +84,7 @@ let infoBase = {
   },
   infoCategory: {
     field: "infoCategory",
-    title: "所属类别",
+    title: "情报类别",
   },
   topicCategory: {
     field: "topicCategory",

@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-01-14 10:25:17
- * @LastEditTime: 2021-02-03 15:16:44
+ * @LastEditTime: 2021-02-09 13:27:24
  */
 import axios from "@/utils/axio";
 
@@ -96,5 +96,15 @@ export function searchInformation(data) {
     url: "/manual/information/searchInformation",
     method: "post",
     data,
+  });
+}
+
+//查询得到详细信息
+export function getDetailInfo(params) {
+  return axios({
+    url: "/" + params.infoType + "/" + params.id,
+    method: "get",
+  }).then((res) => {
+    return res;
   });
 }

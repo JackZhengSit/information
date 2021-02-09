@@ -66,7 +66,12 @@ const routes = [
           {
             path: "details",
             name: "Details",
-            props: (route) => ({ id: route.query.id }),
+            props: (route) => ({
+              originId: route.query.originId,
+              infoType: route.query.infoType,
+              infoTitle: route.query.infoTitle,
+              infoFileUrl: route.query.infoFileUrl,
+            }),
             component: () =>
               import(/* webpackChunkName: "Details" */ "../views/Details.vue"),
           },

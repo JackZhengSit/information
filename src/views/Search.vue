@@ -127,34 +127,42 @@
       <el-col :span="14">
         <div class="result-block" style="background-color: #fff">
           <div class="result-title" style="">
-            <a href="#">共{{ pageCount }}页&nbsp;每页{{ pageSize }}条</a>
-            <a href="#">下一页&nbsp;&nbsp;上一页</a>
+            <div>
+              <a>当前第{{ currentPage }}页</a>
+              <a>每页{{ pageSize }}条</a>
+              <a>共{{ pageCount }}页</a>
+            </div>
+            <div>
+              <a @click="prePage">上一页</a>
+              <a @click="nextPage">下一页</a>
+            </div>
           </div>
           <div class="result-body">
             <result-item
               v-for="li in resultList"
               :key="li.id"
+              :id="li.id"
+              :originId="li.originId"
               :title="li.infoTitle"
               :author="li.infoAuthor"
               :infoType="li.infoType"
               :abstract="li.abs"
+              :fileUrl="li.fileUrl"
             >
             </result-item>
-          </div>
-
-          <div class="result-footer">
-            <el-pagination
-              background
-              layout="prev, pager, next,sizes,jumper"
-              :total="total"
-              :page-size="pageSize"
-              :current-page.sync="currentPage"
-              :page-sizes="[5, 10, 20, 50]"
-              @size-change="handlePageSizeChange"
-              @current-change="handleCurrentPageChange"
-              style="float: right"
-            >
-            </el-pagination>
+            <div class="result-footer">
+              <el-pagination
+                background
+                layout="prev, pager, next,sizes,jumper"
+                :total="total"
+                :page-size="pageSize"
+                :current-page.sync="currentPage"
+                :page-sizes="[5, 10, 20, 50]"
+                @size-change="handlePageSizeChange"
+                @current-change="handleCurrentPageChange"
+              >
+              </el-pagination>
+            </div>
           </div>
         </div>
       </el-col>
@@ -163,14 +171,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import {
-  getInfoTypeCount,
-  getTopicCategoryCount,
-  getProfessionFieldCount,
-  getYearCount,
-  searchInformation,
-} from "@/api/queryInformation";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -178,61 +179,97 @@ export default {
       //左侧导航栏
       activeNames: ["infoType"],
 
-      infoTypeAndCount: [],
-      checkedInfoType: [],
       infoTypeIsIndeterminate: false,
       infoTypeCheckAll: true,
 
-      topicCategoryAndCount: [],
-      checkedTopicCategory: [],
       topicCategoryIsIndeterminate: false,
       topicCategoryCheckAll: true,
 
-      professionFieldAndCount: [],
-      checkedProfessionField: [],
       professionFieldIsIndeterminate: false,
       professionFieldCheckAll: true,
 
-      yearAndCount: [],
-      checkedYear: [],
       yearIsIndeterminate: false,
       yearCheckAll: true,
-
-      resultList: [],
-
-      //分页
-      total: 0,
-      pageSize: 10,
-      currentPage: 1,
-      pageCount: 0,
     };
   },
   computed: {
-    ...mapGetters(["getInfoTypeTitle"]),
+    ...mapState("search", [
+      "infoTypeAndCount",
+      "checkedInfoType",
+      "topicCategoryAndCount",
+      "checkedTopicCategory",
+      "professionFieldAndCount",
+      "checkedProfessionField",
+      "yearAndCount",
+      "checkedYear",
+      "resultList",
+      "total",
+      "pageSize",
+      "currentPage",
+      "pageCount",
+    ]),
+
+    pageSize: {
+      get() {
+        return this.$store.state.search.pageSize;
+      },
+      set(val) {
+        this.$store.commit("search/setPageSize", val);
+      },
+    },
+    currentPage: {
+      get() {
+        return this.$store.state.search.currentPage;
+      },
+      set(val) {
+        this.$store.commit("search/setCurrentPage", val);
+      },
+    },
+    pageCount: {
+      get() {
+        return this.$store.state.search.pageCount;
+      },
+      set(val) {
+        this.$store.commit("search/setPageCount", val);
+      },
+    },
+    checkedInfoType: {
+      get() {
+        return this.$store.state.search.checkedInfoType;
+      },
+      set(val) {
+        this.$store.commit("search/setCheckedInfoType", val);
+      },
+    },
+    checkedTopicCategory: {
+      get() {
+        return this.$store.state.search.checkedTopicCategory;
+      },
+      set(val) {
+        this.$store.commit("search/setCheckedTopicCategory", val);
+      },
+    },
+    checkedProfessionField: {
+      get() {
+        return this.$store.state.search.checkedProfessionField;
+      },
+      set(val) {
+        this.$store.commit("search/setCheckedProfessionField", val);
+      },
+    },
+    checkedYear: {
+      get() {
+        return this.$store.state.search.checkedInfoType;
+      },
+      set(val) {
+        this.$store.commit("search/setCheckedYear", val);
+      },
+    },
   },
   methods: {
+    ...mapActions("search", ["getCheckbox", "search"]),
     initCheckbox() {
-      let p1 = getInfoTypeCount().then((res) => {
-        this.infoTypeAndCount = res;
-        this.checkedInfoType = res.map((item) => item.infoType);
-      });
-
-      let p2 = getTopicCategoryCount().then((res) => {
-        this.topicCategoryAndCount = res;
-        this.checkedTopicCategory = res.map((item) => item.topicCategory);
-      });
-
-      let p3 = getProfessionFieldCount().then((res) => {
-        this.professionFieldAndCount = res;
-        this.checkedProfessionField = res.map((item) => item.professionField);
-      });
-
-      let p4 = getYearCount().then((res) => {
-        this.yearAndCount = res;
-        this.checkedYear = res.map((item) => item.year);
-      });
-
-      return Promise.all([p1, p2, p3, p4]);
+      return this.getCheckbox();
     },
 
     handleCheckAllInfoType(val) {
@@ -288,47 +325,30 @@ export default {
     },
     handlePageSizeChange(val) {
       this.pageSize = val;
-      this.$options.methods.search();
+      this.search();
     },
     handleCurrentPageChange(val) {
       this.currentPage = val;
-      this.$options.methods.search();
+      this.search();
     },
-    search() {
-      let data = {
-        current: this.currentPage,
-        size: this.pageSize,
-        infoType: this.checkedInfoType,
-        topicCategory: this.checkedTopicCategory,
-        professionField: this.checkedProfessionField,
-        year: this.checkedYear,
-      };
-      console.log(this);
-      console.log(data);
-      searchInformation({
-        current: this.currentPage,
-        size: this.pageSize,
-        infoType: this.checkedInfoType
-          .map((item) => "'" + item + "'")
-          .toString(),
-        topicCategory: this.checkedTopicCategory
-          .map((item) => "'" + item + "'")
-          .toString(),
-        professionField: this.checkedProfessionField
-          .map((item) => "'" + item + "'")
-          .toString(),
-        year: this.checkedYear.map((item) => "'" + item + "'").toString(),
-      }).then((res) => {
-        console.log(res);
-        this.resultList = res.records;
-        this.total = res.total;
-        this.currentPage = res.current;
-      });
+    nextPage() {
+      if (0 <= this.currentPage <= this.pageSize) {
+        this.currentPage++;
+      }
+      this.search();
+    },
+    prePage() {
+      if (0 <= this.currentPage <= this.pageSize) {
+        this.currentPage--;
+      }
+      this.search();
     },
   },
   created() {
     this.initCheckbox().then(() => {
-      this.search(this);
+      this.search().then(() => {
+        // console.log(this.checkedProfessionField);
+      });
     });
   },
 };
@@ -361,8 +381,9 @@ export default {
   color: #409eff;
   text-decoration: none;
   font-weight: bold;
-  margin: 0 20px;
+  margin: 0 10px;
   opacity: 1;
+  cursor: pointer;
 }
 
 .result-body {
@@ -371,5 +392,11 @@ export default {
 
 .result-item {
   border-bottom: rgb(235, 238, 245) solid 1px;
+}
+
+.result-footer {
+  padding: 5px 0 5px 0;
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-01-20 10:16:29
- * @LastEditTime: 2021-02-02 16:09:02
+ * @LastEditTime: 2021-02-08 09:03:59
  */
 const state = () => ({
   activeIndex: "",
@@ -30,7 +30,7 @@ const state = () => ({
   ]),
 
   searchInput: "",
-  searchType: "全部",
+  searchType: "all",
 });
 
 export default state;
