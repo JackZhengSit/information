@@ -259,7 +259,7 @@ export default {
     },
     checkedYear: {
       get() {
-        return this.$store.state.search.checkedInfoType;
+        return this.$store.state.search.checkedYear;
       },
       set(val) {
         this.$store.commit("search/setCheckedYear", val);

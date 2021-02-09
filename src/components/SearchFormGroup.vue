@@ -46,6 +46,7 @@ export default {
     // ...mapState(["searchType", "searchInput"]),
     // ...mapMutations(["setSearchType", "setSearchInput"]),
     ...mapState("RouteModule", ["path"]),
+
     searchType: {
       get() {
         return this.$store.state.searchType;
@@ -65,7 +66,10 @@ export default {
   },
   methods: {
     ...mapActions("search", ["search"]),
+    ...mapMutations("search", ["setPageSize", "setCurrentPage"]),
     handleSearch() {
+      this.setPageSize(10);
+      this.setCurrentPage(1);
       if (this.path != "/search") this.$router.push({ name: "Search" });
       else this.search();
     },
