@@ -7,7 +7,7 @@
       <div class="menu-box">
         <a path="/home" @click="toHome($event)" class="menu-title">首页</a>
         <a
-          href="http://200.100.68.18:8088/default/management/informationPortal.jsp"
+          onclick="window.open('http://200.100.68.18:8088/default/management/informationPortal.jsp')"
           class="menu-title"
           >情报需求</a
         >
@@ -15,13 +15,13 @@
           >信息检索</a
         >
         <a
-          href="http://200.100.65.13:8080/r/library/index.jsp"
+          onclick="window.open('http://200.100.65.13:8080/r/library/index.jsp')"
           class="menu-title"
           >馆藏书刊</a
         >
         <a class="menu-title" @click="toWiki">船舶百科</a>
         <a
-          href="http://200.100.65.13:8080/r/library/lib_advice.jsp"
+          onclick="window.open('http://200.100.65.13:8080/r/library/lib_advice.jsp')"
           class="menu-title"
           >总咨询台</a
         >
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
@@ -49,6 +49,7 @@ export default {
     }),
   },
   methods: {
+    ...mapActions("search", ["getCheckbox"]),
     acitveMenuItem() {
       let menu = document.getElementsByClassName("menu-title");
       menu.forEach((element) => {
@@ -61,7 +62,9 @@ export default {
       this.$router.push({ name: "Home" });
     },
     toSearch({ srcElement }) {
-      this.$router.push({ name: "Search" });
+      this.getCheckbox().then(() => {
+        this.$router.push({ name: "Search" });
+      });
     },
     toManage({ srcElement }) {
       this.$router.push({ name: "Manage" });

@@ -345,11 +345,18 @@ export default {
     },
   },
   created() {
-    this.initCheckbox().then(() => {
-      this.search().then(() => {
-        // console.log(this.checkedProfessionField);
+    let isInited =
+      this.checkedInfoType.length != 0 ||
+      this.checkedTopicCategory != 0 ||
+      this.checkedProfessionField != 0 ||
+      this.checkedYear != 0;
+    if (isInited) this.search();
+    else
+      this.initCheckbox().then(() => {
+        this.search().then(() => {
+          // console.log(this.checkedProfessionField);
+        });
       });
-    });
   },
 };
 </script>

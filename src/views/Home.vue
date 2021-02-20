@@ -45,16 +45,25 @@
               <el-button
                 plain
                 type="primary"
-                onclick="window.location.href = 'http://200.100.65.13/kns55/'"
+                onclick="window.open('http://200.100.65.13/kns55/')"
                 ><i class="el-icon-s-cooperation" style="font-size: 80px"></i>
                 <span style="margin: 20px auto; display: block"
                   >知网数据库</span
                 ></el-button
               >
+              <!-- <el-button
+                plain
+                type="primary"
+                onclick="window.open('http://baidu.com')"
+                ><i class="el-icon-s-cooperation" style="font-size: 80px"></i>
+                <span style="margin: 20px auto; display: block"
+                  >知网数据库111</span
+                ></el-button
+              > -->
               <el-button
                 plain
                 type="primary"
-                onclick="window.location.href = 'http://200.100.68.15:8090/Main.htm'"
+                onclick="window.open('http://200.100.68.15:8090/Main.htm')"
               >
                 <i class="el-icon-s-management" style="font-size: 80px"> </i>
                 <span style="margin: 20px auto; display: block"
@@ -63,7 +72,11 @@
               </el-button>
             </el-tab-pane>
             <el-tab-pane label="行业动态" name="industryTrend">
-              <el-table :data="newestIndustyTrendData" style="width: 100%">
+              <el-table
+                :data="newestIndustyTrendData"
+                style="width: 100%"
+                @row-click="showDetails"
+              >
                 <el-table-column
                   show-overflow-tooltip
                   :label="information.infoTitle.title"
@@ -111,7 +124,11 @@
                   </el-dropdown-menu>
                 </el-dropdown>
               </template>
-              <el-table :data="newestInfoInteriorData" style="width: 100%">
+              <el-table
+                :data="newestInfoInteriorData"
+                style="width: 100%"
+                @row-click="showDetails"
+              >
                 <el-table-column
                   show-overflow-tooltip
                   :prop="information.infoTitle.field"
@@ -160,7 +177,11 @@
                   </el-dropdown-menu>
                 </el-dropdown>
               </template>
-              <el-table :data="newestInfoExteriorData" style="width: 100%">
+              <el-table
+                :data="newestInfoExteriorData"
+                style="width: 100%"
+                @row-click="showDetails"
+              >
                 <el-table-column
                   show-overflow-tooltip
                   :prop="information.infoTitle.field"
@@ -195,6 +216,7 @@
             <el-link
               style="float: right; padding: 10px 20px 5px 20px"
               type="primary"
+              @click="infoTypeMore"
               >更多</el-link
             >
           </el-tabs>
@@ -204,20 +226,25 @@
     <el-row>
       <el-col :span="20" :offset="2" style="margin-top: 10px">
         <el-card shadow="hover">
-          <!-- <h5 style="margin-top: 0px">公告信息</h5> -->
+          <el-link type="primary" @click="drawer = true" style="float: right"
+            >更多</el-link
+          >
           <el-carousel height="66px" direction="vertical" arrow="always">
             <el-carousel-item
               v-for="item in newestNoticeData"
               :key="item.title"
             >
-              <h5 style="margin: 0">
-                <i
-                  class="el-icon-message-solid"
-                  style="font-size: 20px; color: #409eff"
-                ></i
-                ><strong> 公告：</strong>
-                {{ item.title }}
-              </h5>
+              <div class="noticeTitle">
+                <h5 style="margin: 0">
+                  <i
+                    class="el-icon-message-solid"
+                    style="font-size: 20px; color: #409eff"
+                  ></i
+                  ><strong> 公告：</strong>
+                  {{ item.title }}
+                </h5>
+              </div>
+
               <p style="margin: 3px 0 0 0">
                 {{ item.mainText }}
                 <!-- <a
@@ -233,6 +260,111 @@
         </el-card>
       </el-col>
     </el-row>
+    <el-drawer
+      title="我是标题"
+      :visible.sync="drawer"
+      :with-header="false"
+      size="70%"
+      @opened="searchNotice"
+    >
+      <el-container>
+        <el-main style="overflow-y: scroll; width: 100vh; height: 100vh">
+          <el-row>
+            <el-col :span="24" justify="center">
+              <el-form :model="noticeForm" ref="noticeForm">
+                <el-form-item label="标题">
+                  <el-input
+                    v-model="noticeForm.title"
+                    style="width: 500px"
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="作者">
+                  <el-input
+                    v-model="noticeForm.author"
+                    style="width: 500px"
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="发布时间">
+                  <el-date-picker
+                    type="date"
+                    placeholder="选择日期"
+                    v-model="noticeForm.publicateDayStart"
+                    format="yyyy-MM-dd"
+                    value-format="yyyy-MM-dd"
+                  ></el-date-picker>
+                  -
+                  <el-date-picker
+                    placeholder="选择时间"
+                    v-model="noticeForm.publicateDayEnd"
+                    format="yyyy-MM-dd"
+                    value-format="yyyy-MM-dd"
+                  ></el-date-picker>
+                </el-form-item>
+                <el-form-item label="">
+                  <el-button type="primary" @click="searchNotice"
+                    >搜索</el-button
+                  >
+                  <el-button type="default" @click="resetSearchNotice"
+                    >重置</el-button
+                  >
+                </el-form-item>
+              </el-form></el-col
+            >
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <el-table :data="noticeTableData" style="width: 100%">
+                <el-table-column type="expand">
+                  <template slot-scope="props">
+                    <el-row>
+                      <el-col :span="2" style="text-align: right"
+                        ><strong>标题：</strong></el-col
+                      >
+                      <el-col :span="20">{{ props.row.title }}</el-col>
+                    </el-row>
+                    <el-row>
+                      <el-col :span="2" style="text-align: right"
+                        ><strong>作者：</strong></el-col
+                      >
+                      <el-col :span="20">{{ props.row.author }}</el-col>
+                    </el-row>
+                    <el-row>
+                      <el-col :span="2" style="text-align: right"
+                        ><strong>内容：</strong></el-col
+                      >
+                      <el-col :span="20">{{ props.row.mainText }}</el-col>
+                    </el-row>
+                    <el-row>
+                      <el-col :span="2" style="text-align: right"
+                        ><strong>发布日：</strong></el-col
+                      >
+                      <el-col :span="20">{{ props.row.publicateDay }}</el-col>
+                    </el-row>
+                    <el-row>
+                      <el-col :span="2" style="text-align: right"
+                        ><strong>创建时间：</strong></el-col
+                      >
+                      <el-col :span="20">{{ props.row.createTime }}</el-col>
+                    </el-row>
+                  </template>
+                </el-table-column>
+                <el-table-column label="标题" prop="title"></el-table-column>
+                <el-table-column label="作者" prop="author"></el-table-column>
+                <el-table-column
+                  label="内容"
+                  prop="mainText"
+                  :show-overflow-tooltip="true"
+                ></el-table-column>
+                <el-table-column
+                  label="发布时间"
+                  prop="publicateDay"
+                ></el-table-column>
+              </el-table>
+            </el-col>
+          </el-row>
+        </el-main>
+      </el-container>
+    </el-drawer>
     <el-row style="margin-top: 5px">
       <el-col :span="20" :offset="2">
         <div class="topic">
@@ -244,12 +376,15 @@
             <el-card shadow="hover">
               <div slot="header" class="clearfix">
                 <span><strong>专题：</strong>{{ topicItem.name }}</span>
-                <el-link style="float: right; padding: 3px 0" type="primary"
+                <el-link
+                  style="float: right; padding: 3px 0"
+                  type="primary"
+                  @click="topicMore(topicItem.name)"
                   >更多</el-link
                 >
               </div>
               <div>
-                <el-table :data="topicItem.list">
+                <el-table :data="topicItem.list" @row-click="showDetails">
                   <el-table-column
                     show-overflow-tooltip
                     :prop="information.infoTitle.field"
@@ -300,15 +435,16 @@ import {
 
 import { countInfoType } from "@/api/queryInformation";
 
-import { getNewestNotice } from "@/api/manageNotice";
+import { getNewestNotice, searchNotice } from "@/api/manageNotice";
 
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 import moment from "moment";
 
 export default {
   data() {
     return {
+      drawer: false,
       showNoticeDetail: false,
       searchInput: "",
       searchType: "全部",
@@ -341,6 +477,13 @@ export default {
           list: [],
         },
       ],
+      noticeForm: {
+        title: "",
+        author: "",
+        publicateDayStart: moment().subtract(1, "months").format("YYYY-MM-DD"),
+        publicateDayEnd: moment().format("YYYY-MM-DD"),
+      },
+      noticeTableData: [],
     };
   },
   computed: {
@@ -354,6 +497,13 @@ export default {
     ]),
   },
   methods: {
+    ...mapMutations("search", [
+      "setCheckedInfoType",
+      "setCheckedTopicCategory",
+      "setCheckedProfessionField",
+      "setCheckedYear",
+    ]),
+    ...mapActions("search", ["getCheckbox"]),
     async infoTypeChart() {
       let value = [];
 
@@ -515,6 +665,74 @@ export default {
       //是否为一周内
       return moment(createTime).isAfter(moment().subtract(7, "d"));
     },
+    searchNotice() {
+      let queryParams = Object.assign({}, this.noticeForm, {
+        page: 0,
+        size: 1000,
+      });
+      console.log(queryParams);
+      searchNotice(queryParams).then((res) => {
+        this.noticeTableData = res.result;
+        console.log(res);
+      });
+    },
+    resetSearchNotice() {
+      this.noticeForm.title = "";
+      this.noticeForm.author = "";
+      this.noticeForm.publicateDayStart = moment()
+        .subtract(1, "months")
+        .format("YYYY-MM-DD");
+      this.noticeForm.publicateDayEnd = moment().format("YYYY-MM-DD");
+    },
+    infoTypeMore() {
+      switch (this.activeTab) {
+        case "dataResource":
+          window.open("http://200.100.68.15:8090/Main.htm");
+          break;
+        case "industryTrend":
+          // this.$store.commit("search/setCheckedInfoType", ["行业动态"]);
+          this.getCheckbox().then(() => {
+            this.setCheckedInfoType(["行业动态"]);
+            this.$router.push({ name: "Search" });
+          });
+          break;
+        case "infoInterior":
+          this.getCheckbox().then(() => {
+            this.setCheckedInfoType([...this.getInteriorInfoTypeTitle]);
+            this.$router.push({ name: "Search" });
+          });
+
+          break;
+        case "infoExterior":
+          this.getCheckbox().then(() => {
+            this.setCheckedInfoType(
+              this.getExteriorInfoTypeTitle.filter((item) => item != "行业动态")
+            );
+            this.$router.push({ name: "Search" });
+          });
+
+          break;
+      }
+    },
+    topicMore(topicName) {
+      this.getCheckbox().then(() => {
+        this.setCheckedTopicCategory([...topicName]);
+        this.$router.push({ name: "Search" });
+      });
+    },
+    showDetails(row) {
+      let routeData = this.$router.resolve({
+        name: "Details",
+        query: {
+          originId: row.originId,
+          infoType: row.infoType,
+          infoTitle: row.title,
+          infoFileUrl: row.fileUrl,
+        },
+        props: true,
+      });
+      window.open(routeData.href, "_blank");
+    },
   },
   created() {
     getNewestIndustryTrend().then((res) => {
@@ -575,5 +793,14 @@ export default {
   to {
     color: #409eff;
   }
+}
+
+.noticeTitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.el-drawer:focus {
+  outline: none;
 }
 </style>

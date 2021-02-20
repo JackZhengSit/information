@@ -131,6 +131,7 @@ export default {
                 page: page.currentPage - 1,
                 size: page.pageSize,
               });
+              console.log(queryParams);
               let p = searchNotice(queryParams);
               return p;
             },
