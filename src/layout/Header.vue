@@ -19,14 +19,17 @@
           class="menu-title"
           >馆藏书刊</a
         >
-        <a class="menu-title" @click="toWiki">船舶百科</a>
-        <a
+        <a path="/wiki" class="menu-title" @click="toWiki">船舶百科</a>
+        <!-- <a
           onclick="window.open('http://200.100.65.13:8080/r/library/lib_advice.jsp')"
           class="menu-title"
           >总咨询台</a
+        > -->
+        <a path="/question" class="menu-title" @click="toQuestion">总咨询台</a>
+        <a path="/download" class="menu-title" @click="toDownload">下载工具</a>
+        <a path="/statistics" class="menu-title" @click="toStatistics"
+          >数据统计</a
         >
-        <a class="menu-title" @click="toDownload">下载工具</a>
-        <a class="menu-title" @click="toStatistics">数据统计</a>
         <a path="/manage" @click="toManage($event)" class="menu-title"
           >后台管理</a
         >
@@ -71,6 +74,9 @@ export default {
     },
     toWiki() {
       this.$router.push({ name: "Wiki" });
+    },
+    toQuestion() {
+      this.$router.push({ name: "Question" });
     },
     toDownload() {
       this.$router.push({ name: "Download" });

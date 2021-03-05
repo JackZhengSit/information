@@ -25,6 +25,7 @@ var infoType = {
   paperExterior: "外部论文",
   patentExterior: "外部专利",
   notice: "公告",
+  question: "问题",
 };
 
 let infoBase = {
@@ -814,6 +815,42 @@ var notice = {
   },
 };
 
+let question = {
+  id: {},
+  title: {
+    field: "title",
+    title: "标题",
+  },
+  inquisitor: {
+    field: "inquisitor",
+    title: "提问者",
+  },
+  detail: {
+    field: "detail",
+    title: "详细",
+  },
+  craeteDay: {
+    field: "createDay",
+    title: "创建日",
+  },
+  createDayStart: {
+    field: "createDayStart",
+    title: "创建日开始",
+  },
+  createDayEnd: {
+    field: "createDayEnd",
+    title: "创建日结束",
+  },
+  createTime: {
+    field: "createTime",
+    title: "创建时间",
+  },
+  updateTime: {
+    field: "updateTime",
+    title: "更新时间",
+  },
+};
+
 Object.assign(industryTrend, infoBase);
 Object.assign(briefReportInterior, infoBase);
 Object.assign(briefReportExterior, briefReportInterior);
@@ -836,4 +873,5 @@ export {
   standardExterior,
   information,
   notice,
+  question,
 };

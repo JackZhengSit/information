@@ -48,6 +48,10 @@
                   <i class="el-icon-bell"></i>
                   <span slot="title">{{ infoType.notice }}</span>
                 </el-menu-item>
+                <el-menu-item index="/manage/question">
+                  <i class="el-icon-microphone"></i>
+                  <span slot="title">{{ infoType.question }}</span>
+                </el-menu-item>
               </el-menu>
             </el-col>
             <el-col :span="20">

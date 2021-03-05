@@ -10,6 +10,7 @@ import Manage from "../views/Manage.vue";
 import Download from "../views/Download.vue";
 import Statistics from "../views/Statistics.vue";
 import Wiki from "../views/Wiki.vue";
+import Question from "../views/Question.vue";
 
 Vue.use(VueRouter);
 
@@ -52,6 +53,11 @@ const routes = [
             path: "wiki",
             name: "Wiki",
             component: Wiki,
+          },
+          {
+            path: "question",
+            name: "Question",
+            component: Question,
           },
           {
             path: "download",
@@ -151,6 +157,14 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "notice" */ "../components/ManageNotice.vue"
+                  ),
+              },
+              {
+                path: "question",
+                name: "question",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "question" */ "../components/ManageQuestion.vue"
                   ),
               },
             ],

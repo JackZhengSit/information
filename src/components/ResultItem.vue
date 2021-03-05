@@ -54,12 +54,21 @@ export default {
       window.open(routeData.href, "_blank");
     },
     openFile() {
-      if (!this.fileUrl.includes(".")) {
-        this.$message({
-          type: "warning",
-          message: "此情报附件无附件或未上传！",
-        });
-      } else window.open(baseUrl + this.fileUrl);
+      if (this.fileUrl.includes(".")) {
+        window.open(baseUrl + this.fileUrl);
+      } else {
+        if (this.infoType == "情报简报") {
+          this.$message({
+            type: "warning",
+            message: "若需全文，请联系标研中心情报科 5216",
+          });
+        } else {
+          this.$message({
+            type: "warning",
+            message: "此情报附件无附件或未上传！",
+          });
+        }
+      }
     },
   },
 };

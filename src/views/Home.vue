@@ -498,6 +498,7 @@ export default {
   },
   methods: {
     ...mapMutations("search", [
+      "setActiveNames",
       "setCheckedInfoType",
       "setCheckedTopicCategory",
       "setCheckedProfessionField",
@@ -685,6 +686,7 @@ export default {
       this.noticeForm.publicateDayEnd = moment().format("YYYY-MM-DD");
     },
     infoTypeMore() {
+      this.setActiveNames(["infoType"]);
       switch (this.activeTab) {
         case "dataResource":
           window.open("http://200.100.68.15:8090/Main.htm");
@@ -715,8 +717,9 @@ export default {
       }
     },
     topicMore(topicName) {
+      this.setActiveNames(["topicCategory"]);
       this.getCheckbox().then(() => {
-        this.setCheckedTopicCategory([...topicName]);
+        this.setCheckedTopicCategory([topicName]);
         this.$router.push({ name: "Search" });
       });
     },
@@ -726,7 +729,7 @@ export default {
         query: {
           originId: row.originId,
           infoType: row.infoType,
-          infoTitle: row.title,
+          infoTitle: row.infoTitle,
           infoFileUrl: row.fileUrl,
         },
         props: true,

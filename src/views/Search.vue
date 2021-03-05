@@ -177,7 +177,7 @@ export default {
   data() {
     return {
       //左侧导航栏
-      activeNames: ["infoType"],
+      // activeNames: ["infoType"],
 
       infoTypeIsIndeterminate: false,
       infoTypeCheckAll: true,
@@ -194,6 +194,7 @@ export default {
   },
   computed: {
     ...mapState("search", [
+      "activeNames",
       "infoTypeAndCount",
       "checkedInfoType",
       "topicCategoryAndCount",

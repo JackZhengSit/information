@@ -14,6 +14,8 @@ import {
 } from "@/api/queryInformation";
 
 const state = () => ({
+  activeNames: ["infoType"],
+
   infoTypeAndCount: [],
   checkedInfoType: [],
   topicCategoryAndCount: [],
@@ -32,6 +34,10 @@ const state = () => ({
 });
 
 const mutations = {
+  setActiveNames(state, activeNames) {
+    state.activeNames = activeNames;
+  },
+
   setInfoTypeAndCount(state, infoTypeAndCount) {
     state.infoTypeAndCount = infoTypeAndCount;
   },
