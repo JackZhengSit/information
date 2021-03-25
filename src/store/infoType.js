@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2021-02-09 10:38:35
+ * @LastEditTime: 2021-03-25 10:00:50
  */
 // var infoType = {
 //   industryTrend: "行业动态",
@@ -26,6 +26,7 @@ var infoType = {
   patentExterior: "外部专利",
   notice: "公告",
   question: "问题",
+  classResource: "课程资源",
 };
 
 let infoBase = {
@@ -851,6 +852,46 @@ let question = {
   },
 };
 
+let classResource = {
+  id: {},
+  orderNum: {
+    field: "orderNum",
+    title: "序号",
+  },
+  orderNumStart: {
+    field: "orderNumStart",
+    title: "序号",
+  },
+  orderNumEnd: {
+    field: "orderNumEnd",
+    title: "序号",
+  },
+  name: {
+    field: "name",
+    title: "课程名称",
+  },
+  teacher: {
+    field: "teacher",
+    title: "主讲人",
+  },
+  target: {
+    field: "target",
+    title: "课程目标",
+  },
+  filePath: {
+    field: "filePath",
+    title: "文件路径",
+  },
+  createTime: {
+    field: "createTime",
+    title: "创建时间",
+  },
+  updateTime: {
+    field: "updateTime",
+    title: "更新时间",
+  },
+};
+
 Object.assign(industryTrend, infoBase);
 Object.assign(briefReportInterior, infoBase);
 Object.assign(briefReportExterior, briefReportInterior);
@@ -874,4 +915,5 @@ export {
   information,
   notice,
   question,
+  classResource,
 };

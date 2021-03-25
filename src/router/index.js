@@ -167,6 +167,14 @@ const routes = [
                     /* webpackChunkName: "question" */ "../components/ManageQuestion.vue"
                   ),
               },
+              {
+                path: "classResource",
+                name: "classResource",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "classResource" */ "../components/ManageClassResource.vue"
+                  ),
+              },
             ],
           },
         ],

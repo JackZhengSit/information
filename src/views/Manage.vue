@@ -52,6 +52,10 @@
                   <i class="el-icon-microphone"></i>
                   <span slot="title">{{ infoType.question }}</span>
                 </el-menu-item>
+                <el-menu-item index="/manage/classResource">
+                  <i class="el-icon-download"></i>
+                  <span slot="title">{{ infoType.classResource }}</span>
+                </el-menu-item>
               </el-menu>
             </el-col>
             <el-col :span="20">
