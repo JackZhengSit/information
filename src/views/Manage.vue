@@ -56,6 +56,10 @@
                   <i class="el-icon-download"></i>
                   <span slot="title">{{ infoType.classResource }}</span>
                 </el-menu-item>
+                <el-menu-item index="/manage/infoLibrary">
+                  <i class="el-icon-notebook-1"></i>
+                  <span slot="title">{{ infoType.infoLibrary }}</span>
+                </el-menu-item>
               </el-menu>
             </el-col>
             <el-col :span="20">

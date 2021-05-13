@@ -14,11 +14,9 @@
         <a path="/search" @click="toSearch($event)" class="menu-title"
           >信息检索</a
         >
-        <a
-          onclick="window.open('http://200.100.65.13:8080/r/library/index.jsp')"
-          class="menu-title"
-          >馆藏书刊</a
-        >
+        <!-- onclick="window.open('http://200.100.65.13:8080/r/library/index.jsp')" -->
+        <a path="/labrary" class="menu-title" @click="toLabrary">馆藏书刊</a>
+
         <a path="/wiki" class="menu-title" @click="toWiki">船舶百科</a>
         <!-- <a
           onclick="window.open('http://200.100.65.13:8080/r/library/lib_advice.jsp')"
@@ -72,6 +70,10 @@ export default {
     toManage({ srcElement }) {
       this.$router.push({ name: "Manage" });
     },
+    toLabrary() {
+      this.$router.push({ name: "Labrary" });
+    },
+
     toWiki() {
       this.$router.push({ name: "Wiki" });
     },

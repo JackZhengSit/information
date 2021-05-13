@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2021-03-25 10:00:50
+ * @LastEditTime: 2021-05-07 16:52:08
  */
 // var infoType = {
 //   industryTrend: "行业动态",
@@ -27,6 +27,7 @@ var infoType = {
   notice: "公告",
   question: "问题",
   classResource: "课程资源",
+  infoLibrary: "馆藏图书",
 };
 
 let infoBase = {
@@ -892,6 +893,74 @@ let classResource = {
   },
 };
 
+let infoLibrary = {
+  id: {},
+  num: {
+    title: "编号",
+    field: "num",
+  },
+  name: {
+    title: "名称",
+    field: "name",
+  },
+  title: {
+    title: "标题",
+    field: "title",
+  },
+  author: {
+    title: "作者",
+    field: "author",
+  },
+  language: {
+    title: "语种",
+    field: "language",
+  },
+  sum: {
+    title: "册数",
+    field: "sum",
+  },
+  publication: {
+    title: "出版社",
+    field: "publication",
+  },
+  publicationDate: {
+    title: "出版社日期",
+    field: "publicationDate",
+  },
+  checkInTime: {
+    title: "登记时间",
+    field: "checkInTime",
+  },
+  // checkInTimeStart: {
+  //   title: "登记时间",
+  //   field: "checkInTimeStart",
+  // },
+  // checkInTimeEnd: {
+  //   title: "登记时间",
+  //   field: "checkInTimeEnd",
+  // },
+  storeSite: {
+    title: "馆藏地",
+    field: "storeSite",
+  },
+  type: {
+    title: "图书类型",
+    field: "type",
+  },
+  filePath: {
+    title: "期刊路径",
+    field: "filePath",
+  },
+  clickCount: {
+    title: "点击量",
+    field: "clickCount",
+  },
+  imgPath: {
+    title: "图片路径",
+    field: "imgPath",
+  },
+};
+
 Object.assign(industryTrend, infoBase);
 Object.assign(briefReportInterior, infoBase);
 Object.assign(briefReportExterior, briefReportInterior);
@@ -916,4 +985,5 @@ export {
   notice,
   question,
   classResource,
+  infoLibrary,
 };

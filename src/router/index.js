@@ -11,6 +11,7 @@ import Download from "../views/Download.vue";
 import Statistics from "../views/Statistics.vue";
 import Wiki from "../views/Wiki.vue";
 import Question from "../views/Question.vue";
+import Labrary from "../views/Labrary.vue";
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ const routes = [
             path: "search",
             name: "Search",
             component: Search,
+          },
+          {
+            path: "labrary",
+            name: "Labrary",
+            component: Labrary,
           },
           {
             path: "wiki",
@@ -173,6 +179,14 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "classResource" */ "../components/ManageClassResource.vue"
+                  ),
+              },
+              {
+                path: "infoLibrary",
+                name: "infoLibrary",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "infoLibrary" */ "../components/ManageInfoLibrary.vue"
                   ),
               },
             ],
