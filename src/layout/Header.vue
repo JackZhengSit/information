@@ -15,7 +15,16 @@
           >信息检索</a
         >
         <!-- onclick="window.open('http://200.100.65.13:8080/r/library/index.jsp')" -->
-        <a path="/labrary" class="menu-title" @click="toLabrary">馆藏书刊</a>
+        <!-- <a path="/labrary" class="menu-title" @click="toLabrary">馆藏书刊</a> -->
+
+        <el-dropdown :hide-on-click="false" @command="toLibrary">
+          <span path="/library" class="menu-title"> 馆藏书刊</span>
+
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="Book">馆藏图书</el-dropdown-item>
+            <el-dropdown-item command="Journal">所内期刊</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
 
         <a path="/wiki" class="menu-title" @click="toWiki">船舶百科</a>
         <!-- <a
@@ -24,7 +33,22 @@
           >总咨询台</a
         > -->
         <a path="/question" class="menu-title" @click="toQuestion">总咨询台</a>
-        <a path="/download" class="menu-title" @click="toDownload">下载工具</a>
+        <!-- <a path="/download" class="menu-title" @click="toDownload">下载工具</a> -->
+        <el-dropdown :hide-on-click="false" @command="toDownload">
+          <span path="/download" class="menu-title"> 下载工具</span>
+
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="SearchIndex"
+              >核心期刊查询入口</el-dropdown-item
+            >
+            <el-dropdown-item command="ClassResource"
+              >信息检索课程推荐</el-dropdown-item
+            >
+            <el-dropdown-item command="Tools"
+              >常用工具书/软件推荐</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </el-dropdown>
         <a path="/statistics" class="menu-title" @click="toStatistics"
           >数据统计</a
         >
@@ -70,8 +94,8 @@ export default {
     toManage({ srcElement }) {
       this.$router.push({ name: "Manage" });
     },
-    toLabrary() {
-      this.$router.push({ name: "Labrary" });
+    toLibrary(command) {
+      this.$router.push({ name: command });
     },
 
     toWiki() {
@@ -80,8 +104,8 @@ export default {
     toQuestion() {
       this.$router.push({ name: "Question" });
     },
-    toDownload() {
-      this.$router.push({ name: "Download" });
+    toDownload(command) {
+      this.$router.push({ name: command });
     },
     toStatistics() {
       this.$router.push({ name: "Statistics" });
@@ -170,5 +194,15 @@ export default {
   color: #1989fa;
   opacity: 1;
   border-bottom: 2px solid #1989fa;
+}
+
+.el-dropdown {
+  display: inline;
+}
+
+.el-dropdown span {
+  font-size: 16px;
+  display: block;
+  line-height: 98px;
 }
 </style>

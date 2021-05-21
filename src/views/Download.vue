@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-01-27 09:38:49
- * @LastEditTime: 2021-03-25 15:01:10
+ * @LastEditTime: 2021-05-19 11:13:52
 -->
 <template>
   <div>
@@ -86,12 +86,20 @@
               <h5>常用软件</h5>
               <el-button
                 plain
-                @click="download('/static/file/info-class-resource/22.xlsx')"
+                @click="
+                  download(
+                    '/static/file/info-class-resource/Acrobat.9.Pro.ChS.rar'
+                  )
+                "
                 >PDF阅读器</el-button
               >
               <el-button
                 plain
-                @click="download('/static/file/info-class-resource/22.xlsx')"
+                @click="
+                  download(
+                    '/static/file/info-class-resource/CAJViewer 7.2.self.exe'
+                  )
+                "
               >
                 清华同方CAJ阅读器
               </el-button>
@@ -99,12 +107,16 @@
               <h5>百科词典/工具书</h5>
               <el-link
                 type="primary"
-                @click="download('/static/file/info-class-resource/22.xlsx')"
+                @click="
+                  download('/static/file/info-class-resource/船舶百科.pdf')
+                "
                 >瓦锡兰船舶百科词典</el-link
               ><br />
               <el-link
                 type="primary"
-                @click="download('/static/file/info-class-resource/22.xlsx')"
+                @click="
+                  download('/static/file/info-class-resource/专利百科手册.pdf')
+                "
                 >智慧芽专利百科全书</el-link
               >
             </div>
@@ -129,25 +141,28 @@ export default {
           no: 1,
           name: "Exlibris中文核心期刊查询系统",
           introduce:
-            "查询浏览的数据库及评价体系及评价体系以及所包含的期刊信息，由中国SFX用户共建共享。由于时间精力所限，本系统不保证所有的数据都能及时收录完整  http://wwww.cceu.org.cn/demo/findcoree.htm",
+            "查询浏览的数据库及评价体系及评价体系以及所包含的期刊信息，由中国SFX用户共建共享。由于时间精力所限，本系统不保证所有的数据都能及时收录完整  http://sfx-86ali.hosted.exlibrisgroup.com/index.html",
         },
         {
           no: 1,
-          name: "Exlibris中文核心期刊查询系统",
+          name: "中文社会科学引文索引（CSSCI）收录期刊",
           introduce:
-            "查询浏览的数据库及评价体系及评价体系以及所包含的期刊信息，由中国SFX用户共建共享。由于时间精力所限，本系统不保证所有的数据都能及时收录完整http://wwww.cceu.org.cn/demo/findcoree.htm",
+            "中文社会科学引文索引（Chinese Social Science Citation Index）是由南京大学中国社会科学研究评价中心开发研制的引文索引数据库，用来检索中文人文社会科学领域的论文收录和被引用情况。http://cssci.nju.edu.cn/",
         },
         {
           no: 1,
-          name: "Exlibris中文核心期刊查询系统",
-          introduce:
-            "查询浏览的数据库及评价体系及评价体系以及所包含的期刊信息，由中国SFX用户共建共享。由于时间精力所限，本系统不保证所有的数据都能及时收录完整http://wwww.cceu.org.cn/demo/findcoree.htm",
+          name: "SCIE参考指南",
+          introduce: "http://apps.webofknowledge.com/",
         },
         {
           no: 1,
-          name: "Exlibris中文核心期刊查询系统",
-          introduce:
-            "查询浏览的数据库及评价体系及评价体系以及所包含的期刊信息，由中国SFX用户共建共享。由于时间精力所限，本系统不保证所有的数据都能及时收录完整http://wwww.cceu.org.cn/demo/findcoree.htm",
+          name: "SSCI参考指南",
+          introduce: "http://apps.webofknowledge.com/",
+        },
+        {
+          no: 1,
+          name: "EI参考指南",
+          introduce: "https://wwww.engineeringvillage.com/home.url",
         },
       ],
       classResourceTableData: [],
@@ -155,14 +170,21 @@ export default {
   },
   methods: {
     download(url) {
-      window.open(baseUrl + url);
+      let a = document.createElement("a");
+      a.href = baseUrl + url;
+      a.download = baseUrl + url;
+      a.click();
     },
     downloadClassResource(id, row) {
-      if (row.filePath != null && row.filePath != "")
-        window.open(
-          baseUrl + "/static/file/info-class-resource/" + row.filePath
-        );
-      else
+      if (row.filePath != null && row.filePath != "") {
+        // window.open(
+        //   baseUrl + "/static/file/info-class-resource/" + row.filePath
+        // );
+        let a = document.createElement("a");
+        a.href = baseUrl + "/static/file/info-class-resource/" + row.filePath;
+        a.download = row.filePath;
+        a.click();
+      } else
         Message({
           message: "文件不存在！",
           type: "error",

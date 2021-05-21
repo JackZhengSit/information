@@ -3,13 +3,13 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-05-06 08:49:51
- * @LastEditTime: 2021-05-12 09:39:31
+ * @LastEditTime: 2021-05-19 14:44:27
 -->
 <template>
   <div>
     <el-row>
       <el-col :span="20" :offset="2">
-        <el-tabs tab-position="left">
+        <el-tabs tab-position="left" type="card">
           <el-tab-pane label="馆藏图书">
             <el-row>
               <el-col :span="12" :offset="6">
@@ -67,7 +67,7 @@
                     header-align="center"
                     align="center"
                     label="登记时间"
-                    prop="publicationDate"
+                    prop="checkInTime"
                     width="100"
                   ></el-table-column>
                   <el-table-column
@@ -171,7 +171,7 @@
                     header-align="center"
                     align="center"
                     label="期刊名称"
-                    prop="title"
+                    prop="name"
                   ></el-table-column>
                   <el-table-column
                     show-overflow-tooltip
@@ -193,7 +193,7 @@
                     header-align="center"
                     align="center"
                     label="登记时间"
-                    prop="publicationDate"
+                    prop="checkInTime"
                     width="150"
                   ></el-table-column>
                   <el-table-column
@@ -236,10 +236,15 @@
                         item.imgPath
                       "
                       fit="fill"
-                      style="width: 150px; height: 220px"
+                      style="width: 150px; height: 220px; cursor: pointer"
+                      @click="downloadJournal(item.id, item)"
                     ></el-image>
                     <div>
-                      <span>{{ item.title }}</span>
+                      <span
+                        style="cursor: pointer"
+                        @click="downloadJournal(item.id, item)"
+                        >{{ item.name }}</span
+                      >
                     </div>
                   </el-card>
                 </div>

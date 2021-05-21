@@ -3,11 +3,11 @@
     <header id="header">
       <router-view name="header"></router-view>
     </header>
+
     <main id="content">
-      <el-main>
-        <router-view name="content"></router-view>
-      </el-main>
+      <el-main><router-view name="content"></router-view></el-main>
     </main>
+
     <footer id="footer">
       <router-view name="footer"></router-view>
     </footer>
@@ -47,19 +47,19 @@ body {
 }
 #index {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
+  flex-direction: column;
 }
-#header {
+/* #header {
   flex: 1;
-}
+} */
 
 #content {
   flex: 1;
   padding-top: 100px;
 }
 
-#footer {
+/* #footer {
   flex: 1;
-}
+} */
 </style>

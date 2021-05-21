@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-23 10:23:20
- * @LastEditTime: 2021-05-07 16:52:08
+ * @LastEditTime: 2021-05-19 09:22:19
  */
 // var infoType = {
 //   industryTrend: "行业动态",
@@ -924,7 +924,7 @@ let infoLibrary = {
     field: "publication",
   },
   publicationDate: {
-    title: "出版社日期",
+    title: "出版日期",
     field: "publicationDate",
   },
   checkInTime: {

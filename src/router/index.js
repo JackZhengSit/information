@@ -11,7 +11,12 @@ import Download from "../views/Download.vue";
 import Statistics from "../views/Statistics.vue";
 import Wiki from "../views/Wiki.vue";
 import Question from "../views/Question.vue";
-import Labrary from "../views/Labrary.vue";
+import Library from "../views/Library.vue";
+import Book from "../views/Book.vue";
+import Journal from "../views/Journal.vue";
+import SearchIndex from "../views/SearchIndex.vue";
+import ClassResource from "../views/ClassResource.vue";
+import Tools from "../views/Tools.vue";
 
 Vue.use(VueRouter);
 
@@ -51,9 +56,20 @@ const routes = [
             component: Search,
           },
           {
-            path: "labrary",
-            name: "Labrary",
-            component: Labrary,
+            path: "library",
+            name: "Library",
+            component: Library,
+            children: [],
+          },
+          {
+            path: "library/book",
+            name: "Book",
+            component: Book,
+          },
+          {
+            path: "library/journal",
+            name: "Journal",
+            component: Journal,
           },
           {
             path: "wiki",
@@ -69,6 +85,22 @@ const routes = [
             path: "download",
             name: "Download",
             component: Download,
+            children: [],
+          },
+          {
+            path: "download/searchIndex",
+            name: "SearchIndex",
+            component: SearchIndex,
+          },
+          {
+            path: "download/classResource",
+            name: "ClassResource",
+            component: ClassResource,
+          },
+          {
+            path: "download/tools",
+            name: "Tools",
+            component: Tools,
           },
           {
             path: "statistics",
