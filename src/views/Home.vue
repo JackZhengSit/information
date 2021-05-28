@@ -507,7 +507,6 @@ export default {
     ...mapActions("search", ["getCheckbox"]),
     async infoTypeChart() {
       let value = [];
-
       for (const item of this.getInfoTypeTitle) {
         await countInfoType({ infoType: item }).then((res) => {
           value.push(res);
@@ -515,8 +514,7 @@ export default {
       }
 
       let myEcharts = this.$echarts.init(
-        document.getElementById("infoTypeChart"),
-        "light"
+        document.getElementById("infoTypeChart")
       );
       let option = {
         title: {
@@ -565,8 +563,7 @@ export default {
       }
 
       let myEcharts = this.$echarts.init(
-        document.getElementById("infoTypeChartInterior"),
-        "light"
+        document.getElementById("infoTypeChartInterior")
       );
       let option = {
         title: {
@@ -609,8 +606,7 @@ export default {
       }
 
       let myEcharts = this.$echarts.init(
-        document.getElementById("infoTypeChartExterior"),
-        "light"
+        document.getElementById("infoTypeChartExterior")
       );
       let option = {
         title: {
