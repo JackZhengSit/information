@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-05-20 15:17:57
- * @LastEditTime: 2021-05-21 16:26:39
+ * @LastEditTime: 2021-06-04 09:37:36
 -->
 <template>
   <div>
@@ -24,10 +24,30 @@
       </el-col>
     </el-row>
 
-    <el-row style="margin: 20px 0 10px 0">
-      <el-col :span="6" :offset="7">
-        期刊分类：
+    <el-row style="margin: 20px 0 0 0">
+      <el-col :span="17" :offset="0">
+        <div style="display: flex; justify-content: flex-end">
+          <el-radio-group
+            v-model="journalSort"
+            @change="sortChange"
+            style="margin: 10px 10px 0 10px"
+          >
+            <el-radio label="publication_date">出版日排序</el-radio>
+            <el-radio label="title">按名称排序</el-radio> </el-radio-group
+          >|
+          <el-radio-group
+            v-model="journalDisplayType"
+            @change="displayChange"
+            style="margin: 10px 10px 0 10px"
+          >
+            <el-radio label="image">按图片显示</el-radio>
+            <el-radio label="list">按列表显示</el-radio>
+          </el-radio-group>
+        </div>
+      </el-col>
+      <el-col :span="2" :offset="0">
         <el-select
+          size="small"
           v-model="journalType"
           placeholder=""
           style="width: 270px"
@@ -40,20 +60,6 @@
             :value="item.value"
           ></el-option>
         </el-select>
-      </el-col>
-      <el-col :span="10" :offset="0">
-        <el-radio-group
-          v-model="journalSort"
-          @change="sortChange"
-          style="margin: 5px 35px 0 0"
-        >
-          <el-radio label="publication_date">出版日排序</el-radio>
-          <el-radio label="title">按名称排序</el-radio>
-        </el-radio-group>
-        <el-radio-group v-model="journalDisplayType" @change="displayChange">
-          <el-radio label="image">按图片显示</el-radio>
-          <el-radio label="list">按列表显示</el-radio>
-        </el-radio-group>
       </el-col>
     </el-row>
     <el-row>
