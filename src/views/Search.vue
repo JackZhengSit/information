@@ -260,6 +260,15 @@ export default {
     },
     checkedYear: {
       get() {
+        // //把其他放在最后
+        // let year = this.$store.state.search.checkedYear;
+        // let otherIdx = year.findIndex((v) => {
+        //   v.year == "其它";
+        // });
+        // let temp = year[otherIdx];
+        // year[otherIdx] = year[year.length - 1];
+        // year[year.length - 1] = temp;
+        // return year;
         return this.$store.state.search.checkedYear;
       },
       set(val) {

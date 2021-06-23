@@ -26,7 +26,7 @@
           </el-dropdown-menu>
         </el-dropdown>
 
-        <a path="/wiki" class="menu-title" @click="toWiki">船舶百科</a>
+        <!-- <a path="/wiki" class="menu-title" @click="toWiki">船舶百科</a> -->
         <!-- <a
           onclick="window.open('http://200.100.65.13:8080/r/library/lib_advice.jsp')"
           class="menu-title"

@@ -57,7 +57,11 @@ export default {
       if (this.fileUrl.includes(".")) {
         window.open(baseUrl + this.fileUrl);
       } else {
-        if (this.infoType == "情报简报") {
+        if (
+          this.infoType == "情报简报" ||
+          this.infoType == "外部简报" ||
+          this.infoType == "情报报告"
+        ) {
           this.$message({
             type: "warning",
             message: "若需全文，请联系标研中心情报科 5216",

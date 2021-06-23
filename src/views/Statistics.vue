@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-01-27 09:39:18
- * @LastEditTime: 2021-05-25 14:36:13
+ * @LastEditTime: 2021-06-22 16:17:37
 -->
 <template>
   <div>
@@ -13,7 +13,7 @@
           <div class="chart" id="typeStatistcs"></div>
           <div class="chart" id="categoryStatistcs"></div>
           <div class="chart" id="fieldStatistcs"></div>
-          <div class="chart" id="yearStatistcs"></div>
+          <div class="chart" id="yearStatistcs" style="height: 1200px"></div>
         </el-card>
       </el-col>
     </el-row>
@@ -35,7 +35,8 @@ export default {
   methods: {
     initTypeChart(data) {
       let typeChart = this.$echarts.init(
-        document.getElementById("typeStatistcs")
+        document.getElementById("typeStatistcs"),
+        "light"
       );
       typeChart.setOption({
         title: {
@@ -62,7 +63,8 @@ export default {
     },
     initTopicCategoryChart(data) {
       let typeChart = this.$echarts.init(
-        document.getElementById("categoryStatistcs")
+        document.getElementById("categoryStatistcs"),
+        "light"
       );
       typeChart.setOption({
         title: {
@@ -89,7 +91,8 @@ export default {
     },
     initProfessionFieldChart(data) {
       let typeChart = this.$echarts.init(
-        document.getElementById("fieldStatistcs")
+        document.getElementById("fieldStatistcs"),
+        "light"
       );
       typeChart.setOption({
         title: {
@@ -116,7 +119,8 @@ export default {
     },
     initYearChart(data) {
       let typeChart = this.$echarts.init(
-        document.getElementById("yearStatistcs")
+        document.getElementById("yearStatistcs"),
+        "light"
       );
       typeChart.setOption({
         title: {

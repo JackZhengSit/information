@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-02-05 13:34:46
- * @LastEditTime: 2021-02-08 16:18:44
+ * @LastEditTime: 2021-06-23 13:46:18
  */
 import {
   getInfoTypeCount,
@@ -45,18 +45,61 @@ const mutations = {
     state.checkedInfoType = checkedInfoType;
   },
   setTopicCategoryAndCount(state, topicCategoryAndCount) {
+    //把其他放在最后
+    let otherIdx;
+    for (let i = 0; i < topicCategoryAndCount.length; i++) {
+      if (topicCategoryAndCount[i].topicCategory == "其它") {
+        otherIdx = i;
+        break;
+      }
+    }
+    if (otherIdx != -1)
+      for (let i = otherIdx; i < topicCategoryAndCount.length - 1; i++) {
+        let temp = topicCategoryAndCount[i + 1];
+        topicCategoryAndCount[i + 1] = topicCategoryAndCount[i];
+        topicCategoryAndCount[i] = temp;
+      }
     state.topicCategoryAndCount = topicCategoryAndCount;
   },
   setCheckedTopicCategory(state, checkedTopicCategory) {
     state.checkedTopicCategory = checkedTopicCategory;
   },
   setProfessionFieldAndCount(state, professionFieldAndCount) {
+    //把其他放在最后
+    let otherIdx;
+    for (let i = 0; i < professionFieldAndCount.length; i++) {
+      if (professionFieldAndCount[i].professionField == "其它") {
+        otherIdx = i;
+        break;
+      }
+    }
+    if (otherIdx != -1)
+      for (let i = otherIdx; i < professionFieldAndCount.length - 1; i++) {
+        let temp = professionFieldAndCount[i + 1];
+        professionFieldAndCount[i + 1] = professionFieldAndCount[i];
+        professionFieldAndCount[i] = temp;
+      }
     state.professionFieldAndCount = professionFieldAndCount;
   },
   setCheckedProfessionField(state, checkedProfessionField) {
     state.checkedProfessionField = checkedProfessionField;
   },
   setYearAndCount(state, yearAndCount) {
+    //把其他放在最后
+    let otherIdx;
+    for (let i = 0; i < yearAndCount.length; i++) {
+      if (yearAndCount[i].year == "其它") {
+        otherIdx = i;
+        break;
+      }
+    }
+    if (otherIdx != -1)
+      for (let i = otherIdx; i < yearAndCount.length - 1; i++) {
+        let temp = yearAndCount[i + 1];
+        yearAndCount[i + 1] = yearAndCount[i];
+        yearAndCount[i] = temp;
+      }
+
     state.yearAndCount = yearAndCount;
   },
   setCheckedYear(state, checkedYear) {

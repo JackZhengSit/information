@@ -313,7 +313,12 @@
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-table :data="noticeTableData" style="width: 100%">
+              <el-table
+                ref="noticeTable"
+                :data="noticeTableData"
+                style="width: 100%"
+                @row-click="rowClick"
+              >
                 <el-table-column type="expand">
                   <template slot-scope="props">
                     <el-row>
@@ -480,7 +485,7 @@ export default {
       noticeForm: {
         title: "",
         author: "",
-        publicateDayStart: moment().subtract(1, "months").format("YYYY-MM-DD"),
+        publicateDayStart: moment().subtract(3, "years").format("YYYY-MM-DD"),
         publicateDayEnd: moment().format("YYYY-MM-DD"),
       },
       noticeTableData: [],
@@ -514,17 +519,30 @@ export default {
       }
 
       let myEcharts = this.$echarts.init(
-        document.getElementById("infoTypeChart")
+        document.getElementById("infoTypeChart"),
+        "light"
       );
       let option = {
         title: {
-          text: "全部情报信息统计",
+          text: "全部情报数据统计",
           left: 80,
           top: 20,
         },
         tooltip: {},
         legend: {
           data: ["知识量"],
+        },
+        graphic: {
+          elements: [
+            {
+              type: "text",
+              left: "70%",
+              top: "10%",
+              style: {
+                text: "总量：" + value.reduce((acc, cur) => (acc += cur)),
+              },
+            },
+          ],
         },
         grid: {
           left: 90,
@@ -563,13 +581,26 @@ export default {
       }
 
       let myEcharts = this.$echarts.init(
-        document.getElementById("infoTypeChartInterior")
+        document.getElementById("infoTypeChartInterior"),
+        "light"
       );
       let option = {
         title: {
-          text: "内部情报信息统计",
+          text: "内部情报数据统计",
           left: 80,
           top: 20,
+        },
+        graphic: {
+          elements: [
+            {
+              type: "text",
+              left: "70%",
+              top: "10%",
+              style: {
+                text: "总量：" + value.reduce((acc, cur) => (acc += cur)),
+              },
+            },
+          ],
         },
         tooltip: {},
         legend: {
@@ -606,13 +637,26 @@ export default {
       }
 
       let myEcharts = this.$echarts.init(
-        document.getElementById("infoTypeChartExterior")
+        document.getElementById("infoTypeChartExterior"),
+        "light"
       );
       let option = {
         title: {
-          text: "外部情报信息统计",
+          text: "外部情报数据统计",
           left: 80,
           top: 20,
+        },
+        graphic: {
+          elements: [
+            {
+              type: "text",
+              left: "70%",
+              top: "10%",
+              style: {
+                text: "总量：" + value.reduce((acc, cur) => (acc += cur)),
+              },
+            },
+          ],
         },
         tooltip: {},
         legend: {
@@ -677,7 +721,7 @@ export default {
       this.noticeForm.title = "";
       this.noticeForm.author = "";
       this.noticeForm.publicateDayStart = moment()
-        .subtract(1, "months")
+        .subtract(3, "years")
         .format("YYYY-MM-DD");
       this.noticeForm.publicateDayEnd = moment().format("YYYY-MM-DD");
     },
@@ -731,6 +775,10 @@ export default {
         props: true,
       });
       window.open(routeData.href, "_blank");
+    },
+    rowClick(row) {
+      // console.log(this.$refs.noticeTable);
+      // this.$refs.noticeTable.toggleRowExpansion(row, true);
     },
   },
   created() {
