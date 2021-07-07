@@ -428,13 +428,34 @@ export default {
     };
   },
   methods: {
+    // openFile() {
+    //   if (!this.infoFileUrl.includes(".")) {
+    //     this.$message({
+    //       type: "warning",
+    //       message: "此情报附件无附件或未上传！",
+    //     });
+    //   } else window.open(baseUrl + this.infoFileUrl);
+    // },
     openFile() {
-      if (!this.infoFileUrl.includes(".")) {
-        this.$message({
-          type: "warning",
-          message: "此情报附件无附件或未上传！",
-        });
-      } else window.open(baseUrl + this.infoFileUrl);
+      if (this.infoFileUrl.includes(".")) {
+        window.open(baseUrl + this.infoFileUrl);
+      } else {
+        if (
+          this.infoType == "情报简报" ||
+          this.infoType == "外部简报" ||
+          this.infoType == "情报报告"
+        ) {
+          this.$message({
+            type: "warning",
+            message: "若需全文，请联系标研中心情报研究科 5216",
+          });
+        } else {
+          this.$message({
+            type: "warning",
+            message: "此情报附件无附件或未上传！",
+          });
+        }
+      }
     },
     getDetailShow() {
       return this.detailShow.find((item) => item.type == this.infoType).show;

@@ -64,7 +64,7 @@ export default {
         ) {
           this.$message({
             type: "warning",
-            message: "若需全文，请联系标研中心情报科 5216",
+            message: "若需全文，请联系标研中心情报研究科 5216",
           });
         } else {
           this.$message({

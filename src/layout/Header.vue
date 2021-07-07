@@ -6,11 +6,7 @@
       </div>
       <div class="menu-box">
         <a path="/home" @click="toHome($event)" class="menu-title">首页</a>
-        <a
-          onclick="window.open('http://200.100.68.18:8088/default/management/informationPortal.jsp')"
-          class="menu-title"
-          >情报需求</a
-        >
+
         <a path="/search" @click="toSearch($event)" class="menu-title"
           >信息检索</a
         >
@@ -52,6 +48,16 @@
         <a path="/statistics" class="menu-title" @click="toStatistics"
           >数据统计</a
         >
+        <el-tooltip
+          content="如出现“调用异常”，请在异常界面刷新"
+          placement="bottom"
+          ><a
+            onclick="window.open('http://200.100.68.18:8088/default/management/informationPortal.jsp')"
+            class="menu-title"
+            >情报需求</a
+          >
+        </el-tooltip>
+
         <a path="/manage" @click="toManage($event)" class="menu-title"
           >后台管理</a
         >

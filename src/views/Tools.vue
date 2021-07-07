@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-05-20 15:36:41
- * @LastEditTime: 2021-05-21 10:45:21
+ * @LastEditTime: 2021-07-07 10:35:14
 -->
 <template>
   <div>
@@ -11,14 +11,31 @@
       <el-col :span="18" :offset="3">
         <div style="padding: 0 20px 0 20px">
           <h5>常用软件</h5>
-          <el-button
+          <!-- <el-button
             plain
             @click="
               download('/static/file/info-class-resource/Acrobat.9.Pro.ChS.rar')
             "
             >PDF阅读器</el-button
+          > -->
+          <a
+            class="linke"
+            :href="
+              this.baseUrl +
+              '/static/file/info-class-resource/Acrobat.9.Pro.ChS.rar'
+            "
+            >PDF阅读器</a
           >
-          <el-button
+
+          <a
+            class="linke"
+            :href="
+              this.baseUrl +
+              '/static/file/info-class-resource/CAJViewer 7.2.self.exe'
+            "
+            >清华同方CAJ阅读器</a
+          >
+          <!-- <el-button
             plain
             @click="
               download(
@@ -27,10 +44,10 @@
             "
           >
             清华同方CAJ阅读器
-          </el-button>
+          </el-button> -->
 
           <h5>百科词典/工具书</h5>
-          <el-link
+          <!-- <el-link
             type="primary"
             @click="download('/static/file/info-class-resource/船舶百科.pdf')"
             >瓦锡兰船舶百科词典</el-link
@@ -41,6 +58,20 @@
               download('/static/file/info-class-resource/专利百科手册.pdf')
             "
             >智慧芽专利百科全书</el-link
+          > -->
+          <a
+            class="linke"
+            :href="
+              this.baseUrl + '/static/file/info-class-resource/船舶百科.pdf'
+            "
+            >瓦锡兰船舶百科词典</a
+          >
+          <a
+            class="linke"
+            :href="
+              this.baseUrl + '/static/file/info-class-resource/专利百科手册.pdf'
+            "
+            >智慧芽专利百科全书</a
           >
         </div>
       </el-col>
@@ -70,5 +101,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.linke {
+  color: #66b1ff;
+  text-decoration: none;
+  margin: 0 20px 0 0;
+}
+.linke:hover {
+  color: #66b1ff;
+  text-decoration: underline;
+}
 </style>

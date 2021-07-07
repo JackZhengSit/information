@@ -261,11 +261,13 @@
       </el-col>
     </el-row>
     <el-drawer
-      title="我是标题"
+      title="公告查询"
       :visible.sync="drawer"
-      :with-header="false"
+      :with-header="true"
       size="70%"
       @opened="searchNotice"
+      show-close="true"
+      close-on-press-escape
     >
       <el-container>
         <el-main style="overflow-y: scroll; width: 100vh; height: 100vh">

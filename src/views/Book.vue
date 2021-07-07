@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-05-20 15:17:31
- * @LastEditTime: 2021-05-21 10:40:05
+ * @LastEditTime: 2021-07-07 09:56:40
 -->
 <template>
   <div>
@@ -50,14 +50,14 @@
             width="210"
           ></el-table-column>
 
-          <el-table-column
+          <!-- <el-table-column
             show-overflow-tooltip
             header-align="center"
             align="center"
             label="出版时间"
             prop="publicationDate"
             width="110"
-          ></el-table-column>
+          ></el-table-column> -->
           <el-table-column
             show-overflow-tooltip
             header-align="center"

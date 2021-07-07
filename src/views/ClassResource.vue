@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-05-20 15:36:32
- * @LastEditTime: 2021-05-21 10:44:48
+ * @LastEditTime: 2021-07-07 10:38:06
 -->
 <template>
   <div>
@@ -74,13 +74,13 @@ export default {
   methods: {
     downloadClassResource(id, row) {
       if (row.filePath != null && row.filePath != "") {
-        // window.open(
-        //   baseUrl + "/static/file/info-class-resource/" + row.filePath
-        // );
-        let a = document.createElement("a");
-        a.href = baseUrl + "/static/file/info-class-resource/" + row.filePath;
-        a.download = row.filePath;
-        a.click();
+        window.open(
+          baseUrl + "/static/file/info-class-resource/" + row.filePath
+        );
+        // let a = document.createElement("a");
+        // a.href = baseUrl + "/static/file/info-class-resource/" + row.filePath;
+        // a.download = row.filePath;
+        // a.click();
       } else
         Message({
           message: "文件不存在！",
