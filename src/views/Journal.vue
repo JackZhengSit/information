@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-05-20 15:17:57
- * @LastEditTime: 2021-06-04 09:37:36
+ * @LastEditTime: 2021-07-15 10:21:57
 -->
 <template>
   <div>
@@ -122,26 +122,30 @@
         </el-table>
 
         <div class="imgBox" v-if="journalDisplayType == 'image'">
-          <el-card
+          <div
             v-for="item in journals"
             :key="item.id"
-            shadow="hover"
-            :body-style="{ padding: '0px' }"
-            style="width: 150px; height: 250px; margin: 10px"
-            ><el-image
-              :src="baseUrl + '/static/file/info-library/pic/' + item.imgPath"
-              fit="fill"
-              style="width: 150px; height: 220px; cursor: pointer"
-              @click="downloadJournal(item.id, item)"
-            ></el-image>
+            style="width: 152px; margin: 10px"
+          >
+            <el-card
+              shadow="hover"
+              :body-style="{ padding: '0px' }"
+              style="height: 220px"
+              ><el-image
+                :src="baseUrl + '/static/file/info-library/pic/' + item.imgPath"
+                fit="fill"
+                style="width: 150px; height: 220px; cursor: pointer"
+                @click="downloadJournal(item.id, item)"
+              ></el-image>
+            </el-card>
             <div>
               <span
-                style="cursor: pointer"
+                style="cursor: pointer; font-size: 12px; color: #409eff"
                 @click="downloadJournal(item.id, item)"
                 >{{ item.name }}</span
               >
             </div>
-          </el-card>
+          </div>
         </div>
         <div class="page">
           <el-pagination

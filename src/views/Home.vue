@@ -67,7 +67,7 @@
               >
                 <i class="el-icon-s-management" style="font-size: 80px"> </i>
                 <span style="margin: 20px auto; display: block"
-                  >国军标网站</span
+                  >国家军用标准全文数据库</span
                 >
               </el-button>
             </el-tab-pane>
@@ -462,7 +462,7 @@ export default {
         { value: "关键词" },
       ],
       information,
-      activeTab: "industryTrend",
+      activeTab: "dataResource",
       newestIndustyTrendData: [],
       newestInfoExteriorData: [],
       newestInfoInteriorData: [],
@@ -800,6 +800,11 @@ export default {
       getTopicInformation({ topic: v.name }).then(
         (res) => (this.topics[i].list = res)
       );
+    });
+    this.$notify.info({
+      title: "提示",
+      message: "为获得最佳使用体验，建议使用chrome浏览器。",
+      offset: 100,
     });
   },
   mounted() {

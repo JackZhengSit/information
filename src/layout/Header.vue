@@ -3,6 +3,7 @@
     <div class="header-box">
       <div class="logo-box">
         <h2 class="logo-title">信息情报库</h2>
+        <!-- <span class="browserAdvice">建议使用chrome浏览器获得更好体验</span> -->
       </div>
       <div class="menu-box">
         <a path="/home" @click="toHome($event)" class="menu-title">首页</a>
@@ -28,7 +29,7 @@
           class="menu-title"
           >总咨询台</a
         > -->
-        <a path="/question" class="menu-title" @click="toQuestion">总咨询台</a>
+
         <!-- <a path="/download" class="menu-title" @click="toDownload">下载工具</a> -->
         <el-dropdown :hide-on-click="false" @command="toDownload">
           <span path="/download" class="menu-title"> 下载工具</span>
@@ -57,10 +58,11 @@
             >情报需求</a
           >
         </el-tooltip>
+        <a path="/question" class="menu-title" @click="toQuestion">总咨询台</a>
 
-        <a path="/manage" @click="toManage($event)" class="menu-title"
+        <!-- <a path="/manage" @click="toManage($event)" class="menu-title"
           >后台管理</a
-        >
+        > -->
       </div>
     </div>
   </div>
@@ -167,6 +169,13 @@ export default {
   color: #409eff;
   margin: 0;
   padding: 0;
+}
+
+.browserAdvice {
+  margin: 0 20px;
+  font-size: 13px;
+  color: #409eff;
+  width: 130px;
 }
 
 .menu-box {
