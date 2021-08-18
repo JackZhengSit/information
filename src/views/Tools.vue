@@ -35,6 +35,11 @@
             "
             >清华同方CAJ阅读器</a
           >
+
+          <a
+            class="linke"            
+            >chrome默认地址：C:\Program Files(x86)\Google\Chrome\Frame\Application</a
+          >
           <!-- <el-button
             plain
             @click="

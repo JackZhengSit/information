@@ -3,7 +3,7 @@
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-05-20 15:17:57
- * @LastEditTime: 2021-07-15 10:21:57
+ * @LastEditTime: 2021-07-15 16:19:21
 -->
 <template>
   <div>
@@ -33,7 +33,7 @@
             style="margin: 10px 10px 0 10px"
           >
             <el-radio label="publication_date">出版日排序</el-radio>
-            <el-radio label="title">按名称排序</el-radio> </el-radio-group
+            <el-radio label="name">按名称排序</el-radio> </el-radio-group
           >|
           <el-radio-group
             v-model="journalDisplayType"
@@ -172,11 +172,11 @@ export default {
     return {
       baseUrl,
       journalSelectList: [
-        { label: "期刊名称", value: "title" },
+        { label: "期刊名称", value: "name" },
         { label: "出版社", value: "publication" },
         { label: "出版时间", value: "publication_date" },
       ],
-      journalSelect: "title",
+      journalSelect: "name",
       journalDisplayType: "image",
       journalSort: "publication_date",
       journalTypeList: [

@@ -23,13 +23,25 @@
         <el-card shadow="hover" style="height: 420px">
           <el-carousel :interval="4000" height="381px">
             <el-carousel-item>
-              <div id="infoTypeChart" class="chartItem"></div>
+              <div
+                id="infoTypeChart"
+                class="chartItem"
+                @click="toStatistics"
+              ></div>
             </el-carousel-item>
             <el-carousel-item>
-              <div id="infoTypeChartInterior" class="chartItem"></div>
+              <div
+                id="infoTypeChartInterior"
+                class="chartItem"
+                @click="toStatistics"
+              ></div>
             </el-carousel-item>
             <el-carousel-item>
-              <div id="infoTypeChartExterior" class="chartItem"></div>
+              <div
+                id="infoTypeChartExterior"
+                class="chartItem"
+                @click="toStatistics"
+              ></div>
             </el-carousel-item>
           </el-carousel>
         </el-card>
@@ -214,6 +226,7 @@
             </el-tab-pane>
 
             <el-link
+              v-if="this.activeTab != 'dataResource'"
               style="float: right; padding: 10px 20px 5px 20px"
               type="primary"
               @click="infoTypeMore"
@@ -263,7 +276,7 @@
     <el-drawer
       title="公告查询"
       :visible.sync="drawer"
-      :with-header="true"
+      :with-header="false"
       size="70%"
       @opened="searchNotice"
       show-close="true"
@@ -271,6 +284,14 @@
     >
       <el-container>
         <el-main style="overflow-y: scroll; width: 100vh; height: 100vh">
+          <el-row>
+            <el-col :span="2">
+              <h3>公告查询</h3>
+            </el-col>
+            <el-col :span="1" :offset="20">
+              <el-button type="danger" @click="drawer = false">关闭</el-button>
+            </el-col>
+          </el-row>
           <el-row>
             <el-col :span="24" justify="center">
               <el-form :model="noticeForm" ref="noticeForm">
@@ -731,7 +752,7 @@ export default {
       this.setActiveNames(["infoType"]);
       switch (this.activeTab) {
         case "dataResource":
-          window.open("http://200.100.68.15:8090/Main.htm");
+          // window.open("http://200.100.68.15:8090/Main.htm");
           break;
         case "industryTrend":
           // this.$store.commit("search/setCheckedInfoType", ["行业动态"]);
@@ -781,6 +802,9 @@ export default {
     rowClick(row) {
       // console.log(this.$refs.noticeTable);
       // this.$refs.noticeTable.toggleRowExpansion(row, true);
+    },
+    toStatistics() {
+      this.$router.push({ name: "Statistics" });
     },
   },
   created() {

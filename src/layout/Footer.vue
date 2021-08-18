@@ -9,7 +9,11 @@
           </p>
         </div>
       </el-col>
-      <el-col :span="3" :offset="9">
+      <el-col :span="3" :offset="2">
+      <h4>相关链接</h4>
+      <el-link type="primary" href="http://200.100.68.18:8088/default/newportal/index.html">知识管理</el-link>
+      </el-col>
+      <el-col :span="3" :offset="3">
         <div>
           <h4>联系我们</h4>
           <p>标准研究中心 情报研究科</p>

@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header-box">
       <div class="logo-box">
-        <h2 class="logo-title">信息情报库</h2>
+        <h2 class="logo-title" @click="toHome">信息情报库</h2>
         <!-- <span class="browserAdvice">建议使用chrome浏览器获得更好体验</span> -->
       </div>
       <div class="menu-box">
@@ -169,6 +169,7 @@ export default {
   color: #409eff;
   margin: 0;
   padding: 0;
+  cursor:pointer;
 }
 
 .browserAdvice {
