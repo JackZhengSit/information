@@ -63,15 +63,7 @@
                   >知网数据库</span
                 ></el-button
               >
-              <!-- <el-button
-                plain
-                type="primary"
-                onclick="window.open('http://baidu.com')"
-                ><i class="el-icon-s-cooperation" style="font-size: 80px"></i>
-                <span style="margin: 20px auto; display: block"
-                  >知网数据库111</span
-                ></el-button
-              > -->
+
               <el-button
                 plain
                 type="primary"
@@ -80,6 +72,16 @@
                 <i class="el-icon-s-management" style="font-size: 80px"> </i>
                 <span style="margin: 20px auto; display: block"
                   >国家军用标准全文数据库</span
+                >
+              </el-button>
+              <el-button
+                plain
+                type="primary"
+                onclick="window.open('http://200.100.68.28:8080')"
+              >
+                <i class="el-icon-s-claim" style="font-size: 80px"> </i>
+                <span style="margin: 20px auto; display: block"
+                  >标准实施系统</span
                 >
               </el-button>
             </el-tab-pane>
@@ -233,6 +235,44 @@
               >更多</el-link
             >
           </el-tabs>
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row style="margin-top: 10px">
+      <el-col :span="20" :offset="2">
+        <el-card shadow="hover">
+          <el-row>
+            <el-col :span="4">
+              <span style="font-size: 1em; font-weight: bold; color: #409eff"
+                >重点产品<br />检测导航</span
+              >
+            </el-col>
+            <el-col :span="20">
+              <el-col :span="12">
+                <el-button plain type="primary" onclick="">
+                  <i
+                    class="el-icon-s-home"
+                    style="font-size: 30px; width: 500px; display: inline-block"
+                    ><span style="font-size: 20px"
+                      >船舶设备智能故障诊断</span
+                    ></i
+                  >
+                </el-button>
+              </el-col>
+              <el-col :span="12">
+                <el-button
+                  plain
+                  type="primary"
+                  onclick=""
+                  style="display: block; width: 500px; display: inline-block"
+                >
+                  <i class="el-icon-s-home" style="font-size: 30px"
+                    ><span style="font-size: 20px">行星滚柱丝杠</span></i
+                  >
+                </el-button>
+              </el-col>
+            </el-col>
+          </el-row>
         </el-card>
       </el-col>
     </el-row>
