@@ -60,6 +60,10 @@
                   <i class="el-icon-notebook-1"></i>
                   <span slot="title">{{ infoType.infoLibrary }}</span>
                 </el-menu-item>
+                <el-menu-item index="/manage/importantProduct">
+                  <i class="el-icon-copy-document"></i>
+                  <span slot="title">{{ infoType.importantProduct }}</span>
+                </el-menu-item>
               </el-menu>
             </el-col>
             <el-col :span="20">

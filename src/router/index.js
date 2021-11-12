@@ -221,6 +221,14 @@ const routes = [
                     /* webpackChunkName: "infoLibrary" */ "../components/ManageInfoLibrary.vue"
                   ),
               },
+              {
+                path: "importantProduct",
+                name: "importantProduct",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "infoLibrary" */ "../components/ManageImportantProduct.vue"
+                  ),
+              },
             ],
           },
         ],

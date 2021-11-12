@@ -28,6 +28,7 @@ var infoType = {
   question: "问题",
   classResource: "课程资源",
   infoLibrary: "馆藏图书",
+  importantProduct:"重点产品分类"
 };
 
 let infoBase = {
@@ -960,6 +961,7 @@ let infoLibrary = {
     field: "imgPath",
   },
 };
+
 
 Object.assign(industryTrend, infoBase);
 Object.assign(briefReportInterior, infoBase);

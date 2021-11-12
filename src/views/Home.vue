@@ -244,7 +244,7 @@
           <el-row>
             <el-col :span="4">
               <span style="font-size: 1em; font-weight: bold; color: #409eff"
-                >重点产品<br />检测导航</span
+                >重点产品<br />监测导航</span
               >
             </el-col>
             <el-col :span="20">
@@ -254,7 +254,7 @@
                     class="el-icon-s-home"
                     style="font-size: 30px; width: 500px; display: inline-block"
                     ><span style="font-size: 20px"
-                      >船舶设备智能故障诊断</span
+                      >船舶设备智能故障诊断（开发中）</span
                     ></i
                   >
                 </el-button>
@@ -267,7 +267,9 @@
                   style="display: block; width: 500px; display: inline-block"
                 >
                   <i class="el-icon-s-home" style="font-size: 30px"
-                    ><span style="font-size: 20px">行星滚柱丝杠</span></i
+                    ><span style="font-size: 20px"
+                      >行星滚柱丝杠（开发中）</span
+                    ></i
                   >
                 </el-button>
               </el-col>
@@ -319,7 +321,7 @@
       :with-header="false"
       size="70%"
       @opened="searchNotice"
-      show-close="true"
+      :show-close="true"
       close-on-press-escape
     >
       <el-container>
