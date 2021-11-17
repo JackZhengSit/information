@@ -23,13 +23,26 @@
             @click="removeFileById(row)"
             >删除</el-button
           >
+          <el-button
+            type="primary"
+            style="margin-left: 10px"
+            @click="relate(row)"
+            >关联</el-button
+          >
         </el-upload>
       </template>
     </vxe-grid>
+
+    <relate-dialog
+      ref="relateDialogRef"
+      :originId="originId"
+      :infoType="infoType"
+    ></relate-dialog>
   </div>
 </template>
 
 <script>
+import relateDialog from "./RelateDialog.vue";
 import { Message, MessageBox } from "element-ui";
 import { industryTrend } from "../store/infoType";
 import {
@@ -63,10 +76,17 @@ function csvToObject(csvString) {
 }
 
 export default {
+  components: {
+    relateDialog,
+  },
   data() {
     return {
       // xGrid: this.$refs.xGrid,
       uploadUrl: baseUrl + "/manual/industry-trend/upload",
+
+      originId: "",
+      infoType: "industryTrend",
+
       gridOptions: {
         border: true,
         resizable: true,
@@ -1014,7 +1034,7 @@ export default {
           },
           {
             resizable: true,
-            width: 180,
+            width: 250,
             align: "center",
             title: "操作",
             slots: { default: "uploadFile" },
@@ -1100,6 +1120,10 @@ export default {
     exportMethod({ options }) {
       this.tableExportMethod(options, industryTrend);
       return Promise.resolve();
+    },
+    relate(row) {
+      this.originId = row.id.toString();
+      this.$refs.relateDialogRef.show();
     },
   },
   mounted: function () {
