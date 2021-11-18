@@ -7,11 +7,11 @@
  */
 const development = process.env.NODE_ENV !== "production";
 module.exports = {
-  configureWebpack: (config) => {
+  configureWebpack: config => {
     if (development) {
       // 开发环境配置
       config.devtool = "source-map";
     }
   },
-  productionSourceMap: false,
+  productionSourceMap: false
 };

@@ -112,7 +112,7 @@ export var briefReportInteriorExample = {
   createTime: "创建时间",
 
   /** 更新时间 */
-  updateTime: "更新时间",
+  updateTime: "更新时间"
 };
 
 // let a = {
@@ -190,5 +190,5 @@ let b = {
   language: "测试测试",
   keywords: "测试测试",
   informationOrigin: "测试测试",
-  referWebsite: "http://dfajosdfjapsodjfpaosdjf",
+  referWebsite: "http://dfajosdfjapsodjfpaosdjf"
 };

@@ -97,12 +97,12 @@ export default {
       questionForm: {
         title: "",
         detail: "",
-        inquisitor: "",
+        inquisitor: ""
       },
       questionList: [],
       questionTotal: 1,
       quesitonCurrent: 1,
-      questionPageSize: 10,
+      questionPageSize: 10
     };
   },
   methods: {
@@ -110,22 +110,22 @@ export default {
       this.questionForm = {
         title: "",
         detail: "",
-        inquisitor: "",
+        inquisitor: ""
       };
     },
     retriveQuestion() {
       let thisVm = this;
       getQuestion({
         page: this.quesitonCurrent - 1,
-        size: this.questionPageSize,
-      }).then((res) => {
+        size: this.questionPageSize
+      }).then(res => {
         this.questionTotal = res.page.total;
         this.questionList = res.result;
-        res.result.forEach((element) => {
+        res.result.forEach(element => {
           axios({
             url: element._links.infoAnwsers.href,
-            method: "get",
-          }).then((anwserRes) => {
+            method: "get"
+          }).then(anwserRes => {
             thisVm.$set(element, "anwser", anwserRes._embedded.infoAnwsers[0]);
             // element.anwser = anwserRes._embedded.infoAnwsers[0];
           });
@@ -139,35 +139,34 @@ export default {
       ) {
         this.$message({
           type: "error",
-          message: "标题与详情不可以为空！",
+          message: "标题与详情不可以为空！"
         });
       } else {
         await insertQuestion(this.questionForm).then(() => {
           this.$message({
             type: "success",
-            message: "提交成功！",
+            message: "提交成功！"
           });
         });
         this.questionForm = {
           title: "",
           detail: "",
-          inquisitor: "",
+          inquisitor: ""
         };
         getQuestion({
           page: this.quesitonCurrent - 1,
-          size: this.questionPageSize,
-        }).then((res) => {
+          size: this.questionPageSize
+        }).then(res => {
           this.questionTotal = res.page.total;
           this.questionList = res.result;
         });
       }
-    },
+    }
   },
   created() {
     this.retriveQuestion();
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

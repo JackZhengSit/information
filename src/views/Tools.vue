@@ -22,7 +22,7 @@
             class="linke"
             :href="
               this.baseUrl +
-              '/static/file/info-class-resource/Acrobat.9.Pro.ChS.rar'
+                '/static/file/info-class-resource/Acrobat.9.Pro.ChS.rar'
             "
             >PDF阅读器</a
           >
@@ -31,14 +31,14 @@
             class="linke"
             :href="
               this.baseUrl +
-              '/static/file/info-class-resource/CAJViewer 7.2.self.exe'
+                '/static/file/info-class-resource/CAJViewer 7.2.self.exe'
             "
             >清华同方CAJ阅读器</a
           >
 
-          <a
-            class="linke"            
-            >chrome默认地址：C:\Program Files(x86)\Google\Chrome\Frame\Application</a
+          <a class="linke"
+            >chrome默认地址：C:\Program
+            Files(x86)\Google\Chrome\Frame\Application</a
           >
           <!-- <el-button
             plain
@@ -91,7 +91,7 @@ import { Message, MessageBox } from "element-ui";
 export default {
   data() {
     return {
-      baseUrl,
+      baseUrl
     };
   },
   methods: {
@@ -100,9 +100,9 @@ export default {
       a.href = baseUrl + url;
       a.download = baseUrl + url;
       a.click();
-    },
+    }
   },
-  created() {},
+  created() {}
 };
 </script>
 

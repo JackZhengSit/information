@@ -37,7 +37,7 @@ import {
   insertQuestion,
   updateQuestion,
   deleteQuestion,
-  manageSearch,
+  manageSearch
 } from "@/api/manageInfoQuestion";
 
 import { insertAnwser, deleteAnwser } from "@/api/manageInfoAnwser";
@@ -58,7 +58,7 @@ export default {
         editConfig: {
           trigger: "dblclick",
           mode: "row",
-          showStatus: true,
+          showStatus: true
         },
         formConfig: {
           titleWidth: 100,
@@ -71,8 +71,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: question.inquisitor.field,
@@ -81,8 +81,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: question.createDayStart.field,
@@ -91,8 +91,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: question.createDayEnd.field,
@@ -101,8 +101,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               span: 24,
@@ -114,14 +114,14 @@ export default {
                     props: {
                       type: "submit",
                       content: "搜索",
-                      status: "primary",
-                    },
+                      status: "primary"
+                    }
                   },
-                  { props: { type: "reset", content: "重置" } },
-                ],
-              },
-            },
-          ],
+                  { props: { type: "reset", content: "重置" } }
+                ]
+              }
+            }
+          ]
         },
         toolbarConfig: {
           buttons: [
@@ -131,72 +131,72 @@ export default {
             {
               code: "save",
               name: "保存",
-              status: "success",
-            },
+              status: "success"
+            }
           ],
           refresh: true,
           zoom: true,
-          custom: true,
+          custom: true
         },
         pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
         },
         proxyConfig: {
           autoLoad: true,
           form: true,
           props: {
             result: "result",
-            total: "page.total",
+            total: "page.total"
           },
           ajax: {
             query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
-                size: page.pageSize,
+                size: page.pageSize
               });
               let p = manageSearch(queryParams);
               return p;
             },
-            save: (data) => {
+            save: data => {
               //   console.log(data);
               Promise.all(
                 data.body.insertRecords
-                  .map((item) => {
+                  .map(item => {
                     insertQuestion(item);
                   })
                   .concat(
-                    data.body.pendingRecords.map((item) => {
+                    data.body.pendingRecords.map(item => {
                       deleteQuestion({ id: item.id });
                     })
                   )
                   .concat(
-                    data.body.updateRecords.map((item) => {
+                    data.body.updateRecords.map(item => {
                       updateQuestion({ id: item.id }, item);
                     })
                   )
               );
             },
-            delete: (data) => {
+            delete: data => {
               Promise.all(
-                data.body.removeRecords.map((item) => {
+                data.body.removeRecords.map(item => {
                   deleteQuestion({ id: item.id });
                 })
               );
-            },
-          },
+            }
+          }
         },
         columns: [
           {
             width: 100,
             visible: false,
             field: question.id.field,
-            title: question.id.title,
+            title: question.id.title
           },
           {
             type: "checkbox",
             width: 50,
             fixed: "left",
-            align: "center",
+            align: "center"
           },
           {
             resizable: true,
@@ -205,7 +205,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: question.title.field,
-            title: question.title.title,
+            title: question.title.title
           },
 
           {
@@ -215,7 +215,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: question.inquisitor.field,
-            title: question.inquisitor.title,
+            title: question.inquisitor.title
           },
           {
             resizable: true,
@@ -224,7 +224,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: question.detail.field,
-            title: question.detail.title,
+            title: question.detail.title
           },
           {
             resizable: true,
@@ -235,7 +235,7 @@ export default {
             title: question.createTime.title,
             formatter: ({ cellValue, row, column }) => {
               return moment(cellValue).format("YYYY-MM-DD HH:MM:SS");
-            },
+            }
           },
           {
             resizable: true,
@@ -246,7 +246,7 @@ export default {
             title: question.updateTime.title,
             formatter: ({ cellValue, row, column }) => {
               return moment(cellValue).format("YYYY-MM-DD HH:MM:SS");
-            },
+            }
           },
           {
             resizable: true,
@@ -254,16 +254,16 @@ export default {
             align: "center",
             title: "操作",
             slots: { default: "infoAnwser" },
-            fixed: "right",
-          },
-        ],
+            fixed: "right"
+          }
+        ]
       },
       dialogFormVisible: false,
       selectedQuestion: {},
       anwserForm: {
         infoQuestion: {},
-        detail: "",
-      },
+        detail: ""
+      }
     };
   },
   computed: {},
@@ -274,8 +274,8 @@ export default {
       this.anwserForm.detail = "";
       axios({
         url: row._links.infoAnwsers.href,
-        method: "get",
-      }).then((res) => {
+        method: "get"
+      }).then(res => {
         if (res.data._embedded.infoAnwsers.length != 0)
           this.anwserForm.detail = res.data._embedded.infoAnwsers[0].detail;
       });
@@ -286,7 +286,7 @@ export default {
         this.dialogFormVisible = false;
         this.$message({
           type: "success",
-          message: "提交成功",
+          message: "提交成功"
         });
       });
     },
@@ -296,20 +296,19 @@ export default {
     deleteAnwser(row) {
       axios({
         url: row._links.infoAnwsers.href,
-        method: "get",
-      }).then((res) => {
+        method: "get"
+      }).then(res => {
         if (res.data._embedded.infoAnwsers.length != 0)
-          deleteAnwser(res.data._embedded.infoAnwsers[0].id).then((res) =>
+          deleteAnwser(res.data._embedded.infoAnwsers[0].id).then(res =>
             this.$message({
               type: "success",
-              message: "删除成功！",
+              message: "删除成功！"
             })
           );
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

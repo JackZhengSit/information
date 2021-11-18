@@ -26,11 +26,11 @@ const state = () => ({
     ["patentExterior", "外部专利"],
     ["standardExterior", "外部标准"],
     ["reportInterior", "情报报告"],
-    ["briefReportInterior", "情报简报"],
+    ["briefReportInterior", "情报简报"]
   ]),
 
   searchInput: "",
-  searchType: "all",
+  searchType: "all"
 });
 
 export default state;

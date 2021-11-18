@@ -10,8 +10,8 @@ import axios from "@/utils/axio";
 export function getAllTopic() {
   return axios({
     url: "/",
-    method: "get",
-  }).then((res) => {
+    method: "get"
+  }).then(res => {
     return res._embeded.topics;
   });
 }

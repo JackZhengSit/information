@@ -128,52 +128,52 @@ import baseUrl from "@/config/baseUrl";
 const base = [
   {
     title: "情报类型",
-    field: "infoCategory",
+    field: "infoCategory"
   },
   {
     title: "专业领域",
-    field: "professionField",
+    field: "professionField"
   },
   {
     title: "专题分类",
-    field: "topicCategory",
+    field: "topicCategory"
   },
   {
     title: "知识发布部门",
-    field: "publishDepartment",
+    field: "publishDepartment"
   },
   {
     title: "登记时间",
-    field: "checkInTime",
+    field: "checkInTime"
   },
   {
     title: "知识类型",
-    field: "knowledgeType",
+    field: "knowledgeType"
   },
   {
     title: "密级",
-    field: "securityLevel",
+    field: "securityLevel"
   },
   {
     title: "形成时间",
-    field: "formatTime",
+    field: "formatTime"
   },
   {
     title: "语种",
-    field: "language",
+    field: "language"
   },
   {
     title: "知识发布部门",
-    field: "publishDepartment",
+    field: "publishDepartment"
   },
   {
     title: "信息来源",
-    field: "informationOrigin",
+    field: "informationOrigin"
   },
   {
     title: "信息编号",
-    field: "infoNo",
-  },
+    field: "infoNo"
+  }
 ];
 const industryTrend = {
   type: "行业动态",
@@ -181,13 +181,13 @@ const industryTrend = {
   show: [
     {
       title: "题名",
-      field: "title",
+      field: "title"
     },
     {
       title: "动态类型",
-      field: "trendType",
-    },
-  ].concat(base),
+      field: "trendType"
+    }
+  ].concat(base)
 };
 const reportExterior = {
   type: "行业报告",
@@ -195,17 +195,17 @@ const reportExterior = {
   show: [
     {
       field: "title",
-      title: "题名",
+      title: "题名"
     },
     {
       field: "type",
-      title: "报告类型",
+      title: "报告类型"
     },
     {
       field: "completeDepartment",
-      title: "内容完成单位",
-    },
-  ].concat(base),
+      title: "内容完成单位"
+    }
+  ].concat(base)
 };
 const briefReportExterior = {
   type: "外部简报",
@@ -213,21 +213,21 @@ const briefReportExterior = {
   show: [
     {
       field: "name",
-      title: "简报名称",
+      title: "简报名称"
     },
     {
       field: "type",
-      title: "简报类型",
+      title: "简报类型"
     },
     {
       field: "completeDepartment",
-      title: "完成单位",
+      title: "完成单位"
     },
     {
       field: "title",
-      title: "题名",
-    },
-  ].concat(base),
+      title: "题名"
+    }
+  ].concat(base)
 };
 const patentExterior = {
   type: "外部专利",
@@ -235,44 +235,44 @@ const patentExterior = {
   show: [
     {
       field: "inventionTitile",
-      title: "专利名称",
+      title: "专利名称"
     },
     {
       field: "applicationNo",
-      title: "申请号",
+      title: "申请号"
     },
     {
       field: "applicationDay",
-      title: "申请日",
+      title: "申请日"
     },
 
     {
       field: "publicationNo",
-      title: "授权号",
+      title: "授权号"
     },
 
     {
       field: "applicationType",
-      title: "申请类型",
+      title: "申请类型"
     },
     {
       field: "patentType",
-      title: "专利类别",
+      title: "专利类别"
     },
     {
       field: "assignee",
-      title: "申请公司",
+      title: "申请公司"
     },
 
     {
       field: "inventor",
-      title: "发明人",
+      title: "发明人"
     },
     {
       field: "claims",
-      title: "权力要求书",
-    },
-  ].concat(base),
+      title: "权力要求书"
+    }
+  ].concat(base)
 };
 const paperExterior = {
   type: "外部论文",
@@ -280,42 +280,42 @@ const paperExterior = {
   show: [
     {
       field: "paperType",
-      title: "论文类型",
+      title: "论文类型"
     },
     {
       field: "title",
-      title: "题名",
+      title: "题名"
     },
     {
       field: "author",
-      title: "作者",
+      title: "作者"
     },
     {
       field: "authorInstitution",
-      title: "作者单位",
+      title: "作者单位"
     },
     {
       field: "firstAuthorInstitution",
-      title: "第一作者",
+      title: "第一作者"
     },
     {
       field: "informationComeFrom",
-      title: "文献来源",
+      title: "文献来源"
     },
     {
       field: "publicationTime",
-      title: "发表时间",
+      title: "发表时间"
     },
 
     {
       field: "documentType",
-      title: "文献类型",
+      title: "文献类型"
     },
     {
       field: "pageNo",
-      title: "页码",
-    },
-  ].concat(base),
+      title: "页码"
+    }
+  ].concat(base)
 };
 const standardExterior = {
   type: "外部标准",
@@ -323,44 +323,44 @@ const standardExterior = {
   show: [
     {
       field: "name",
-      title: "标准名称",
+      title: "标准名称"
     },
     {
       field: "num",
-      title: "标准号",
+      title: "标准号"
     },
     {
       field: "publicateDate",
-      title: "发布日",
+      title: "发布日"
     },
 
     {
       field: "executeDate",
-      title: "实施日",
+      title: "实施日"
     },
 
     {
       field: "specifyInstitution",
-      title: "归口单位",
+      title: "归口单位"
     },
 
     {
       field: "status",
-      title: "标准状态",
+      title: "标准状态"
     },
     {
       field: "authorInstitution",
-      title: "起草单位",
+      title: "起草单位"
     },
     {
       field: "chineseStandardClassNum",
-      title: "中国分类号",
+      title: "中国分类号"
     },
     {
       field: "substituteStandard",
-      title: "替代标准",
-    },
-  ].concat(base),
+      title: "替代标准"
+    }
+  ].concat(base)
 };
 const briefReportInterior = {
   type: "情报简报",
@@ -368,21 +368,21 @@ const briefReportInterior = {
   show: [
     {
       field: "name",
-      title: "简报名称",
+      title: "简报名称"
     },
     {
       field: "type",
-      title: "简报类型",
+      title: "简报类型"
     },
     {
       field: "completeDepartment",
-      title: "完成单位",
+      title: "完成单位"
     },
     {
       field: "title",
-      title: "题名",
-    },
-  ].concat(base),
+      title: "题名"
+    }
+  ].concat(base)
 };
 const reportInterior = {
   type: "情报报告",
@@ -390,17 +390,17 @@ const reportInterior = {
   show: [
     {
       field: "title",
-      title: "题名",
+      title: "题名"
     },
     {
       field: "type",
-      title: "报告类型",
+      title: "报告类型"
     },
     {
       field: "completeDepartment",
-      title: "内容完成单位",
-    },
-  ].concat(base),
+      title: "内容完成单位"
+    }
+  ].concat(base)
 };
 
 const detailShow = [
@@ -411,7 +411,7 @@ const detailShow = [
   patentExterior,
   standardExterior,
   briefReportInterior,
-  reportInterior,
+  reportInterior
 ];
 
 export default {
@@ -419,12 +419,12 @@ export default {
     originId: String,
     infoType: String,
     infoTitle: String,
-    infoFileUrl: String,
+    infoFileUrl: String
   },
   data() {
     return {
       detailShow,
-      info: [],
+      info: []
     };
   },
   methods: {
@@ -447,35 +447,34 @@ export default {
         ) {
           this.$message({
             type: "warning",
-            message: "若需全文，请联系标研中心情报研究科 5216",
+            message: "若需全文，请联系标研中心情报研究科 5216"
           });
         } else {
           this.$message({
             type: "warning",
-            message: "此情报附件无附件或未上传！",
+            message: "此情报附件无附件或未上传！"
           });
         }
       }
     },
     getDetailShow() {
-      return this.detailShow.find((item) => item.type == this.infoType).show;
+      return this.detailShow.find(item => item.type == this.infoType).show;
     },
     getDetail() {
       getDetailInfo({
-        infoType: this.detailShow.find((item) => item.type == this.infoType)
-          .url,
-        id: this.originId,
-      }).then((res) => {
+        infoType: this.detailShow.find(item => item.type == this.infoType).url,
+        id: this.originId
+      }).then(res => {
         this.info = res;
       });
-    },
+    }
   },
   created() {
     // console.log(this.infoType);
     // console.log(this.detailShow.find((item) => item.type == this.infoType));
     // console.log(this.detailShow);
     this.getDetail();
-  },
+  }
 };
 </script>
 

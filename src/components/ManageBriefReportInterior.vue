@@ -36,7 +36,7 @@ import { briefReportInteriorExample } from "@/store/infoExample";
 import {
   searchBriefReportInterior,
   removeRemoteFileById,
-  confirmSaveBriefReportInterior,
+  confirmSaveBriefReportInterior
 } from "@/api/manageBriefReportInterior";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
@@ -47,7 +47,7 @@ function csvToObject(csvString) {
   let datas = [];
   let headers = csvarry[0].split(",");
   for (let i = 0; i < headers.length; i++) {
-    Object.keys(briefReportInterior).forEach(function (key) {
+    Object.keys(briefReportInterior).forEach(function(key) {
       if (briefReportInterior[key].title == headers[i])
         headers[i] = briefReportInterior[key].field;
     });
@@ -79,7 +79,7 @@ export default {
         editConfig: {
           trigger: "dblclick",
           mode: "row",
-          showStatus: true,
+          showStatus: true
         },
         formConfig: {
           data: {},
@@ -93,8 +93,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: 1,
-              },
+                defaultValue: 1
+              }
             },
             {
               field: briefReportInterior.orderNumEnd.field,
@@ -103,8 +103,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: 1000000,
-              },
+                defaultValue: 1000000
+              }
             },
             {
               field: briefReportInterior.name.field,
@@ -113,8 +113,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.type.field,
@@ -123,8 +123,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.completeDepartment.field,
@@ -133,8 +133,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.topicCategory.field,
@@ -143,8 +143,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.professionField.field,
@@ -153,8 +153,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.infoNo.field,
@@ -163,8 +163,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.title.field,
@@ -174,8 +174,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.industryType.field,
@@ -185,8 +185,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.industryDetailType.field,
@@ -196,8 +196,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.industryChainType.field,
@@ -207,8 +207,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.referDeviceType.field,
@@ -218,8 +218,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.referDevice.field,
@@ -229,8 +229,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.referProduct.field,
@@ -240,8 +240,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.referProject.field,
@@ -251,8 +251,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.referInstitution.field,
@@ -262,8 +262,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.referTechnology.field,
@@ -273,8 +273,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.infoCategory.field,
@@ -284,8 +284,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.department.field,
@@ -295,8 +295,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.researchField.field,
@@ -306,8 +306,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.researchOrientation.field,
@@ -317,8 +317,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.researchSystem.field,
@@ -328,8 +328,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.techFieldType1.field,
@@ -339,8 +339,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.techFieldType2.field,
@@ -350,8 +350,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.techFieldType3.field,
@@ -361,8 +361,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.industryField.field,
@@ -372,8 +372,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.industryOrientation.field,
@@ -383,8 +383,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.publishDepartment.field,
@@ -394,8 +394,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.checkInTimeStart.field,
@@ -405,8 +405,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: briefReportInterior.checkInTimeEnd.field,
@@ -416,8 +416,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: briefReportInterior.knowledgeType.field,
@@ -427,8 +427,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.securityLevel.field,
@@ -438,8 +438,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
 
             {
@@ -450,8 +450,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: briefReportInterior.formatTimeEnd.field,
@@ -461,8 +461,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: briefReportInterior.informationCollactor.field,
@@ -472,8 +472,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.informationAuditor.field,
@@ -483,8 +483,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.language.field,
@@ -494,8 +494,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.keywords.field,
@@ -505,8 +505,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.informationOrigin.field,
@@ -516,8 +516,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: briefReportInterior.referWebsite.field,
@@ -527,8 +527,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             // {
             //   field: briefReportInterior.createTime.field,
@@ -561,34 +561,34 @@ export default {
                     props: {
                       type: "submit",
                       content: "搜索",
-                      status: "primary",
-                    },
+                      status: "primary"
+                    }
                   },
-                  { props: { type: "reset", content: "重置" } },
-                ],
-              },
-            },
-          ],
+                  { props: { type: "reset", content: "重置" } }
+                ]
+              }
+            }
+          ]
         },
         pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
         },
         sortConfig: {
           trigger: "cell",
-          remote: true,
+          remote: true
         },
         importConfig: {
           mode: "insert",
           remote: true,
           types: ["xlsx"],
-          importMethod: this.importMethod,
+          importMethod: this.importMethod
         },
         exportConfig: {
           remote: true,
           exportMethod: this.exportMethod,
           // original: true,
           // types: ["xlsx"],
-          modes: ["current", "selected"],
+          modes: ["current", "selected"]
         },
         toolbarConfig: {
           buttons: [
@@ -598,14 +598,14 @@ export default {
             {
               code: "save",
               name: "保存",
-              status: "success",
-            },
+              status: "success"
+            }
           ],
           refresh: true,
           import: true,
           export: true,
           zoom: true,
-          custom: true,
+          custom: true
         },
         proxyConfig: {
           autoLoad: true,
@@ -613,13 +613,13 @@ export default {
           sort: true,
           props: {
             result: "result",
-            total: "page.total",
+            total: "page.total"
           },
           ajax: {
             query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
-                size: page.pageSize,
+                size: page.pageSize
               });
               let firstSort = sorts[0];
               if (firstSort) {
@@ -630,7 +630,7 @@ export default {
               let p = searchBriefReportInterior(queryParams);
               return p;
             },
-            save: (data) => {
+            save: data => {
               confirmSaveBriefReportInterior(data.body);
               // .then((result) =>
               //   Message({
@@ -639,7 +639,7 @@ export default {
               //   })
               // );
             },
-            delete: (data) => {
+            delete: data => {
               confirmSaveBriefReportInterior(data.body);
               // .then((result) =>
               //   Message({
@@ -647,21 +647,21 @@ export default {
               //     type: "success",
               //   })
               // );
-            },
-          },
+            }
+          }
         },
         columns: [
           {
             width: 100,
             visible: false,
             field: briefReportInterior.id.field,
-            title: briefReportInterior.id.title,
+            title: briefReportInterior.id.title
           },
           {
             type: "checkbox",
             width: 50,
             fixed: "left",
-            align: "center",
+            align: "center"
           },
           {
             fixed: "left",
@@ -673,7 +673,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: briefReportInterior.orderNum.field,
-            title: briefReportInterior.orderNum.title,
+            title: briefReportInterior.orderNum.title
           },
           {
             resizable: true,
@@ -683,7 +683,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.name.field,
-            title: briefReportInterior.name.title,
+            title: briefReportInterior.name.title
           },
           {
             resizable: true,
@@ -693,7 +693,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.type.field,
-            title: briefReportInterior.type.title,
+            title: briefReportInterior.type.title
           },
           {
             resizable: true,
@@ -703,7 +703,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.completeDepartment.field,
-            title: briefReportInterior.completeDepartment.title,
+            title: briefReportInterior.completeDepartment.title
           },
           {
             resizable: true,
@@ -713,7 +713,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.title.field,
-            title: briefReportInterior.title.title,
+            title: briefReportInterior.title.title
           },
           {
             resizable: true,
@@ -723,7 +723,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.industryType.field,
-            title: briefReportInterior.industryType.title,
+            title: briefReportInterior.industryType.title
           },
           {
             resizable: true,
@@ -733,7 +733,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.industryDetailType.field,
-            title: briefReportInterior.industryDetailType.title,
+            title: briefReportInterior.industryDetailType.title
           },
           {
             resizable: true,
@@ -743,7 +743,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.industryChainType.field,
-            title: briefReportInterior.industryChainType.title,
+            title: briefReportInterior.industryChainType.title
           },
           {
             resizable: true,
@@ -753,7 +753,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.referDeviceType.field,
-            title: briefReportInterior.referDeviceType.title,
+            title: briefReportInterior.referDeviceType.title
           },
           {
             resizable: true,
@@ -763,7 +763,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.referDevice.field,
-            title: briefReportInterior.referDevice.title,
+            title: briefReportInterior.referDevice.title
           },
           {
             resizable: true,
@@ -773,7 +773,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.referProduct.field,
-            title: briefReportInterior.referProduct.title,
+            title: briefReportInterior.referProduct.title
           },
           {
             resizable: true,
@@ -783,7 +783,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.referProject.field,
-            title: briefReportInterior.referProject.title,
+            title: briefReportInterior.referProject.title
           },
           {
             resizable: true,
@@ -793,7 +793,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.referInstitution.field,
-            title: briefReportInterior.referInstitution.title,
+            title: briefReportInterior.referInstitution.title
           },
           {
             resizable: true,
@@ -803,7 +803,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.referTechnology.field,
-            title: briefReportInterior.referTechnology.title,
+            title: briefReportInterior.referTechnology.title
           },
           {
             resizable: true,
@@ -813,7 +813,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.infoCategory.field,
-            title: briefReportInterior.infoCategory.title,
+            title: briefReportInterior.infoCategory.title
           },
           {
             resizable: true,
@@ -823,7 +823,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.topicCategory.field,
-            title: briefReportInterior.topicCategory.title,
+            title: briefReportInterior.topicCategory.title
           },
           {
             resizable: true,
@@ -833,7 +833,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.professionField.field,
-            title: briefReportInterior.professionField.title,
+            title: briefReportInterior.professionField.title
           },
           {
             resizable: true,
@@ -843,7 +843,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.infoNo.field,
-            title: briefReportInterior.infoNo.title,
+            title: briefReportInterior.infoNo.title
           },
           {
             resizable: true,
@@ -853,7 +853,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.department.field,
-            title: briefReportInterior.department.title,
+            title: briefReportInterior.department.title
           },
           {
             resizable: true,
@@ -863,7 +863,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.researchField.field,
-            title: briefReportInterior.researchField.title,
+            title: briefReportInterior.researchField.title
           },
           {
             resizable: true,
@@ -873,7 +873,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.researchOrientation.field,
-            title: briefReportInterior.researchOrientation.title,
+            title: briefReportInterior.researchOrientation.title
           },
           {
             resizable: true,
@@ -883,7 +883,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.researchSystem.field,
-            title: briefReportInterior.researchSystem.title,
+            title: briefReportInterior.researchSystem.title
           },
           {
             resizable: true,
@@ -893,7 +893,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.techFieldType1.field,
-            title: briefReportInterior.techFieldType1.title,
+            title: briefReportInterior.techFieldType1.title
           },
           {
             resizable: true,
@@ -903,7 +903,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.techFieldType2.field,
-            title: briefReportInterior.techFieldType2.title,
+            title: briefReportInterior.techFieldType2.title
           },
           {
             resizable: true,
@@ -913,7 +913,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.techFieldType3.field,
-            title: briefReportInterior.techFieldType3.title,
+            title: briefReportInterior.techFieldType3.title
           },
           {
             resizable: true,
@@ -923,7 +923,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.industryField.field,
-            title: briefReportInterior.industryField.title,
+            title: briefReportInterior.industryField.title
           },
           {
             resizable: true,
@@ -933,7 +933,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.industryOrientation.field,
-            title: briefReportInterior.industryOrientation.title,
+            title: briefReportInterior.industryOrientation.title
           },
           {
             resizable: true,
@@ -943,7 +943,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.publishDepartment.field,
-            title: briefReportInterior.publishDepartment.title,
+            title: briefReportInterior.publishDepartment.title
           },
           {
             resizable: true,
@@ -953,7 +953,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.checkInTime.field,
-            title: briefReportInterior.checkInTime.title,
+            title: briefReportInterior.checkInTime.title
           },
           {
             resizable: true,
@@ -963,7 +963,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.knowledgeType.field,
-            title: briefReportInterior.knowledgeType.title,
+            title: briefReportInterior.knowledgeType.title
           },
           {
             resizable: true,
@@ -973,7 +973,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.securityLevel.field,
-            title: briefReportInterior.securityLevel.title,
+            title: briefReportInterior.securityLevel.title
           },
           {
             resizable: true,
@@ -983,7 +983,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.abs.field,
-            title: briefReportInterior.abs.title,
+            title: briefReportInterior.abs.title
           },
           {
             resizable: true,
@@ -993,7 +993,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.formatTime.field,
-            title: briefReportInterior.formatTime.title,
+            title: briefReportInterior.formatTime.title
           },
           {
             resizable: true,
@@ -1003,7 +1003,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.informationCollactor.field,
-            title: briefReportInterior.informationCollactor.title,
+            title: briefReportInterior.informationCollactor.title
           },
           {
             resizable: true,
@@ -1013,7 +1013,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.informationAuditor.field,
-            title: briefReportInterior.informationAuditor.title,
+            title: briefReportInterior.informationAuditor.title
           },
           {
             resizable: true,
@@ -1023,7 +1023,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.language.field,
-            title: briefReportInterior.language.title,
+            title: briefReportInterior.language.title
           },
           {
             resizable: true,
@@ -1033,7 +1033,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.keywords.field,
-            title: briefReportInterior.keywords.title,
+            title: briefReportInterior.keywords.title
           },
           {
             resizable: true,
@@ -1043,7 +1043,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.informationOrigin.field,
-            title: briefReportInterior.informationOrigin.title,
+            title: briefReportInterior.informationOrigin.title
           },
           {
             resizable: true,
@@ -1053,7 +1053,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: briefReportInterior.referWebsite.field,
-            title: briefReportInterior.referWebsite.title,
+            title: briefReportInterior.referWebsite.title
           },
           {
             resizable: true,
@@ -1063,7 +1063,7 @@ export default {
             // editRender: { name: "input", enabled: false },
             field: briefReportInterior.fileName.field,
             title: briefReportInterior.fileName.title,
-            fixed: "right",
+            fixed: "right"
           },
           {
             resizable: true,
@@ -1071,19 +1071,19 @@ export default {
             align: "center",
             title: "操作",
             slots: { default: "uploadFile" },
-            fixed: "right",
-          },
-        ],
-      },
+            fixed: "right"
+          }
+        ]
+      }
     };
   },
   methods: {
     removeFileById(row) {
-      removeRemoteFileById({ id: row.id }).then((res) => {
+      removeRemoteFileById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");
         Message({
           message: "删除成功！",
-          type: "success",
+          type: "success"
         });
       });
     },
@@ -1091,7 +1091,7 @@ export default {
       this.$refs.xGrid.commitProxy("query");
       Message({
         message: "上传成功",
-        type: "success",
+        type: "success"
       });
     },
     replaceExcelTitle(workbook) {
@@ -1115,7 +1115,7 @@ export default {
       let methods = this.$options.methods;
       return new Promise((resolve, reject) => {
         let reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
           let data = e.target.result;
           let workbook = XLSX.read(data, { type: "binary" });
           let worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -1124,20 +1124,20 @@ export default {
           // console.log(workbook);
           // console.log(importData);
           confirmSaveBriefReportInterior({
-            insertRecords: importData,
+            insertRecords: importData
           }).then(() => {
             xGrid.commitProxy("query");
             Message({
               type: "success",
-              message: "导入成功",
+              message: "导入成功"
             });
           });
           resolve();
         };
-        reader.onerror = function (e) {
+        reader.onerror = function(e) {
           Message({
             type: "error",
-            message: "读取文件出错",
+            message: "读取文件出错"
           });
           reject();
         };
@@ -1145,20 +1145,19 @@ export default {
       }).catch(() => {
         Message({
           type: "error",
-          message: "导入失败",
+          message: "导入失败"
         });
       });
     },
     exportMethod({ options }) {
       this.tableExportMethod(options, briefReportInterior);
       return Promise.resolve();
-    },
+    }
   },
-  mounted: function () {
+  mounted: function() {
     // var xGrid = this.$refs.xGrid;
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

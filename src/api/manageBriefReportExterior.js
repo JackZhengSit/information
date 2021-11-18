@@ -11,13 +11,13 @@ export function getBriefReportExterior(params) {
   return axios({
     url: "/BriefReportExterior",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return Promise.resolve({
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.briefReportExteriors,
+      result: res._embedded.briefReportExteriors
     });
   });
 }
@@ -26,13 +26,13 @@ export function searchBriefReportExterior(params) {
   return axios({
     url: "/BriefReportExterior/search/manageSearch",
     method: "get",
-    params,
-  }).then((res) => {
+    params
+  }).then(res => {
     return {
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.briefReportExteriors,
+      result: res._embedded.briefReportExteriors
     };
   });
 }
@@ -41,8 +41,8 @@ export function confirmSaveBriefReportExterior(data) {
   return axios({
     url: "/manual/brief-report-exterior/save",
     method: "post",
-    data: data,
-  }).then((res) => {
+    data: data
+  }).then(res => {
     // console.log(res);
     return res;
   });
@@ -52,8 +52,8 @@ export function removeRemoteFileById(param) {
   return axios({
     url: "/manual/brief-report-exterior/remove",
     method: "get",
-    params: param,
-  }).then((res) => {
+    params: param
+  }).then(res => {
     return res;
   });
 }

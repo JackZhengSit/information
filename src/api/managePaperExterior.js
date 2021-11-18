@@ -11,13 +11,13 @@ export function getPaperExterior(params) {
   return axios({
     url: "/PaperExterior",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return Promise.resolve({
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.paperExteriors,
+      result: res._embedded.paperExteriors
     });
   });
 }
@@ -26,13 +26,13 @@ export function searchPaperExterior(params) {
   return axios({
     url: "/PaperExterior/search/manageSearch",
     method: "get",
-    params,
-  }).then((res) => {
+    params
+  }).then(res => {
     return {
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.paperExteriors,
+      result: res._embedded.paperExteriors
     };
   });
 }
@@ -41,8 +41,8 @@ export function confirmSavePaperExterior(data) {
   return axios({
     url: "/manual/paper-exterior/save",
     method: "post",
-    data: data,
-  }).then((res) => {
+    data: data
+  }).then(res => {
     // console.log(res);
     return res;
   });
@@ -52,8 +52,8 @@ export function removeRemoteFileById(param) {
   return axios({
     url: "/manual/paper-exterior/remove",
     method: "get",
-    params: param,
-  }).then((res) => {
+    params: param
+  }).then(res => {
     return res;
   });
 }

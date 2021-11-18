@@ -53,7 +53,7 @@ import {
   searchInfoLibrary,
   removeRemoteFileById,
   removeRemoteImgById,
-  confirmSaveInfoLibrary,
+  confirmSaveInfoLibrary
 } from "@/api/manageInfoLibrary";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
@@ -64,7 +64,7 @@ function csvToObject(csvString) {
   let datas = [];
   let headers = csvarry[0].split(",");
   for (let i = 0; i < headers.length; i++) {
-    Object.keys(infoLibrary).forEach(function (key) {
+    Object.keys(infoLibrary).forEach(function(key) {
       if (infoLibrary[key].title == headers[i])
         headers[i] = infoLibrary[key].field;
     });
@@ -97,7 +97,7 @@ export default {
         editConfig: {
           trigger: "dblclick",
           mode: "row",
-          showStatus: true,
+          showStatus: true
         },
         formConfig: {
           titleWidth: 100,
@@ -110,8 +110,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: infoLibrary.name.field,
@@ -120,8 +120,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: infoLibrary.title.field,
@@ -131,8 +131,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: infoLibrary.author.field,
@@ -141,8 +141,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: infoLibrary.language.field,
@@ -151,8 +151,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: infoLibrary.publication.field,
@@ -161,8 +161,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: infoLibrary.publicationDate.field,
@@ -172,8 +172,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: infoLibrary.checkInTime.field,
@@ -183,8 +183,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: infoLibrary.storeSite.field,
@@ -194,8 +194,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               span: 24,
@@ -208,34 +208,34 @@ export default {
                     props: {
                       type: "submit",
                       content: "搜索",
-                      status: "primary",
-                    },
+                      status: "primary"
+                    }
                   },
-                  { props: { type: "reset", content: "重置" } },
-                ],
-              },
-            },
-          ],
+                  { props: { type: "reset", content: "重置" } }
+                ]
+              }
+            }
+          ]
         },
         pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
         },
         sortConfig: {
           trigger: "cell",
-          remote: true,
+          remote: true
         },
         importConfig: {
           mode: "insert",
           remote: true,
           types: ["xlsx"],
-          importMethod: this.importMethod,
+          importMethod: this.importMethod
         },
         exportConfig: {
           remote: true,
           exportMethod: this.exportMethod,
           // original: true,
           // types: ["xlsx"],
-          modes: ["current", "selected"],
+          modes: ["current", "selected"]
         },
         toolbarConfig: {
           buttons: [
@@ -245,14 +245,14 @@ export default {
             {
               code: "save",
               name: "保存",
-              status: "success",
-            },
+              status: "success"
+            }
           ],
           refresh: true,
           import: true,
           export: true,
           zoom: true,
-          custom: true,
+          custom: true
         },
         proxyConfig: {
           autoLoad: true,
@@ -260,13 +260,13 @@ export default {
           sort: true,
           props: {
             result: "result",
-            total: "page.total",
+            total: "page.total"
           },
           ajax: {
             query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
-                size: page.pageSize,
+                size: page.pageSize
               });
               let firstSort = sorts[0];
               if (firstSort) {
@@ -277,26 +277,26 @@ export default {
               let p = searchInfoLibrary(queryParams);
               return p;
             },
-            save: (data) => {
+            save: data => {
               confirmSaveInfoLibrary(data.body);
             },
-            delete: (data) => {
+            delete: data => {
               confirmSaveInfoLibrary(data.body);
-            },
-          },
+            }
+          }
         },
         columns: [
           {
             width: 100,
             visible: false,
             field: infoLibrary.id.field,
-            title: infoLibrary.id.title,
+            title: infoLibrary.id.title
           },
           {
             type: "checkbox",
             width: 50,
             fixed: "left",
-            align: "center",
+            align: "center"
           },
           {
             resizable: true,
@@ -306,7 +306,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.num.field,
-            title: infoLibrary.num.title,
+            title: infoLibrary.num.title
           },
           {
             resizable: true,
@@ -317,7 +317,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.type.field,
-            title: infoLibrary.type.title,
+            title: infoLibrary.type.title
           },
           {
             resizable: true,
@@ -327,7 +327,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.name.field,
-            title: infoLibrary.name.title,
+            title: infoLibrary.name.title
           },
 
           {
@@ -338,7 +338,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.title.field,
-            title: infoLibrary.title.title,
+            title: infoLibrary.title.title
           },
           {
             resizable: true,
@@ -348,7 +348,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.author.field,
-            title: infoLibrary.author.title,
+            title: infoLibrary.author.title
           },
           {
             resizable: true,
@@ -358,7 +358,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.language.field,
-            title: infoLibrary.language.title,
+            title: infoLibrary.language.title
           },
           {
             resizable: true,
@@ -368,7 +368,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.sum.field,
-            title: infoLibrary.sum.title,
+            title: infoLibrary.sum.title
           },
           {
             resizable: true,
@@ -378,7 +378,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.publication.field,
-            title: infoLibrary.publication.title,
+            title: infoLibrary.publication.title
           },
           {
             resizable: true,
@@ -388,7 +388,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.publicationDate.field,
-            title: infoLibrary.publicationDate.title,
+            title: infoLibrary.publicationDate.title
           },
 
           {
@@ -399,7 +399,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.checkInTime.field,
-            title: infoLibrary.checkInTime.title,
+            title: infoLibrary.checkInTime.title
           },
           {
             resizable: true,
@@ -409,7 +409,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: infoLibrary.storeSite.field,
-            title: infoLibrary.storeSite.title,
+            title: infoLibrary.storeSite.title
           },
           {
             resizable: true,
@@ -419,7 +419,7 @@ export default {
             showHeaderOverflow: "tooltip",
 
             field: infoLibrary.clickCount.field,
-            title: infoLibrary.clickCount.title,
+            title: infoLibrary.clickCount.title
           },
           {
             resizable: true,
@@ -429,7 +429,7 @@ export default {
             showHeaderOverflow: "tooltip",
 
             field: infoLibrary.imgPath.field,
-            title: infoLibrary.imgPath.title,
+            title: infoLibrary.imgPath.title
           },
           {
             resizable: true,
@@ -439,7 +439,7 @@ export default {
             showHeaderOverflow: "tooltip",
 
             field: infoLibrary.filePath.field,
-            title: infoLibrary.filePath.title,
+            title: infoLibrary.filePath.title
           },
           {
             resizable: true,
@@ -447,7 +447,7 @@ export default {
             align: "center",
             title: "图片操作",
             slots: { default: "uploadImg" },
-            fixed: "right",
+            fixed: "right"
           },
           {
             resizable: true,
@@ -455,28 +455,28 @@ export default {
             align: "center",
             title: "文件操作",
             slots: { default: "uploadFile" },
-            fixed: "right",
-          },
-        ],
-      },
+            fixed: "right"
+          }
+        ]
+      }
     };
   },
   methods: {
     removeFileById(row) {
-      removeRemoteFileById({ id: row.id }).then((res) => {
+      removeRemoteFileById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");
         Message({
           message: "删除成功！",
-          type: "success",
+          type: "success"
         });
       });
     },
     removeImgbyId(row) {
-      removeRemoteImgById({ id: row.id }).then((res) => {
+      removeRemoteImgById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");
         Message({
           message: "删除成功！",
-          type: "success",
+          type: "success"
         });
       });
     },
@@ -484,7 +484,7 @@ export default {
       this.$refs.xGrid.commitProxy("query");
       Message({
         message: "上传成功",
-        type: "success",
+        type: "success"
       });
     },
     replaceExcelTitle(workbook) {
@@ -509,7 +509,7 @@ export default {
       let methods = this.$options.methods;
       return new Promise((resolve, reject) => {
         let reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
           let data = e.target.result;
           let workbook = XLSX.read(data, { type: "binary" });
           let worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -518,20 +518,20 @@ export default {
           // console.log(workbook);
           //   console.log(importData);
           confirmSaveInfoLibrary({
-            insertRecords: importData,
+            insertRecords: importData
           }).then(() => {
             xGrid.commitProxy("query");
             Message({
               type: "success",
-              message: "导入成功",
+              message: "导入成功"
             });
           });
           resolve();
         };
-        reader.onerror = function (e) {
+        reader.onerror = function(e) {
           Message({
             type: "error",
-            message: "读取文件出错",
+            message: "读取文件出错"
           });
           reject();
         };
@@ -539,20 +539,19 @@ export default {
       }).catch(() => {
         Message({
           type: "error",
-          message: "导入失败",
+          message: "导入失败"
         });
       });
     },
     exportMethod({ options }) {
       this.tableExportMethod(options, infoLibrary);
       return Promise.resolve();
-    },
+    }
   },
-  mounted: function () {
+  mounted: function() {
     // var xGrid = this.$refs.xGrid;
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

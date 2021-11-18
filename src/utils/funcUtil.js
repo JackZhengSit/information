@@ -71,7 +71,7 @@ function sheet2blob(sheet, sheetName) {
   sheetName = sheetName || "sheet1";
   var workbook = {
     SheetNames: [sheetName],
-    Sheets: {},
+    Sheets: {}
   };
   replaceExcelTitleToTitle();
   workbook.Sheets[sheetName] = sheet;
@@ -79,7 +79,7 @@ function sheet2blob(sheet, sheetName) {
   var wopts = {
     bookType: "xlsx", // 要生成的文件类型
     bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
-    type: "binary",
+    type: "binary"
   };
   var wbout = XLSX.write(workbook, wopts);
   var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });

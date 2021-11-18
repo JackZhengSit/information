@@ -174,7 +174,7 @@ export default {
       journalSelectList: [
         { label: "期刊名称", value: "name" },
         { label: "出版社", value: "publication" },
-        { label: "出版时间", value: "publication_date" },
+        { label: "出版时间", value: "publication_date" }
       ],
       journalSelect: "name",
       journalDisplayType: "image",
@@ -189,14 +189,14 @@ export default {
         { label: "The Naval ARCHITECT", value: "ARCHITECT" },
         { label: "Offshore Marine Technology", value: "Offshore" },
         { label: "Warship Technology", value: "Warship" },
-        { label: "The Marine Professional", value: "Professional" },
+        { label: "The Marine Professional", value: "Professional" }
       ],
       journalType: "",
       journalSearchInput: "",
       journals: [],
       journalPageCur: 0,
       journalPageSize: 24,
-      journalPageTotal: 0,
+      journalPageTotal: 0
     };
   },
   methods: {
@@ -207,8 +207,8 @@ export default {
         option: this.journalSelect,
         text: this.journalSearchInput,
         sort: this.journalSort,
-        type: this.journalType,
-      }).then((res) => {
+        type: this.journalType
+      }).then(res => {
         this.journals = res.records;
         this.journalPageTotal = res.total;
       });
@@ -219,7 +219,7 @@ export default {
       else
         Message({
           message: "文件不存在！",
-          type: "error",
+          type: "error"
         });
     },
     displayChange() {},
@@ -230,8 +230,8 @@ export default {
         option: this.journalSelect,
         text: this.journalSearchInput,
         sort: this.journalSort,
-        type: this.journalType,
-      }).then((res) => {
+        type: this.journalType
+      }).then(res => {
         this.journals = res.records;
         this.journalPageTotal = res.total;
       });
@@ -243,17 +243,17 @@ export default {
         option: this.journalSelect,
         text: this.journalSearchInput,
         sort: this.journalSort,
-        type: this.journalType,
-      }).then((res) => {
+        type: this.journalType
+      }).then(res => {
         this.journals = res.records;
         this.journalPageTotal = res.total;
       });
-    },
+    }
   },
 
   created() {
     this.searchJournal();
-  },
+  }
 };
 </script>
 

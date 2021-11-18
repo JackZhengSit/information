@@ -111,7 +111,7 @@ export default {
         { label: "书名", value: "name" },
         { label: "作者", value: "author" },
         { label: "出版时间", value: "publication_date" },
-        { label: "馆藏地", value: "storeSite" },
+        { label: "馆藏地", value: "storeSite" }
       ],
       bookSelect: "name",
       bookSearchInput: "",
@@ -119,7 +119,7 @@ export default {
       books: [],
       bookPageCur: 0,
       bookPageSize: 20,
-      bookPageTotal: 0,
+      bookPageTotal: 0
     };
   },
   methods: {
@@ -128,17 +128,17 @@ export default {
         cur: this.bookPageCur,
         size: this.bookPageSize,
         option: this.bookSelect,
-        text: this.bookSearchInput,
-      }).then((res) => {
+        text: this.bookSearchInput
+      }).then(res => {
         this.books = res.records;
         this.bookPageTotal = res.total;
       });
-    },
+    }
   },
 
   created() {
     this.searchBook();
-  },
+  }
 };
 </script>
 

@@ -18,7 +18,7 @@ let api = {
   manageIndustryTrend,
   manageNotice,
   managePaperExterior,
-  queryInformation: queryInformation,
+  queryInformation: queryInformation
 };
 
 export default api;

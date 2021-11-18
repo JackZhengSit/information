@@ -23,6 +23,7 @@
             @click="removeFileById(row)"
             >删除</el-button
           >
+          <el-button type="primary" @click="relate()">关联</el-button>
         </el-upload>
       </template>
     </vxe-grid>
@@ -30,12 +31,12 @@
 </template>
 
 <script>
-import { Message, MessageBox } from "element-ui";
+import { Message } from "element-ui";
 import { industryTrend } from "../store/infoType";
 import {
   searchIndustryTrend,
   removeRemoteFileById,
-  confirmSaveIndustryTrend,
+  confirmSaveIndustryTrend
 } from "@/api/manageIndustryTrend";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
@@ -78,7 +79,7 @@ export default {
         editConfig: {
           trigger: "dblclick",
           mode: "row",
-          showStatus: true,
+          showStatus: true
         },
         formConfig: {
           // data: {},
@@ -92,8 +93,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: 1,
-              },
+                defaultValue: 1
+              }
             },
             {
               field: industryTrend.orderNumEnd.field,
@@ -102,8 +103,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: 1000000,
-              },
+                defaultValue: 1000000
+              }
             },
             {
               field: industryTrend.title.field,
@@ -112,8 +113,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.trendType.field,
@@ -122,8 +123,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.industryType.field,
@@ -133,8 +134,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.topicCategory.field,
@@ -143,8 +144,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.professionField.field,
@@ -153,8 +154,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.infoNo.field,
@@ -163,8 +164,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.industryDetailType.field,
@@ -174,8 +175,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.industryChainType.field,
@@ -185,8 +186,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.referDeviceType.field,
@@ -196,8 +197,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.referDevice.field,
@@ -207,8 +208,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.referProduct.field,
@@ -218,8 +219,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.referProject.field,
@@ -229,8 +230,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.referInstitution.field,
@@ -240,8 +241,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.referTechnology.field,
@@ -251,8 +252,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.infoCategory.field,
@@ -262,8 +263,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.department.field,
@@ -273,8 +274,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.researchField.field,
@@ -284,8 +285,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.researchOrientation.field,
@@ -295,8 +296,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.researchSystem.field,
@@ -306,8 +307,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.techFieldType1.field,
@@ -317,8 +318,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.techFieldType2.field,
@@ -328,8 +329,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.techFieldType3.field,
@@ -339,8 +340,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.industryField.field,
@@ -350,8 +351,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.industryOrientation.field,
@@ -361,8 +362,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.publishDepartment.field,
@@ -372,8 +373,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             { span: 8 },
             {
@@ -384,8 +385,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: industryTrend.checkInTimeEnd.field,
@@ -395,8 +396,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: industryTrend.knowledgeType.field,
@@ -406,8 +407,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.securityLevel.field,
@@ -417,8 +418,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
 
             {
@@ -429,8 +430,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: industryTrend.formatTimeEnd.field,
@@ -440,8 +441,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: industryTrend.informationCollactor.field,
@@ -451,8 +452,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.informationAuditor.field,
@@ -462,8 +463,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.language.field,
@@ -473,8 +474,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.keywords.field,
@@ -484,8 +485,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.informationOrigin.field,
@@ -495,8 +496,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: industryTrend.referWebsite.field,
@@ -506,8 +507,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             // {
             //   field: industryTrend.createTime.field,
@@ -540,34 +541,34 @@ export default {
                     props: {
                       type: "submit",
                       content: "搜索",
-                      status: "primary",
-                    },
+                      status: "primary"
+                    }
                   },
-                  { props: { type: "reset", content: "重置" } },
-                ],
-              },
-            },
-          ],
+                  { props: { type: "reset", content: "重置" } }
+                ]
+              }
+            }
+          ]
         },
         pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
         },
         sortConfig: {
           trigger: "cell",
-          remote: true,
+          remote: true
         },
         importConfig: {
           mode: "insert",
           remote: true,
           types: ["xlsx"],
-          importMethod: this.importMethod,
+          importMethod: this.importMethod
         },
         exportConfig: {
           remote: true,
           exportMethod: this.exportMethod,
           // original: true,
           // types: ["xlsx"],
-          modes: ["current", "selected"],
+          modes: ["current", "selected"]
         },
         toolbarConfig: {
           buttons: [
@@ -577,14 +578,14 @@ export default {
             {
               code: "save",
               name: "保存",
-              status: "success",
-            },
+              status: "success"
+            }
           ],
           refresh: true,
           import: true,
           export: true,
           zoom: true,
-          custom: true,
+          custom: true
         },
         proxyConfig: {
           autoLoad: true,
@@ -592,13 +593,13 @@ export default {
           sort: true,
           props: {
             result: "result",
-            total: "page.total",
+            total: "page.total"
           },
           ajax: {
             query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
-                size: page.pageSize,
+                size: page.pageSize
               });
               let firstSort = sorts[0];
               if (firstSort) {
@@ -609,26 +610,26 @@ export default {
               let p = searchIndustryTrend(queryParams);
               return p;
             },
-            save: (data) => {
+            save: data => {
               confirmSaveIndustryTrend(data.body);
             },
-            delete: (data) => {
+            delete: data => {
               confirmSaveIndustryTrend(data.body);
-            },
-          },
+            }
+          }
         },
         columns: [
           {
             width: 100,
             visible: false,
             field: industryTrend.id.field,
-            title: industryTrend.id.title,
+            title: industryTrend.id.title
           },
           {
             type: "checkbox",
             width: 50,
             fixed: "left",
-            align: "center",
+            align: "center"
           },
           {
             fixed: "left",
@@ -640,7 +641,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: industryTrend.orderNum.field,
-            title: industryTrend.orderNum.title,
+            title: industryTrend.orderNum.title
           },
           {
             resizable: true,
@@ -650,7 +651,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.trendType.field,
-            title: industryTrend.trendType.title,
+            title: industryTrend.trendType.title
           },
           {
             resizable: true,
@@ -660,7 +661,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.title.field,
-            title: industryTrend.title.title,
+            title: industryTrend.title.title
           },
           {
             resizable: true,
@@ -670,7 +671,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.industryType.field,
-            title: industryTrend.industryType.title,
+            title: industryTrend.industryType.title
           },
           {
             resizable: true,
@@ -680,7 +681,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.industryDetailType.field,
-            title: industryTrend.industryDetailType.title,
+            title: industryTrend.industryDetailType.title
           },
           {
             resizable: true,
@@ -690,7 +691,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.industryChainType.field,
-            title: industryTrend.industryChainType.title,
+            title: industryTrend.industryChainType.title
           },
           {
             resizable: true,
@@ -700,7 +701,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.referDeviceType.field,
-            title: industryTrend.referDeviceType.title,
+            title: industryTrend.referDeviceType.title
           },
           {
             resizable: true,
@@ -710,7 +711,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.referDevice.field,
-            title: industryTrend.referDevice.title,
+            title: industryTrend.referDevice.title
           },
           {
             resizable: true,
@@ -720,7 +721,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.referProduct.field,
-            title: industryTrend.referProduct.title,
+            title: industryTrend.referProduct.title
           },
           {
             resizable: true,
@@ -730,7 +731,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.referProject.field,
-            title: industryTrend.referProject.title,
+            title: industryTrend.referProject.title
           },
           {
             resizable: true,
@@ -740,7 +741,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.referInstitution.field,
-            title: industryTrend.referInstitution.title,
+            title: industryTrend.referInstitution.title
           },
           {
             resizable: true,
@@ -750,7 +751,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.referTechnology.field,
-            title: industryTrend.referTechnology.title,
+            title: industryTrend.referTechnology.title
           },
           {
             resizable: true,
@@ -760,7 +761,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.infoCategory.field,
-            title: industryTrend.infoCategory.title,
+            title: industryTrend.infoCategory.title
           },
           {
             resizable: true,
@@ -770,7 +771,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.topicCategory.field,
-            title: industryTrend.topicCategory.title,
+            title: industryTrend.topicCategory.title
           },
           {
             resizable: true,
@@ -780,7 +781,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.professionField.field,
-            title: industryTrend.professionField.title,
+            title: industryTrend.professionField.title
           },
           {
             resizable: true,
@@ -790,7 +791,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.infoNo.field,
-            title: industryTrend.infoNo.title,
+            title: industryTrend.infoNo.title
           },
           {
             resizable: true,
@@ -800,7 +801,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.department.field,
-            title: industryTrend.department.title,
+            title: industryTrend.department.title
           },
           {
             resizable: true,
@@ -810,7 +811,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.researchField.field,
-            title: industryTrend.researchField.title,
+            title: industryTrend.researchField.title
           },
           {
             resizable: true,
@@ -820,7 +821,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.researchOrientation.field,
-            title: industryTrend.researchOrientation.title,
+            title: industryTrend.researchOrientation.title
           },
           {
             resizable: true,
@@ -830,7 +831,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.researchSystem.field,
-            title: industryTrend.researchSystem.title,
+            title: industryTrend.researchSystem.title
           },
           {
             resizable: true,
@@ -840,7 +841,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.techFieldType1.field,
-            title: industryTrend.techFieldType1.title,
+            title: industryTrend.techFieldType1.title
           },
           {
             resizable: true,
@@ -850,7 +851,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.techFieldType2.field,
-            title: industryTrend.techFieldType2.title,
+            title: industryTrend.techFieldType2.title
           },
           {
             resizable: true,
@@ -860,7 +861,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.techFieldType3.field,
-            title: industryTrend.techFieldType3.title,
+            title: industryTrend.techFieldType3.title
           },
           {
             resizable: true,
@@ -870,7 +871,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.industryField.field,
-            title: industryTrend.industryField.title,
+            title: industryTrend.industryField.title
           },
           {
             resizable: true,
@@ -880,7 +881,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.industryOrientation.field,
-            title: industryTrend.industryOrientation.title,
+            title: industryTrend.industryOrientation.title
           },
           {
             resizable: true,
@@ -890,7 +891,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.publishDepartment.field,
-            title: industryTrend.publishDepartment.title,
+            title: industryTrend.publishDepartment.title
           },
           {
             resizable: true,
@@ -900,7 +901,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.checkInTime.field,
-            title: industryTrend.checkInTime.title,
+            title: industryTrend.checkInTime.title
           },
           {
             resizable: true,
@@ -910,7 +911,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.knowledgeType.field,
-            title: industryTrend.knowledgeType.title,
+            title: industryTrend.knowledgeType.title
           },
           {
             resizable: true,
@@ -920,7 +921,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.securityLevel.field,
-            title: industryTrend.securityLevel.title,
+            title: industryTrend.securityLevel.title
           },
           {
             resizable: true,
@@ -930,7 +931,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.abs.field,
-            title: industryTrend.abs.title,
+            title: industryTrend.abs.title
           },
           {
             resizable: true,
@@ -940,7 +941,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.formatTime.field,
-            title: industryTrend.formatTime.title,
+            title: industryTrend.formatTime.title
           },
           {
             resizable: true,
@@ -950,7 +951,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.informationCollactor.field,
-            title: industryTrend.informationCollactor.title,
+            title: industryTrend.informationCollactor.title
           },
           {
             resizable: true,
@@ -960,7 +961,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.informationAuditor.field,
-            title: industryTrend.informationAuditor.title,
+            title: industryTrend.informationAuditor.title
           },
           {
             resizable: true,
@@ -970,7 +971,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.language.field,
-            title: industryTrend.language.title,
+            title: industryTrend.language.title
           },
           {
             resizable: true,
@@ -980,7 +981,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.keywords.field,
-            title: industryTrend.keywords.title,
+            title: industryTrend.keywords.title
           },
           {
             resizable: true,
@@ -990,7 +991,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.informationOrigin.field,
-            title: industryTrend.informationOrigin.title,
+            title: industryTrend.informationOrigin.title
           },
           {
             resizable: true,
@@ -1000,7 +1001,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: industryTrend.referWebsite.field,
-            title: industryTrend.referWebsite.title,
+            title: industryTrend.referWebsite.title
           },
           {
             resizable: true,
@@ -1010,7 +1011,7 @@ export default {
             // editRender: { name: "input", enabled: false },
             field: industryTrend.fileName.field,
             title: industryTrend.fileName.title,
-            fixed: "right",
+            fixed: "right"
           },
           {
             resizable: true,
@@ -1018,19 +1019,20 @@ export default {
             align: "center",
             title: "操作",
             slots: { default: "uploadFile" },
-            fixed: "right",
-          },
-        ],
-      },
+            fixed: "right"
+          }
+        ]
+      }
     };
   },
   methods: {
+    relate() {},
     removeFileById(row) {
-      removeRemoteFileById({ id: row.id }).then((res) => {
+      removeRemoteFileById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");
         Message({
           message: "删除成功！",
-          type: "success",
+          type: "success"
         });
       });
     },
@@ -1038,7 +1040,7 @@ export default {
       this.$refs.xGrid.commitProxy("query");
       Message({
         message: "上传成功",
-        type: "success",
+        type: "success"
       });
     },
     replaceExcelTitle(workbook) {
@@ -1072,12 +1074,12 @@ export default {
           // console.log(workbook);
           // console.log(importData);
           confirmSaveIndustryTrend({
-            insertRecords: importData,
+            insertRecords: importData
           }).then(() => {
             xGrid.commitProxy("query");
             Message({
               type: "success",
-              message: "导入成功",
+              message: "导入成功"
             });
           });
           resolve();
@@ -1085,7 +1087,7 @@ export default {
         reader.onerror = function (e) {
           Message({
             type: "error",
-            message: "读取文件出错",
+            message: "读取文件出错"
           });
           reject();
         };
@@ -1093,20 +1095,19 @@ export default {
       }).catch(() => {
         Message({
           type: "error",
-          message: "导入失败",
+          message: "导入失败"
         });
       });
     },
     exportMethod({ options }) {
       this.tableExportMethod(options, industryTrend);
       return Promise.resolve();
-    },
+    }
   },
   mounted: function () {
     // var xGrid = this.$refs.xGrid;
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

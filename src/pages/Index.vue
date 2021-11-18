@@ -33,10 +33,10 @@ export default {
     return {
       background: {
         backgroundImage: "url(" + require("../assets/back.jpg") + ")",
-        backgroundRepeat: "no-repeat",
-      },
+        backgroundRepeat: "no-repeat"
+      }
     };
-  },
+  }
 };
 </script>
 

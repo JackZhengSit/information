@@ -10,8 +10,12 @@
         </div>
       </el-col>
       <el-col :span="3" :offset="2">
-      <h4>相关链接</h4>
-      <el-link type="primary" href="http://200.100.68.18:8088/default/newportal/index.html">知识管理</el-link>
+        <h4>相关链接</h4>
+        <el-link
+          type="primary"
+          href="http://200.100.68.18:8088/default/newportal/index.html"
+          >知识管理</el-link
+        >
       </el-col>
       <el-col :span="3" :offset="3">
         <div>

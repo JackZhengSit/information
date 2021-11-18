@@ -182,7 +182,7 @@
                   <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item
                       v-for="item in getExteriorInfoTypeTitle.filter(
-                        (item) => item != '行业动态'
+                        item => item != '行业动态'
                       )"
                       :key="item"
                       :command="item"
@@ -500,7 +500,7 @@ import {
   getNewestInfoExterior,
   getNewestInfoInterior,
   getTopicInformation,
-  getNewestInfoByInfoType,
+  getNewestInfoByInfoType
 } from "@/api/queryInformation";
 
 import { countInfoType } from "@/api/queryInformation";
@@ -522,7 +522,7 @@ export default {
         { value: "全部" },
         { value: "标题" },
         { value: "作者" },
-        { value: "关键词" },
+        { value: "关键词" }
       ],
       information,
       activeTab: "dataResource",
@@ -534,26 +534,28 @@ export default {
         {
           id: 1,
           name: "配套产品",
-          list: [],
+          list: []
         },
         {
           id: 2,
           name: "前沿技术",
-          list: [],
+          list: []
         },
         {
           id: 3,
           name: "市场运行",
-          list: [],
-        },
+          list: []
+        }
       ],
       noticeForm: {
         title: "",
         author: "",
-        publicateDayStart: moment().subtract(3, "years").format("YYYY-MM-DD"),
-        publicateDayEnd: moment().format("YYYY-MM-DD"),
+        publicateDayStart: moment()
+          .subtract(3, "years")
+          .format("YYYY-MM-DD"),
+        publicateDayEnd: moment().format("YYYY-MM-DD")
       },
-      noticeTableData: [],
+      noticeTableData: []
     };
   },
   computed: {
@@ -563,8 +565,8 @@ export default {
       "getExteriorInfoTypeField",
       "getExteriorInfoTypeTitle",
       "getInteriorInfoTypeField",
-      "getInteriorInfoTypeTitle",
-    ]),
+      "getInteriorInfoTypeTitle"
+    ])
   },
   methods: {
     ...mapMutations("search", [
@@ -572,13 +574,13 @@ export default {
       "setCheckedInfoType",
       "setCheckedTopicCategory",
       "setCheckedProfessionField",
-      "setCheckedYear",
+      "setCheckedYear"
     ]),
     ...mapActions("search", ["getCheckbox"]),
     async infoTypeChart() {
       let value = [];
       for (const item of this.getInfoTypeTitle) {
-        await countInfoType({ infoType: item }).then((res) => {
+        await countInfoType({ infoType: item }).then(res => {
           value.push(res);
         });
       }
@@ -591,11 +593,11 @@ export default {
         title: {
           text: "全部情报数据统计",
           left: 80,
-          top: 20,
+          top: 20
         },
         tooltip: {},
         legend: {
-          data: ["知识量"],
+          data: ["知识量"]
         },
         graphic: {
           elements: [
@@ -604,26 +606,26 @@ export default {
               left: "70%",
               top: "10%",
               style: {
-                text: "总量：" + value.reduce((acc, cur) => (acc += cur)),
-              },
-            },
-          ],
+                text: "总量：" + value.reduce((acc, cur) => (acc += cur))
+              }
+            }
+          ]
         },
         grid: {
-          left: 90,
+          left: 90
         },
         xAxis: { type: "value" },
         yAxis: {
           type: "category",
-          data: [...this.getInfoTypeTitle].reverse(),
+          data: [...this.getInfoTypeTitle].reverse()
         },
         series: [
           {
             name: "数量",
             type: "bar",
-            data: [...value].reverse(),
-          },
-        ],
+            data: [...value].reverse()
+          }
+        ]
       };
       // this.$nextTick(() => {
       //   myEcharts.setOption(option);
@@ -632,7 +634,7 @@ export default {
       //   });
       // });
       myEcharts.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myEcharts.resize();
       });
     },
@@ -640,7 +642,7 @@ export default {
       let value = [];
 
       for (const item of this.getInteriorInfoTypeTitle) {
-        await countInfoType({ infoType: item }).then((res) => {
+        await countInfoType({ infoType: item }).then(res => {
           value.push(res);
         });
       }
@@ -653,7 +655,7 @@ export default {
         title: {
           text: "内部情报数据统计",
           left: 80,
-          top: 20,
+          top: 20
         },
         graphic: {
           elements: [
@@ -662,33 +664,33 @@ export default {
               left: "70%",
               top: "10%",
               style: {
-                text: "总量：" + value.reduce((acc, cur) => (acc += cur)),
-              },
-            },
-          ],
+                text: "总量：" + value.reduce((acc, cur) => (acc += cur))
+              }
+            }
+          ]
         },
         tooltip: {},
         legend: {
-          data: ["知识量"],
+          data: ["知识量"]
         },
         grid: {
-          left: 90,
+          left: 90
         },
         xAxis: { type: "value" },
         yAxis: {
           type: "category",
-          data: [...this.getInteriorInfoTypeTitle].reverse(),
+          data: [...this.getInteriorInfoTypeTitle].reverse()
         },
         series: [
           {
             name: "销量",
             type: "bar",
-            data: [...value].reverse(),
-          },
-        ],
+            data: [...value].reverse()
+          }
+        ]
       };
       myEcharts.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myEcharts.resize();
       });
     },
@@ -696,7 +698,7 @@ export default {
       let value = [];
 
       for (const item of this.getExteriorInfoTypeTitle) {
-        await countInfoType({ infoType: item }).then((res) => {
+        await countInfoType({ infoType: item }).then(res => {
           value.push(res);
         });
       }
@@ -709,7 +711,7 @@ export default {
         title: {
           text: "外部情报数据统计",
           left: 80,
-          top: 20,
+          top: 20
         },
         graphic: {
           elements: [
@@ -718,44 +720,44 @@ export default {
               left: "70%",
               top: "10%",
               style: {
-                text: "总量：" + value.reduce((acc, cur) => (acc += cur)),
-              },
-            },
-          ],
+                text: "总量：" + value.reduce((acc, cur) => (acc += cur))
+              }
+            }
+          ]
         },
         tooltip: {},
         legend: {
-          data: ["知识量"],
+          data: ["知识量"]
         },
         grid: {
-          left: 90,
+          left: 90
         },
         xAxis: { type: "value" },
         yAxis: {
           type: "category",
-          data: [...this.getExteriorInfoTypeTitle].reverse(),
+          data: [...this.getExteriorInfoTypeTitle].reverse()
         },
         series: [
           {
             name: "销量",
             type: "bar",
-            data: [...value].reverse(),
-          },
-        ],
+            data: [...value].reverse()
+          }
+        ]
       };
       myEcharts.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myEcharts.resize();
       });
     },
     newestInfoInteriorCommand(command) {
-      getNewestInfoByInfoType({ infoType: command }).then((res) => {
+      getNewestInfoByInfoType({ infoType: command }).then(res => {
         this.newestInfoInteriorData = res;
         this.activeTab = "infoInterior";
       });
     },
     newestInfoExteriorCommand(command) {
-      getNewestInfoByInfoType({ infoType: command }).then((res) => {
+      getNewestInfoByInfoType({ infoType: command }).then(res => {
         this.newestInfoExteriorData = res;
         this.activeTab = "infoExterior";
       });
@@ -774,10 +776,10 @@ export default {
     searchNotice() {
       let queryParams = Object.assign({}, this.noticeForm, {
         page: 0,
-        size: 1000,
+        size: 1000
       });
       console.log(queryParams);
-      searchNotice(queryParams).then((res) => {
+      searchNotice(queryParams).then(res => {
         this.noticeTableData = res.result;
         console.log(res);
       });
@@ -813,7 +815,7 @@ export default {
         case "infoExterior":
           this.getCheckbox().then(() => {
             this.setCheckedInfoType(
-              this.getExteriorInfoTypeTitle.filter((item) => item != "行业动态")
+              this.getExteriorInfoTypeTitle.filter(item => item != "行业动态")
             );
             this.$router.push({ name: "Search" });
           });
@@ -835,9 +837,9 @@ export default {
           originId: row.originId,
           infoType: row.infoType,
           infoTitle: row.infoTitle,
-          infoFileUrl: row.fileUrl,
+          infoFileUrl: row.fileUrl
         },
-        props: true,
+        props: true
       });
       window.open(routeData.href, "_blank");
     },
@@ -847,37 +849,37 @@ export default {
     },
     toStatistics() {
       this.$router.push({ name: "Statistics" });
-    },
+    }
   },
   created() {
-    getNewestIndustryTrend().then((res) => {
+    getNewestIndustryTrend().then(res => {
       this.newestIndustyTrendData = res;
     });
-    getNewestInfoExterior().then((res) => {
+    getNewestInfoExterior().then(res => {
       this.newestInfoExteriorData = res;
     });
-    getNewestInfoInterior().then((res) => {
+    getNewestInfoInterior().then(res => {
       this.newestInfoInteriorData = res;
     });
-    getNewestNotice().then((res) => {
+    getNewestNotice().then(res => {
       this.newestNoticeData = res;
     });
     this.topics.forEach((v, i) => {
       getTopicInformation({ topic: v.name }).then(
-        (res) => (this.topics[i].list = res)
+        res => (this.topics[i].list = res)
       );
     });
     this.$notify.info({
       title: "提示",
       message: "为获得最佳使用体验，建议使用chrome浏览器。",
-      offset: 100,
+      offset: 100
     });
   },
   mounted() {
     this.infoTypeChart();
     this.infoTypeChartInterior();
     this.infoTypeChartExterior();
-  },
+  }
 };
 </script>
 

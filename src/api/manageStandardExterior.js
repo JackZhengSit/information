@@ -11,13 +11,13 @@ export function getStandardExterior(params) {
   return axios({
     url: "/StandardExterior",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return Promise.resolve({
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.standardExteriors,
+      result: res._embedded.standardExteriors
     });
   });
 }
@@ -26,13 +26,13 @@ export function searchStandardExterior(params) {
   return axios({
     url: "/StandardExterior/search/manageSearch",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return {
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.standardExteriors,
+      result: res._embedded.standardExteriors
     };
   });
 }
@@ -41,8 +41,8 @@ export function confirmSaveStandardExterior(data) {
   return axios({
     url: "/manual/standard-exterior/save",
     method: "post",
-    data: data,
-  }).then((res) => {
+    data: data
+  }).then(res => {
     // console.log(res);
     return res;
   });
@@ -52,8 +52,8 @@ export function removeRemoteFileById(param) {
   return axios({
     url: "/manual/standard-exterior/remove",
     method: "get",
-    params: param,
-  }).then((res) => {
+    params: param
+  }).then(res => {
     return res;
   });
 }

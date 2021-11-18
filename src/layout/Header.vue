@@ -73,19 +73,19 @@ import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
-      activeUrl: "",
+      activeUrl: ""
     };
   },
   computed: {
     ...mapState({
-      path: (state) => state.RouteModule.path,
-    }),
+      path: state => state.RouteModule.path
+    })
   },
   methods: {
     ...mapActions("search", ["getCheckbox"]),
     acitveMenuItem() {
       let menu = document.getElementsByClassName("menu-title");
-      menu.forEach((element) => {
+      menu.forEach(element => {
         if (this.path.startsWith(element.getAttribute("path"))) {
           element.className = "menu-title-active";
         }
@@ -117,26 +117,26 @@ export default {
     },
     toStatistics() {
       this.$router.push({ name: "Statistics" });
-    },
+    }
   },
   watch: {
-    "$route.path": function (newVal, oldVal) {
+    "$route.path": function(newVal, oldVal) {
       let menu = document.getElementsByClassName("menu-title");
       document.getElementsByClassName("menu-title-active")[0].className =
         "menu-title";
-      menu.forEach((element) => {
+      menu.forEach(element => {
         let pathStr = element.getAttribute("path");
         // console.log(pathStr);
         if (newVal.startsWith(pathStr)) {
           element.className = "menu-title-active";
         }
       });
-    },
+    }
   },
 
   mounted() {
     this.acitveMenuItem();
-  },
+  }
 };
 </script>
 
@@ -169,7 +169,7 @@ export default {
   color: #409eff;
   margin: 0;
   padding: 0;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .browserAdvice {

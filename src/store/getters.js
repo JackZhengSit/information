@@ -8,36 +8,36 @@ import state from "./state";
  * @LastEditTime: 2021-01-20 14:16:39
  */
 const getters = {
-  getInfoTypeField: (state) => {
+  getInfoTypeField: state => {
     return [...state.infoTypeMap.keys()];
   },
-  getInfoTypeTitle: (state) => {
+  getInfoTypeTitle: state => {
     return [...state.infoTypeMap.values()];
   },
   getExteriorInfoTypeField: (state, getters) => {
-    return getters.getInfoTypeField.filter((item) => {
+    return getters.getInfoTypeField.filter(item => {
       return !item.endsWith("Interior");
     });
   },
   getInteriorInfoTypeField: (state, getters) => {
-    return getters.getInfoTypeField.filter((item) => {
+    return getters.getInfoTypeField.filter(item => {
       return item.endsWith("Interior");
     });
   },
   getExteriorInfoTypeTitle: (state, getters) => {
     let titleExterior = [];
-    getters.getExteriorInfoTypeField.forEach((element) => {
+    getters.getExteriorInfoTypeField.forEach(element => {
       titleExterior.push(state.infoTypeMap.get(element));
     });
     return titleExterior;
   },
   getInteriorInfoTypeTitle: (state, getters) => {
     let titleInterior = [];
-    getters.getInteriorInfoTypeField.forEach((element) => {
+    getters.getInteriorInfoTypeField.forEach(element => {
       titleInterior.push(state.infoTypeMap.get(element));
     });
     return titleInterior;
-  },
+  }
 };
 
 export default getters;

@@ -26,8 +26,6 @@
   </div>
 </template>
 
-
-
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
 
@@ -38,8 +36,8 @@ export default {
         { label: "全部", value: "all" },
         { label: "标题", value: "info_title" },
         { label: "作者", value: "info_author" },
-        { label: "关键词", value: "keywords" },
-      ],
+        { label: "关键词", value: "keywords" }
+      ]
     };
   },
   computed: {
@@ -53,7 +51,7 @@ export default {
       },
       set(value) {
         this.$store.commit("setSearchType", value);
-      },
+      }
     },
     searchInput: {
       get() {
@@ -61,8 +59,8 @@ export default {
       },
       set(value) {
         this.$store.commit("setSearchInput", value);
-      },
-    },
+      }
+    }
   },
   methods: {
     ...mapActions("search", ["search"]),
@@ -72,8 +70,8 @@ export default {
       this.setCurrentPage(1);
       if (this.path != "/search") this.$router.push({ name: "Search" });
       else this.search();
-    },
-  },
+    }
+  }
 };
 </script>
 

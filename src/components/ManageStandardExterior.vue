@@ -35,7 +35,7 @@ import { standardExterior } from "../store/infoType";
 import {
   searchStandardExterior,
   removeRemoteFileById,
-  confirmSaveStandardExterior,
+  confirmSaveStandardExterior
 } from "@/api/manageStandardExterior";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
@@ -45,7 +45,7 @@ function csvToObject(csvString) {
   let datas = [];
   let headers = csvarry[0].split(",");
   for (let i = 0; i < headers.length; i++) {
-    Object.keys(standardExterior).forEach(function (key) {
+    Object.keys(standardExterior).forEach(function(key) {
       if (standardExterior[key].title == headers[i])
         headers[i] = standardExterior[key].field;
     });
@@ -77,7 +77,7 @@ export default {
         editConfig: {
           trigger: "dblclick",
           mode: "row",
-          showStatus: true,
+          showStatus: true
         },
         formConfig: {
           data: {},
@@ -91,8 +91,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: 1,
-              },
+                defaultValue: 1
+              }
             },
             {
               field: standardExterior.orderNumEnd.field,
@@ -101,8 +101,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: 1000000,
-              },
+                defaultValue: 1000000
+              }
             },
             {
               field: standardExterior.type.field,
@@ -111,8 +111,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.name.field,
@@ -121,8 +121,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.num.field,
@@ -131,8 +131,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.topicCategory.field,
@@ -141,8 +141,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.professionField.field,
@@ -151,8 +151,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.infoNo.field,
@@ -161,8 +161,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.specifyInstitution.field,
@@ -172,8 +172,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.specifyInstitution.field,
@@ -183,8 +183,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.applicationScope.field,
@@ -194,8 +194,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.publicateDateStart.field,
@@ -205,8 +205,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: standardExterior.publicateDateEnd.field,
@@ -216,8 +216,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: standardExterior.executeDateStart.field,
@@ -227,8 +227,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: standardExterior.executeDateEnd.field,
@@ -238,8 +238,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
 
             {
@@ -250,8 +250,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.status.field,
@@ -261,8 +261,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.authorInstitution.field,
@@ -272,8 +272,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.chineseStandardClassNumname.field,
@@ -283,8 +283,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.substituteStandard.field,
@@ -294,8 +294,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.publicateCompony.field,
@@ -305,8 +305,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
 
             {
@@ -317,8 +317,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.industryDetailType.field,
@@ -328,8 +328,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.industryChainType.field,
@@ -339,8 +339,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.referDeviceType.field,
@@ -350,8 +350,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.referDevice.field,
@@ -361,8 +361,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.referProduct.field,
@@ -372,8 +372,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.referProject.field,
@@ -383,8 +383,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.referInstitution.field,
@@ -394,8 +394,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.referTechnology.field,
@@ -405,8 +405,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.infoCategory.field,
@@ -416,8 +416,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.department.field,
@@ -427,8 +427,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.researchField.field,
@@ -438,8 +438,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.researchOrientation.field,
@@ -449,8 +449,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.researchSystem.field,
@@ -460,8 +460,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.techFieldType1.field,
@@ -471,8 +471,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.techFieldType2.field,
@@ -482,8 +482,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.techFieldType3.field,
@@ -493,8 +493,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.industryField.field,
@@ -504,8 +504,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.industryOrientation.field,
@@ -515,8 +515,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.publishDepartment.field,
@@ -526,8 +526,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.knowledgeType.field,
@@ -537,8 +537,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
 
             {
@@ -549,8 +549,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: standardExterior.checkInTimeEnd.field,
@@ -560,8 +560,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
 
             {
@@ -572,8 +572,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: standardExterior.formatTimeEnd.field,
@@ -583,8 +583,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: standardExterior.securityLevel.field,
@@ -594,8 +594,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.informationCollactor.field,
@@ -605,8 +605,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.informationAuditor.field,
@@ -616,8 +616,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.language.field,
@@ -627,8 +627,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.keywords.field,
@@ -638,8 +638,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.informationOrigin.field,
@@ -649,8 +649,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: standardExterior.referWebsite.field,
@@ -660,8 +660,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             // {
             //   field: standardExterior.createTime.field,
@@ -694,34 +694,34 @@ export default {
                     props: {
                       type: "submit",
                       content: "搜索",
-                      status: "primary",
-                    },
+                      status: "primary"
+                    }
                   },
-                  { props: { type: "reset", content: "重置" } },
-                ],
-              },
-            },
-          ],
+                  { props: { type: "reset", content: "重置" } }
+                ]
+              }
+            }
+          ]
         },
         pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
         },
         sortConfig: {
           trigger: "cell",
-          remote: true,
+          remote: true
         },
         importConfig: {
           mode: "insert",
           remote: true,
           types: ["xlsx"],
-          importMethod: this.importMethod,
+          importMethod: this.importMethod
         },
         exportConfig: {
           remote: true,
           exportMethod: this.exportMethod,
           // original: true,
           // types: ["xlsx"],
-          modes: ["current", "selected"],
+          modes: ["current", "selected"]
         },
         toolbarConfig: {
           buttons: [
@@ -731,14 +731,14 @@ export default {
             {
               code: "save",
               name: "保存",
-              status: "success",
-            },
+              status: "success"
+            }
           ],
           refresh: true,
           import: true,
           export: true,
           zoom: true,
-          custom: true,
+          custom: true
         },
         proxyConfig: {
           autoLoad: true,
@@ -746,13 +746,13 @@ export default {
           sort: true,
           props: {
             result: "result",
-            total: "page.total",
+            total: "page.total"
           },
           ajax: {
             query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
-                size: page.pageSize,
+                size: page.pageSize
               });
               let firstSort = sorts[0];
               if (firstSort) {
@@ -763,26 +763,26 @@ export default {
               let p = searchStandardExterior(queryParams);
               return p;
             },
-            save: (data) => {
+            save: data => {
               confirmSaveStandardExterior(data.body);
             },
-            delete: (data) => {
+            delete: data => {
               confirmSaveStandardExterior(data.body);
-            },
-          },
+            }
+          }
         },
         columns: [
           {
             width: 100,
             visible: false,
             field: standardExterior.id.field,
-            title: standardExterior.id.title,
+            title: standardExterior.id.title
           },
           {
             type: "checkbox",
             width: 50,
             fixed: "left",
-            align: "center",
+            align: "center"
           },
           {
             fixed: "left",
@@ -794,7 +794,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: standardExterior.orderNum.field,
-            title: standardExterior.orderNum.title,
+            title: standardExterior.orderNum.title
           },
           {
             resizable: true,
@@ -804,7 +804,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.type.field,
-            title: standardExterior.type.title,
+            title: standardExterior.type.title
           },
           {
             resizable: true,
@@ -814,7 +814,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.name.field,
-            title: standardExterior.name.title,
+            title: standardExterior.name.title
           },
           {
             resizable: true,
@@ -824,7 +824,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.num.field,
-            title: standardExterior.num.title,
+            title: standardExterior.num.title
           },
           {
             resizable: true,
@@ -834,7 +834,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.publicateDate.field,
-            title: standardExterior.publicateDate.title,
+            title: standardExterior.publicateDate.title
           },
           {
             resizable: true,
@@ -844,7 +844,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.executeDate.field,
-            title: standardExterior.executeDate.title,
+            title: standardExterior.executeDate.title
           },
           {
             resizable: true,
@@ -854,7 +854,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.specifyInstitution.field,
-            title: standardExterior.specifyInstitution.title,
+            title: standardExterior.specifyInstitution.title
           },
           {
             resizable: true,
@@ -864,7 +864,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.applicationScope.field,
-            title: standardExterior.applicationScope.title,
+            title: standardExterior.applicationScope.title
           },
           {
             resizable: true,
@@ -874,7 +874,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.author.field,
-            title: standardExterior.author.title,
+            title: standardExterior.author.title
           },
           {
             resizable: true,
@@ -884,7 +884,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.status.field,
-            title: standardExterior.status.title,
+            title: standardExterior.status.title
           },
           {
             resizable: true,
@@ -894,7 +894,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.authorInstitution.field,
-            title: standardExterior.authorInstitution.title,
+            title: standardExterior.authorInstitution.title
           },
           {
             resizable: true,
@@ -904,7 +904,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.chineseStandardClassNumname.field,
-            title: standardExterior.chineseStandardClassNumname.title,
+            title: standardExterior.chineseStandardClassNumname.title
           },
           {
             resizable: true,
@@ -914,7 +914,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.substituteStandard.field,
-            title: standardExterior.substituteStandard.title,
+            title: standardExterior.substituteStandard.title
           },
           {
             resizable: true,
@@ -924,7 +924,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.publicateCompony.field,
-            title: standardExterior.publicateCompony.title,
+            title: standardExterior.publicateCompony.title
           },
 
           {
@@ -935,7 +935,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.industryType.field,
-            title: standardExterior.industryType.title,
+            title: standardExterior.industryType.title
           },
           {
             resizable: true,
@@ -945,7 +945,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.industryDetailType.field,
-            title: standardExterior.industryDetailType.title,
+            title: standardExterior.industryDetailType.title
           },
           {
             resizable: true,
@@ -955,7 +955,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.industryChainType.field,
-            title: standardExterior.industryChainType.title,
+            title: standardExterior.industryChainType.title
           },
           {
             resizable: true,
@@ -965,7 +965,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.referDeviceType.field,
-            title: standardExterior.referDeviceType.title,
+            title: standardExterior.referDeviceType.title
           },
           {
             resizable: true,
@@ -975,7 +975,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.referDevice.field,
-            title: standardExterior.referDevice.title,
+            title: standardExterior.referDevice.title
           },
           {
             resizable: true,
@@ -985,7 +985,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.referProduct.field,
-            title: standardExterior.referProduct.title,
+            title: standardExterior.referProduct.title
           },
           {
             resizable: true,
@@ -995,7 +995,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.referProject.field,
-            title: standardExterior.referProject.title,
+            title: standardExterior.referProject.title
           },
           {
             resizable: true,
@@ -1005,7 +1005,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.referInstitution.field,
-            title: standardExterior.referInstitution.title,
+            title: standardExterior.referInstitution.title
           },
           {
             resizable: true,
@@ -1015,7 +1015,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.referTechnology.field,
-            title: standardExterior.referTechnology.title,
+            title: standardExterior.referTechnology.title
           },
           {
             resizable: true,
@@ -1025,7 +1025,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.infoCategory.field,
-            title: standardExterior.infoCategory.title,
+            title: standardExterior.infoCategory.title
           },
           {
             resizable: true,
@@ -1035,7 +1035,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.topicCategory.field,
-            title: standardExterior.topicCategory.title,
+            title: standardExterior.topicCategory.title
           },
           {
             resizable: true,
@@ -1045,7 +1045,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.professionField.field,
-            title: standardExterior.professionField.title,
+            title: standardExterior.professionField.title
           },
           {
             resizable: true,
@@ -1055,7 +1055,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.infoNo.field,
-            title: standardExterior.infoNo.title,
+            title: standardExterior.infoNo.title
           },
           {
             resizable: true,
@@ -1065,7 +1065,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.department.field,
-            title: standardExterior.department.title,
+            title: standardExterior.department.title
           },
           {
             resizable: true,
@@ -1075,7 +1075,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.researchField.field,
-            title: standardExterior.researchField.title,
+            title: standardExterior.researchField.title
           },
           {
             resizable: true,
@@ -1085,7 +1085,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.researchOrientation.field,
-            title: standardExterior.researchOrientation.title,
+            title: standardExterior.researchOrientation.title
           },
           {
             resizable: true,
@@ -1095,7 +1095,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.researchSystem.field,
-            title: standardExterior.researchSystem.title,
+            title: standardExterior.researchSystem.title
           },
           {
             resizable: true,
@@ -1105,7 +1105,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.techFieldType1.field,
-            title: standardExterior.techFieldType1.title,
+            title: standardExterior.techFieldType1.title
           },
           {
             resizable: true,
@@ -1115,7 +1115,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.techFieldType2.field,
-            title: standardExterior.techFieldType2.title,
+            title: standardExterior.techFieldType2.title
           },
           {
             resizable: true,
@@ -1125,7 +1125,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.techFieldType3.field,
-            title: standardExterior.techFieldType3.title,
+            title: standardExterior.techFieldType3.title
           },
           {
             resizable: true,
@@ -1135,7 +1135,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.industryField.field,
-            title: standardExterior.industryField.title,
+            title: standardExterior.industryField.title
           },
           {
             resizable: true,
@@ -1145,7 +1145,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.industryOrientation.field,
-            title: standardExterior.industryOrientation.title,
+            title: standardExterior.industryOrientation.title
           },
           {
             resizable: true,
@@ -1155,7 +1155,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.publishDepartment.field,
-            title: standardExterior.publishDepartment.title,
+            title: standardExterior.publishDepartment.title
           },
           {
             resizable: true,
@@ -1165,7 +1165,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.checkInTime.field,
-            title: standardExterior.checkInTime.title,
+            title: standardExterior.checkInTime.title
           },
           {
             resizable: true,
@@ -1175,7 +1175,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.knowledgeType.field,
-            title: standardExterior.knowledgeType.title,
+            title: standardExterior.knowledgeType.title
           },
           {
             resizable: true,
@@ -1185,7 +1185,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.securityLevel.field,
-            title: standardExterior.securityLevel.title,
+            title: standardExterior.securityLevel.title
           },
           {
             resizable: true,
@@ -1195,7 +1195,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.abs.field,
-            title: standardExterior.abs.title,
+            title: standardExterior.abs.title
           },
           {
             resizable: true,
@@ -1205,7 +1205,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.formatTime.field,
-            title: standardExterior.formatTime.title,
+            title: standardExterior.formatTime.title
           },
           {
             resizable: true,
@@ -1215,7 +1215,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.informationCollactor.field,
-            title: standardExterior.informationCollactor.title,
+            title: standardExterior.informationCollactor.title
           },
           {
             resizable: true,
@@ -1225,7 +1225,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.informationAuditor.field,
-            title: standardExterior.informationAuditor.title,
+            title: standardExterior.informationAuditor.title
           },
           {
             resizable: true,
@@ -1235,7 +1235,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.language.field,
-            title: standardExterior.language.title,
+            title: standardExterior.language.title
           },
           {
             resizable: true,
@@ -1245,7 +1245,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.keywords.field,
-            title: standardExterior.keywords.title,
+            title: standardExterior.keywords.title
           },
           {
             resizable: true,
@@ -1255,7 +1255,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.informationOrigin.field,
-            title: standardExterior.informationOrigin.title,
+            title: standardExterior.informationOrigin.title
           },
           {
             resizable: true,
@@ -1265,7 +1265,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: standardExterior.referWebsite.field,
-            title: standardExterior.referWebsite.title,
+            title: standardExterior.referWebsite.title
           },
           {
             resizable: true,
@@ -1275,7 +1275,7 @@ export default {
             // editRender: { name: "input", enabled: false },
             field: standardExterior.fileName.field,
             title: standardExterior.fileName.title,
-            fixed: "right",
+            fixed: "right"
           },
           {
             resizable: true,
@@ -1283,19 +1283,19 @@ export default {
             align: "center",
             title: "操作",
             slots: { default: "uploadFile" },
-            fixed: "right",
-          },
-        ],
-      },
+            fixed: "right"
+          }
+        ]
+      }
     };
   },
   methods: {
     removeFileById(row) {
-      removeRemoteFileById({ id: row.id }).then((res) => {
+      removeRemoteFileById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");
         Message({
           message: "删除成功！",
-          type: "success",
+          type: "success"
         });
       });
     },
@@ -1303,7 +1303,7 @@ export default {
       this.$refs.xGrid.commitProxy("query");
       Message({
         message: "上传成功",
-        type: "success",
+        type: "success"
       });
     },
     replaceExcelTitle(workbook) {
@@ -1327,7 +1327,7 @@ export default {
       let methods = this.$options.methods;
       return new Promise((resolve, reject) => {
         let reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
           let data = e.target.result;
           let workbook = XLSX.read(data, { type: "binary" });
           let worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -1336,20 +1336,20 @@ export default {
           // console.log(workbook);
           // console.log(importData);
           confirmSaveStandardExterior({
-            insertRecords: importData,
+            insertRecords: importData
           }).then(() => {
             xGrid.commitProxy("query");
             Message({
               type: "success",
-              message: "导入成功",
+              message: "导入成功"
             });
           });
           resolve();
         };
-        reader.onerror = function (e) {
+        reader.onerror = function(e) {
           Message({
             type: "error",
-            message: "读取文件出错",
+            message: "读取文件出错"
           });
           reject();
         };
@@ -1357,20 +1357,19 @@ export default {
       }).catch(() => {
         Message({
           type: "error",
-          message: "导入失败",
+          message: "导入失败"
         });
       });
     },
     exportMethod({ options }) {
       this.tableExportMethod(options, standardExterior);
       return Promise.resolve();
-    },
+    }
   },
-  mounted: function () {
+  mounted: function() {
     // var xGrid = this.$refs.xGrid;
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

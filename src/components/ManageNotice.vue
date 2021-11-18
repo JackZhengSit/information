@@ -17,7 +17,7 @@ import {
   searchNotice,
   insertNotice,
   deleteNotice,
-  updateNotice,
+  updateNotice
 } from "@/api/manageNotice";
 import moment from "moment";
 
@@ -35,7 +35,7 @@ export default {
         editConfig: {
           trigger: "dblclick",
           mode: "row",
-          showStatus: true,
+          showStatus: true
         },
         formConfig: {
           titleWidth: 100,
@@ -48,8 +48,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: notice.author.field,
@@ -58,8 +58,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: notice.publicateDayStart.field,
@@ -68,8 +68,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: notice.publicateDayEnd.field,
@@ -78,8 +78,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               span: 24,
@@ -91,17 +91,17 @@ export default {
                     props: {
                       type: "submit",
                       content: "搜索",
-                      status: "primary",
-                    },
+                      status: "primary"
+                    }
                   },
-                  { props: { type: "reset", content: "重置" } },
-                ],
-              },
-            },
-          ],
+                  { props: { type: "reset", content: "重置" } }
+                ]
+              }
+            }
+          ]
         },
         pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
         },
         toolbarConfig: {
           buttons: [
@@ -111,70 +111,70 @@ export default {
             {
               code: "save",
               name: "保存",
-              status: "success",
-            },
+              status: "success"
+            }
           ],
           refresh: true,
           zoom: true,
-          custom: true,
+          custom: true
         },
         proxyConfig: {
           autoLoad: true,
           form: true,
           props: {
             result: "result",
-            total: "page.total",
+            total: "page.total"
           },
           ajax: {
             query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
-                size: page.pageSize,
+                size: page.pageSize
               });
               console.log(queryParams);
               let p = searchNotice(queryParams);
               return p;
             },
-            save: (data) => {
+            save: data => {
               //   console.log(data);
               Promise.all(
                 data.body.insertRecords
-                  .map((item) => {
+                  .map(item => {
                     insertNotice(item);
                   })
                   .concat(
-                    data.body.pendingRecords.map((item) => {
+                    data.body.pendingRecords.map(item => {
                       deleteNotice({ id: item.id }, item);
                     })
                   )
                   .concat(
-                    data.body.updateRecords.map((item) => {
+                    data.body.updateRecords.map(item => {
                       updateNotice({ id: item.id }, item);
                     })
                   )
               );
             },
-            delete: (data) => {
+            delete: data => {
               Promise.all(
-                data.body.removeRecords.map((item) => {
+                data.body.removeRecords.map(item => {
                   deleteNotice({ id: item.id }, item);
                 })
               );
-            },
-          },
+            }
+          }
         },
         columns: [
           {
             width: 100,
             visible: false,
             field: notice.id.field,
-            title: notice.id.title,
+            title: notice.id.title
           },
           {
             type: "checkbox",
             width: 50,
             fixed: "left",
-            align: "center",
+            align: "center"
           },
           {
             resizable: true,
@@ -184,7 +184,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: notice.title.field,
-            title: notice.title.title,
+            title: notice.title.title
           },
 
           {
@@ -194,7 +194,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: notice.author.field,
-            title: notice.author.title,
+            title: notice.author.title
           },
           {
             resizable: true,
@@ -203,7 +203,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: notice.mainText.field,
-            title: notice.mainText.title,
+            title: notice.mainText.title
           },
           {
             resizable: true,
@@ -212,7 +212,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: notice.publicateDay.field,
-            title: notice.publicateDay.title,
+            title: notice.publicateDay.title
           },
           {
             resizable: true,
@@ -223,7 +223,7 @@ export default {
             title: notice.createTime.title,
             formatter: ({ cellValue, row, column }) => {
               return moment(cellValue).format("YYYY-MM-DD HH:MM:SS");
-            },
+            }
           },
           {
             resizable: true,
@@ -234,14 +234,13 @@ export default {
             title: notice.updateTime.title,
             formatter: ({ cellValue, row, column }) => {
               return moment(cellValue).format("YYYY-MM-DD HH:MM:SS");
-            },
-          },
-        ],
-      },
+            }
+          }
+        ]
+      }
     };
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

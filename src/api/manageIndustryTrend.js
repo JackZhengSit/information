@@ -11,13 +11,13 @@ export function getIndustryTrend(params) {
   return axios({
     url: "/IndustryTrend",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return Promise.resolve({
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.industryTrends,
+      result: res._embedded.industryTrends
     });
   });
 }
@@ -26,13 +26,13 @@ export function searchIndustryTrend(params) {
   return axios({
     url: "/IndustryTrend/search/manageSearch",
     method: "get",
-    params,
-  }).then((res) => {
+    params
+  }).then(res => {
     return {
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.industryTrends,
+      result: res._embedded.industryTrends
     };
   });
 }
@@ -41,8 +41,8 @@ export function confirmSaveIndustryTrend(data) {
   return axios({
     url: "/manual/industry-trend/save",
     method: "post",
-    data: data,
-  }).then((res) => {
+    data: data
+  }).then(res => {
     // console.log(res);
     return res;
   });
@@ -52,8 +52,8 @@ export function removeRemoteFileById(param) {
   return axios({
     url: "/manual/industry-trend/remove",
     method: "get",
-    params: param,
-  }).then((res) => {
+    params: param
+  }).then(res => {
     return res;
   });
 }

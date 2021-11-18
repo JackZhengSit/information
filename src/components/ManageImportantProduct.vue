@@ -83,7 +83,7 @@ import {
   getAllByImportantProduct,
   addImportantProduct,
   patchImportantProduct,
-  deleteImportantProduct,
+  deleteImportantProduct
 } from "@/api/manageImportantProduct";
 export default {
   data() {
@@ -92,17 +92,17 @@ export default {
       keyword: "",
       dialogVisible: false,
       productName: "",
-      editRow: "",
+      editRow: ""
     };
   },
   methods: {
     loadData() {
-      getAllByImportantProduct({ productName: "" }).then((res) => {
+      getAllByImportantProduct({ productName: "" }).then(res => {
         this.tableData = res._embedded.importantProducts;
       });
     },
     search() {
-      getAllByImportantProduct({ productName: this.keyword }).then((res) => {
+      getAllByImportantProduct({ productName: this.keyword }).then(res => {
         console.log(res);
         this.tableData = res._embedded.importantProducts;
       });
@@ -116,10 +116,10 @@ export default {
       this.productName = row.productName;
     },
     handleDelete(index, row) {
-      deleteImportantProduct(row.id).then((res) => {
+      deleteImportantProduct(row.id).then(res => {
         this.$message({
           type: "success",
-          message: "删除成功",
+          message: "删除成功"
         });
         this.loadData();
       });
@@ -127,20 +127,20 @@ export default {
     submit() {
       this.dialogVisible = false;
       if (!this.editRow) {
-        addImportantProduct({ productName: this.productName }).then((res) => {
+        addImportantProduct({ productName: this.productName }).then(res => {
           this.$message({
             type: "success",
-            message: "新增成功",
+            message: "新增成功"
           });
           this.loadData();
         });
       } else {
         patchImportantProduct(this.editRow.id, {
-          productName: this.productName,
-        }).then((res) => {
+          productName: this.productName
+        }).then(res => {
           this.$message({
             type: "success",
-            message: "修改成功",
+            message: "修改成功"
           });
           this.loadData();
         });
@@ -149,10 +149,10 @@ export default {
     closed() {
       this.editRow = null;
       this.productName = null;
-    },
+    }
   },
   created() {
     this.loadData();
-  },
+  }
 };
 </script>

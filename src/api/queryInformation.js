@@ -10,8 +10,8 @@ import axios from "@/utils/axio";
 export function getNewestIndustryTrend() {
   return axios({
     url: "/Information/search/getNewestIndustryTrend",
-    method: "get",
-  }).then((res) => {
+    method: "get"
+  }).then(res => {
     return res._embedded.viewInformations;
   });
 }
@@ -19,8 +19,8 @@ export function getNewestIndustryTrend() {
 export function getNewestInfoExterior() {
   return axios({
     url: "/Information/search/getNewestInfoExterior",
-    method: "get",
-  }).then((res) => {
+    method: "get"
+  }).then(res => {
     return res._embedded.viewInformations;
   });
 }
@@ -28,8 +28,8 @@ export function getNewestInfoExterior() {
 export function getNewestInfoInterior() {
   return axios({
     url: "/Information/search/getNewestInfoInterior",
-    method: "get",
-  }).then((res) => {
+    method: "get"
+  }).then(res => {
     return res._embedded.viewInformations;
   });
 }
@@ -38,8 +38,8 @@ export function getTopicInformation(params) {
   return axios({
     url: "/Information/search/getTopicInformation",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return res._embedded.viewInformations;
   });
 }
@@ -48,8 +48,8 @@ export function countInfoType(params) {
   return axios({
     url: "/Information/search/countInfoType",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return res;
   });
 }
@@ -58,8 +58,8 @@ export function getNewestInfoByInfoType(params) {
   return axios({
     url: "/Information/search/getNewestInfoByInfoType",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return res._embedded.viewInformations;
   });
 }
@@ -67,27 +67,27 @@ export function getNewestInfoByInfoType(params) {
 export function getInfoTypeCount() {
   return axios({
     url: "/manual/information/getInfoTypeCount",
-    method: "get",
+    method: "get"
   });
 }
 
 export function getTopicCategoryCount() {
   return axios({
     url: "/manual/information/getTopicCategoryCount",
-    method: "get",
+    method: "get"
   });
 }
 export function getProfessionFieldCount() {
   return axios({
     url: "/manual/information/getProfessionFieldCount",
-    method: "get",
+    method: "get"
   });
 }
 
 export function getYearCount() {
   return axios({
     url: "/manual/information/getYearCount",
-    method: "get",
+    method: "get"
   });
 }
 
@@ -95,7 +95,7 @@ export function searchInformation(data) {
   return axios({
     url: "/manual/information/searchInformation",
     method: "post",
-    data,
+    data
   });
 }
 
@@ -103,8 +103,8 @@ export function searchInformation(data) {
 export function getDetailInfo(params) {
   return axios({
     url: "/" + params.infoType + "/" + params.id,
-    method: "get",
-  }).then((res) => {
+    method: "get"
+  }).then(res => {
     return res;
   });
 }

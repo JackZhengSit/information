@@ -35,7 +35,7 @@ import { paperExterior } from "../store/infoType";
 import {
   searchPaperExterior,
   removeRemoteFileById,
-  confirmSavePaperExterior,
+  confirmSavePaperExterior
 } from "@/api/managePaperExterior";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
@@ -45,7 +45,7 @@ function csvToObject(csvString) {
   let datas = [];
   let headers = csvarry[0].split(",");
   for (let i = 0; i < headers.length; i++) {
-    Object.keys(paperExterior).forEach(function (key) {
+    Object.keys(paperExterior).forEach(function(key) {
       if (paperExterior[key].title == headers[i])
         headers[i] = paperExterior[key].field;
     });
@@ -77,7 +77,7 @@ export default {
         editConfig: {
           trigger: "dblclick",
           mode: "row",
-          showStatus: true,
+          showStatus: true
         },
         formConfig: {
           data: {},
@@ -91,8 +91,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: 1,
-              },
+                defaultValue: 1
+              }
             },
             {
               field: paperExterior.orderNumEnd.field,
@@ -101,8 +101,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: 1000000,
-              },
+                defaultValue: 1000000
+              }
             },
             {
               field: paperExterior.paperType.field,
@@ -111,8 +111,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.title.field,
@@ -121,8 +121,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.author.field,
@@ -131,8 +131,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.topicCategory.field,
@@ -141,8 +141,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.professionField.field,
@@ -151,8 +151,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.infoNo.field,
@@ -161,8 +161,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.authorInstitution.field,
@@ -172,8 +172,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.firstAuthorInstitution.field,
@@ -183,8 +183,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.informationComeFrom.field,
@@ -194,8 +194,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.publicationTimeStart.field,
@@ -205,8 +205,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: paperExterior.publicationTimeEnd.field,
@@ -216,8 +216,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: paperExterior.documentType.field,
@@ -227,8 +227,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.pageNo.field,
@@ -238,8 +238,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.traslatedTitle.field,
@@ -249,8 +249,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.authorGroup.field,
@@ -260,8 +260,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.publicateCompony.field,
@@ -271,8 +271,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.publicateTimeStart.field,
@@ -282,8 +282,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: paperExterior.publicateTimeEnd.field,
@@ -293,8 +293,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: paperExterior.conferenceSite.field,
@@ -304,8 +304,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.conferenceName.field,
@@ -315,8 +315,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.conferenceDateStart.field,
@@ -326,8 +326,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: paperExterior.conferenceDateEnd.field,
@@ -337,8 +337,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: paperExterior.chineseClassNum.field,
@@ -348,8 +348,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.fundProject.field,
@@ -359,8 +359,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.reference.field,
@@ -370,8 +370,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.quotation.field,
@@ -381,8 +381,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.allName.field,
@@ -392,8 +392,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.pageCount.field,
@@ -403,8 +403,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.collectCompany.field,
@@ -414,8 +414,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
 
             {
@@ -426,8 +426,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.industryDetailType.field,
@@ -437,8 +437,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.industryChainType.field,
@@ -448,8 +448,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.referDeviceType.field,
@@ -459,8 +459,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.referDevice.field,
@@ -470,8 +470,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.referProduct.field,
@@ -481,8 +481,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.referProject.field,
@@ -492,8 +492,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.referInstitution.field,
@@ -503,8 +503,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.referTechnology.field,
@@ -514,8 +514,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.infoCategory.field,
@@ -525,8 +525,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.department.field,
@@ -536,8 +536,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.researchField.field,
@@ -547,8 +547,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.researchOrientation.field,
@@ -558,8 +558,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.researchSystem.field,
@@ -569,8 +569,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.techFieldType1.field,
@@ -580,8 +580,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.techFieldType2.field,
@@ -591,8 +591,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.techFieldType3.field,
@@ -602,8 +602,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.industryField.field,
@@ -613,8 +613,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.industryOrientation.field,
@@ -624,8 +624,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.publishDepartment.field,
@@ -635,8 +635,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.checkInTimeStart.field,
@@ -646,8 +646,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: paperExterior.checkInTimeEnd.field,
@@ -657,8 +657,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: paperExterior.knowledgeType.field,
@@ -668,8 +668,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.securityLevel.field,
@@ -679,8 +679,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
 
             {
@@ -691,8 +691,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: paperExterior.formatTimeEnd.field,
@@ -702,8 +702,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: paperExterior.informationCollactor.field,
@@ -713,8 +713,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.informationAuditor.field,
@@ -724,8 +724,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.language.field,
@@ -735,8 +735,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.keywords.field,
@@ -746,8 +746,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.informationOrigin.field,
@@ -757,8 +757,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: paperExterior.referWebsite.field,
@@ -768,8 +768,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             // {
             //   field: paperExterior.createTime.field,
@@ -802,34 +802,34 @@ export default {
                     props: {
                       type: "submit",
                       content: "搜索",
-                      status: "primary",
-                    },
+                      status: "primary"
+                    }
                   },
-                  { props: { type: "reset", content: "重置" } },
-                ],
-              },
-            },
-          ],
+                  { props: { type: "reset", content: "重置" } }
+                ]
+              }
+            }
+          ]
         },
         pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
         },
         sortConfig: {
           trigger: "cell",
-          remote: true,
+          remote: true
         },
         importConfig: {
           mode: "insert",
           remote: true,
           types: ["xlsx"],
-          importMethod: this.importMethod,
+          importMethod: this.importMethod
         },
         exportConfig: {
           remote: true,
           exportMethod: this.exportMethod,
           // original: true,
           // types: ["xlsx"],
-          modes: ["current", "selected"],
+          modes: ["current", "selected"]
         },
         toolbarConfig: {
           buttons: [
@@ -839,14 +839,14 @@ export default {
             {
               code: "save",
               name: "保存",
-              status: "success",
-            },
+              status: "success"
+            }
           ],
           refresh: true,
           import: true,
           export: true,
           zoom: true,
-          custom: true,
+          custom: true
         },
         proxyConfig: {
           autoLoad: true,
@@ -854,13 +854,13 @@ export default {
           sort: true,
           props: {
             result: "result",
-            total: "page.total",
+            total: "page.total"
           },
           ajax: {
             query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
-                size: page.pageSize,
+                size: page.pageSize
               });
               let firstSort = sorts[0];
               if (firstSort) {
@@ -871,26 +871,26 @@ export default {
               let p = searchPaperExterior(queryParams);
               return p;
             },
-            save: (data) => {
+            save: data => {
               confirmSavePaperExterior(data.body);
             },
-            delete: (data) => {
+            delete: data => {
               confirmSavePaperExterior(data.body);
-            },
-          },
+            }
+          }
         },
         columns: [
           {
             width: 100,
             visible: false,
             field: paperExterior.id.field,
-            title: paperExterior.id.title,
+            title: paperExterior.id.title
           },
           {
             type: "checkbox",
             width: 50,
             fixed: "left",
-            align: "center",
+            align: "center"
           },
           {
             fixed: "left",
@@ -902,7 +902,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: paperExterior.orderNum.field,
-            title: paperExterior.orderNum.title,
+            title: paperExterior.orderNum.title
           },
 
           {
@@ -913,7 +913,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.paperType.field,
-            title: paperExterior.paperType.title,
+            title: paperExterior.paperType.title
           },
           {
             resizable: true,
@@ -923,7 +923,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.title.field,
-            title: paperExterior.title.title,
+            title: paperExterior.title.title
           },
           {
             resizable: true,
@@ -933,7 +933,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.author.field,
-            title: paperExterior.author.title,
+            title: paperExterior.author.title
           },
           {
             resizable: true,
@@ -943,7 +943,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.authorInstitution.field,
-            title: paperExterior.authorInstitution.title,
+            title: paperExterior.authorInstitution.title
           },
           {
             resizable: true,
@@ -953,7 +953,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.firstAuthorInstitution.field,
-            title: paperExterior.firstAuthorInstitution.title,
+            title: paperExterior.firstAuthorInstitution.title
           },
           {
             resizable: true,
@@ -963,7 +963,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.informationComeFrom.field,
-            title: paperExterior.informationComeFrom.title,
+            title: paperExterior.informationComeFrom.title
           },
           {
             resizable: true,
@@ -973,7 +973,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.publicationTime.field,
-            title: paperExterior.publicationTime.title,
+            title: paperExterior.publicationTime.title
           },
           {
             resizable: true,
@@ -983,7 +983,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.documentType.field,
-            title: paperExterior.documentType.title,
+            title: paperExterior.documentType.title
           },
           {
             resizable: true,
@@ -993,7 +993,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.pageNo.field,
-            title: paperExterior.pageNo.title,
+            title: paperExterior.pageNo.title
           },
           {
             resizable: true,
@@ -1003,7 +1003,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.traslatedTitle.field,
-            title: paperExterior.traslatedTitle.title,
+            title: paperExterior.traslatedTitle.title
           },
           {
             resizable: true,
@@ -1013,7 +1013,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.authorGroup.field,
-            title: paperExterior.authorGroup.title,
+            title: paperExterior.authorGroup.title
           },
           {
             resizable: true,
@@ -1023,7 +1023,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.publicateCompony.field,
-            title: paperExterior.publicateCompony.title,
+            title: paperExterior.publicateCompony.title
           },
           {
             resizable: true,
@@ -1033,7 +1033,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.publicateTime.field,
-            title: paperExterior.publicateTime.title,
+            title: paperExterior.publicateTime.title
           },
           {
             resizable: true,
@@ -1043,7 +1043,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.conferenceSite.field,
-            title: paperExterior.conferenceSite.title,
+            title: paperExterior.conferenceSite.title
           },
           {
             resizable: true,
@@ -1053,7 +1053,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.conferenceName.field,
-            title: paperExterior.conferenceName.title,
+            title: paperExterior.conferenceName.title
           },
           {
             resizable: true,
@@ -1063,7 +1063,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.conferenceDate.field,
-            title: paperExterior.conferenceDate.title,
+            title: paperExterior.conferenceDate.title
           },
           {
             resizable: true,
@@ -1073,7 +1073,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.chineseClassNum.field,
-            title: paperExterior.chineseClassNum.title,
+            title: paperExterior.chineseClassNum.title
           },
           {
             resizable: true,
@@ -1083,7 +1083,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.fundProject.field,
-            title: paperExterior.fundProject.title,
+            title: paperExterior.fundProject.title
           },
           {
             resizable: true,
@@ -1093,7 +1093,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.reference.field,
-            title: paperExterior.reference.title,
+            title: paperExterior.reference.title
           },
           {
             resizable: true,
@@ -1103,7 +1103,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.quotation.field,
-            title: paperExterior.quotation.title,
+            title: paperExterior.quotation.title
           },
           {
             resizable: true,
@@ -1113,7 +1113,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.allName.field,
-            title: paperExterior.allName.title,
+            title: paperExterior.allName.title
           },
           {
             resizable: true,
@@ -1123,7 +1123,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.pageCount.field,
-            title: paperExterior.pageCount.title,
+            title: paperExterior.pageCount.title
           },
           {
             resizable: true,
@@ -1133,7 +1133,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.collectCompany.field,
-            title: paperExterior.collectCompany.title,
+            title: paperExterior.collectCompany.title
           },
 
           {
@@ -1144,7 +1144,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.industryType.field,
-            title: paperExterior.industryType.title,
+            title: paperExterior.industryType.title
           },
           {
             resizable: true,
@@ -1154,7 +1154,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.industryDetailType.field,
-            title: paperExterior.industryDetailType.title,
+            title: paperExterior.industryDetailType.title
           },
           {
             resizable: true,
@@ -1164,7 +1164,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.industryChainType.field,
-            title: paperExterior.industryChainType.title,
+            title: paperExterior.industryChainType.title
           },
           {
             resizable: true,
@@ -1174,7 +1174,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.referDeviceType.field,
-            title: paperExterior.referDeviceType.title,
+            title: paperExterior.referDeviceType.title
           },
           {
             resizable: true,
@@ -1184,7 +1184,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.referDevice.field,
-            title: paperExterior.referDevice.title,
+            title: paperExterior.referDevice.title
           },
           {
             resizable: true,
@@ -1194,7 +1194,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.referProduct.field,
-            title: paperExterior.referProduct.title,
+            title: paperExterior.referProduct.title
           },
           {
             resizable: true,
@@ -1204,7 +1204,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.referProject.field,
-            title: paperExterior.referProject.title,
+            title: paperExterior.referProject.title
           },
           {
             resizable: true,
@@ -1214,7 +1214,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.referInstitution.field,
-            title: paperExterior.referInstitution.title,
+            title: paperExterior.referInstitution.title
           },
           {
             resizable: true,
@@ -1224,7 +1224,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.referTechnology.field,
-            title: paperExterior.referTechnology.title,
+            title: paperExterior.referTechnology.title
           },
           {
             resizable: true,
@@ -1234,7 +1234,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.infoCategory.field,
-            title: paperExterior.infoCategory.title,
+            title: paperExterior.infoCategory.title
           },
           {
             resizable: true,
@@ -1244,7 +1244,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.topicCategory.field,
-            title: paperExterior.topicCategory.title,
+            title: paperExterior.topicCategory.title
           },
           {
             resizable: true,
@@ -1254,7 +1254,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.professionField.field,
-            title: paperExterior.professionField.title,
+            title: paperExterior.professionField.title
           },
           {
             resizable: true,
@@ -1264,7 +1264,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.infoNo.field,
-            title: paperExterior.infoNo.title,
+            title: paperExterior.infoNo.title
           },
           {
             resizable: true,
@@ -1274,7 +1274,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.department.field,
-            title: paperExterior.department.title,
+            title: paperExterior.department.title
           },
           {
             resizable: true,
@@ -1284,7 +1284,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.researchField.field,
-            title: paperExterior.researchField.title,
+            title: paperExterior.researchField.title
           },
           {
             resizable: true,
@@ -1294,7 +1294,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.researchOrientation.field,
-            title: paperExterior.researchOrientation.title,
+            title: paperExterior.researchOrientation.title
           },
           {
             resizable: true,
@@ -1304,7 +1304,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.researchSystem.field,
-            title: paperExterior.researchSystem.title,
+            title: paperExterior.researchSystem.title
           },
           {
             resizable: true,
@@ -1314,7 +1314,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.techFieldType1.field,
-            title: paperExterior.techFieldType1.title,
+            title: paperExterior.techFieldType1.title
           },
           {
             resizable: true,
@@ -1324,7 +1324,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.techFieldType2.field,
-            title: paperExterior.techFieldType2.title,
+            title: paperExterior.techFieldType2.title
           },
           {
             resizable: true,
@@ -1334,7 +1334,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.techFieldType3.field,
-            title: paperExterior.techFieldType3.title,
+            title: paperExterior.techFieldType3.title
           },
           {
             resizable: true,
@@ -1344,7 +1344,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.industryField.field,
-            title: paperExterior.industryField.title,
+            title: paperExterior.industryField.title
           },
           {
             resizable: true,
@@ -1354,7 +1354,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.industryOrientation.field,
-            title: paperExterior.industryOrientation.title,
+            title: paperExterior.industryOrientation.title
           },
           {
             resizable: true,
@@ -1364,7 +1364,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.publishDepartment.field,
-            title: paperExterior.publishDepartment.title,
+            title: paperExterior.publishDepartment.title
           },
           {
             resizable: true,
@@ -1374,7 +1374,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.checkInTime.field,
-            title: paperExterior.checkInTime.title,
+            title: paperExterior.checkInTime.title
           },
           {
             resizable: true,
@@ -1384,7 +1384,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.knowledgeType.field,
-            title: paperExterior.knowledgeType.title,
+            title: paperExterior.knowledgeType.title
           },
           {
             resizable: true,
@@ -1394,7 +1394,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.securityLevel.field,
-            title: paperExterior.securityLevel.title,
+            title: paperExterior.securityLevel.title
           },
           {
             resizable: true,
@@ -1404,7 +1404,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.abs.field,
-            title: paperExterior.abs.title,
+            title: paperExterior.abs.title
           },
           {
             resizable: true,
@@ -1414,7 +1414,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.formatTime.field,
-            title: paperExterior.formatTime.title,
+            title: paperExterior.formatTime.title
           },
           {
             resizable: true,
@@ -1424,7 +1424,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.informationCollactor.field,
-            title: paperExterior.informationCollactor.title,
+            title: paperExterior.informationCollactor.title
           },
           {
             resizable: true,
@@ -1434,7 +1434,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.informationAuditor.field,
-            title: paperExterior.informationAuditor.title,
+            title: paperExterior.informationAuditor.title
           },
           {
             resizable: true,
@@ -1444,7 +1444,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.language.field,
-            title: paperExterior.language.title,
+            title: paperExterior.language.title
           },
           {
             resizable: true,
@@ -1454,7 +1454,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.keywords.field,
-            title: paperExterior.keywords.title,
+            title: paperExterior.keywords.title
           },
           {
             resizable: true,
@@ -1464,7 +1464,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.informationOrigin.field,
-            title: paperExterior.informationOrigin.title,
+            title: paperExterior.informationOrigin.title
           },
           {
             resizable: true,
@@ -1474,7 +1474,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: paperExterior.referWebsite.field,
-            title: paperExterior.referWebsite.title,
+            title: paperExterior.referWebsite.title
           },
           {
             resizable: true,
@@ -1484,7 +1484,7 @@ export default {
             // editRender: { name: "input", enabled: false },
             field: paperExterior.fileName.field,
             title: paperExterior.fileName.title,
-            fixed: "right",
+            fixed: "right"
           },
           {
             resizable: true,
@@ -1492,19 +1492,19 @@ export default {
             align: "center",
             title: "操作",
             slots: { default: "uploadFile" },
-            fixed: "right",
-          },
-        ],
-      },
+            fixed: "right"
+          }
+        ]
+      }
     };
   },
   methods: {
     removeFileById(row) {
-      removeRemoteFileById({ id: row.id }).then((res) => {
+      removeRemoteFileById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");
         Message({
           message: "删除成功！",
-          type: "success",
+          type: "success"
         });
       });
     },
@@ -1512,7 +1512,7 @@ export default {
       this.$refs.xGrid.commitProxy("query");
       Message({
         message: "上传成功",
-        type: "success",
+        type: "success"
       });
     },
     replaceExcelTitle(workbook) {
@@ -1536,7 +1536,7 @@ export default {
       let methods = this.$options.methods;
       return new Promise((resolve, reject) => {
         let reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
           let data = e.target.result;
           let workbook = XLSX.read(data, { type: "binary" });
           let worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -1545,20 +1545,20 @@ export default {
           // console.log(workbook);
           // console.log(importData);
           confirmSavePaperExterior({
-            insertRecords: importData,
+            insertRecords: importData
           }).then(() => {
             xGrid.commitProxy("query");
             Message({
               type: "success",
-              message: "导入成功",
+              message: "导入成功"
             });
           });
           resolve();
         };
-        reader.onerror = function (e) {
+        reader.onerror = function(e) {
           Message({
             type: "error",
-            message: "读取文件出错",
+            message: "读取文件出错"
           });
           reject();
         };
@@ -1566,20 +1566,19 @@ export default {
       }).catch(() => {
         Message({
           type: "error",
-          message: "导入失败",
+          message: "导入失败"
         });
       });
     },
     exportMethod({ options }) {
       this.tableExportMethod(options, paperExterior);
       return Promise.resolve();
-    },
+    }
   },
-  mounted: function () {
+  mounted: function() {
     // var xGrid = this.$refs.xGrid;
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

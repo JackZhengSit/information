@@ -83,13 +83,13 @@ export default {
   data() {
     return {
       infoType,
-      defaultActiveIndex: "/manage/industryTrend",
+      defaultActiveIndex: "/manage/industryTrend"
     };
   },
   computed: {
     ...mapState({
-      activeIndex: (state) => state.RouteModule.path,
-    }),
+      activeIndex: state => state.RouteModule.path
+    })
   },
   methods: {
     onSubmit() {
@@ -97,10 +97,9 @@ export default {
     },
     reset() {
       //reset
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

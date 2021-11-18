@@ -25,7 +25,7 @@ import {
   getInfoTypeCount,
   getTopicCategoryCount,
   getProfessionFieldCount,
-  getYearCount,
+  getYearCount
 } from "../api/queryInformation";
 
 export default {
@@ -41,24 +41,24 @@ export default {
       typeChart.setOption({
         title: {
           left: "40%",
-          text: "情报类型统计",
+          text: "情报类型统计"
         },
         tooltip: {},
         legend: {
           right: 10,
-          data: ["数量"],
+          data: ["数量"]
         },
         dataset: {
-          source: data,
+          source: data
         },
         xAxis: {},
         yAxis: { type: "category" },
         series: [
           {
             name: "数量",
-            type: "bar",
-          },
-        ],
+            type: "bar"
+          }
+        ]
       });
     },
     initTopicCategoryChart(data) {
@@ -69,24 +69,24 @@ export default {
       typeChart.setOption({
         title: {
           left: "40%",
-          text: "专题统计",
+          text: "专题统计"
         },
         tooltip: {},
         legend: {
           right: 10,
-          data: ["数量"],
+          data: ["数量"]
         },
         dataset: {
-          source: data,
+          source: data
         },
         xAxis: {},
         yAxis: { type: "category" },
         series: [
           {
             name: "数量",
-            type: "bar",
-          },
-        ],
+            type: "bar"
+          }
+        ]
       });
     },
     initProfessionFieldChart(data) {
@@ -97,24 +97,24 @@ export default {
       typeChart.setOption({
         title: {
           left: "40%",
-          text: "专业领域统计",
+          text: "专业领域统计"
         },
         tooltip: {},
         legend: {
           right: 10,
-          data: ["数量"],
+          data: ["数量"]
         },
         dataset: {
-          source: data,
+          source: data
         },
         xAxis: {},
         yAxis: { type: "category" },
         series: [
           {
             name: "数量",
-            type: "bar",
-          },
-        ],
+            type: "bar"
+          }
+        ]
       });
     },
     initYearChart(data) {
@@ -125,41 +125,41 @@ export default {
       typeChart.setOption({
         title: {
           left: "40%",
-          text: "年份统计",
+          text: "年份统计"
         },
         tooltip: {},
         legend: {
           right: 10,
-          data: ["数量"],
+          data: ["数量"]
         },
         dataset: {
-          source: data,
+          source: data
         },
         xAxis: {},
         yAxis: { type: "category" },
         series: [
           {
             name: "数量",
-            type: "bar",
-          },
-        ],
+            type: "bar"
+          }
+        ]
       });
-    },
+    }
   },
   mounted() {
-    getInfoTypeCount().then((res) => {
+    getInfoTypeCount().then(res => {
       this.initTypeChart(res);
     });
-    getTopicCategoryCount().then((res) => {
+    getTopicCategoryCount().then(res => {
       this.initTopicCategoryChart(res);
     });
-    getProfessionFieldCount().then((res) => {
+    getProfessionFieldCount().then(res => {
       this.initProfessionFieldChart(res);
     });
-    getYearCount().then((res) => {
+    getYearCount().then(res => {
       this.initYearChart(res);
     });
-  },
+  }
 };
 </script>
 

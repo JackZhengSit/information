@@ -23,7 +23,7 @@ h4,
 h5 {
   color: #303133;
 }
-P {
+p {
   font-size: 14px;
   color: #606266;
 }

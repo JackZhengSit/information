@@ -37,19 +37,19 @@ export default {
     author: String,
     infoType: String,
     abstract: String,
-    fileUrl: String,
+    fileUrl: String
   },
   methods: {
-    showDetails: function (event) {
+    showDetails: function(event) {
       let routeData = this.$router.resolve({
         name: "Details",
         query: {
           originId: this.originId,
           infoType: this.infoType,
           infoTitle: this.title,
-          infoFileUrl: this.fileUrl,
+          infoFileUrl: this.fileUrl
         },
-        props: true,
+        props: true
       });
       window.open(routeData.href, "_blank");
     },
@@ -64,21 +64,21 @@ export default {
         ) {
           this.$message({
             type: "warning",
-            message: "若需全文，请联系标研中心情报研究科 5216",
+            message: "若需全文，请联系标研中心情报研究科 5216"
           });
         } else {
           this.$message({
             type: "warning",
-            message: "此情报附件无附件或未上传！",
+            message: "此情报附件无附件或未上传！"
           });
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .result-item {
   padding: 10px 0 10px 0;
 }

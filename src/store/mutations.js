@@ -11,7 +11,7 @@ const mutations = {
   },
   setSearchInput(state, value) {
     state.searchInput = value;
-  },
+  }
 };
 
 export default mutations;

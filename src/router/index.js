@@ -28,7 +28,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../pages/About.vue"),
+      import(/* webpackChunkName: "about" */ "../pages/About.vue")
   },
   {
     path: "/",
@@ -42,82 +42,82 @@ const routes = [
         components: {
           header: Header,
           content: Content,
-          footer: Footer,
+          footer: Footer
         },
         children: [
           {
             path: "home",
             name: "Home",
-            component: Home,
+            component: Home
           },
           {
             path: "search",
             name: "Search",
-            component: Search,
+            component: Search
           },
           {
             path: "library",
             name: "Library",
             component: Library,
-            children: [],
+            children: []
           },
           {
             path: "library/book",
             name: "Book",
-            component: Book,
+            component: Book
           },
           {
             path: "library/journal",
             name: "Journal",
-            component: Journal,
+            component: Journal
           },
           {
             path: "wiki",
             name: "Wiki",
-            component: Wiki,
+            component: Wiki
           },
           {
             path: "question",
             name: "Question",
-            component: Question,
+            component: Question
           },
           {
             path: "download",
             name: "Download",
             component: Download,
-            children: [],
+            children: []
           },
           {
             path: "download/searchIndex",
             name: "SearchIndex",
-            component: SearchIndex,
+            component: SearchIndex
           },
           {
             path: "download/classResource",
             name: "ClassResource",
-            component: ClassResource,
+            component: ClassResource
           },
           {
             path: "download/tools",
             name: "Tools",
-            component: Tools,
+            component: Tools
           },
           {
             path: "statistics",
             name: "Statistics",
-            component: Statistics,
+            component: Statistics
           },
           {
             path: "details",
             name: "Details",
-            props: (route) => ({
+            props: route => ({
               originId: route.query.originId,
               infoType: route.query.infoType,
               infoTitle: route.query.infoTitle,
-              infoFileUrl: route.query.infoFileUrl,
+              infoFileUrl: route.query.infoFileUrl
             }),
             component: () =>
-              import(/* webpackChunkName: "Details" */ "../views/Details.vue"),
+              import(/* webpackChunkName: "Details" */ "../views/Details.vue")
           },
           {
             path: "manage",
@@ -131,7 +131,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "ManageBriefReportExterior" */ "../components/ManageBriefReportExterior.vue"
-                  ),
+                  )
               },
               {
                 path: "briefReportInterior",
@@ -139,7 +139,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "ManageBriefReportInterior" */ "../components/ManageBriefReportInterior.vue"
-                  ),
+                  )
               },
               {
                 path: "industryTrend",
@@ -147,7 +147,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "industryTrend" */ "../components/ManageIndustryTrend.vue"
-                  ),
+                  )
               },
               {
                 path: "paperExterior",
@@ -155,7 +155,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "paperExterior" */ "../components/ManagePaperExterior.vue"
-                  ),
+                  )
               },
               {
                 path: "patentExterior",
@@ -163,7 +163,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "patentExterior" */ "../components/ManagePatentExterior.vue"
-                  ),
+                  )
               },
               {
                 path: "reportExterior",
@@ -171,7 +171,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "reportExterior" */ "../components/ManageReportExterior.vue"
-                  ),
+                  )
               },
               {
                 path: "reportInterior",
@@ -179,7 +179,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "reportInterior" */ "../components/ManageReportInterior.vue"
-                  ),
+                  )
               },
               {
                 path: "standardExterior",
@@ -187,7 +187,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "standardExterior" */ "../components/ManageStandardExterior.vue"
-                  ),
+                  )
               },
               {
                 path: "notice",
@@ -195,7 +195,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "notice" */ "../components/ManageNotice.vue"
-                  ),
+                  )
               },
               {
                 path: "question",
@@ -203,7 +203,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "question" */ "../components/ManageQuestion.vue"
-                  ),
+                  )
               },
               {
                 path: "classResource",
@@ -211,7 +211,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "classResource" */ "../components/ManageClassResource.vue"
-                  ),
+                  )
               },
               {
                 path: "infoLibrary",
@@ -219,7 +219,7 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "infoLibrary" */ "../components/ManageInfoLibrary.vue"
-                  ),
+                  )
               },
               {
                 path: "importantProduct",
@@ -227,20 +227,20 @@ const routes = [
                 component: () =>
                   import(
                     /* webpackChunkName: "infoLibrary" */ "../components/ManageImportantProduct.vue"
-                  ),
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+                  )
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;

@@ -4,7 +4,7 @@ export function insertQuestion(data) {
   return axios({
     url: "/InfoQuestion",
     method: "post",
-    data,
+    data
   });
 }
 
@@ -12,14 +12,14 @@ export function updateQuestion(params, data) {
   return axios({
     url: "/InfoQuestion/" + params.id,
     method: "patch",
-    data,
+    data
   });
 }
 
 export function deleteQuestion(params) {
   return axios({
     url: "/InfoQuestion/" + params.id,
-    method: "delete",
+    method: "delete"
   });
 }
 
@@ -27,13 +27,13 @@ export function getQuestion(params) {
   return axios({
     url: "/InfoQuestion",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return {
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.infoQuestions,
+      result: res._embedded.infoQuestions
     };
   });
 }
@@ -42,13 +42,13 @@ export function manageSearch(params) {
   return axios({
     url: "/InfoQuestion/search/manageSearch",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return {
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.infoQuestions,
+      result: res._embedded.infoQuestions
     };
   });
 }

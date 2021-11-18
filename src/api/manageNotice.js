@@ -10,8 +10,8 @@ import axios from "@/utils/axio";
 export function getNewestNotice() {
   return axios({
     url: "/Notice/search/getNewestNotice",
-    method: "get",
-  }).then((res) => {
+    method: "get"
+  }).then(res => {
     return res._embedded.notices;
   });
 }
@@ -20,13 +20,13 @@ export function searchNotice(params) {
   return axios({
     url: "/Notice/search/manageSearch",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return {
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.notices,
+      result: res._embedded.notices
     };
   });
 }
@@ -35,7 +35,7 @@ export function insertNotice(data) {
   return axios({
     url: "/Notice",
     method: "post",
-    data: data,
+    data: data
   });
 }
 
@@ -43,7 +43,7 @@ export function deleteNotice(params, data) {
   return axios({
     url: "/Notice/" + params.id,
     method: "delete",
-    data,
+    data
   });
 }
 
@@ -51,6 +51,6 @@ export function updateNotice(params, data) {
   return axios({
     url: "/Notice/" + params.id,
     method: "patch",
-    data,
+    data
   });
 }

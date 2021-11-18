@@ -11,7 +11,7 @@ import { Message, MessageBox } from "element-ui";
 import baseUrl from "@/config/baseUrl";
 
 const service = axios.create({
-  timeout: 10000,
+  timeout: 10000
 });
 
 service.defaults.headers.post["Content-Type"] =
@@ -29,39 +29,39 @@ service.defaults.baseURL = baseUrl;
 // }
 
 service.interceptors.request.use(
-  (config) => {
+  config => {
     return config;
   },
-  (error) => {
+  error => {
     Promise.reject(error);
   }
 );
 
 service.interceptors.response.use(
-  (response) => {
+  response => {
     if (200 <= response.status < 300) {
       return response.data;
     } else {
       Message({
         message: "错误：" + response.message,
         type: "error",
-        duration: 5 * 1000,
+        duration: 5 * 1000
       });
       return Promise.reject(response);
     }
   },
-  (error) => {
+  error => {
     Message({
       message: "错误：" + error.message,
       type: "error",
-      duration: 5 * 1000,
+      duration: 5 * 1000
     });
-    return Promise.reject(error).catch((error) => {
+    return Promise.reject(error).catch(error => {
       console.log(error);
       if (error.response.data) {
         Message({
           message: "错误：" + error.response.data.message,
-          type: "error",
+          type: "error"
         });
       }
       return Promise.reject(error);

@@ -11,5 +11,5 @@ import "vxe-table/lib/style.css";
 Vue.use(VXETable);
 VXETable.setup({
   zIndex: 1000,
-  grid: {},
+  grid: {}
 });

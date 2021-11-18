@@ -68,7 +68,7 @@ export default {
     return {
       baseUrl,
 
-      classResourceTableData: [],
+      classResourceTableData: []
     };
   },
   methods: {
@@ -84,17 +84,16 @@ export default {
       } else
         Message({
           message: "文件不存在！",
-          type: "error",
+          type: "error"
         });
-    },
+    }
   },
   created() {
-    getClassResource({ page: 0, size: 1000 }).then((res) => {
+    getClassResource({ page: 0, size: 1000 }).then(res => {
       this.classResourceTableData = res.result;
     });
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

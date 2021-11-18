@@ -11,7 +11,7 @@ export function insertClassResource(data) {
   return axios({
     url: "/InfoClassResource",
     method: "post",
-    data,
+    data
   });
 }
 
@@ -19,14 +19,14 @@ export function updateClassResource(params, data) {
   return axios({
     url: "/InfoClassResource/" + params.id,
     method: "patch",
-    data,
+    data
   });
 }
 
 export function deleteClassResource(params) {
   return axios({
     url: "/InfoClassResource/" + params.id,
-    method: "delete",
+    method: "delete"
   });
 }
 
@@ -34,13 +34,13 @@ export function getClassResource(params) {
   return axios({
     url: "/InfoClassResource",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return {
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.infoClassResources,
+      result: res._embedded.infoClassResources
     };
   });
 }
@@ -49,13 +49,13 @@ export function manageSearch(params) {
   return axios({
     url: "/InfoClassResource/search/manageSearch",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return {
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.infoClassResources,
+      result: res._embedded.infoClassResources
     };
   });
 }
@@ -64,8 +64,8 @@ export function removeRemoteFileById(param) {
   return axios({
     url: "/manual/info-class-resource/remove",
     method: "get",
-    params: param,
-  }).then((res) => {
+    params: param
+  }).then(res => {
     return res;
   });
 }

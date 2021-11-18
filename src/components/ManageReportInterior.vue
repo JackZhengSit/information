@@ -35,7 +35,7 @@ import { reportInterior } from "../store/infoType";
 import {
   searchReportInterior,
   removeRemoteFileById,
-  confirmSaveReportInterior,
+  confirmSaveReportInterior
 } from "@/api/manageReportInterior";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
@@ -45,7 +45,7 @@ function csvToObject(csvString) {
   let datas = [];
   let headers = csvarry[0].split(",");
   for (let i = 0; i < headers.length; i++) {
-    Object.keys(reportInterior).forEach(function (key) {
+    Object.keys(reportInterior).forEach(function(key) {
       if (reportInterior[key].title == headers[i])
         headers[i] = reportInterior[key].field;
     });
@@ -77,7 +77,7 @@ export default {
         editConfig: {
           trigger: "dblclick",
           mode: "row",
-          showStatus: true,
+          showStatus: true
         },
         formConfig: {
           data: {},
@@ -91,8 +91,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: 1,
-              },
+                defaultValue: 1
+              }
             },
             {
               field: reportInterior.orderNumEnd.field,
@@ -101,8 +101,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: 1000000,
-              },
+                defaultValue: 1000000
+              }
             },
 
             {
@@ -112,8 +112,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.completeDepartment.field,
@@ -122,8 +122,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.title.field,
@@ -133,8 +133,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.topicCategory.field,
@@ -143,8 +143,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.professionField.field,
@@ -153,8 +153,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.infoNo.field,
@@ -163,8 +163,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.industryType.field,
@@ -174,8 +174,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.industryDetailType.field,
@@ -185,8 +185,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.industryChainType.field,
@@ -196,8 +196,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.referDeviceType.field,
@@ -207,8 +207,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.referDevice.field,
@@ -218,8 +218,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.referProduct.field,
@@ -229,8 +229,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.referProject.field,
@@ -240,8 +240,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.referInstitution.field,
@@ -251,8 +251,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.referTechnology.field,
@@ -262,8 +262,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.infoCategory.field,
@@ -273,8 +273,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.department.field,
@@ -284,8 +284,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.researchField.field,
@@ -295,8 +295,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.researchOrientation.field,
@@ -306,8 +306,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.researchSystem.field,
@@ -317,8 +317,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.techFieldType1.field,
@@ -328,8 +328,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.techFieldType2.field,
@@ -339,8 +339,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.techFieldType3.field,
@@ -350,8 +350,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.industryField.field,
@@ -361,8 +361,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.industryOrientation.field,
@@ -372,8 +372,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.publishDepartment.field,
@@ -383,8 +383,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.checkInTimeStart.field,
@@ -394,8 +394,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: reportInterior.checkInTimeEnd.field,
@@ -405,8 +405,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: reportInterior.knowledgeType.field,
@@ -416,8 +416,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.securityLevel.field,
@@ -427,8 +427,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
 
             {
@@ -439,8 +439,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: reportInterior.formatTimeEnd.field,
@@ -450,8 +450,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: reportInterior.informationCollactor.field,
@@ -461,8 +461,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.informationAuditor.field,
@@ -472,8 +472,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.language.field,
@@ -483,8 +483,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.keywords.field,
@@ -494,8 +494,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.informationOrigin.field,
@@ -505,8 +505,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: reportInterior.referWebsite.field,
@@ -516,8 +516,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             // {
             //   field: reportInterior.createTime.field,
@@ -550,34 +550,34 @@ export default {
                     props: {
                       type: "submit",
                       content: "搜索",
-                      status: "primary",
-                    },
+                      status: "primary"
+                    }
                   },
-                  { props: { type: "reset", content: "重置" } },
-                ],
-              },
-            },
-          ],
+                  { props: { type: "reset", content: "重置" } }
+                ]
+              }
+            }
+          ]
         },
         pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
         },
         sortConfig: {
           trigger: "cell",
-          remote: true,
+          remote: true
         },
         importConfig: {
           mode: "insert",
           remote: true,
           types: ["xlsx"],
-          importMethod: this.importMethod,
+          importMethod: this.importMethod
         },
         exportConfig: {
           remote: true,
           exportMethod: this.exportMethod,
           // original: true,
           // types: ["xlsx"],
-          modes: ["current", "selected"],
+          modes: ["current", "selected"]
         },
         toolbarConfig: {
           buttons: [
@@ -587,14 +587,14 @@ export default {
             {
               code: "save",
               name: "保存",
-              status: "success",
-            },
+              status: "success"
+            }
           ],
           refresh: true,
           import: true,
           export: true,
           zoom: true,
-          custom: true,
+          custom: true
         },
         proxyConfig: {
           autoLoad: true,
@@ -602,13 +602,13 @@ export default {
           sort: true,
           props: {
             result: "result",
-            total: "page.total",
+            total: "page.total"
           },
           ajax: {
             query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
-                size: page.pageSize,
+                size: page.pageSize
               });
               let firstSort = sorts[0];
               if (firstSort) {
@@ -619,26 +619,26 @@ export default {
               let p = searchReportInterior(queryParams);
               return p;
             },
-            save: (data) => {
+            save: data => {
               confirmSaveReportInterior(data.body);
             },
-            delete: (data) => {
+            delete: data => {
               confirmSaveReportInterior(data.body);
-            },
-          },
+            }
+          }
         },
         columns: [
           {
             width: 100,
             visible: false,
             field: reportInterior.id.field,
-            title: reportInterior.id.title,
+            title: reportInterior.id.title
           },
           {
             type: "checkbox",
             width: 50,
             fixed: "left",
-            align: "center",
+            align: "center"
           },
           {
             fixed: "left",
@@ -650,7 +650,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: reportInterior.orderNum.field,
-            title: reportInterior.orderNum.title,
+            title: reportInterior.orderNum.title
           },
 
           {
@@ -661,7 +661,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.type.field,
-            title: reportInterior.type.title,
+            title: reportInterior.type.title
           },
           {
             resizable: true,
@@ -671,7 +671,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.completeDepartment.field,
-            title: reportInterior.completeDepartment.title,
+            title: reportInterior.completeDepartment.title
           },
           {
             resizable: true,
@@ -681,7 +681,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.title.field,
-            title: reportInterior.title.title,
+            title: reportInterior.title.title
           },
           {
             resizable: true,
@@ -691,7 +691,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.industryType.field,
-            title: reportInterior.industryType.title,
+            title: reportInterior.industryType.title
           },
           {
             resizable: true,
@@ -701,7 +701,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.industryDetailType.field,
-            title: reportInterior.industryDetailType.title,
+            title: reportInterior.industryDetailType.title
           },
           {
             resizable: true,
@@ -711,7 +711,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.industryChainType.field,
-            title: reportInterior.industryChainType.title,
+            title: reportInterior.industryChainType.title
           },
           {
             resizable: true,
@@ -721,7 +721,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.referDeviceType.field,
-            title: reportInterior.referDeviceType.title,
+            title: reportInterior.referDeviceType.title
           },
           {
             resizable: true,
@@ -731,7 +731,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.referDevice.field,
-            title: reportInterior.referDevice.title,
+            title: reportInterior.referDevice.title
           },
           {
             resizable: true,
@@ -741,7 +741,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.referProduct.field,
-            title: reportInterior.referProduct.title,
+            title: reportInterior.referProduct.title
           },
           {
             resizable: true,
@@ -751,7 +751,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.referProject.field,
-            title: reportInterior.referProject.title,
+            title: reportInterior.referProject.title
           },
           {
             resizable: true,
@@ -761,7 +761,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.referInstitution.field,
-            title: reportInterior.referInstitution.title,
+            title: reportInterior.referInstitution.title
           },
           {
             resizable: true,
@@ -771,7 +771,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.referTechnology.field,
-            title: reportInterior.referTechnology.title,
+            title: reportInterior.referTechnology.title
           },
           {
             resizable: true,
@@ -781,7 +781,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.infoCategory.field,
-            title: reportInterior.infoCategory.title,
+            title: reportInterior.infoCategory.title
           },
           {
             resizable: true,
@@ -791,7 +791,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.topicCategory.field,
-            title: reportInterior.topicCategory.title,
+            title: reportInterior.topicCategory.title
           },
           {
             resizable: true,
@@ -801,7 +801,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.professionField.field,
-            title: reportInterior.professionField.title,
+            title: reportInterior.professionField.title
           },
           {
             resizable: true,
@@ -811,7 +811,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.infoNo.field,
-            title: reportInterior.infoNo.title,
+            title: reportInterior.infoNo.title
           },
           {
             resizable: true,
@@ -821,7 +821,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.department.field,
-            title: reportInterior.department.title,
+            title: reportInterior.department.title
           },
           {
             resizable: true,
@@ -831,7 +831,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.researchField.field,
-            title: reportInterior.researchField.title,
+            title: reportInterior.researchField.title
           },
           {
             resizable: true,
@@ -841,7 +841,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.researchOrientation.field,
-            title: reportInterior.researchOrientation.title,
+            title: reportInterior.researchOrientation.title
           },
           {
             resizable: true,
@@ -851,7 +851,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.researchSystem.field,
-            title: reportInterior.researchSystem.title,
+            title: reportInterior.researchSystem.title
           },
           {
             resizable: true,
@@ -861,7 +861,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.techFieldType1.field,
-            title: reportInterior.techFieldType1.title,
+            title: reportInterior.techFieldType1.title
           },
           {
             resizable: true,
@@ -871,7 +871,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.techFieldType2.field,
-            title: reportInterior.techFieldType2.title,
+            title: reportInterior.techFieldType2.title
           },
           {
             resizable: true,
@@ -881,7 +881,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.techFieldType3.field,
-            title: reportInterior.techFieldType3.title,
+            title: reportInterior.techFieldType3.title
           },
           {
             resizable: true,
@@ -891,7 +891,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.industryField.field,
-            title: reportInterior.industryField.title,
+            title: reportInterior.industryField.title
           },
           {
             resizable: true,
@@ -901,7 +901,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.industryOrientation.field,
-            title: reportInterior.industryOrientation.title,
+            title: reportInterior.industryOrientation.title
           },
           {
             resizable: true,
@@ -911,7 +911,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.publishDepartment.field,
-            title: reportInterior.publishDepartment.title,
+            title: reportInterior.publishDepartment.title
           },
           {
             resizable: true,
@@ -921,7 +921,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.checkInTime.field,
-            title: reportInterior.checkInTime.title,
+            title: reportInterior.checkInTime.title
           },
           {
             resizable: true,
@@ -931,7 +931,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.knowledgeType.field,
-            title: reportInterior.knowledgeType.title,
+            title: reportInterior.knowledgeType.title
           },
           {
             resizable: true,
@@ -941,7 +941,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.securityLevel.field,
-            title: reportInterior.securityLevel.title,
+            title: reportInterior.securityLevel.title
           },
           {
             resizable: true,
@@ -951,7 +951,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.abs.field,
-            title: reportInterior.abs.title,
+            title: reportInterior.abs.title
           },
           {
             resizable: true,
@@ -961,7 +961,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.formatTime.field,
-            title: reportInterior.formatTime.title,
+            title: reportInterior.formatTime.title
           },
           {
             resizable: true,
@@ -971,7 +971,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.informationCollactor.field,
-            title: reportInterior.informationCollactor.title,
+            title: reportInterior.informationCollactor.title
           },
           {
             resizable: true,
@@ -981,7 +981,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.informationAuditor.field,
-            title: reportInterior.informationAuditor.title,
+            title: reportInterior.informationAuditor.title
           },
           {
             resizable: true,
@@ -991,7 +991,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.language.field,
-            title: reportInterior.language.title,
+            title: reportInterior.language.title
           },
           {
             resizable: true,
@@ -1001,7 +1001,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.keywords.field,
-            title: reportInterior.keywords.title,
+            title: reportInterior.keywords.title
           },
           {
             resizable: true,
@@ -1011,7 +1011,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.informationOrigin.field,
-            title: reportInterior.informationOrigin.title,
+            title: reportInterior.informationOrigin.title
           },
           {
             resizable: true,
@@ -1021,7 +1021,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: reportInterior.referWebsite.field,
-            title: reportInterior.referWebsite.title,
+            title: reportInterior.referWebsite.title
           },
           {
             resizable: true,
@@ -1031,7 +1031,7 @@ export default {
             // editRender: { name: "input", enabled: false },
             field: reportInterior.fileName.field,
             title: reportInterior.fileName.title,
-            fixed: "right",
+            fixed: "right"
           },
           {
             resizable: true,
@@ -1039,19 +1039,19 @@ export default {
             align: "center",
             title: "操作",
             slots: { default: "uploadFile" },
-            fixed: "right",
-          },
-        ],
-      },
+            fixed: "right"
+          }
+        ]
+      }
     };
   },
   methods: {
     removeFileById(row) {
-      removeRemoteFileById({ id: row.id }).then((res) => {
+      removeRemoteFileById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");
         Message({
           message: "删除成功！",
-          type: "success",
+          type: "success"
         });
       });
     },
@@ -1059,7 +1059,7 @@ export default {
       this.$refs.xGrid.commitProxy("query");
       Message({
         message: "上传成功",
-        type: "success",
+        type: "success"
       });
     },
     replaceExcelTitle(workbook) {
@@ -1083,7 +1083,7 @@ export default {
       let methods = this.$options.methods;
       return new Promise((resolve, reject) => {
         let reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
           let data = e.target.result;
           let workbook = XLSX.read(data, { type: "binary" });
           let worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -1092,20 +1092,20 @@ export default {
           // console.log(workbook);
           // console.log(importData);
           confirmSaveReportInterior({
-            insertRecords: importData,
+            insertRecords: importData
           }).then(() => {
             xGrid.commitProxy("query");
             Message({
               type: "success",
-              message: "导入成功",
+              message: "导入成功"
             });
           });
           resolve();
         };
-        reader.onerror = function (e) {
+        reader.onerror = function(e) {
           Message({
             type: "error",
-            message: "读取文件出错",
+            message: "读取文件出错"
           });
           reject();
         };
@@ -1113,20 +1113,19 @@ export default {
       }).catch(() => {
         Message({
           type: "error",
-          message: "导入失败",
+          message: "导入失败"
         });
       });
     },
     exportMethod({ options }) {
       this.tableExportMethod(options, reportInterior);
       return Promise.resolve();
-    },
+    }
   },
-  mounted: function () {
+  mounted: function() {
     // var xGrid = this.$refs.xGrid;
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -40,13 +40,13 @@
 import {
   getAllRelate,
   addRelate,
-  deleteAllRelateByType,
+  deleteAllRelateByType
 } from "@/api/manageInfoProductRel";
 import { getAllByImportantProduct } from "@/api/manageImportantProduct";
 export default {
   props: {
     infoType: String,
-    originId: String,
+    originId: String
   },
   data() {
     return {
@@ -54,7 +54,7 @@ export default {
       checkAll: false,
       checkedProductName: [],
       relate: [],
-      isIndeterminate: true,
+      isIndeterminate: true
     };
   },
   methods: {
@@ -72,16 +72,18 @@ export default {
         checkedCount > 0 && checkedCount < this.relate.length;
     },
     submitRelate() {
+      let a;
+      a = 1;
       deleteAllRelateByType("industryTrend")
-        .then((res) => {
+        .then(res => {
           console.log(res);
         })
         .then(() => {
-          let infoProductRels = this.checkedProductName.map((item) => {
+          let infoProductRels = this.checkedProductName.map(item => {
             let infoProductRel = {
               importantProductId: item.id,
               infoType: this.infoType,
-              infoId: this.originId,
+              infoId: this.originId
             };
           });
           return addRelate(infoProductRels);
@@ -89,24 +91,22 @@ export default {
         .then();
     },
     open() {
-      let _this = this;
       getAllByImportantProduct({ productName: "" })
-        .then((res) => {
+        .then(res => {
           this.relate = res._embedded.importantProducts;
         })
         .then(() => {
           return getAllRelate({
             infoType: this.infoType,
-            originId: this.originId,
+            originId: this.originId
           });
         })
-        .then((res) => {
-          this.checkedProductName = res._embedded.infoProductRels.map((pr) => {
-            return this.relate.filter((r) => r.id == pr.importantProductId)[0]
+        .then(res => {
+          this.checkedProductName = res._embedded.infoProductRels.map(pr => {
+            return this.relate.filter(r => r.id == pr.importantProductId)[0]
               .productName;
           });
           console.log(this.checkedProductName);
-          c;
         })
         .then();
     },
@@ -114,10 +114,9 @@ export default {
       this.checkedProductName = [];
       this.relate = [];
       this.isIndeterminate = true;
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

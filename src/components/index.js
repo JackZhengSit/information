@@ -12,5 +12,5 @@ export default {
   install(Vue) {
     Vue.component("result-item", ResultItem);
     Vue.component("search-form-group", SearchFormGroup);
-  },
+  }
 };

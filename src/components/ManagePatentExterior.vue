@@ -35,7 +35,7 @@ import { patentExterior } from "../store/infoType";
 import {
   searchPatentExterior,
   removeRemoteFileById,
-  confirmSavePatentExterior,
+  confirmSavePatentExterior
 } from "@/api/managePatentExterior";
 import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
@@ -45,7 +45,7 @@ function csvToObject(csvString) {
   let datas = [];
   let headers = csvarry[0].split(",");
   for (let i = 0; i < headers.length; i++) {
-    Object.keys(patentExterior).forEach(function (key) {
+    Object.keys(patentExterior).forEach(function(key) {
       if (patentExterior[key].title == headers[i])
         headers[i] = patentExterior[key].field;
     });
@@ -77,7 +77,7 @@ export default {
         editConfig: {
           trigger: "dblclick",
           mode: "row",
-          showStatus: true,
+          showStatus: true
         },
         formConfig: {
           data: {},
@@ -91,8 +91,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: 1,
-              },
+                defaultValue: 1
+              }
             },
             {
               field: patentExterior.orderNumEnd.field,
@@ -101,8 +101,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: 1000000,
-              },
+                defaultValue: 1000000
+              }
             },
 
             {
@@ -112,8 +112,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.applicationNo.field,
@@ -122,8 +122,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.publicationNo.field,
@@ -133,8 +133,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.topicCategory.field,
@@ -143,8 +143,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.professionField.field,
@@ -153,8 +153,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.infoNo.field,
@@ -163,8 +163,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.applicationDayStart.field,
@@ -174,8 +174,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: patentExterior.applicationDayEnd.field,
@@ -185,8 +185,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
 
             {
@@ -197,8 +197,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.patentType.field,
@@ -208,8 +208,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.assignee.field,
@@ -219,8 +219,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.publicationDayStart.field,
@@ -230,8 +230,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: patentExterior.publicationDayEnd.field,
@@ -241,8 +241,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
 
             {
@@ -253,8 +253,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.assignee.field,
@@ -264,8 +264,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.firstAssignee.field,
@@ -275,8 +275,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.inventor.field,
@@ -286,8 +286,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.priorityNum.field,
@@ -297,8 +297,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.priorityDayStart.field,
@@ -308,8 +308,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: patentExterior.priorityDayEnd.field,
@@ -319,8 +319,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: patentExterior.mainClassNum.field,
@@ -330,8 +330,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.legalStatus.field,
@@ -341,8 +341,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
 
             {
@@ -353,8 +353,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.industryDetailType.field,
@@ -364,8 +364,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.industryChainType.field,
@@ -375,8 +375,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.referDeviceType.field,
@@ -386,8 +386,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.referDevice.field,
@@ -397,8 +397,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.referProduct.field,
@@ -408,8 +408,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.referProject.field,
@@ -419,8 +419,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.referInstitution.field,
@@ -430,8 +430,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.referTechnology.field,
@@ -441,8 +441,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.infoCategory.field,
@@ -452,8 +452,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.department.field,
@@ -463,8 +463,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.researchField.field,
@@ -474,8 +474,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.researchOrientation.field,
@@ -485,8 +485,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.researchSystem.field,
@@ -496,8 +496,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.techFieldType1.field,
@@ -507,8 +507,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.techFieldType2.field,
@@ -518,8 +518,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.techFieldType3.field,
@@ -529,8 +529,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.industryField.field,
@@ -540,8 +540,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.industryOrientation.field,
@@ -551,8 +551,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.publishDepartment.field,
@@ -562,8 +562,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.knowledgeType.field,
@@ -573,8 +573,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.securityLevel.field,
@@ -584,8 +584,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.checkInTimeStart.field,
@@ -595,8 +595,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: patentExterior.checkInTimeEnd.field,
@@ -606,8 +606,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
 
             {
@@ -618,8 +618,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "start" },
-                defaultValue: "1900-01-01",
-              },
+                defaultValue: "1900-01-01"
+              }
             },
             {
               field: patentExterior.formatTimeEnd.field,
@@ -629,8 +629,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "end" },
-                defaultValue: moment().format("YYYY-MM-DD"),
-              },
+                defaultValue: moment().format("YYYY-MM-DD")
+              }
             },
             {
               field: patentExterior.informationCollactor.field,
@@ -640,8 +640,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.informationAuditor.field,
@@ -651,8 +651,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.language.field,
@@ -662,8 +662,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.keywords.field,
@@ -673,8 +673,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.informationOrigin.field,
@@ -684,8 +684,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: patentExterior.referWebsite.field,
@@ -695,8 +695,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             // {
             //   field: patentExterior.createTime.field,
@@ -729,34 +729,34 @@ export default {
                     props: {
                       type: "submit",
                       content: "搜索",
-                      status: "primary",
-                    },
+                      status: "primary"
+                    }
                   },
-                  { props: { type: "reset", content: "重置" } },
-                ],
-              },
-            },
-          ],
+                  { props: { type: "reset", content: "重置" } }
+                ]
+              }
+            }
+          ]
         },
         pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
         },
         sortConfig: {
           trigger: "cell",
-          remote: true,
+          remote: true
         },
         importConfig: {
           mode: "insert",
           remote: true,
           types: ["xlsx"],
-          importMethod: this.importMethod,
+          importMethod: this.importMethod
         },
         exportConfig: {
           remote: true,
           exportMethod: this.exportMethod,
           // original: true,
           // types: ["xlsx"],
-          modes: ["current", "selected"],
+          modes: ["current", "selected"]
         },
         toolbarConfig: {
           buttons: [
@@ -766,14 +766,14 @@ export default {
             {
               code: "save",
               name: "保存",
-              status: "success",
-            },
+              status: "success"
+            }
           ],
           refresh: true,
           import: true,
           export: true,
           zoom: true,
-          custom: true,
+          custom: true
         },
         proxyConfig: {
           autoLoad: true,
@@ -781,13 +781,13 @@ export default {
           sort: true,
           props: {
             result: "result",
-            total: "page.total",
+            total: "page.total"
           },
           ajax: {
             query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
-                size: page.pageSize,
+                size: page.pageSize
               });
               let firstSort = sorts[0];
               if (firstSort) {
@@ -798,26 +798,26 @@ export default {
               let p = searchPatentExterior(queryParams);
               return p;
             },
-            save: (data) => {
+            save: data => {
               confirmSavePatentExterior(data.body);
             },
-            delete: (data) => {
+            delete: data => {
               confirmSavePatentExterior(data.body);
-            },
-          },
+            }
+          }
         },
         columns: [
           {
             width: 100,
             visible: false,
             field: patentExterior.id.field,
-            title: patentExterior.id.title,
+            title: patentExterior.id.title
           },
           {
             type: "checkbox",
             width: 50,
             fixed: "left",
-            align: "center",
+            align: "center"
           },
           {
             fixed: "left",
@@ -829,7 +829,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: patentExterior.orderNum.field,
-            title: patentExterior.orderNum.title,
+            title: patentExterior.orderNum.title
           },
 
           {
@@ -840,7 +840,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.inventionTitile.field,
-            title: patentExterior.inventionTitile.title,
+            title: patentExterior.inventionTitile.title
           },
           {
             resizable: true,
@@ -850,7 +850,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.applicationNo.field,
-            title: patentExterior.applicationNo.title,
+            title: patentExterior.applicationNo.title
           },
           {
             resizable: true,
@@ -860,7 +860,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.applicationDay.field,
-            title: patentExterior.applicationDay.title,
+            title: patentExterior.applicationDay.title
           },
           {
             resizable: true,
@@ -870,7 +870,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.publicationNo.field,
-            title: patentExterior.publicationNo.title,
+            title: patentExterior.publicationNo.title
           },
           {
             resizable: true,
@@ -880,7 +880,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.publicationDay.field,
-            title: patentExterior.publicationDay.title,
+            title: patentExterior.publicationDay.title
           },
           {
             resizable: true,
@@ -890,7 +890,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.applicationType.field,
-            title: patentExterior.applicationType.title,
+            title: patentExterior.applicationType.title
           },
           {
             resizable: true,
@@ -900,7 +900,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.patentType.field,
-            title: patentExterior.patentType.title,
+            title: patentExterior.patentType.title
           },
           {
             resizable: true,
@@ -910,7 +910,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.assignee.field,
-            title: patentExterior.assignee.title,
+            title: patentExterior.assignee.title
           },
           {
             resizable: true,
@@ -920,7 +920,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.firstAssignee.field,
-            title: patentExterior.firstAssignee.title,
+            title: patentExterior.firstAssignee.title
           },
           {
             resizable: true,
@@ -930,7 +930,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.inventor.field,
-            title: patentExterior.inventor.title,
+            title: patentExterior.inventor.title
           },
           {
             resizable: true,
@@ -940,7 +940,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.claims.field,
-            title: patentExterior.claims.title,
+            title: patentExterior.claims.title
           },
           {
             resizable: true,
@@ -950,7 +950,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.priorityNum.field,
-            title: patentExterior.priorityNum.title,
+            title: patentExterior.priorityNum.title
           },
           {
             resizable: true,
@@ -960,7 +960,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.priorityDay.field,
-            title: patentExterior.priorityDay.title,
+            title: patentExterior.priorityDay.title
           },
           {
             resizable: true,
@@ -970,7 +970,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.mainClassNum.field,
-            title: patentExterior.mainClassNum.title,
+            title: patentExterior.mainClassNum.title
           },
           {
             resizable: true,
@@ -980,7 +980,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.legalStatus.field,
-            title: patentExterior.legalStatus.title,
+            title: patentExterior.legalStatus.title
           },
 
           {
@@ -991,7 +991,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.industryType.field,
-            title: patentExterior.industryType.title,
+            title: patentExterior.industryType.title
           },
           {
             resizable: true,
@@ -1001,7 +1001,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.industryDetailType.field,
-            title: patentExterior.industryDetailType.title,
+            title: patentExterior.industryDetailType.title
           },
           {
             resizable: true,
@@ -1011,7 +1011,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.industryChainType.field,
-            title: patentExterior.industryChainType.title,
+            title: patentExterior.industryChainType.title
           },
           {
             resizable: true,
@@ -1021,7 +1021,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.referDeviceType.field,
-            title: patentExterior.referDeviceType.title,
+            title: patentExterior.referDeviceType.title
           },
           {
             resizable: true,
@@ -1031,7 +1031,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.referDevice.field,
-            title: patentExterior.referDevice.title,
+            title: patentExterior.referDevice.title
           },
           {
             resizable: true,
@@ -1041,7 +1041,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.referProduct.field,
-            title: patentExterior.referProduct.title,
+            title: patentExterior.referProduct.title
           },
           {
             resizable: true,
@@ -1051,7 +1051,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.referProject.field,
-            title: patentExterior.referProject.title,
+            title: patentExterior.referProject.title
           },
           {
             resizable: true,
@@ -1061,7 +1061,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.referInstitution.field,
-            title: patentExterior.referInstitution.title,
+            title: patentExterior.referInstitution.title
           },
           {
             resizable: true,
@@ -1071,7 +1071,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.referTechnology.field,
-            title: patentExterior.referTechnology.title,
+            title: patentExterior.referTechnology.title
           },
           {
             resizable: true,
@@ -1081,7 +1081,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.infoCategory.field,
-            title: patentExterior.infoCategory.title,
+            title: patentExterior.infoCategory.title
           },
           {
             resizable: true,
@@ -1091,7 +1091,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.topicCategory.field,
-            title: patentExterior.topicCategory.title,
+            title: patentExterior.topicCategory.title
           },
           {
             resizable: true,
@@ -1101,7 +1101,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.professionField.field,
-            title: patentExterior.professionField.title,
+            title: patentExterior.professionField.title
           },
           {
             resizable: true,
@@ -1111,7 +1111,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.infoNo.field,
-            title: patentExterior.infoNo.title,
+            title: patentExterior.infoNo.title
           },
           {
             resizable: true,
@@ -1121,7 +1121,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.department.field,
-            title: patentExterior.department.title,
+            title: patentExterior.department.title
           },
           {
             resizable: true,
@@ -1131,7 +1131,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.researchField.field,
-            title: patentExterior.researchField.title,
+            title: patentExterior.researchField.title
           },
           {
             resizable: true,
@@ -1141,7 +1141,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.researchOrientation.field,
-            title: patentExterior.researchOrientation.title,
+            title: patentExterior.researchOrientation.title
           },
           {
             resizable: true,
@@ -1151,7 +1151,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.researchSystem.field,
-            title: patentExterior.researchSystem.title,
+            title: patentExterior.researchSystem.title
           },
           {
             resizable: true,
@@ -1161,7 +1161,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.techFieldType1.field,
-            title: patentExterior.techFieldType1.title,
+            title: patentExterior.techFieldType1.title
           },
           {
             resizable: true,
@@ -1171,7 +1171,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.techFieldType2.field,
-            title: patentExterior.techFieldType2.title,
+            title: patentExterior.techFieldType2.title
           },
           {
             resizable: true,
@@ -1181,7 +1181,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.techFieldType3.field,
-            title: patentExterior.techFieldType3.title,
+            title: patentExterior.techFieldType3.title
           },
           {
             resizable: true,
@@ -1191,7 +1191,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.industryField.field,
-            title: patentExterior.industryField.title,
+            title: patentExterior.industryField.title
           },
           {
             resizable: true,
@@ -1201,7 +1201,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.industryOrientation.field,
-            title: patentExterior.industryOrientation.title,
+            title: patentExterior.industryOrientation.title
           },
           {
             resizable: true,
@@ -1211,7 +1211,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.publishDepartment.field,
-            title: patentExterior.publishDepartment.title,
+            title: patentExterior.publishDepartment.title
           },
           {
             resizable: true,
@@ -1221,7 +1221,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.checkInTime.field,
-            title: patentExterior.checkInTime.title,
+            title: patentExterior.checkInTime.title
           },
           {
             resizable: true,
@@ -1231,7 +1231,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.knowledgeType.field,
-            title: patentExterior.knowledgeType.title,
+            title: patentExterior.knowledgeType.title
           },
           {
             resizable: true,
@@ -1241,7 +1241,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.securityLevel.field,
-            title: patentExterior.securityLevel.title,
+            title: patentExterior.securityLevel.title
           },
           {
             resizable: true,
@@ -1251,7 +1251,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.abs.field,
-            title: patentExterior.abs.title,
+            title: patentExterior.abs.title
           },
           {
             resizable: true,
@@ -1261,7 +1261,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.formatTime.field,
-            title: patentExterior.formatTime.title,
+            title: patentExterior.formatTime.title
           },
           {
             resizable: true,
@@ -1271,7 +1271,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.informationCollactor.field,
-            title: patentExterior.informationCollactor.title,
+            title: patentExterior.informationCollactor.title
           },
           {
             resizable: true,
@@ -1281,7 +1281,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.informationAuditor.field,
-            title: patentExterior.informationAuditor.title,
+            title: patentExterior.informationAuditor.title
           },
           {
             resizable: true,
@@ -1291,7 +1291,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.language.field,
-            title: patentExterior.language.title,
+            title: patentExterior.language.title
           },
           {
             resizable: true,
@@ -1301,7 +1301,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.keywords.field,
-            title: patentExterior.keywords.title,
+            title: patentExterior.keywords.title
           },
           {
             resizable: true,
@@ -1311,7 +1311,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.informationOrigin.field,
-            title: patentExterior.informationOrigin.title,
+            title: patentExterior.informationOrigin.title
           },
           {
             resizable: true,
@@ -1321,7 +1321,7 @@ export default {
             showHeaderOverflow: "tooltip",
             editRender: { name: "input" },
             field: patentExterior.referWebsite.field,
-            title: patentExterior.referWebsite.title,
+            title: patentExterior.referWebsite.title
           },
           {
             resizable: true,
@@ -1331,7 +1331,7 @@ export default {
             // editRender: { name: "input", enabled: false },
             field: patentExterior.fileName.field,
             title: patentExterior.fileName.title,
-            fixed: "right",
+            fixed: "right"
           },
           {
             resizable: true,
@@ -1339,19 +1339,19 @@ export default {
             align: "center",
             title: "操作",
             slots: { default: "uploadFile" },
-            fixed: "right",
-          },
-        ],
-      },
+            fixed: "right"
+          }
+        ]
+      }
     };
   },
   methods: {
     removeFileById(row) {
-      removeRemoteFileById({ id: row.id }).then((res) => {
+      removeRemoteFileById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");
         Message({
           message: "删除成功！",
-          type: "success",
+          type: "success"
         });
       });
     },
@@ -1359,7 +1359,7 @@ export default {
       this.$refs.xGrid.commitProxy("query");
       Message({
         message: "上传成功",
-        type: "success",
+        type: "success"
       });
     },
     replaceExcelTitle(workbook) {
@@ -1383,7 +1383,7 @@ export default {
       let methods = this.$options.methods;
       return new Promise((resolve, reject) => {
         let reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
           let data = e.target.result;
           let workbook = XLSX.read(data, { type: "binary" });
           let worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -1392,20 +1392,20 @@ export default {
           // console.log(workbook);
           // console.log(importData);
           confirmSavePatentExterior({
-            insertRecords: importData,
+            insertRecords: importData
           }).then(() => {
             xGrid.commitProxy("query");
             Message({
               type: "success",
-              message: "导入成功",
+              message: "导入成功"
             });
           });
           resolve();
         };
-        reader.onerror = function (e) {
+        reader.onerror = function(e) {
           Message({
             type: "error",
-            message: "读取文件出错",
+            message: "读取文件出错"
           });
           reject();
         };
@@ -1413,20 +1413,19 @@ export default {
       }).catch(() => {
         Message({
           type: "error",
-          message: "导入失败",
+          message: "导入失败"
         });
       });
     },
     exportMethod({ options }) {
       this.tableExportMethod(options, patentExterior);
       return Promise.resolve();
-    },
+    }
   },
-  mounted: function () {
+  mounted: function() {
     // var xGrid = this.$refs.xGrid;
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

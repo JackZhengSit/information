@@ -37,7 +37,7 @@ import {
   updateClassResource,
   deleteClassResource,
   manageSearch,
-  removeRemoteFileById,
+  removeRemoteFileById
 } from "@/api/manageClassResource";
 import baseUrl from "@/config/baseUrl";
 
@@ -56,7 +56,7 @@ export default {
         editConfig: {
           trigger: "dblclick",
           mode: "row",
-          showStatus: true,
+          showStatus: true
         },
         formConfig: {
           titleWidth: 100,
@@ -69,8 +69,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "0",
-              },
+                defaultValue: "0"
+              }
             },
             {
               field: classResource.orderNumEnd.field,
@@ -79,8 +79,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: 100000,
-              },
+                defaultValue: 100000
+              }
             },
             {
               field: classResource.name.field,
@@ -89,8 +89,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: classResource.teacher.field,
@@ -99,8 +99,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               field: classResource.target.field,
@@ -109,8 +109,8 @@ export default {
               itemRender: {
                 name: "$input",
                 props: { placeholder: "" },
-                defaultValue: "",
-              },
+                defaultValue: ""
+              }
             },
             {
               span: 24,
@@ -122,14 +122,14 @@ export default {
                     props: {
                       type: "submit",
                       content: "搜索",
-                      status: "primary",
-                    },
+                      status: "primary"
+                    }
                   },
-                  { props: { type: "reset", content: "重置" } },
-                ],
-              },
-            },
-          ],
+                  { props: { type: "reset", content: "重置" } }
+                ]
+              }
+            }
+          ]
         },
         toolbarConfig: {
           buttons: [
@@ -139,72 +139,72 @@ export default {
             {
               code: "save",
               name: "保存",
-              status: "success",
-            },
+              status: "success"
+            }
           ],
           refresh: true,
           zoom: true,
-          custom: true,
+          custom: true
         },
         pagerConfig: {
-          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+          pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000]
         },
         proxyConfig: {
           autoLoad: true,
           form: true,
           props: {
             result: "result",
-            total: "page.total",
+            total: "page.total"
           },
           ajax: {
             query: ({ page, sorts, form }) => {
               const queryParams = Object.assign({}, form, {
                 page: page.currentPage - 1,
-                size: page.pageSize,
+                size: page.pageSize
               });
               let p = manageSearch(queryParams);
               return p;
             },
-            save: (data) => {
+            save: data => {
               //   console.log(data);
               Promise.all(
                 data.body.insertRecords
-                  .map((item) => {
+                  .map(item => {
                     insertClassResource(item);
                   })
                   .concat(
-                    data.body.pendingRecords.map((item) => {
+                    data.body.pendingRecords.map(item => {
                       deleteClassResource({ id: item.id });
                     })
                   )
                   .concat(
-                    data.body.updateRecords.map((item) => {
+                    data.body.updateRecords.map(item => {
                       updateClassResource({ id: item.id }, item);
                     })
                   )
               );
             },
-            delete: (data) => {
+            delete: data => {
               Promise.all(
-                data.body.removeRecords.map((item) => {
+                data.body.removeRecords.map(item => {
                   deleteClassResource({ id: item.id });
                 })
               );
-            },
-          },
+            }
+          }
         },
         columns: [
           {
             width: 100,
             visible: false,
             field: classResource.id.field,
-            title: classResource.id.title,
+            title: classResource.id.title
           },
           {
             type: "checkbox",
             width: 50,
             fixed: "left",
-            align: "center",
+            align: "center"
           },
           {
             resizable: true,
@@ -213,7 +213,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: classResource.orderNum.field,
-            title: classResource.orderNum.title,
+            title: classResource.orderNum.title
           },
 
           {
@@ -223,7 +223,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: classResource.name.field,
-            title: classResource.name.title,
+            title: classResource.name.title
           },
           {
             resizable: true,
@@ -232,7 +232,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: classResource.teacher.field,
-            title: classResource.teacher.title,
+            title: classResource.teacher.title
           },
           {
             resizable: true,
@@ -241,7 +241,7 @@ export default {
             showOverflow: "tooltip",
             showHeaderOverflow: "tooltip",
             field: classResource.target.field,
-            title: classResource.target.title,
+            title: classResource.target.title
           },
 
           {
@@ -253,7 +253,7 @@ export default {
             title: classResource.createTime.title,
             formatter: ({ cellValue, row, column }) => {
               return moment(cellValue).format("YYYY-MM-DD HH:MM:SS");
-            },
+            }
           },
           {
             resizable: true,
@@ -264,7 +264,7 @@ export default {
             title: classResource.updateTime.title,
             formatter: ({ cellValue, row, column }) => {
               return moment(cellValue).format("YYYY-MM-DD HH:MM:SS");
-            },
+            }
           },
           {
             resizable: true,
@@ -273,7 +273,7 @@ export default {
             showHeaderOverflow: "tooltip",
             field: classResource.filePath.field,
             title: classResource.filePath.title,
-            fixed: "right",
+            fixed: "right"
           },
           {
             resizable: true,
@@ -281,10 +281,10 @@ export default {
             align: "center",
             title: "操作",
             slots: { default: "fileOperation" },
-            fixed: "right",
-          },
-        ],
-      },
+            fixed: "right"
+          }
+        ]
+      }
     };
   },
   computed: {},
@@ -293,21 +293,20 @@ export default {
       this.$refs.xGrid.commitProxy("query");
       this.Message({
         message: "上传成功",
-        type: "success",
+        type: "success"
       });
     },
     removeFileById(row) {
-      removeRemoteFileById({ id: row.id }).then((res) => {
+      removeRemoteFileById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");
         this.Message({
           message: "删除成功！",
-          type: "success",
+          type: "success"
         });
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

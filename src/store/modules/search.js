@@ -10,7 +10,7 @@ import {
   getTopicCategoryCount,
   getProfessionFieldCount,
   getYearCount,
-  searchInformation,
+  searchInformation
 } from "@/api/queryInformation";
 
 const state = () => ({
@@ -30,7 +30,7 @@ const state = () => ({
   total: 0,
   pageSize: 10,
   currentPage: 1,
-  pageCount: 0,
+  pageCount: 0
 });
 
 const mutations = {
@@ -119,37 +119,37 @@ const mutations = {
   },
   setPageCount(state, pageCount) {
     state.pageCount = pageCount;
-  },
+  }
 };
 
 const actions = {
   getCheckbox({ commit }) {
-    let p1 = getInfoTypeCount().then((res) => {
+    let p1 = getInfoTypeCount().then(res => {
       commit("setInfoTypeAndCount", res);
       commit(
         "setCheckedInfoType",
-        res.map((item) => item.infoType)
+        res.map(item => item.infoType)
       );
     });
-    let p2 = getTopicCategoryCount().then((res) => {
+    let p2 = getTopicCategoryCount().then(res => {
       commit("setTopicCategoryAndCount", res);
       commit(
         "setCheckedTopicCategory",
-        res.map((item) => item.topicCategory)
+        res.map(item => item.topicCategory)
       );
     });
-    let p3 = getProfessionFieldCount().then((res) => {
+    let p3 = getProfessionFieldCount().then(res => {
       commit("setProfessionFieldAndCount", res);
       commit(
         "setCheckedProfessionField",
-        res.map((item) => item.professionField)
+        res.map(item => item.professionField)
       );
     });
-    let p4 = getYearCount().then((res) => {
+    let p4 = getYearCount().then(res => {
       commit("setYearAndCount", res);
       commit(
         "setCheckedYear",
-        res.map((item) => item.year)
+        res.map(item => item.year)
       );
     });
     return Promise.all([p1, p2, p3, p4]);
@@ -160,29 +160,27 @@ const actions = {
       searchType: rootState.searchType,
       current: state.currentPage,
       size: state.pageSize,
-      infoType: state.checkedInfoType
-        .map((item) => "'" + item + "'")
-        .toString(),
+      infoType: state.checkedInfoType.map(item => "'" + item + "'").toString(),
       topicCategory: state.checkedTopicCategory
-        .map((item) => "'" + item + "'")
+        .map(item => "'" + item + "'")
         .toString(),
       professionField: state.checkedProfessionField
-        .map((item) => "'" + item + "'")
+        .map(item => "'" + item + "'")
         .toString(),
-      year: state.checkedYear.map((item) => "'" + item + "'").toString(),
-    }).then((res) => {
+      year: state.checkedYear.map(item => "'" + item + "'").toString()
+    }).then(res => {
       commit("setResultList", res.records);
       commit("setTotal", res.total);
       commit("setCurrentPage", res.current);
       commit("setPageCount", res.pages);
       return Promise.resolve();
     });
-  },
+  }
 };
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions,
+  actions
 };

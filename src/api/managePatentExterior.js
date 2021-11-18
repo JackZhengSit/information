@@ -11,13 +11,13 @@ export function getPatentExterior(params) {
   return axios({
     url: "/PatentExterior",
     method: "get",
-    params: params,
-  }).then((res) => {
+    params: params
+  }).then(res => {
     return Promise.resolve({
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.patentExteriors,
+      result: res._embedded.patentExteriors
     });
   });
 }
@@ -26,13 +26,13 @@ export function searchPatentExterior(params) {
   return axios({
     url: "/PatentExterior/search/manageSearch",
     method: "get",
-    params,
-  }).then((res) => {
+    params
+  }).then(res => {
     return {
       page: {
-        total: res.page.totalElements,
+        total: res.page.totalElements
       },
-      result: res._embedded.patentExteriors,
+      result: res._embedded.patentExteriors
     };
   });
 }
@@ -41,8 +41,8 @@ export function confirmSavePatentExterior(data) {
   return axios({
     url: "/manual/patent-exterior/save",
     method: "post",
-    data: data,
-  }).then((res) => {
+    data: data
+  }).then(res => {
     // console.log(res);
     return res;
   });
@@ -52,8 +52,8 @@ export function removeRemoteFileById(param) {
   return axios({
     url: "/manual/patent-exterior/remove",
     method: "get",
-    params: param,
-  }).then((res) => {
+    params: param
+  }).then(res => {
     return res;
   });
 }

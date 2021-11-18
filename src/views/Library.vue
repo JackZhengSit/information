@@ -232,8 +232,8 @@
                     ><el-image
                       :src="
                         baseUrl +
-                        '/static/file/info-library/pic/' +
-                        item.imgPath
+                          '/static/file/info-library/pic/' +
+                          item.imgPath
                       "
                       fit="fill"
                       style="width: 150px; height: 220px; cursor: pointer"
@@ -285,7 +285,7 @@ export default {
         { label: "书名", value: "name" },
         { label: "作者", value: "author" },
         { label: "出版时间", value: "publication_date" },
-        { label: "馆藏地", value: "storeSite" },
+        { label: "馆藏地", value: "storeSite" }
       ],
       bookSelect: "name",
       bookSearchInput: "",
@@ -298,7 +298,7 @@ export default {
       journalSelectList: [
         { label: "期刊名称", value: "title" },
         { label: "出版社", value: "publication" },
-        { label: "出版时间", value: "publication_date" },
+        { label: "出版时间", value: "publication_date" }
       ],
       journalSelect: "title",
       journalDisplayType: "image",
@@ -313,14 +313,14 @@ export default {
         { label: "The Naval ARCHITECT", value: "ARCHITECT" },
         { label: "Offshore Marine Technology", value: "Offshore" },
         { label: "Warship Technology", value: "Warship" },
-        { label: "The Marine Professional", value: "Professional" },
+        { label: "The Marine Professional", value: "Professional" }
       ],
       journalType: "",
       journalSearchInput: "",
       journals: [],
       journalPageCur: 0,
       journalPageSize: 16,
-      journalPageTotal: 0,
+      journalPageTotal: 0
     };
   },
   methods: {
@@ -329,8 +329,8 @@ export default {
         cur: this.bookPageCur,
         size: this.bookPageSize,
         option: this.bookSelect,
-        text: this.bookSearchInput,
-      }).then((res) => {
+        text: this.bookSearchInput
+      }).then(res => {
         this.books = res.records;
         this.bookPageTotal = res.total;
       });
@@ -343,8 +343,8 @@ export default {
         option: this.journalSelect,
         text: this.journalSearchInput,
         sort: this.journalSort,
-        type: this.journalType,
-      }).then((res) => {
+        type: this.journalType
+      }).then(res => {
         this.journals = res.records;
         this.journalPageTotal = res.total;
       });
@@ -355,7 +355,7 @@ export default {
       else
         Message({
           message: "文件不存在！",
-          type: "error",
+          type: "error"
         });
     },
     displayChange() {},
@@ -366,8 +366,8 @@ export default {
         option: this.journalSelect,
         text: this.journalSearchInput,
         sort: this.journalSort,
-        type: this.journalType,
-      }).then((res) => {
+        type: this.journalType
+      }).then(res => {
         this.journals = res.records;
         this.journalPageTotal = res.total;
       });
@@ -379,18 +379,18 @@ export default {
         option: this.journalSelect,
         text: this.journalSearchInput,
         sort: this.journalSort,
-        type: this.journalType,
-      }).then((res) => {
+        type: this.journalType
+      }).then(res => {
         this.journals = res.records;
         this.journalPageTotal = res.total;
       });
-    },
+    }
   },
 
   created() {
     this.searchBook();
     this.searchJournal();
-  },
+  }
 };
 </script>
 

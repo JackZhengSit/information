@@ -189,7 +189,7 @@ export default {
       professionFieldCheckAll: true,
 
       yearIsIndeterminate: false,
-      yearCheckAll: true,
+      yearCheckAll: true
     };
   },
   computed: {
@@ -207,7 +207,7 @@ export default {
       "total",
       "pageSize",
       "currentPage",
-      "pageCount",
+      "pageCount"
     ]),
 
     pageSize: {
@@ -216,7 +216,7 @@ export default {
       },
       set(val) {
         this.$store.commit("search/setPageSize", val);
-      },
+      }
     },
     currentPage: {
       get() {
@@ -224,7 +224,7 @@ export default {
       },
       set(val) {
         this.$store.commit("search/setCurrentPage", val);
-      },
+      }
     },
     pageCount: {
       get() {
@@ -232,7 +232,7 @@ export default {
       },
       set(val) {
         this.$store.commit("search/setPageCount", val);
-      },
+      }
     },
     checkedInfoType: {
       get() {
@@ -240,7 +240,7 @@ export default {
       },
       set(val) {
         this.$store.commit("search/setCheckedInfoType", val);
-      },
+      }
     },
     checkedTopicCategory: {
       get() {
@@ -248,7 +248,7 @@ export default {
       },
       set(val) {
         this.$store.commit("search/setCheckedTopicCategory", val);
-      },
+      }
     },
     checkedProfessionField: {
       get() {
@@ -256,7 +256,7 @@ export default {
       },
       set(val) {
         this.$store.commit("search/setCheckedProfessionField", val);
-      },
+      }
     },
     checkedYear: {
       get() {
@@ -273,8 +273,8 @@ export default {
       },
       set(val) {
         this.$store.commit("search/setCheckedYear", val);
-      },
-    },
+      }
+    }
   },
   methods: {
     ...mapActions("search", ["getCheckbox", "search"]),
@@ -284,7 +284,7 @@ export default {
 
     handleCheckAllInfoType(val) {
       this.checkedInfoType = val
-        ? this.infoTypeAndCount.map((item) => item.infoType)
+        ? this.infoTypeAndCount.map(item => item.infoType)
         : [];
       this.infoTypeIsIndeterminate = false;
     },
@@ -297,7 +297,7 @@ export default {
     },
     handleCheckAllTopicCategory(val) {
       this.checkedTopicCategory = val
-        ? this.topicCategoryAndCount.map((item) => item.topicCategory)
+        ? this.topicCategoryAndCount.map(item => item.topicCategory)
         : [];
       this.topicCategoryIsIndeterminate = false;
     },
@@ -310,7 +310,7 @@ export default {
     },
     handleCheckAllProfessionField(val) {
       this.checkedProfessionField = val
-        ? this.professionFieldAndCount.map((item) => item.professionField)
+        ? this.professionFieldAndCount.map(item => item.professionField)
         : [];
       this.professionFieldIsIndeterminate = false;
     },
@@ -323,7 +323,7 @@ export default {
         checkedProfessionFieldCount < allCount;
     },
     handleCheckAllYear(val) {
-      this.checkedYear = val ? this.yearAndCount.map((item) => item.year) : [];
+      this.checkedYear = val ? this.yearAndCount.map(item => item.year) : [];
       this.yearIsIndeterminate = false;
     },
     handleCheckedYearChange(val) {
@@ -352,7 +352,7 @@ export default {
         this.currentPage--;
       }
       this.search();
-    },
+    }
   },
   created() {
     let isInited =
@@ -367,7 +367,7 @@ export default {
           // console.log(this.checkedProfessionField);
         });
       });
-  },
+  }
 };
 </script>
 

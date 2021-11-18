@@ -1,32 +1,32 @@
 import axios from "@/utils/axio";
 
-export function getAllByImportantProduct(params){
-    return axios({
+export function getAllByImportantProduct(params) {
+  return axios({
     url: "/ImportantProduct/search/getAllByProductName",
     method: "get",
-    params,
+    params
   });
 }
 
-export function addImportantProduct(data){
-    return axios({
-        url:"/ImportantProduct",
-        method:"post",
-        data,
-    })
+export function addImportantProduct(data) {
+  return axios({
+    url: "/ImportantProduct",
+    method: "post",
+    data
+  });
 }
 
-export function patchImportantProduct(id,data){
-    return axios({
-    url: "/ImportantProduct/"+id,
+export function patchImportantProduct(id, data) {
+  return axios({
+    url: "/ImportantProduct/" + id,
     method: "patch",
-    data,
+    data
   });
 }
 
-export function deleteImportantProduct(id){
-    return axios({
-        url:"/ImportantProduct/"+id,
-        method:"delete"
-    })
+export function deleteImportantProduct(id) {
+  return axios({
+    url: "/ImportantProduct/" + id,
+    method: "delete"
+  });
 }
