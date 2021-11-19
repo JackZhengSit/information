@@ -23,9 +23,20 @@
             @click="removeFileById(row)"
             >删除</el-button
           >
+          <el-button
+            type="primary"
+            style="margin-left: 10px"
+            @click="relate(row)"
+            >关联</el-button
+          >
         </el-upload>
       </template>
     </vxe-grid>
+    <relate-dialog
+      ref="relateDialogRef"
+      :originId="originId"
+      :infoType="infoType"
+    ></relate-dialog>
   </div>
 </template>
 
@@ -41,32 +52,13 @@ import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
 import moment from "moment";
 
-// function csvToObject(csvString) {
-//   let csvarry = csvString.split("\r\n");
-//   let datas = [];
-//   let headers = csvarry[0].split(",");
-//   for (let i = 0; i < headers.length; i++) {
-//     Object.keys(briefReportExterior).forEach(function(key) {
-//       if (briefReportExterior[key].title == headers[i])
-//         headers[i] = briefReportExterior[key].field;
-//     });
-//   }
-//   for (let i = 1; i < csvarry.length - 1; i++) {
-//     let data = {};
-//     let temp = csvarry[i].split(",");
-//     for (let j = 0; j < temp.length; j++) {
-//       data[headers[j]] = temp[j];
-//     }
-//     datas.push(data);
-//   }
-//   return datas;
-// }
-
 export default {
   data() {
     return {
       // xGrid: this.$refs.xGrid,
       uploadUrl: baseUrl + "/manual/brief-report-exterior/upload",
+      originId: "",
+      infoType: "briefReportExterior",
       gridOptions: {
         border: true,
         resizable: true,
@@ -1053,7 +1045,7 @@ export default {
           },
           {
             resizable: true,
-            width: 180,
+            width: 250,
             align: "center",
             title: "操作",
             slots: { default: "uploadFile" },
@@ -1064,6 +1056,10 @@ export default {
     };
   },
   methods: {
+    relate(row) {
+      this.originId = row.id.toString();
+      this.$refs.relateDialogRef.show();
+    },
     removeFileById(row) {
       removeRemoteFileById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");

@@ -19,7 +19,7 @@
           @change="handleCheckedRelateChange"
         >
           <el-checkbox
-            v-for="item in relate"
+            v-for="item in importantProduct"
             :label="item.productName"
             :key="item.id"
             >{{ item.productName }}</el-checkbox
@@ -40,7 +40,7 @@
 import {
   getAllRelate,
   addRelate,
-  deleteAllRelateByType
+  deleteInfoProductRel
 } from "@/api/manageInfoProductRel";
 import { getAllByImportantProduct } from "@/api/manageImportantProduct";
 export default {
@@ -52,9 +52,10 @@ export default {
     return {
       dialogVisible: false,
       checkAll: false,
+      checkedRel: [],
       checkedProductName: [],
-      relate: [],
-      isIndeterminate: true
+      importantProduct: [],
+      isIndeterminate: false
     };
   },
   methods: {
@@ -62,38 +63,44 @@ export default {
       this.dialogVisible = true;
     },
     handleCheckAllChange(val) {
-      this.checkedProductName = val ? this.relate : [];
+      let allProductName = this.importantProduct.map(item => {
+        return item.productName;
+      });
+      this.checkedProductName = val ? allProductName : [];
       this.isIndeterminate = false;
     },
     handleCheckedRelateChange(value) {
       let checkedCount = value.length;
-      this.checkAll = checkedCount === this.relate.length;
+      this.checkAll = checkedCount === this.importantProduct.length;
       this.isIndeterminate =
-        checkedCount > 0 && checkedCount < this.relate.length;
+        checkedCount > 0 && checkedCount < this.importantProduct.length;
     },
     submitRelate() {
-      let a;
-      a = 1;
-      deleteAllRelateByType("industryTrend")
-        .then(res => {
-          console.log(res);
-        })
-        .then(() => {
-          let infoProductRels = this.checkedProductName.map(item => {
-            let infoProductRel = {
-              importantProductId: item.id,
-              infoType: this.infoType,
-              infoId: this.originId
-            };
-          });
-          return addRelate(infoProductRels);
-        })
-        .then();
+      this.checkedRel.forEach(item => {
+        deleteInfoProductRel(item.id);
+      });
+      this.checkedProductName.forEach(name => {
+        // console.log(this.importantProduct.find(p => p.productName == name).id);
+        addRelate({
+          importantProductId: this.importantProduct.find(
+            p => p.productName == name
+          ).id,
+          productName: name,
+          infoType: this.infoType,
+          originId: this.originId
+        });
+      });
+      this.dialogVisible = false;
+      this.$message({
+        message: "关联成功",
+        type: "success"
+      });
     },
     open() {
+      // let _this = this;
       getAllByImportantProduct({ productName: "" })
         .then(res => {
-          this.relate = res._embedded.importantProducts;
+          this.importantProduct = res._embedded.importantProducts;
         })
         .then(() => {
           return getAllRelate({
@@ -101,19 +108,40 @@ export default {
             originId: this.originId
           });
         })
+        //转换对象
         .then(res => {
-          this.checkedProductName = res._embedded.infoProductRels.map(pr => {
-            return this.relate.filter(r => r.id == pr.importantProductId)[0]
-              .productName;
-          });
-          console.log(this.checkedProductName);
+          this.checkedRel = res._embedded.infoProductRels;
+          this.checkedProductName = this.checkedRel.map(
+            item => item.productName
+          );
         })
-        .then();
+        //处理多选组
+        .then(() => {
+          // console.log(this.checkedProductName);
+          // console.log(this.importantProduct);
+          if (this.checkedProductName.length == 0) {
+            this.checkAll = false;
+            this.isIndeterminate = false;
+          } else if (
+            this.importantProduct.length == this.checkedProductName.length
+          ) {
+            this.isIndeterminate = false;
+            this.checkAll = true;
+          } else if (
+            this.importantProduct.length >
+            this.checkedProductName.length >
+            0
+          ) {
+            this.isIndeterminate = true;
+          }
+        });
     },
     close() {
       this.checkedProductName = [];
-      this.relate = [];
-      this.isIndeterminate = true;
+      this.importantProduct = [];
+      this.checkedRel = [];
+      this.isIndeterminate = false;
+      this.checkAll = false;
     }
   }
 };

@@ -23,15 +23,28 @@
             @click="removeFileById(row)"
             >删除</el-button
           >
-          <el-button type="primary" @click="relate()">关联</el-button>
+
+          <el-button
+            type="primary"
+            style="margin-left: 10px"
+            @click="relate(row)"
+            >关联</el-button
+          >
         </el-upload>
       </template>
     </vxe-grid>
+
+    <relate-dialog
+      ref="relateDialogRef"
+      :originId="originId"
+      :infoType="infoType"
+    ></relate-dialog>
   </div>
 </template>
 
 <script>
 import { Message } from "element-ui";
+
 import { industryTrend } from "../store/infoType";
 import {
   searchIndustryTrend,
@@ -42,32 +55,15 @@ import baseUrl from "@/config/baseUrl";
 import XLSX from "xlsx";
 import moment from "moment";
 
-function csvToObject(csvString) {
-  let csvarry = csvString.split("\r\n");
-  let datas = [];
-  let headers = csvarry[0].split(",");
-  for (let i = 0; i < headers.length; i++) {
-    Object.keys(industryTrend).forEach(function (key) {
-      if (industryTrend[key].title == headers[i])
-        headers[i] = industryTrend[key].field;
-    });
-  }
-  for (let i = 1; i < csvarry.length - 1; i++) {
-    let data = {};
-    let temp = csvarry[i].split(",");
-    for (let j = 0; j < temp.length; j++) {
-      data[headers[j]] = temp[j];
-    }
-    datas.push(data);
-  }
-  return datas;
-}
-
 export default {
   data() {
     return {
       // xGrid: this.$refs.xGrid,
       uploadUrl: baseUrl + "/manual/industry-trend/upload",
+
+      originId: "",
+      infoType: "industryTrend",
+
       gridOptions: {
         border: true,
         resizable: true,
@@ -1015,7 +1011,7 @@ export default {
           },
           {
             resizable: true,
-            width: 180,
+            width: 250,
             align: "center",
             title: "操作",
             slots: { default: "uploadFile" },
@@ -1026,9 +1022,8 @@ export default {
     };
   },
   methods: {
-    relate() {},
     removeFileById(row) {
-      removeRemoteFileById({ id: row.id }).then(res => {
+      removeRemoteFileById({ id: row.id }).then(() => {
         this.$refs.xGrid.commitProxy("query");
         Message({
           message: "删除成功！",
@@ -1084,7 +1079,7 @@ export default {
           });
           resolve();
         };
-        reader.onerror = function (e) {
+        reader.onerror = function () {
           Message({
             type: "error",
             message: "读取文件出错"
@@ -1102,9 +1097,13 @@ export default {
     exportMethod({ options }) {
       this.tableExportMethod(options, industryTrend);
       return Promise.resolve();
+    },
+    relate(row) {
+      this.originId = row.id.toString();
+      this.$refs.relateDialogRef.show();
     }
   },
-  mounted: function () {
+  mounted() {
     // var xGrid = this.$refs.xGrid;
   }
 };

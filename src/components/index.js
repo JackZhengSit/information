@@ -7,10 +7,12 @@
  */
 import ResultItem from "./ResultItem";
 import SearchFormGroup from "./SearchFormGroup";
+import RelateDialog from "./RelateDialog";
 
 export default {
   install(Vue) {
     Vue.component("result-item", ResultItem);
     Vue.component("search-form-group", SearchFormGroup);
+    Vue.component("relate-dialog", RelateDialog);
   }
 };

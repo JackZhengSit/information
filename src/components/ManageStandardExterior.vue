@@ -23,9 +23,19 @@
             @click="removeFileById(row)"
             >删除</el-button
           >
+          <el-button
+            type="primary"
+            style="margin-left: 10px"
+            @click="relate(row)"
+            >关联</el-button
+          >
         </el-upload>
-      </template>
-    </vxe-grid>
+      </template> </vxe-grid
+    ><relate-dialog
+      ref="relateDialogRef"
+      :originId="originId"
+      :infoType="infoType"
+    ></relate-dialog>
   </div>
 </template>
 
@@ -45,7 +55,7 @@ function csvToObject(csvString) {
   let datas = [];
   let headers = csvarry[0].split(",");
   for (let i = 0; i < headers.length; i++) {
-    Object.keys(standardExterior).forEach(function(key) {
+    Object.keys(standardExterior).forEach(function (key) {
       if (standardExterior[key].title == headers[i])
         headers[i] = standardExterior[key].field;
     });
@@ -64,6 +74,8 @@ function csvToObject(csvString) {
 export default {
   data() {
     return {
+      originId: "",
+      infoType: "standardExterior",
       // xGrid: this.$refs.xGrid,
       uploadUrl: baseUrl + "/manual/standard-exterior/upload",
       gridOptions: {
@@ -1279,7 +1291,7 @@ export default {
           },
           {
             resizable: true,
-            width: 180,
+            width: 250,
             align: "center",
             title: "操作",
             slots: { default: "uploadFile" },
@@ -1290,6 +1302,10 @@ export default {
     };
   },
   methods: {
+    relate(row) {
+      this.originId = row.id.toString();
+      this.$refs.relateDialogRef.show();
+    },
     removeFileById(row) {
       removeRemoteFileById({ id: row.id }).then(res => {
         this.$refs.xGrid.commitProxy("query");
@@ -1327,7 +1343,7 @@ export default {
       let methods = this.$options.methods;
       return new Promise((resolve, reject) => {
         let reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           let data = e.target.result;
           let workbook = XLSX.read(data, { type: "binary" });
           let worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -1346,7 +1362,7 @@ export default {
           });
           resolve();
         };
-        reader.onerror = function(e) {
+        reader.onerror = function (e) {
           Message({
             type: "error",
             message: "读取文件出错"
@@ -1366,7 +1382,7 @@ export default {
       return Promise.resolve();
     }
   },
-  mounted: function() {
+  mounted: function () {
     // var xGrid = this.$refs.xGrid;
   }
 };
