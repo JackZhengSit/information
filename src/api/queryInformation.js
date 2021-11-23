@@ -91,6 +91,13 @@ export function getYearCount() {
   });
 }
 
+export function getProductCount() {
+  return axios({
+    url: "/manual/information/getProductCount",
+    method: "get"
+  });
+}
+
 export function searchInformation(data) {
   return axios({
     url: "/manual/information/searchInformation",

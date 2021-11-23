@@ -10,8 +10,10 @@ import {
   getTopicCategoryCount,
   getProfessionFieldCount,
   getYearCount,
+  getProductCount,
   searchInformation
 } from "@/api/queryInformation";
+import { time } from "_echarts@5.2.2@echarts";
 
 const state = () => ({
   activeNames: ["infoType"],
@@ -22,6 +24,8 @@ const state = () => ({
   checkedTopicCategory: [],
   professionFieldAndCount: [],
   checkedProfessionField: [],
+  productNameAndCount: [],
+  checkedProductName: [],
   yearAndCount: [],
   checkedYear: [],
 
@@ -83,6 +87,12 @@ const mutations = {
   },
   setCheckedProfessionField(state, checkedProfessionField) {
     state.checkedProfessionField = checkedProfessionField;
+  },
+  setProductName(state, productCount) {
+    state.productNameAndCount = productCount;
+  },
+  setCheckedProductName(state, checkedProductname) {
+    state.checkedProductName = checkedProductname;
   },
   setYearAndCount(state, yearAndCount) {
     //把其他放在最后
@@ -152,7 +162,14 @@ const actions = {
         res.map(item => item.year)
       );
     });
-    return Promise.all([p1, p2, p3, p4]);
+    let p5 = getProductCount().then(res => {
+      commit("setProductName", res);
+      commit(
+        "setCheckedProductName",
+        res.map(item => item.productName)
+      );
+    });
+    return Promise.all([p1, p2, p3, p4, p5]);
   },
   search({ commit, state, rootState }) {
     searchInformation({
@@ -167,6 +184,7 @@ const actions = {
       professionField: state.checkedProfessionField
         .map(item => "'" + item + "'")
         .toString(),
+      productName: state.checkedProductName,
       year: state.checkedYear.map(item => "'" + item + "'").toString()
     }).then(res => {
       commit("setResultList", res.records);

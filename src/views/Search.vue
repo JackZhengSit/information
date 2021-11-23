@@ -96,6 +96,31 @@
                 >
               </el-checkbox-group>
             </el-collapse-item>
+            <el-collapse-item name="productName">
+              <template slot="title">
+                重点产品
+                <div style="margin-left: 30px">
+                  <el-checkbox
+                    :indeterminate="productNameIsIndeterminate"
+                    v-model="productNameCheckAll"
+                    @change="handleCheckAllProductName"
+                    >全选</el-checkbox
+                  >
+                </div>
+              </template>
+              <el-checkbox-group
+                v-model="checkedProductName"
+                @change="handleCheckedProductNameChange"
+              >
+                <el-checkbox
+                  style="width: 130px; margin: 0px"
+                  v-for="item in productNameAndCount"
+                  :label="item.productName"
+                  :key="item.productName"
+                  >{{ item.productName }}({{ item.count }})</el-checkbox
+                >
+              </el-checkbox-group>
+            </el-collapse-item>
             <el-collapse-item name="year">
               <template slot="title">
                 年份
@@ -188,6 +213,9 @@ export default {
       professionFieldIsIndeterminate: false,
       professionFieldCheckAll: true,
 
+      productNameIsIndeterminate: false,
+      productNameCheckAll: true,
+
       yearIsIndeterminate: false,
       yearCheckAll: true
     };
@@ -201,6 +229,8 @@ export default {
       "checkedTopicCategory",
       "professionFieldAndCount",
       "checkedProfessionField",
+      "productNameAndCount",
+      "checkedProductName",
       "yearAndCount",
       "checkedYear",
       "resultList",
@@ -256,6 +286,14 @@ export default {
       },
       set(val) {
         this.$store.commit("search/setCheckedProfessionField", val);
+      }
+    },
+    checkedProductName: {
+      get() {
+        return this.$store.state.search.checkedProductName;
+      },
+      set(val) {
+        this.$store.commit("search/setCheckedProductName", val);
       }
     },
     checkedYear: {
@@ -322,6 +360,21 @@ export default {
         checkedProfessionFieldCount > 0 &&
         checkedProfessionFieldCount < allCount;
     },
+
+    handleCheckAllProductName(val) {
+      this.checkedProductName = val
+        ? this.productNameAndCount.map(item => item.productName)
+        : [];
+      this.productNameIsIndeterminate = false;
+    },
+    handleCheckedProductNameChange(val) {
+      let checkedProductNameCount = val.length;
+      let allCount = this.productNameAndCount.length;
+      this.productNameCheckAll = checkedProductNameCount === allCount;
+      this.productNameIsIndeterminate =
+        checkedProductNameCount > 0 && checkedProductNameCount < allCount;
+    },
+
     handleCheckAllYear(val) {
       this.checkedYear = val ? this.yearAndCount.map(item => item.year) : [];
       this.yearIsIndeterminate = false;
