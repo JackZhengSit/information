@@ -214,7 +214,7 @@ export default {
       professionFieldCheckAll: true,
 
       productNameIsIndeterminate: false,
-      productNameCheckAll: true,
+      productNameCheckAll: false,
 
       yearIsIndeterminate: false,
       yearCheckAll: true
@@ -239,6 +239,15 @@ export default {
       "currentPage",
       "pageCount"
     ]),
+
+    // activeNames: {
+    //   get() {
+    //     return this.$store.state.activeName;
+    //   },
+    //   set(val) {
+    //     this.$store.commit("search/setActiveNames");
+    //   }
+    // },
 
     pageSize: {
       get() {

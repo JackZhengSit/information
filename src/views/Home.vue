@@ -249,7 +249,7 @@
             </el-col>
             <el-col :span="20">
               <el-col :span="12">
-                <el-button plain type="primary" onclick="">
+                <el-button plain type="primary" @click="shipDeviceCheck()">
                   <i
                     class="el-icon-s-home"
                     style="font-size: 30px; width: 500px; display: inline-block"
@@ -263,7 +263,7 @@
                 <el-button
                   plain
                   type="primary"
-                  onclick=""
+                  @click="rollerScrew()"
                   style="display: block; width: 500px; display: inline-block"
                 >
                   <i class="el-icon-s-home" style="font-size: 30px"
@@ -550,9 +550,7 @@ export default {
       noticeForm: {
         title: "",
         author: "",
-        publicateDayStart: moment()
-          .subtract(3, "years")
-          .format("YYYY-MM-DD"),
+        publicateDayStart: moment().subtract(3, "years").format("YYYY-MM-DD"),
         publicateDayEnd: moment().format("YYYY-MM-DD")
       },
       noticeTableData: []
@@ -574,6 +572,7 @@ export default {
       "setCheckedInfoType",
       "setCheckedTopicCategory",
       "setCheckedProfessionField",
+      "setCheckedProductName",
       "setCheckedYear"
     ]),
     ...mapActions("search", ["getCheckbox"]),
@@ -634,7 +633,7 @@ export default {
       //   });
       // });
       myEcharts.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myEcharts.resize();
       });
     },
@@ -690,7 +689,7 @@ export default {
         ]
       };
       myEcharts.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myEcharts.resize();
       });
     },
@@ -746,7 +745,7 @@ export default {
         ]
       };
       myEcharts.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myEcharts.resize();
       });
     },
@@ -849,6 +848,20 @@ export default {
     },
     toStatistics() {
       this.$router.push({ name: "Statistics" });
+    },
+    shipDeviceCheck() {
+      this.setActiveNames(["productName"]);
+      this.getCheckbox().then(() => {
+        this.setCheckedProductName(["船舶设备智能故障诊断"]);
+        this.$router.push({ name: "Search" });
+      });
+    },
+    rollerScrew() {
+      this.setActiveNames(["productName"]);
+      this.getCheckbox().then(() => {
+        this.setCheckedProductName(["行星滚柱丝杠"]);
+        this.$router.push({ name: "Search" });
+      });
     }
   },
   created() {

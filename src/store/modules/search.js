@@ -164,10 +164,10 @@ const actions = {
     });
     let p5 = getProductCount().then(res => {
       commit("setProductName", res);
-      commit(
-        "setCheckedProductName",
-        res.map(item => item.productName)
-      );
+      // commit(
+      //   "setCheckedProductName",
+      //   res.map(item => item.productName)
+      // );
     });
     return Promise.all([p1, p2, p3, p4, p5]);
   },
