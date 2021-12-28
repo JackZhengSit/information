@@ -254,7 +254,7 @@
                     class="el-icon-s-home"
                     style="font-size: 30px; width: 500px; display: inline-block"
                     ><span style="font-size: 20px"
-                      >船舶设备智能故障诊断（开发中）</span
+                      >船舶设备智能故障诊断</span
                     ></i
                   >
                 </el-button>
@@ -267,9 +267,7 @@
                   style="display: block; width: 500px; display: inline-block"
                 >
                   <i class="el-icon-s-home" style="font-size: 30px"
-                    ><span style="font-size: 20px"
-                      >行星滚柱丝杠（开发中）</span
-                    ></i
+                    ><span style="font-size: 20px">行星滚柱丝杠</span></i
                   >
                 </el-button>
               </el-col>
