@@ -57,7 +57,7 @@
               <el-button
                 plain
                 type="primary"
-                onclick="window.open('http://200.100.65.13/kns55/')"
+                onclick="window.open('http://200.100.68.28/kns55/')"
                 ><i class="el-icon-s-cooperation" style="font-size: 80px"></i>
                 <span style="margin: 20px auto; display: block"
                   >知网数据库</span
