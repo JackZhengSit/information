@@ -11,7 +11,7 @@ import { Message, MessageBox } from "element-ui";
 import baseUrl from "@/config/baseUrl";
 
 const service = axios.create({
-  timeout: 10000
+  timeout: 1000 * 60 * 5
 });
 
 service.defaults.headers.post["Content-Type"] =
@@ -21,9 +21,9 @@ service.defaults.baseURL = baseUrl;
 
 // // 环境的切换
 // if (process.env.NODE_ENV == "development") {
-//   service.defaults.baseURL = "http://localhost:9000";
+//   service.defaults.baseURL = "http://localhost:9000";··
 // } else if (process.env.NODE_ENV == "debug") {
-//   service.defaults.baseURL = "http://localhost:9000";
+//   service.defaults.baseURL = "http://localhost:9000";·
 // } else if (process.env.NODE_ENV == "production") {
 //   service.defaults.baseURL = "http://localhost:9000";
 // }

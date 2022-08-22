@@ -22,7 +22,7 @@
             class="linke"
             :href="
               this.baseUrl +
-                '/static/file/info-class-resource/Acrobat.9.Pro.ChS.rar'
+              '/static/file/info-class-resource/Acrobat.9.Pro.ChS.rar'
             "
             >PDF阅读器</a
           >
@@ -31,7 +31,7 @@
             class="linke"
             :href="
               this.baseUrl +
-                '/static/file/info-class-resource/CAJViewer 7.2.self.exe'
+              '/static/file/info-class-resource/CAJViewer 7.2.self.exe'
             "
             >清华同方CAJ阅读器</a
           >
@@ -77,6 +77,13 @@
               this.baseUrl + '/static/file/info-class-resource/专利百科手册.pdf'
             "
             >智慧芽专利百科全书</a
+          >
+          <a
+            class="linke"
+            :href="
+              this.baseUrl + '/static/file/info-class-resource/情报检索单.doc'
+            "
+            >情报检索单</a
           >
         </div>
       </el-col>
