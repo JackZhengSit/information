@@ -248,7 +248,7 @@
               >
             </el-col>
             <el-col :span="20">
-              <el-col :span="12">
+              <el-col :span="8">
                 <el-button plain type="primary" @click="shipDeviceCheck()">
                   <i
                     class="el-icon-s-home"
@@ -259,7 +259,7 @@
                   >
                 </el-button>
               </el-col>
-              <el-col :span="12">
+              <el-col :span="8">
                 <el-button
                   plain
                   type="primary"
@@ -268,6 +268,18 @@
                 >
                   <i class="el-icon-s-home" style="font-size: 30px"
                     ><span style="font-size: 20px">行星滚柱丝杠</span></i
+                  >
+                </el-button>
+              </el-col>
+              <el-col :span="8">
+                <el-button
+                  plain
+                  type="primary"
+                  @click="stabilizing()"
+                  style="display: block; width: 500px; display: inline-block"
+                >
+                  <i class="el-icon-s-home" style="font-size: 30px"
+                  ><span style="font-size: 20px">船舶减摇装置</span></i
                   >
                 </el-button>
               </el-col>
@@ -858,6 +870,13 @@ export default {
       this.setActiveNames(["productName"]);
       this.getCheckbox().then(() => {
         this.setCheckedProductName(["行星滚柱丝杠"]);
+        this.$router.push({ name: "Search" });
+      });
+    },
+    stabilizing(){
+      this.setActiveNames(["productName"]);
+      this.getCheckbox().then(() => {
+        this.setCheckedProductName(["船舶减摇装置"]);
         this.$router.push({ name: "Search" });
       });
     }

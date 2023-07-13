@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2020-11-30 13:46:45
@@ -43,7 +43,6 @@
 <script>
 import { Message, MessageBox } from "element-ui";
 import { briefReportInterior } from "../store/infoType";
-import { briefReportInteriorExample } from "@/store/infoExample";
 import {
   searchBriefReportInterior,
   removeRemoteFileById,

@@ -3,14 +3,12 @@
     <div class="header-box">
       <div class="logo-box">
         <h2 class="logo-title" @click="toHome">信息情报库</h2>
-        <!-- <span class="browserAdvice">建议使用chrome浏览器获得更好体验</span> -->
+        <span class="worning">非密软件<br>禁止处理涉密信息</span>
       </div>
       <div class="menu-box">
         <a path="/home" @click="toHome($event)" class="menu-title">首页</a>
 
-        <a path="/search" @click="toSearch($event)" class="menu-title"
-          >信息检索</a
-        >
+        <a path="/search" @click="toSearch($event)" class="menu-title">信息检索</a>
         <!-- onclick="window.open('http://200.100.65.13:8080/r/library/index.jsp')" -->
         <!-- <a path="/labrary" class="menu-title" @click="toLabrary">馆藏书刊</a> -->
 
@@ -35,28 +33,15 @@
           <span path="/download" class="menu-title"> 下载工具</span>
 
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="SearchIndex"
-              >核心期刊查询入口</el-dropdown-item
-            >
-            <el-dropdown-item command="ClassResource"
-              >信息检索课程推荐</el-dropdown-item
-            >
-            <el-dropdown-item command="Tools"
-              >常用工具书/软件推荐</el-dropdown-item
-            >
+            <el-dropdown-item command="SearchIndex">核心期刊查询入口</el-dropdown-item>
+            <el-dropdown-item command="ClassResource">信息检索课程推荐</el-dropdown-item>
+            <el-dropdown-item command="Tools">常用工具书/软件推荐</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <a path="/statistics" class="menu-title" @click="toStatistics"
-          >数据统计</a
-        >
-        <el-tooltip
-          content="如出现“调用异常”，请在异常界面刷新"
-          placement="bottom"
-          ><a
+        <a path="/statistics" class="menu-title" @click="toStatistics">数据统计</a>
+        <el-tooltip content="如出现“调用异常”，请在异常界面刷新" placement="bottom"><a
             onclick="window.open('http://200.100.68.18:8088/default/management/informationPortal.jsp')"
-            class="menu-title"
-            >情报需求</a
-          >
+            class="menu-title">情报需求</a>
         </el-tooltip>
         <a path="/question" class="menu-title" @click="toQuestion">总咨询台</a>
 
@@ -120,7 +105,7 @@ export default {
     }
   },
   watch: {
-    "$route.path": function(newVal, oldVal) {
+    "$route.path": function (newVal, oldVal) {
       let menu = document.getElementsByClassName("menu-title");
       document.getElementsByClassName("menu-title-active")[0].className =
         "menu-title";
@@ -165,6 +150,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
 }
+
 .logo-title {
   color: #409eff;
   margin: 0;
@@ -172,10 +158,10 @@ export default {
   cursor: pointer;
 }
 
-.browserAdvice {
+.worning {
   margin: 0 20px;
   font-size: 13px;
-  color: #409eff;
+  color: red;
   width: 130px;
 }
 
@@ -185,6 +171,7 @@ export default {
   justify-content: flex-end;
   justify-items: stretch;
 }
+
 .menu-title {
   text-decoration: none;
   text-align: center;

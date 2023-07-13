@@ -113,7 +113,7 @@
                 @change="handleCheckedProductNameChange"
               >
                 <el-checkbox
-                  style="width: 130px; margin: 0px"
+                  style="width: 100%; margin: 0px"
                   v-for="item in productNameAndCount"
                   :label="item.productName"
                   :key="item.productName"
