@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Version: 0.0.0
  * @Autor: JackZheng
  * @Date: 2021-01-27 15:55:12
@@ -34,6 +34,7 @@ export default {
     return {
       searchTypes: [
         { label: "全部", value: "all" },
+        { label: "编号", value: "info_code" },
         { label: "标题", value: "info_title" },
         { label: "作者", value: "info_author" },
         { label: "关键词", value: "keywords" }

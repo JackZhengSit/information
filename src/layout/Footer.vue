@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <el-row style>
-      <el-col :span="10" :offset="1">
+      <el-col :offset="1" :span="10">
         <div>
           <h4>关于信息情报库</h4>
           <p>
@@ -9,24 +9,26 @@
           </p>
         </div>
       </el-col>
-      <el-col :span="3" :offset="2">
+      <el-col :offset="2" :span="3">
         <h4>相关链接</h4>
         <el-link
-          type="primary"
           href="http://200.100.68.18:8088/default/newportal/index.html"
-          >知识管理</el-link
+          type="primary"
+        >知识管理
+        </el-link
         >
       </el-col>
-      <el-col :span="3" :offset="3">
+      <el-col :offset="3" :span="3">
         <div>
           <h4>联系我们</h4>
           <p>标准研究中心 情报研究科</p>
           <p>联系方式：5216 5219</p>
+          <p>信息情报总访问量：{{logCount}}</p>
         </div>
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="22" :offset="1">
+      <el-col :offset="1" :span="22">
         <div style="border-top: 2px solid #409eff"></div>
         <p style="margin: 0px; font-size: 12px">
           第七〇四研究所版权所有 计算机中心研发
@@ -37,7 +39,21 @@
 </template>
 
 <script>
-export default {};
+
+import { getCount } from "@/api/httpLog";
+
+export default {
+  data() {
+    return {
+      logCount: 0
+    };
+  },
+  created() {
+    getCount().then((res)=>{
+      this.logCount=res.result;
+    })
+  }
+};
 </script>
 
 <style>

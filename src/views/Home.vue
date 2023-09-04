@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="10" :offset="7">
+      <el-col :offset="7" :span="10">
         <!-- <div class="group">
           <el-select v-model="searchType" placeholder="" style="width: 150px">
             <el-option
@@ -18,7 +18,7 @@
       </el-col>
     </el-row>
     <el-row :gutter="20" style="margin-top: 20px">
-      <el-col :span="10" :offset="2">
+      <el-col :offset="2" :span="10">
         <!-- <el-carousel :interval="4000" height="280px"> -->
         <el-card shadow="hover" style="height: 420px">
           <el-carousel :interval="4000" height="381px">
@@ -55,33 +55,33 @@
               style="height: 289px"
             >
               <el-button
+                onclick="window.open('http://200.100.68.28/kns55/')"
                 plain
                 type="primary"
-                onclick="window.open('http://200.100.68.28/kns55/')"
-                ><i class="el-icon-s-cooperation" style="font-size: 80px"></i>
+              ><i class="el-icon-s-cooperation" style="font-size: 80px"></i>
                 <span style="margin: 20px auto; display: block"
-                  >知网数据库</span
+                >知网数据库</span
                 ></el-button
               >
 
               <el-button
+                onclick="window.open('http://200.100.68.15:8090/Main.htm')"
                 plain
                 type="primary"
-                onclick="window.open('http://200.100.68.15:8090/Main.htm')"
               >
                 <i class="el-icon-s-management" style="font-size: 80px"> </i>
                 <span style="margin: 20px auto; display: block"
-                  >国家军用标准全文数据库</span
+                >国家军用标准全文数据库</span
                 >
               </el-button>
               <el-button
+                onclick="window.open('http://200.100.68.28:8080')"
                 plain
                 type="primary"
-                onclick="window.open('http://200.100.68.28:8080')"
               >
                 <i class="el-icon-s-claim" style="font-size: 80px"> </i>
                 <span style="margin: 20px auto; display: block"
-                  >标准实施系统</span
+                >标准实施系统</span
                 >
               </el-button>
             </el-tab-pane>
@@ -92,10 +92,10 @@
                 @row-click="showDetails"
               >
                 <el-table-column
-                  show-overflow-tooltip
                   :label="information.infoTitle.title"
                   :prop="information.infoTitle.field"
                   min-width="200"
+                  show-overflow-tooltip
                 >
                 </el-table-column>
                 <el-table-column label="" width="50">
@@ -103,21 +103,21 @@
                     <span
                       v-if="isnew(scope.row.createTime)"
                       class="new-animation"
-                      >new</span
+                    >new</span
                     >
                   </template>
                 </el-table-column>
                 <el-table-column
-                  align="center"
-                  :prop="information.infoType.field"
                   :label="information.infoType.title"
+                  :prop="information.infoType.field"
+                  align="center"
                   width="100"
                 ></el-table-column>
                 <el-table-column
-                  align="center"
-                  :prop="information.createTime.field"
-                  :label="information.createTime.title"
                   :formatter="formatDate"
+                  :label="information.createTime.title"
+                  :prop="information.createTime.field"
+                  align="center"
                   width="100"
                 ></el-table-column>
               </el-table>
@@ -133,7 +133,8 @@
                       v-for="item in getInteriorInfoTypeTitle"
                       :key="item"
                       :command="item"
-                      >{{ item }}</el-dropdown-item
+                    >{{ item }}
+                    </el-dropdown-item
                     >
                   </el-dropdown-menu>
                 </el-dropdown>
@@ -144,31 +145,31 @@
                 @row-click="showDetails"
               >
                 <el-table-column
-                  show-overflow-tooltip
-                  :prop="information.infoTitle.field"
                   :label="information.infoTitle.title"
+                  :prop="information.infoTitle.field"
                   min-width="200"
+                  show-overflow-tooltip
                 ></el-table-column>
                 <el-table-column label="" width="50">
                   <template slot-scope="scope">
                     <span
                       v-if="isnew(scope.row.createTime)"
                       class="new-animation"
-                      >new</span
+                    >new</span
                     >
                   </template>
                 </el-table-column>
                 <el-table-column
-                  align="center"
-                  :prop="information.infoType.field"
                   :label="information.infoType.title"
+                  :prop="information.infoType.field"
+                  align="center"
                   width="100"
                 ></el-table-column>
                 <el-table-column
-                  align="center"
-                  :prop="information.createTime.field"
-                  :label="information.createTime.title"
                   :formatter="formatDate"
+                  :label="information.createTime.title"
+                  :prop="information.createTime.field"
+                  align="center"
                   width="100"
                 ></el-table-column>
               </el-table>
@@ -186,7 +187,8 @@
                       )"
                       :key="item"
                       :command="item"
-                      >{{ item }}</el-dropdown-item
+                    >{{ item }}
+                    </el-dropdown-item
                     >
                   </el-dropdown-menu>
                 </el-dropdown>
@@ -197,31 +199,31 @@
                 @row-click="showDetails"
               >
                 <el-table-column
-                  show-overflow-tooltip
-                  :prop="information.infoTitle.field"
                   :label="information.infoTitle.title"
+                  :prop="information.infoTitle.field"
                   min-width="200"
+                  show-overflow-tooltip
                 ></el-table-column>
                 <el-table-column label="" width="50">
                   <template slot-scope="scope">
                     <span
                       v-if="isnew(scope.row.createTime)"
                       class="new-animation"
-                      >new</span
+                    >new</span
                     >
                   </template>
                 </el-table-column>
                 <el-table-column
-                  align="center"
-                  :prop="information.infoType.field"
                   :label="information.infoType.title"
+                  :prop="information.infoType.field"
+                  align="center"
                   width="100"
                 ></el-table-column>
                 <el-table-column
-                  align="center"
-                  :prop="information.createTime.field"
-                  :label="information.createTime.title"
                   :formatter="formatDate"
+                  :label="information.createTime.title"
+                  :prop="information.createTime.field"
+                  align="center"
                   width="100"
                 ></el-table-column>
               </el-table>
@@ -232,19 +234,20 @@
               style="float: right; padding: 10px 20px 5px 20px"
               type="primary"
               @click="infoTypeMore"
-              >更多</el-link
+            >更多
+            </el-link
             >
           </el-tabs>
         </el-card>
       </el-col>
     </el-row>
     <el-row style="margin-top: 10px">
-      <el-col :span="20" :offset="2">
+      <el-col :offset="2" :span="20">
         <el-card shadow="hover">
           <el-row>
             <el-col :span="4">
               <span style="font-size: 1em; font-weight: bold; color: #409eff"
-                >重点产品<br />监测导航</span
+              >重点产品<br />监测导航</span
               >
             </el-col>
             <el-col :span="20">
@@ -252,10 +255,10 @@
                 <el-button plain type="primary" @click="shipDeviceCheck()">
                   <i
                     class="el-icon-s-home"
-                    style="font-size: 30px; width: 500px; display: inline-block"
-                    ><span style="font-size: 20px"
-                      >船舶设备智能故障诊断</span
-                    ></i
+                    style="font-size: 30px; width: 300px; display: inline-block"
+                  ><span style="font-size: 20px"
+                  >船舶设备智能故障诊断</span
+                  ></i
                   >
                 </el-button>
               </el-col>
@@ -264,10 +267,10 @@
                   plain
                   type="primary"
                   @click="rollerScrew()"
-                  style="display: block; width: 500px; display: inline-block"
+
                 >
-                  <i class="el-icon-s-home" style="font-size: 30px"
-                    ><span style="font-size: 20px">行星滚柱丝杠</span></i
+                  <i class="el-icon-s-home" style="font-size: 30px; width: 300px; display: inline-block"
+                  ><span style="font-size: 20px">行星滚柱丝杠</span></i
                   >
                 </el-button>
               </el-col>
@@ -276,9 +279,9 @@
                   plain
                   type="primary"
                   @click="stabilizing()"
-                  style="display: block; width: 500px; display: inline-block"
+
                 >
-                  <i class="el-icon-s-home" style="font-size: 30px"
+                  <i class="el-icon-s-home" style="font-size: 30px; width: 300px; display: inline-block"
                   ><span style="font-size: 20px">船舶减摇装置</span></i
                   >
                 </el-button>
@@ -289,12 +292,13 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="20" :offset="2" style="margin-top: 10px">
+      <el-col :offset="2" :span="20" style="margin-top: 10px">
         <el-card shadow="hover">
-          <el-link type="primary" @click="drawer = true" style="float: right"
-            >更多</el-link
+          <el-link style="float: right" type="primary" @click="drawer = true"
+          >更多
+          </el-link
           >
-          <el-carousel height="66px" direction="vertical" arrow="always">
+          <el-carousel arrow="always" direction="vertical" height="66px">
             <el-carousel-item
               v-for="item in newestNoticeData"
               :key="item.title"
@@ -326,13 +330,13 @@
       </el-col>
     </el-row>
     <el-drawer
-      title="公告查询"
+      :show-close="true"
       :visible.sync="drawer"
       :with-header="false"
-      size="70%"
-      @opened="searchNotice"
-      :show-close="true"
       close-on-press-escape
+      size="70%"
+      title="公告查询"
+      @opened="searchNotice"
     >
       <el-container>
         <el-main style="overflow-y: scroll; width: 100vh; height: 100vh">
@@ -340,13 +344,13 @@
             <el-col :span="2">
               <h3>公告查询</h3>
             </el-col>
-            <el-col :span="1" :offset="20">
+            <el-col :offset="20" :span="1">
               <el-button type="danger" @click="drawer = false">关闭</el-button>
             </el-col>
           </el-row>
           <el-row>
             <el-col :span="24" justify="center">
-              <el-form :model="noticeForm" ref="noticeForm">
+              <el-form ref="noticeForm" :model="noticeForm">
                 <el-form-item label="标题">
                   <el-input
                     v-model="noticeForm.title"
@@ -361,29 +365,32 @@
                 </el-form-item>
                 <el-form-item label="发布时间">
                   <el-date-picker
-                    type="date"
-                    placeholder="选择日期"
                     v-model="noticeForm.publicateDayStart"
                     format="yyyy-MM-dd"
+                    placeholder="选择日期"
+                    type="date"
                     value-format="yyyy-MM-dd"
                   ></el-date-picker>
                   -
                   <el-date-picker
-                    placeholder="选择时间"
                     v-model="noticeForm.publicateDayEnd"
                     format="yyyy-MM-dd"
+                    placeholder="选择时间"
                     value-format="yyyy-MM-dd"
                   ></el-date-picker>
                 </el-form-item>
                 <el-form-item label="">
                   <el-button type="primary" @click="searchNotice"
-                    >搜索</el-button
+                  >搜索
+                  </el-button
                   >
                   <el-button type="default" @click="resetSearchNotice"
-                    >重置</el-button
+                  >重置
+                  </el-button
                   >
                 </el-form-item>
-              </el-form></el-col
+              </el-form>
+            </el-col
             >
           </el-row>
           <el-row>
@@ -398,31 +405,31 @@
                   <template slot-scope="props">
                     <el-row>
                       <el-col :span="2" style="text-align: right"
-                        ><strong>标题：</strong></el-col
+                      ><strong>标题：</strong></el-col
                       >
                       <el-col :span="20">{{ props.row.title }}</el-col>
                     </el-row>
                     <el-row>
                       <el-col :span="2" style="text-align: right"
-                        ><strong>作者：</strong></el-col
+                      ><strong>作者：</strong></el-col
                       >
                       <el-col :span="20">{{ props.row.author }}</el-col>
                     </el-row>
                     <el-row>
                       <el-col :span="2" style="text-align: right"
-                        ><strong>内容：</strong></el-col
+                      ><strong>内容：</strong></el-col
                       >
                       <el-col :span="20">{{ props.row.mainText }}</el-col>
                     </el-row>
                     <el-row>
                       <el-col :span="2" style="text-align: right"
-                        ><strong>发布日：</strong></el-col
+                      ><strong>发布日：</strong></el-col
                       >
                       <el-col :span="20">{{ props.row.publicateDay }}</el-col>
                     </el-row>
                     <el-row>
                       <el-col :span="2" style="text-align: right"
-                        ><strong>创建时间：</strong></el-col
+                      ><strong>创建时间：</strong></el-col
                       >
                       <el-col :span="20">{{ props.row.createTime }}</el-col>
                     </el-row>
@@ -431,9 +438,9 @@
                 <el-table-column label="标题" prop="title"></el-table-column>
                 <el-table-column label="作者" prop="author"></el-table-column>
                 <el-table-column
+                  :show-overflow-tooltip="true"
                   label="内容"
                   prop="mainText"
-                  :show-overflow-tooltip="true"
                 ></el-table-column>
                 <el-table-column
                   label="发布时间"
@@ -446,7 +453,7 @@
       </el-container>
     </el-drawer>
     <el-row style="margin-top: 5px">
-      <el-col :span="20" :offset="2">
+      <el-col :offset="2" :span="20">
         <div class="topic">
           <div
             v-for="topicItem in topics"
@@ -460,38 +467,39 @@
                   style="float: right; padding: 3px 0"
                   type="primary"
                   @click="topicMore(topicItem.name)"
-                  >更多</el-link
+                >更多
+                </el-link
                 >
               </div>
               <div>
                 <el-table :data="topicItem.list" @row-click="showDetails">
                   <el-table-column
-                    show-overflow-tooltip
-                    :prop="information.infoTitle.field"
                     :label="information.infoTitle.title"
+                    :prop="information.infoTitle.field"
                     min-width="180"
+                    show-overflow-tooltip
                   ></el-table-column>
                   <el-table-column label="" width="50">
                     <template slot-scope="scope">
                       <span
                         v-if="isnew(scope.row.createTime)"
                         class="new-animation"
-                        >new</span
+                      >new</span
                       >
                     </template>
                   </el-table-column>
                   <el-table-column
-                    align="center"
-                    :prop="information.infoType.field"
                     :label="information.infoType.title"
+                    :prop="information.infoType.field"
+                    align="center"
                     width="100"
                   ></el-table-column>
                   <el-table-column
+                    :formatter="formatDate"
+                    :label="information.createTime.title"
+                    :prop="information.createTime.field"
                     align="center"
                     width="100"
-                    :prop="information.createTime.field"
-                    :label="information.createTime.title"
-                    :formatter="formatDate"
                   ></el-table-column>
                 </el-table>
               </div>
@@ -506,14 +514,13 @@
 <script>
 import { information } from "../store/infoType";
 import {
+  countInfoType,
   getNewestIndustryTrend,
+  getNewestInfoByInfoType,
   getNewestInfoExterior,
   getNewestInfoInterior,
-  getTopicInformation,
-  getNewestInfoByInfoType
+  getTopicInformation
 } from "@/api/queryInformation";
-
-import { countInfoType } from "@/api/queryInformation";
 
 import { getNewestNotice, searchNotice } from "@/api/manageNotice";
 
@@ -643,7 +650,7 @@ export default {
       //   });
       // });
       myEcharts.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myEcharts.resize();
       });
     },
@@ -699,7 +706,7 @@ export default {
         ]
       };
       myEcharts.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myEcharts.resize();
       });
     },
@@ -755,7 +762,7 @@ export default {
         ]
       };
       myEcharts.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myEcharts.resize();
       });
     },
@@ -873,7 +880,7 @@ export default {
         this.$router.push({ name: "Search" });
       });
     },
-    stabilizing(){
+    stabilizing() {
       this.setActiveNames(["productName"]);
       this.getCheckbox().then(() => {
         this.setCheckedProductName(["船舶减摇装置"]);
@@ -917,6 +924,7 @@ export default {
 .el-dropdown-link {
   color: #303133;
 }
+
 .chartItem {
   height: 400px;
 }
@@ -927,6 +935,7 @@ export default {
   justify-content: center;
   align-content: flex-start;
 }
+
 .topicItem {
   flex: 0 0 32%;
   padding: 5px;
@@ -937,7 +946,8 @@ export default {
   -webkit-animation: newAnimation 0.5s 0.2s linear infinite alternate; /* Safari and Chrome */
 }
 
-@-webkit-keyframes newAnimation /* Safari and Chrome */ {
+@-webkit-keyframes newAnimation /* Safari and Chrome */
+{
   from {
     color: #409eff;
     opacity: 0.5;

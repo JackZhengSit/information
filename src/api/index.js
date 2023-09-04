@@ -11,6 +11,7 @@ import manageIndustryTrend from "./manageIndustryTrend";
 import manageNotice from "./manageNotice";
 import managePaperExterior from "./managePaperExterior";
 import queryInformation from "./queryInformation";
+import httpLog from "./httpLog"
 
 let api = {
   manageBriefReportExterior: () => import("./manageBriefReportExterior"),
@@ -18,6 +19,7 @@ let api = {
   manageIndustryTrend,
   manageNotice,
   managePaperExterior,
+  httpLog,
   queryInformation: queryInformation
 };
 
